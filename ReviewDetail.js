@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         fontSize: 26,
         paddingTop: 35,
         color: 'white',
-        fontFamily: 'bangna-new',
+        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
         paddingLeft: 7, 

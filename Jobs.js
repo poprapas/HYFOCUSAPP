@@ -262,12 +262,12 @@ const styles = StyleSheet.create({
       fontWeight: 'normal',
       color:'black',
       textAlign:'left',
-      fontFamily: 'bangna-new',
+      fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
   },
   more: {
       fontWeight: 'normal',
       fontSize: 50,
-      fontFamily: 'bangna-new',
+      fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
   }
 });
 

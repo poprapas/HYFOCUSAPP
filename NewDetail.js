@@ -11,15 +11,15 @@ import {
     ScrollView,
     Dimensions,
     WebView,
-    FlatList
+    FlatList,
+    PixelRatio
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
 import HTMLView from 'react-native-htmlview';
 
-const { width } = Dimensions.get("window");
-const height = width *  1.09;
+const { width, height } = Dimensions.get("window");
 
 const deviceWidth = Dimensions.get("window").width;
 
@@ -29,22 +29,24 @@ export default class NewDetail extends Component {
 
     renderNode(node, index, siblings, parent, defaultRenderer) {
 
-        if (node.name == 'img') {
-            const a = node.attribs;
+        if (node.name == 'p' && node.children[0].name == 'img') {
+            const a = node.children[0].attribs;
             return (
                 <Image
-                    key={index} 
-                    style={{
-                        width: Number(a.width), 
-                        height: Number(a.height)
-                    }}
-                    source={{
-                        uri: a.src
-                    }}
-                />
-            );
+                key={index} 
+                style= {{
+                    width: width,
+                    height: (width / 2 ) * (a.width / a.height),
+                    marginVertical: 10,
+                }}
+                source={{
+                    uri: node.children[0].attribs.src
+                }}
+            />
+            )
         }
 
+        
         if (node.name == 'p' && node.children[0].name == 'iframe') {
             if (node.children[0].attribs.src.slice(0, 2) == '//') {
                 node.children[0].attribs.src = 'https:' + node.children[0].attribs.src
@@ -87,6 +89,8 @@ export default class NewDetail extends Component {
 
         const { navigate } = this.props.navigation;
 
+        let descript = this.props.navigation.state.params.description;
+
         return (
             <View style={styles.container}>
 
@@ -109,18 +113,16 @@ export default class NewDetail extends Component {
                     style={styles.logo} />
 
                 <View style = {styles.listView}>
-                    <ScrollView style={{height: height, width: "100%"}}>
+                    <ScrollView style={{height: height-170, width: "100%"}}>
                         <Image  source= {{uri: this.props.navigation.state.params.image}} 
                             style={{width: 374, height: 220}}/>
                         <Text style={styles.title}> {this.props.navigation.state.params.title} </Text>
                         <Text></Text>
                         <HTMLView
-                            value={this.props.navigation.state.params.description}
+                            value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}
                             stylesheet={styless}
-                            //textComponentProps={{ style: styles.defaultStyle }}
                         />
-
                         <Text style={styles.view}> Views: {this.props.navigation.state.params.view} </Text>
                         <Text style={styles.view}> Date: {this.props.navigation.state.params.date} </Text>
                     </ScrollView>
@@ -159,7 +161,7 @@ const styles = StyleSheet.create({
         paddingTop: 35,
         color: 'white',
         //alignSelf: 'center',
-        fontFamily: 'bangna-new',
+        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
         paddingLeft: 5, 
@@ -189,6 +191,7 @@ const styless = StyleSheet.create({
         fontWeight: 'normal',
         color:'white',
         textAlign:'left',
-        fontFamily: 'Times New Roman'
-    }
+        fontFamily: 'Times New Roman',
+        margin:0
+    },
 });

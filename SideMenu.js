@@ -10,6 +10,7 @@ import {
     TextInput,
     TouchableOpacity,
     Linking,
+    Platform
   } from 'react-native';
 
 import DrawerMenuScreen from './DrawerMenuScreen';
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20, 
     paddingTop: 6,
     paddingBottom: 6,
-    fontFamily: 'bangna-new',
+    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
   },
   navSectionStyle: {
     backgroundColor: 'black',

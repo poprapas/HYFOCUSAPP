@@ -10,7 +10,6 @@
 		"native-base": "^2.3.3",
 		"prop-types": "^15.6.0",
 		"react": "16.0.0",
-		"react-iframe": "^1.1.0",
 		"react-native": "0.50.3",
 		"react-native-action-bar": "^2.0.2",
 		"react-native-button": "^2.1.0",
@@ -21,12 +20,10 @@
 		"react-native-material-dropdown": "^0.6.0",
 		"react-native-navigation-bar": "^0.2.1",
 		"react-native-progress": "^3.4.0",
-		"react-native-render-html": "^3.5.2",
 		"react-native-search-filter": "^0.1.2",
 		"react-native-splash-screen": "^3.0.6",
 		"react-native-swiper-flatlist": "^1.0.2",
 		"react-native-vector-icons": "^4.4.2",
-		"react-native-video": "^2.0.0",
 		"react-navigation": "^1.0.0-beta.21"
 	},
 	"devDependencies": {

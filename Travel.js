@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
         paddingLeft: 4,
         paddingTop: 35,
         color: 'white',
-        fontFamily: 'bangna-new',
+        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
         paddingLeft: 5, 
@@ -178,7 +178,8 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         color:'white',
         textAlign:'right',
-        fontFamily: 'bangna-new',
+        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+        paddingTop: 5,
         textDecorationLine: 'underline'
     },    
     titleText: {
@@ -186,6 +187,7 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         color:'white',
         textAlign:'center',
-        fontFamily: 'bangna-new',
+        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+        paddingTop: 5,
     },
 });
