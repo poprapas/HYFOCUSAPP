@@ -134,8 +134,8 @@ const styles = StyleSheet.create({
     color: 'white', 
     fontSize: 16, 
     paddingLeft: 20, 
-    paddingTop: 6,
-    paddingBottom: 6,
+    paddingTop: Platform.OS == 'ios' ? 9 : 6,
+    paddingBottom: Platform.OS == 'ios' ? 9 : 6,
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
   },
   navSectionStyle: {
@@ -147,41 +147,14 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     backgroundColor: 'black',
-    marginTop: 40,
-    paddingLeft: 40,
+    marginTop: Platform.OS == 'ios' ? 60 : 40,
+    paddingTop: 1,
+    paddingLeft: 45,
     alignItems: 'flex-start',
   },
-  // searchInput: {
-  //   height: 33,
-  //   padding: 4,
-  //   marginRight: 5,
-  //   marginTop: 10,
-  //   flexGrow: 1,
-  //   fontSize: 16,
-  //   fontFamily: 'bangna-new',
-  //   borderWidth: 1,
-  //   borderColor: 'black',
-  //   borderRadius: 15,
-  //   color: 'black',
-  //   backgroundColor: 'white',
-  // },
 });
 
 export default SideMenu;
-
-            // <View style={styles.navSectionStyle}>
-            //   <TextInput
-            //       style={styles.searchInput}
-            //       placeholder= '  Search'
-            //       placeholderTextColor = "#404040"
-            //       underlineColorAndroid="transparent"
-            //   />
-
-            //   <View style={{paddingTop: 10, paddingRight: 30}}>
-            //     <Image source={require('./assets/images/search-icon.png')} style={{height: 19, width: 19}}/>
-            //   </View>
-            // </View>
-
 
 
 

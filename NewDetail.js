@@ -31,9 +31,10 @@ export default class NewDetail extends Component {
             return (
                 <Image
                 key={index} 
-                style= {{
-                    width: width,
-                    height: (width / 2 ) * (a.width / a.height),
+                sstyle= {{
+                    width: (width / 2) * a.width / a.height,
+                    height: width / 2,
+                    alignSelf: 'center',
                     marginVertical: 10,
                 }}
                 source={{
@@ -56,8 +57,8 @@ export default class NewDetail extends Component {
                         uri: node.children[0].attribs.src
                     }}
                     style={{
-                        width: 350, 
-                        height: 200,
+                        width: width-10, 
+                        height: (width-10) * 0.5625,
                         alignSelf: 'center',
                     }}
                 />
@@ -65,16 +66,22 @@ export default class NewDetail extends Component {
 
             }
             else {
+                let a = node.children[0].attribs;
+
                  return (
                     <WebView
                         key={index}
                         source={{
-                            uri: node.children[0].attribs.src
+                            uri: a.src
                         }}
                         style={{
-                            width: 300, 
-                            height: 500,
+                            //width: 300, 
+                            //height: 500,
+                            //alignSelf: 'center',
+                            width: (width / 2) * a.width / a.height,
+                            height: width / 2,
                             alignSelf: 'center',
+                            marginVertical: 10,
                         }}
                     />
                 );

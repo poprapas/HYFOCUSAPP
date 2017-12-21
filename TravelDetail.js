@@ -11,7 +11,8 @@ import {
     Dimensions,
     ScrollView,
     WebView,
-    FlatList
+    FlatList,
+    PixelRatio
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
@@ -28,43 +29,44 @@ export default class TravelDetail extends Component {
             const a = node.children[0].attribs;
             return (
                 <Image
-                key={index} 
-                style= {{
-                    width: width,
-                    height: (width / 2 ) * (a.width / a.height),
-                    marginVertical: 10,
-                }}
-                source={{
-                    uri: node.children[0].attribs.src
-                }}
-            />
+                    key={index}
+                    style={{
+                        width: (width / 2) * a.width / a.height,
+                        height: width / 2,
+                        alignSelf: 'center',
+                        marginVertical: 10,
+                    }}
+                    source={{
+                        uri: node.children[0].attribs.src
+                    }}
+                />
             )
         }
 
         if (node.name == 'p' && node.children[0].name == 'iframe') {
-            const iframeHtml = `<iframe src="${node.children[0].attribs.src}" 
+            const a = node.children[0].attribs;
+            const iframeHtml = `<iframe src="${a.src}" 
                                         height= 220, 
                                         width= ${width - 10}, 
 
                                 >
                                 </iframe>`;
             return (
-                <View key={index} 
-                      style={{  
-                                //width: width-10, 
-                                //height: (width-10) * 0.586,
-                                width: width, 
-                                height: 230, 
-                                marginLeft: -10, 
-                                paddingBottom: 10,
-                                alignSelf: 'center'
-
-                            }}
+                <View key={index}
+                    style={{
+                        width: width,
+                        height: 230,
+                        marginLeft: -20,
+                        paddingBottom: 10,
+                        alignSelf: 'center'
+                    }}
                 >
-                    <WebView source={{html: iframeHtml}} />       
+                    <WebView source={{ html: iframeHtml }} />
                 </View>
-                );
+            );
         }
+
+
     }
 
     render() {
@@ -76,35 +78,35 @@ export default class TravelDetail extends Component {
 
             <View style={styles.container}>
                 <ActionBar
-                      containerStyle={styles.bar}
-                      backgroundColor= {'black'}
-                      leftIconName={'back'}
-                      onLeftPress= {() => navigate('Travel')}
-                      title={'เที่ยวหาดใหญ่'} 
-                      rightIcons={[
+                    containerStyle={styles.bar}
+                    backgroundColor={'black'}
+                    leftIconName={'back'}
+                    onLeftPress={() => navigate('Travel')}
+                    title={'เที่ยวหาดใหญ่'}
+                    rightIcons={[
                         {
-                          name: 'facebook', 
-                          onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                          //onPress: () => navigate('Social'),
+                            name: 'facebook',
+                            onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
+                            //onPress: () => navigate('Social'),
                         },
-                      ]}
+                    ]}
                 />
 
-                <View style={{flexDirection: 'row', paddingBottom: 10}}>
+                <View style={{ flexDirection: 'row', paddingBottom: 10 }}>
 
-                    <Image source={require('./assets/images/banner.png')} 
+                    <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />
                     <Text style={styles.travelfont}> ---- Travel ---- </Text>
 
                 </View>
 
-                <View style = {styles.listView}>
-                    <ScrollView style={{height: height-175, width: "100%"}}>
-                        <Image  source= {{uri: this.props.navigation.state.params.image}} 
-                            style={{ 
-                                width: width-10, 
-                                height: (width-10) * 0.625
-                            }} 
+                <View style={styles.listView}>
+                    <ScrollView style={{ height: height - 175, width: "100%" }}>
+                        <Image source={{ uri: this.props.navigation.state.params.image }}
+                            style={{
+                                width: width - 10,
+                                height: (width - 10) * 0.625
+                            }}
                         />
                         <Text style={styles.title}> {this.props.navigation.state.params.title} </Text>
                         <Text></Text>
@@ -141,23 +143,23 @@ const styles = StyleSheet.create({
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
-        paddingLeft: 5, 
-        paddingRight: 5, 
+        paddingLeft: 5,
+        paddingRight: 5,
         //paddingTop: 5, 
         //paddingBottom: 20,
     },
     title: {
         fontSize: 16,
         fontWeight: 'bold',
-        color:'white',
-        textAlign:'center',
+        color: 'white',
+        textAlign: 'center',
         fontFamily: 'Times New Roman'
     },
     view: {
         fontSize: 14,
         fontWeight: 'normal',
-        color:'white',
-        textAlign:'right',
+        color: 'white',
+        textAlign: 'right',
         fontFamily: 'Times New Roman'
     },
     containermap: {
@@ -183,8 +185,8 @@ const styless = StyleSheet.create({
     p: {
         fontSize: 15,
         fontWeight: 'normal',
-        color:'white',
-        textAlign:'left',
+        color: 'white',
+        textAlign: 'left',
         fontFamily: 'Times New Roman'
     }
 });

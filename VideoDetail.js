@@ -29,8 +29,9 @@ export default class VideoDetail extends Component {
                 <Image
                 key={index} 
                 style= {{
-                    width: width,
-                    height: (width / 2 ) * (a.width / a.height),
+                    width: (width / 2) * a.width / a.height,
+                    height: width / 2,
+                    alignSelf: 'center',
                     marginVertical: 10,
                 }}
                 source={{
@@ -52,8 +53,8 @@ export default class VideoDetail extends Component {
                             uri: node.children[0].attribs.src
                         }}
                         style={{
-                            width: 350, 
-                            height: 200,
+                            width: width-10, 
+                            height: (width-10) * 0.5625,
                             alignSelf: 'center',
                         }}
                     />

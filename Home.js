@@ -274,9 +274,9 @@ export default class Home extends Component {
 
               <SwiperFlatList
                 autoplay
-                autoplayDelay={1}
+                autoplayDelay={2}
                 autoplayLoop
-                index={1}
+                index={0}
                 showPagination >
 
                 <View style={{ backgroundColor: 'white', paddingRight: 4, paddingLeft: 4, paddingTop: 4 }}>
@@ -392,8 +392,8 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline'
   },
   advt_1: {
-    height: 186,
-    width: 335,
+    height: (width-48) * 0.526,
+    width: width-48,
   },
   advt_2: {
     height: 120,
@@ -405,7 +405,7 @@ const styles = StyleSheet.create({
   },
   advt_4: {
     height: 38,
-    width: 385,
+    width: width,
   },
   button: {
     fontSize: 14,

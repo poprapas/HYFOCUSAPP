@@ -28,8 +28,9 @@ export default class StoryDetail extends Component {
                 <Image
                 key={index} 
                 style= {{
-                    width: width,
-                    height: (width / 2 ) * (a.width / a.height),
+                    width: (width / 2) * a.width / a.height,
+                    height: width / 2,
+                    alignSelf: 'center',
                     marginVertical: 10,
                 }}
                 source={{

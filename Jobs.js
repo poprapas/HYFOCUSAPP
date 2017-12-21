@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import {
-    Platform,
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    TextInput,
-    TouchableOpacity,
-    Linking,
-    ListView,
-    ActivityIndicator,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  Linking,
+  ListView,
+  ActivityIndicator,
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
@@ -34,8 +34,9 @@ export default class Jobs extends Component {
       isLoading: true,
       isLoadingMore: false,
       _data: null,
-      _dataAfter: "", 
-      start: 0, 
+      _dataAfter: "",
+      start: 0,
+      end: false,
     };
   }
 
@@ -53,7 +54,7 @@ export default class Jobs extends Component {
   }
 
   _fetchData(callback) {
-    fetch('https://www.hatyaifocus.com/rest/api.php?action=jobs&start='+this.state.start+'&per_page=10')
+    fetch('https://www.hatyaifocus.com/rest/api.php?action=jobs&start=' + this.state.start + '&per_page=10')
       .then(response => response.json())
       .then(callback)
       .catch(error => {
@@ -62,24 +63,36 @@ export default class Jobs extends Component {
   }
 
   _fetchMore() {
-    this.fetchData(responseJson => {
-      const data = this.state._data.concat(responseJson);
+    if (!this.state.isLoadingMore) {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(data),
-        isLoadingMore: false,
-        _data: data,
-        _dataAfter: responseJson.data,
-        start: this.state.start + 10,
+        isLoadingMore: true,
+      })
+      this.fetchData(responseJson => {
+        if (responseJson == null) {
+          this.setState({
+            end: true
+          })
+        }
+        else {
+          const data = this.state._data.concat(responseJson);
+          this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(data),
+            isLoadingMore: false,
+            _data: data,
+            _dataAfter: responseJson.data,
+            start: this.state.start + 10,
+          });
+        }
       });
-    });
+    }
   }
 
   componentDidMount() {
     //Start getting the first batch of data from reddit
-      this.fetchData(responseJson => {
-        let ds = new ListView.DataSource({
-          rowHasChanged: (r1, r2) => r1 !== r2,
-        });
+    this.fetchData(responseJson => {
+      let ds = new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2,
+      });
       const data = responseJson;
       this.setState({
         dataSource: ds.cloneWithRows(data),
@@ -93,7 +106,7 @@ export default class Jobs extends Component {
 
   render() {
 
-    let { type, province} = this.state;
+    let { type, province } = this.state;
 
     let textStyle = [
       styles[type + province],
@@ -101,7 +114,7 @@ export default class Jobs extends Component {
 
     if (this.state.isLoading) {
       return (
-        <View style={{flex: 1, paddingTop: 20}}>
+        <View style={{ flex: 1, paddingTop: 20 }}>
           <ActivityIndicator />
         </View>
       );
@@ -115,10 +128,10 @@ export default class Jobs extends Component {
 
         <ActionBar
           containerStyle={styles.bar}
-          backgroundColor= {'black'}
+          backgroundColor={'black'}
           leftIconName={'back'}
-          onLeftPress= {() => navigate('Tab')}
-          title={'หางานหาดใหญ่'} 
+          onLeftPress={() => navigate('Tab')}
+          title={'หางานหาดใหญ่'}
           rightIcons={[
             {
               name: 'facebook',
@@ -128,24 +141,24 @@ export default class Jobs extends Component {
           ]}
         />
 
-        <Image source={require('./assets/images/banner.png')} 
+        <Image source={require('./assets/images/banner.png')}
           style={styles.logo} />
 
-        <View style={{ flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <View style={{ flex: 1, paddingRight: 20, paddingLeft: 10 }}>
             <Dropdown
               ref={this.typeRef}
-              label= ''
+              label=''
               value={type}
               onChangeText={this.onChangeText}
               data={typeData}
             />
           </View>
 
-          <View style={{ flex: 1, paddingRight: 20  }}>
+          <View style={{ flex: 1, paddingRight: 20 }}>
             <Dropdown
               ref={this.provinceRef}
-              label= ''
+              label=''
               value={province}
               onChangeText={this.onChangeText}
               data={provinceData}
@@ -156,71 +169,77 @@ export default class Jobs extends Component {
             <TextInput
               style={styles.searchInput}
               placeholder='ตำแหน่งงาน'
-              placeholderTextColor = 'black'
+              placeholderTextColor='black'
               underlineColorAndroid="transparent"
             />
           </View>
         </View>
 
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={(rowData) =>  
-              <View style= {styles.listView}>
-                  <View style= {{flexDirection: 'row', backgroundColor: 'white', justifyContent: 'space-around', paddingTop: 5}}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) =>
+            <View style={styles.listView}>
+              <View style={{ flexDirection: 'row', backgroundColor: 'white', justifyContent: 'space-around', paddingTop: 5 }}>
 
-                    <Image  source= {{uri: rowData.IMG}} 
-                      style={{width: 105, height: 100}}/>
+                <Image source={{ uri: rowData.IMG }}
+                  style={{ width: 105, height: 100 }} />
 
-                    <View style= {{flexDirection: 'column', paddingTop: 5}}>
-                      <Text style={styles.titleText}> ตำแหน่ง : {rowData["​POSITION"]} </Text>
-                      <Text style={styles.titleText}> วุฒิการศึกษา : {rowData.CERTIFICATE} </Text>
-                      <Text style={styles.titleText}> จังหวัด  : {rowData.PROVINCE} </Text>
-                      <Text style={styles.titleText}> จำนวน : {rowData.RATE} ตำแหน่ง </Text>
-                    </View>
+                <View style={{ flexDirection: 'column', paddingTop: 5 }}>
+                  <Text style={styles.titleText}> ตำแหน่ง : {rowData["​POSITION"]} </Text>
+                  <Text style={styles.titleText}> วุฒิการศึกษา : {rowData.CERTIFICATE} </Text>
+                  <Text style={styles.titleText}> จังหวัด  : {rowData.PROVINCE} </Text>
+                  <Text style={styles.titleText}> จำนวน : {rowData.RATE} ตำแหน่ง </Text>
+                </View>
 
-                    <View style= {{paddingLeft: 5, paddingTop: 20}}>
-                      <TouchableOpacity 
-                        key={rowData.id} 
-                        onPress={() => navigate('JobDetail', 
-                          {
-                            image: rowData.IMG,
-                            company: rowData.COMPANY,
-                            address: rowData.ADDRESS,
-                            province: rowData.PROVINCE,
-                            tel: rowData.TEL,
-                            email: rowData.EMAIL,
-                            position: rowData["POSITION"],
-                            rate: rowData.RATE,
-                            salary: rowData.SALARY,
-                            style: rowData.STYLE,
-                            certi: rowData.CERTIFICATE,
-                            sex: rowData.SEX,
-                            description: rowData.DESCRIPTION,
-                            date: rowData.DATE,
-                            view: rowData.VIEWS,
-                          }
-                        )}
-                      >
-                        <Text style={styles.more}> > </Text>      
-                      </TouchableOpacity>                  
-                    </View>
+                <View style={{ paddingLeft: 5, paddingTop: 20 }}>
+                  <TouchableOpacity
+                    key={rowData.id}
+                    onPress={() => navigate('JobDetail',
+                      {
+                        image: rowData.IMG,
+                        company: rowData.COMPANY,
+                        address: rowData.ADDRESS,
+                        province: rowData.PROVINCE,
+                        tel: rowData.TEL,
+                        email: rowData.EMAIL,
+                        position: rowData["POSITION"],
+                        rate: rowData.RATE,
+                        salary: rowData.SALARY,
+                        style: rowData.STYLE,
+                        certi: rowData.CERTIFICATE,
+                        sex: rowData.SEX,
+                        description: rowData.DESCRIPTION,
+                        date: rowData.DATE,
+                        view: rowData.VIEWS,
+                      }
+                    )}
+                  >
+                    <Text style={styles.more}> > </Text>
+                  </TouchableOpacity>
+                </View>
 
-                  </View>
-                                                        
-              </View> 
+              </View>
+
+            </View>
+          }
+
+          onEndReached={() =>
+            this.fetchMore()}
+          renderFooter={() => {
+            if (this.state.end) {
+              <View />
             }
-
-            onEndReached={() =>
-              this.setState({ isLoadingMore: true }, () => this.fetchMore())}
-            renderFooter={() => {
+            else {
               return (
                 this.state.isLoadingMore &&
                 <View style={{ flex: 1, padding: 10 }}>
                   <ActivityIndicator size="small" />
                 </View>
               )
-            }}
-          />
+            }
+          }}
+
+        />
 
       </View>
     );
@@ -229,45 +248,45 @@ export default class Jobs extends Component {
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      //justifyContent: 'center',
-      //alignItems: 'center',
-      backgroundColor: Color.BROWN[600],
-    },
+    flex: 1,
+    //justifyContent: 'center',
+    //alignItems: 'center',
+    backgroundColor: Color.BROWN[600],
+  },
   logo: {
-      height: 100,
-      width: 150,
+    height: 100,
+    width: 150,
   },
   searchInput: {
-      height: 20,
-      padding: 4,
-      marginRight: 3,
-      marginTop: 35,
-      flexGrow: 0.5,
-      fontSize: 14,
-      color: 'black',
-      borderWidth: 2,
-      borderColor: 'black',
-      alignItems: 'center',
-      borderRadius: 4,
-      textAlign: 'center',
-      backgroundColor: 'white',
+    height: 20,
+    padding: 4,
+    marginRight: 3,
+    marginTop: 35,
+    flexGrow: 0.5,
+    fontSize: 14,
+    color: 'black',
+    borderWidth: 2,
+    borderColor: 'black',
+    alignItems: 'center',
+    borderRadius: 4,
+    textAlign: 'center',
+    backgroundColor: 'white',
   },
   listView: {
-      paddingTop: 2, 
-      paddingBottom: 2,
+    paddingTop: 2,
+    paddingBottom: 2,
   },
   titleText: {
-      fontSize: 14,
-      fontWeight: 'normal',
-      color:'black',
-      textAlign:'left',
-      fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+    fontSize: 14,
+    fontWeight: 'normal',
+    color: 'black',
+    textAlign: 'left',
+    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
   },
   more: {
-      fontWeight: 'normal',
-      fontSize: 50,
-      fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+    fontWeight: 'normal',
+    fontSize: 50,
+    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
   }
 });
 

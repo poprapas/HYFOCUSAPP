@@ -22,21 +22,23 @@ const { width, height } = Dimensions.get("window");
 export default class EatDetail extends Component {
 
     renderNode(node, index, siblings, parent, defaultRenderer) {
-        
+
         if (node.name == 'p' && node.children[0].name == 'img') {
             const a = node.children[0].attribs;
+            console.log(width)
             return (
                 <Image
-                key={index} 
-                style= {{
-                    width: width,
-                    height: (width / 2 ) * (a.width / a.height),
-                    marginVertical: 10,
-                }}
-                source={{
-                    uri: node.children[0].attribs.src
-                }}
-            />
+                    key={index}
+                    style={{
+                        width: (width / 2) * a.width / a.height,
+                        height: width / 2,
+                        alignSelf: 'center',
+                        marginVertical: 10,
+                    }}
+                    source={{
+                        uri: node.children[0].attribs.src
+                    }}
+                />
             )
         }
 
@@ -49,22 +51,47 @@ export default class EatDetail extends Component {
                                 >
                                 </iframe>`;
             return (
-                <View key={index} 
-                      style={{  width: width, 
-                                height: 230, 
-                                marginLeft: -20, 
-                                paddingBottom: 10,
-                                alignSelf: 'center'
-                                // width: width,
-                                // height: (width / 2 ) * (a.width / a.height),
-                                // marginVertical: 10,
-                            }}
+                <View key={index}
+                    style={{
+                        width: width,
+                        height: 230,
+                        marginLeft: -20,
+                        paddingBottom: 10,
+                        alignSelf: 'center'
+                    }}
                 >
-                    <WebView source={{html: iframeHtml}} />       
+                    <WebView source={{ html: iframeHtml }} />
                 </View>
-                );
+            );
         }
-        
+
+        // if (node.name == 'p' && node.children[0].name == 'iframe') {
+        //     const a = node.children[0].attribs;
+        //     const iframeHtml = `<iframe src="${a.src}" 
+        //                                 height= 100%, 
+        //                                 width= 100%, 
+        //                                 frameborder= 0,
+        //                                 border= 0,
+        //                         >
+        //                         </iframe>`;
+        //     return (
+        //         <View key={index}
+        //             style={{
+        //                 alignSelf: 'center',
+        //                 width: (width / 2) * 16 / 9,
+        //                 height: width / 2,
+        //                 margin: 10
+        //             }}
+        //         >
+        //             <WebView source={{ html: iframeHtml }}
+        //                 style={{
+        //                     margin: -10
+        //                 }}
+        //             />
+        //         </View>
+        //     );
+        // }
+
     }
 
     render() {
@@ -76,36 +103,36 @@ export default class EatDetail extends Component {
 
             <View style={styles.container}>
                 <ActionBar
-                      containerStyle={styles.bar}
-                      backgroundColor= {'black'}
-                      leftIconName={'back'}
-                      onLeftPress= {() => navigate('Eat')}
-                      title={'ของกินหาดใหญ่'} 
-                      rightIcons={[
+                    containerStyle={styles.bar}
+                    backgroundColor={'black'}
+                    leftIconName={'back'}
+                    onLeftPress={() => navigate('Eat')}
+                    title={'ของกินหาดใหญ่'}
+                    rightIcons={[
                         {
-                          name: 'facebook', 
-                          onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                          //onPress: () => navigate('Social'),
+                            name: 'facebook',
+                            onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
+                            //onPress: () => navigate('Social'),
                         },
-                      ]}
+                    ]}
                 />
 
-                <View style={{flexDirection: 'row', paddingBottom: 10}}>
+                <View style={{ flexDirection: 'row', paddingBottom: 10 }}>
 
-                    <Image source={require('./assets/images/banner.png')} 
+                    <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />
                     <Text style={styles.eatfont}> ---- Eat ---- </Text>
 
                 </View>
 
-                <View style = {styles.listView}>
-                    <ScrollView style={{height: height-175, width: "100%"}}>
-                        <Image  source= {{uri: this.props.navigation.state.params.image}} 
+                <View style={styles.listView}>
+                    <ScrollView style={{ height: height - 175, width: "100%" }}>
+                        <Image source={{ uri: this.props.navigation.state.params.image }}
                             style={{
-                                width: width-10, 
-                                height: (width-10) * 0.625
-                            }}/>
-                        <Text style={styles.title}> {this.props.navigation.state.params.title} </Text>
+                                width: width - 10,
+                                height: (width - 10) * 0.625
+                            }} />
+                        <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                         <Text></Text>
                         <HTMLView
                             value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
@@ -143,23 +170,23 @@ const styles = StyleSheet.create({
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
-        paddingLeft: 7, 
-        paddingRight: 5, 
+        paddingLeft: 7,
+        paddingRight: 5,
         //paddingTop: 5, 
         //paddingBottom: 20,
     },
     title: {
         fontSize: 16,
         fontWeight: 'bold',
-        color:'white',
-        textAlign:'center',
+        color: 'white',
+        textAlign: 'center',
         fontFamily: 'Times New Roman'
     },
     view: {
         fontSize: 14,
         fontWeight: 'normal',
-        color:'white',
-        textAlign:'right',
+        color: 'white',
+        textAlign: 'right',
         fontFamily: 'Times New Roman'
     },
 
@@ -169,8 +196,8 @@ const styless = StyleSheet.create({
     p: {
         fontSize: 15,
         fontWeight: 'normal',
-        color:'white',
-        textAlign:'left',
+        color: 'white',
+        textAlign: 'left',
         fontFamily: 'Times New Roman'
     },
 });
