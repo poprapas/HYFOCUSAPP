@@ -74,7 +74,11 @@ export default class StoryDetail extends Component {
                 <View style = {styles.listView}>
                     <ScrollView style={{height: height-175, width: "100%"}}>
                         <Image  source= {{uri: this.props.navigation.state.params.image}} 
-                            style={{width: 374, height: 220}}/>
+                            style={{ 
+                                width: width-10, 
+                                height: (width-10) * 0.625
+                            }} 
+                        />
                         <Text style={styles.title}> {this.props.navigation.state.params.title} </Text>
                         <Text></Text>
                         <HTMLView

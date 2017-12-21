@@ -8,11 +8,14 @@ import {
     TouchableOpacity,
     Linking,
     ListView,
-    ActivityIndicator
+    ActivityIndicator,
+    Dimensions
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
+
+const { width, height } = Dimensions.get("window");
 
 export default class People extends Component {
 
@@ -111,7 +114,11 @@ export default class People extends Component {
                         renderRow={(rowData) =>  <View style= {styles.listView}>
                                                         <Text style={styles.titleText}> {rowData.TOPIC} </Text>
                                                         <Image  source= {{uri: rowData.FEATURE}} 
-                                                        style={{width: 260, height: 300}}/>
+                                                        style={{ 
+                                                          width: width-150, 
+                                                          height: (width-10) * 0.8
+                                                        }}
+                                                        />
                                                       <TouchableOpacity 
                                                             key={rowData.id} 
                                                             onPress={() => navigate('PeopleDetail', 

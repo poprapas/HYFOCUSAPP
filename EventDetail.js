@@ -72,7 +72,10 @@ export default class EventDetail extends Component {
                 <View style = {styles.listView}>
                     <ScrollView style={{height: height-175, width: "100%"}}>
                         <Image  source= {{uri: this.props.navigation.state.params.image}} 
-                            style={{width: 375, height: 95}}/>
+                            style={{
+                                width: width-10, 
+                                height: (width-10) * 0.25
+                            }}/>
                         <Text style={styles.title}> {this.props.navigation.state.params.title} </Text>
                         <Text></Text>
                         <HTMLView

@@ -76,7 +76,10 @@ export default class PeopleDetail extends Component {
                         
                         <View style={{alignItems: 'center'}}>
                             <Image  source= {{uri: this.props.navigation.state.params.image}} 
-                                style={{width: 260, height: 300}}/>
+                                style={{
+                                    width: width-150, 
+                                    height: (width-10) * 0.8
+                                }}/>
                         </View>
                         <Text style={styles.title}> {this.props.navigation.state.params.title} </Text>
                         <Text></Text>
