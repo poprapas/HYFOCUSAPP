@@ -18,26 +18,27 @@ import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
 import HTMLView from 'react-native-htmlview';
 
-const { width } = Dimensions.get("window");
-const height = width * 1.09;
+const { width, height } = Dimensions.get("window");
 
 export default class TravelDetail extends Component {
 
     renderNode(node, index, siblings, parent, defaultRenderer) {
-        if (node.name == 'img') {
-            const a = node.attribs;
+
+        if (node.name == 'p' && node.children[0].name == 'img') {
+            const a = node.children[0].attribs;
             return (
                 <Image
-                    key={index} 
-                    style={{
-                        width: Number(a.width), 
-                        height: Number(a.height)
-                    }}
-                    source={{
-                        uri: a.src
-                    }}
-                />
-            );
+                key={index} 
+                style= {{
+                    width: width,
+                    height: (width / 2 ) * (a.width / a.height),
+                    marginVertical: 10,
+                }}
+                source={{
+                    uri: node.children[0].attribs.src
+                }}
+            />
+            )
         }
 
         if (node.name == 'p' && node.children[0].name == 'iframe') {
@@ -62,29 +63,11 @@ export default class TravelDetail extends Component {
                 );
         }
     }
-        
-        // if (node.name == 'p' && node.children[0].name == 'iframe') {
-        //     //console.log(node.children[0].attribs.src)
-        //      return (
-        //         <WebView
-        //             key={index}
-        //             source={{
-        //                 uri: 'https://www.google.com/maps/@7.0113513,100.4721213,3a,75y,271.11h,65.34t/data=!3m6!1e1!3m4!1sbmn81_NclR1f4KT1IjcpIg!2e0!7i13312!8i6656'
-        //                 //uri: 'https://www.google.com/maps/embed?pb=!1m0!4v1508328335618!6m8!1m7!1s_1RVKLz1MGdAh4_asgaJCw!2m2!1d7.011253691624095!2d100.4721350903641!3f287.10771871464965!4f-16.168099298207366!5f0.7820865974627469'
-        //                 //uri: node.children[0].attribs.src
-        //             }}
-        //             style={{
-        //                 width: 350, 
-        //                 height: 250,
-        //                 alignSelf: 'center',
-        //             }}
-        //         />
-        //     );
-        // }
 
     render() {
 
         const { navigate } = this.props.navigation;
+        let descript = this.props.navigation.state.params.description;
 
         return (
 
@@ -113,13 +96,13 @@ export default class TravelDetail extends Component {
                 </View>
 
                 <View style = {styles.listView}>
-                    <ScrollView style={{height: height, width: "100%"}}>
+                    <ScrollView style={{height: height-175, width: "100%"}}>
                         <Image  source= {{uri: this.props.navigation.state.params.image}} 
                             style={{width: 374, height: 220}}/>
                         <Text style={styles.title}> {this.props.navigation.state.params.title} </Text>
                         <Text></Text>
                         <HTMLView
-                            value={this.props.navigation.state.params.description}
+                            value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}
                             stylesheet={styless}
                         />

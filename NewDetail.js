@@ -21,9 +21,6 @@ import HTMLView from 'react-native-htmlview';
 
 const { width, height } = Dimensions.get("window");
 
-const deviceWidth = Dimensions.get("window").width;
-
-
 export default class NewDetail extends Component {
 
 
@@ -88,7 +85,6 @@ export default class NewDetail extends Component {
     render() {
 
         const { navigate } = this.props.navigation;
-
         let descript = this.props.navigation.state.params.description;
 
         return (
@@ -113,7 +109,7 @@ export default class NewDetail extends Component {
                     style={styles.logo} />
 
                 <View style = {styles.listView}>
-                    <ScrollView style={{height: height-170, width: "100%"}}>
+                    <ScrollView style={{height: height-175, width: "100%"}}>
                         <Image  source= {{uri: this.props.navigation.state.params.image}} 
                             style={{width: 374, height: 220}}/>
                         <Text style={styles.title}> {this.props.navigation.state.params.title} </Text>

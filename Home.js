@@ -11,6 +11,7 @@ import {
   ListView,
   Linking,
   FlatList,
+  Dimensions
 } from 'react-native';
 
 
@@ -19,10 +20,11 @@ import { StackNavigator } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import ActionBar from 'react-native-action-bar';
 import DrawerLayout from 'react-native-drawer-layout';
-import SwiperFlatList from 'react-native-swiper-flatlist';
+import SwiperFlatList from 'react-native-swiper-flatlist'
 import Button from 'react-native-button';
-
 import SideMenu from "./SideMenu"
+
+const { width, height } = Dimensions.get("window");
 
 export default class Home extends Component {
   constructor(props) {
@@ -152,7 +154,13 @@ export default class Home extends Component {
               renderRow={(rowData) => <View style={styles.listView}>
                 <Text style={styles.titleText}> {rowData.TOPIC} </Text>
                 <Image source={{ uri: rowData.FEATURE }}
-                  style={{ width: 374, height: 200 }} />
+                  style={{ 
+                            width: 374, 
+                            height: 220
+                            //width: width,
+                            //height: (width / 2 ) * (a.width / a.height),
+                        }} 
+                />
                 <TouchableOpacity
                   key={rowData.id}
                   onPress={() => navigate('NewDetail',

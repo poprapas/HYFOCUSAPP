@@ -17,30 +17,32 @@ import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
 import HTMLView from 'react-native-htmlview';
 
-const { width } = Dimensions.get("window");
-const height = width * 1.09;
+const { width, height } = Dimensions.get("window");
 
 export default class EatDetail extends Component {
 
     renderNode(node, index, siblings, parent, defaultRenderer) {
-        if (node.name == 'img') {
-            const a = node.attribs;
+        
+        if (node.name == 'p' && node.children[0].name == 'img') {
+            const a = node.children[0].attribs;
             return (
                 <Image
-                    key={index} 
-                    style={{
-                        width: Number(a.width), 
-                        height: Number(a.height)
-                    }}
-                    source={{
-                        uri: a.src
-                    }}
-                />
-            );
+                key={index} 
+                style= {{
+                    width: width,
+                    height: (width / 2 ) * (a.width / a.height),
+                    marginVertical: 10,
+                }}
+                source={{
+                    uri: node.children[0].attribs.src
+                }}
+            />
+            )
         }
 
         if (node.name == 'p' && node.children[0].name == 'iframe') {
-            const iframeHtml = `<iframe src="${node.children[0].attribs.src}" 
+            const a = node.children[0].attribs;
+            const iframeHtml = `<iframe src="${a.src}" 
                                         height= 220, 
                                         width= ${width - 10}, 
 
@@ -53,7 +55,9 @@ export default class EatDetail extends Component {
                                 marginLeft: -20, 
                                 paddingBottom: 10,
                                 alignSelf: 'center'
-
+                                // width: width,
+                                // height: (width / 2 ) * (a.width / a.height),
+                                // marginVertical: 10,
                             }}
                 >
                     <WebView source={{html: iframeHtml}} />       
@@ -66,6 +70,7 @@ export default class EatDetail extends Component {
     render() {
 
         const { navigate } = this.props.navigation;
+        let descript = this.props.navigation.state.params.description;
 
         return (
 
@@ -94,13 +99,13 @@ export default class EatDetail extends Component {
                 </View>
 
                 <View style = {styles.listView}>
-                    <ScrollView style={{height: height, width: "100%"}}>
+                    <ScrollView style={{height: height-175, width: "100%"}}>
                         <Image  source= {{uri: this.props.navigation.state.params.image}} 
                             style={{width: 374, height: 220}}/>
                         <Text style={styles.title}> {this.props.navigation.state.params.title} </Text>
                         <Text></Text>
                         <HTMLView
-                            value={this.props.navigation.state.params.description}
+                            value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}
                             stylesheet={styless}
                         />

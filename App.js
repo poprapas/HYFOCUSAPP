@@ -24,7 +24,6 @@ import Video from "./Video"
 import VideoDetail from "./VideoDetail"
 import Review from "./Review"
 import ReviewDetail from "./ReviewDetail"
-import Setting from "./Setting"
 import Home from "./Home"
 import DrawerMenuScreen from "./DrawerMenuScreen"
 import SideMenu from "./SideMenu"
@@ -62,7 +61,6 @@ const AppNavigator = StackNavigator({
   VideoDetail: { screen: VideoDetail },
   Review: { screen: Review },
   ReviewDetail: { screen: ReviewDetail },
-  Setting: { screen: Setting },
   About: { screen: About },
   DrawerMenuScreen: { screen: DrawerMenuScreen },
   SideMenu: { screen: SideMenu },
