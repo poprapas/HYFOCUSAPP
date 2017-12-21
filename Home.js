@@ -155,10 +155,8 @@ export default class Home extends Component {
                 <Text style={styles.titleText}> {rowData.TOPIC} </Text>
                 <Image source={{ uri: rowData.FEATURE }}
                   style={{ 
-                            width: 374, 
-                            height: 220
-                            //width: width,
-                            //height: (width / 2 ) * (a.width / a.height),
+                    width: width-10, 
+                    height: (width-10) * 0.625
                         }} 
                 />
                 <TouchableOpacity
