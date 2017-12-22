@@ -26,17 +26,17 @@ export default class EventDetail extends Component {
             const a = node.children[0].attribs;
             return (
                 <Image
-                key={index} 
-                style= {{
-                    width: (width / 2) * a.width / a.height,
-                    height: width / 2,
-                    alignSelf: 'center',
-                    marginVertical: 10,
-                }}
-                source={{
-                    uri: node.children[0].attribs.src
-                }}
-            />
+                    key={index}
+                    style={{
+                        width: (width / 2) * a.width / a.height,
+                        height: width / 2,
+                        alignSelf: 'center',
+                        marginVertical: 10,
+                    }}
+                    source={{
+                        uri: node.children[0].attribs.src
+                    }}
+                />
             )
         }
     }
@@ -50,33 +50,35 @@ export default class EventDetail extends Component {
 
             <View style={styles.container}>
                 <ActionBar
-                      containerStyle={styles.bar}
-                      backgroundColor= {'black'}
-                      leftIconName={'back'}
-                      onLeftPress= {() => navigate('Event')}
-                      title={'ไปหม้ายโหม๋เรา'} 
-                      rightIcons={[
+                    containerStyle={styles.bar}
+                    backgroundColor={'black'}
+                    leftIconName={'back'}
+                    onLeftPress={() => navigate('Event')}
+                    title={'ไปหม้ายโหม๋เรา'}
+                    rightIcons={[
                         {
-                          name: 'facebook', 
-                          onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                          //onPress: () => navigate('Social'),
+                            name: 'facebook',
+                            onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
+                            //onPress: () => navigate('Social'),
                         },
-                      ]}
+                    ]}
                 />
 
-               <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <Image source={require('./assets/images/banner.png')} 
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />
-                    <Text style={styles.eventfont}> -- ไปหม้ายโหม๋เรา -- </Text>
+                    <View style={{ flex: 1 }}>
+                        <Text style={styles.eventfont}> -- ไปหม้ายโหม๋เรา -- </Text>
+                    </View>
                 </View>
 
-                <View style = {styles.listView}>
-                    <ScrollView style={{height: height-175, width: "100%"}}>
-                        <Image  source= {{uri: this.props.navigation.state.params.image}} 
+                <View style={styles.listView}>
+                    <ScrollView style={{ height: height - 175, width: "100%" }}>
+                        <Image source={{ uri: this.props.navigation.state.params.image }}
                             style={{
-                                width: width-10, 
-                                height: (width-10) * 0.25
-                            }}/>
+                                width: width - 10,
+                                height: (width - 10) * 0.25
+                            }} />
                         <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                         <Text></Text>
                         <HTMLView
@@ -114,21 +116,21 @@ const styles = StyleSheet.create({
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
-        paddingLeft: 5, 
-        paddingRight: 5, 
+        paddingLeft: 5,
+        paddingRight: 5,
     },
     title: {
         fontSize: 16,
         fontWeight: 'bold',
-        color:'white',
-        textAlign:'center',
+        color: 'white',
+        textAlign: 'center',
         fontFamily: 'Times New Roman'
     },
     view: {
         fontSize: 14,
         fontWeight: 'normal',
-        color:'white',
-        textAlign:'right',
+        color: 'white',
+        textAlign: 'right',
         fontFamily: 'Times New Roman'
     },
 
@@ -138,8 +140,8 @@ const styless = StyleSheet.create({
     p: {
         fontSize: 15,
         fontWeight: 'normal',
-        color:'white',
-        textAlign:'left',
+        color: 'white',
+        textAlign: 'left',
         fontFamily: 'Times New Roman'
     }
 });

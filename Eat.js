@@ -114,11 +114,13 @@ export default class Eat extends Component {
                         },
                     ]}
                 />
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
                     <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />
-                    <Text style={styles.eatfont}> ---- Eat ---- </Text>
+                    <View style={{ flex: 1 }}>
+                        <Text style={styles.eatfont}> ---- Eat ---- </Text>
+                    </View>
 
                 </View>
 
@@ -153,17 +155,17 @@ export default class Eat extends Component {
 
                     onEndReached={() =>
                         this.fetchMore()}
-                      renderFooter={() => {
+                    renderFooter={() => {
                         if (this.state.end) {
-                          <View />
+                            <View />
                         }
                         else {
-                          return (
-                            this.state.isLoadingMore &&
-                            <View style={{ flex: 1, padding: 10 }}>
-                              <ActivityIndicator size="small" />
-                            </View>
-                          )
+                            return (
+                                this.state.isLoadingMore &&
+                                <View style={{ flex: 1, padding: 10 }}>
+                                    <ActivityIndicator size="small" />
+                                </View>
+                            )
                         }
                     }}
                 />
@@ -191,7 +193,7 @@ const styles = StyleSheet.create({
     },
     listView: {
         paddingLeft: 5,
-        paddingRight: 5, 
+        paddingRight: 5,
         paddingBottom: 2
     },
     moredetail: {
@@ -209,6 +211,6 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        paddingTop: 5,
+        paddingTop: 10,
     },
 });

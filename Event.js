@@ -115,10 +115,12 @@ export default class Event extends Component {
                     ]}
                 />
 
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />
+                    <View style={{flex: 1}}>
                     <Text style={styles.eventfont}> -- ไปหม้ายโหม๋เรา -- </Text>
+                    </View>
                 </View>
 
                 <ListView
@@ -207,6 +209,6 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        paddingTop: 5,
+        paddingTop: 10,
     },
 });

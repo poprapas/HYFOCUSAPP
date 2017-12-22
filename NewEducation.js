@@ -117,11 +117,13 @@ export default class New extends Component {
                     ]}
                 />
 
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
                     <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />
-                    <Text style={styles.bannerfont}> -- ข่าวการศึกษา -- </Text>
+                    <View style={{ flex: 1 }}>
+                        <Text style={styles.bannerfont}> -- ข่าวการศึกษา -- </Text>
+                    </View>
 
                 </View>
 
@@ -214,6 +216,6 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        paddingTop: 5,
+        paddingTop: 10,
     },
 });

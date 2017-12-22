@@ -92,11 +92,13 @@ export default class TravelDetail extends Component {
                     ]}
                 />
 
-                <View style={{ flexDirection: 'row', paddingBottom: 5, justifyContent: 'space-around'}}>
+                <View style={{ flexDirection: 'row', paddingBottom: 5, justifyContent: 'space-between' }}>
 
                     <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />
-                    <Text style={styles.travelfont}> ---- Travel ---- </Text>
+                    <View style={{ flex: 1 }}>
+                        <Text style={styles.travelfont}> ---- Travel ---- </Text>
+                    </View>
 
                 </View>
 

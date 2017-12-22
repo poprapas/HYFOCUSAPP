@@ -117,11 +117,13 @@ export default class New extends Component {
                     ]}
                 />
 
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
                     <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />
-                    <Text style={styles.bannerfont}> - ข่าวสังคมและการเมือง - </Text>
+                    <View style={{ flex: 1 }}>
+                        <Text style={styles.bannerfont}> - ข่าวสังคมและการเมือง - </Text>
+                    </View>
 
                 </View>
 
@@ -156,17 +158,17 @@ export default class New extends Component {
 
                     onEndReached={() =>
                         this.fetchMore()}
-                      renderFooter={() => {
+                    renderFooter={() => {
                         if (this.state.end) {
-                          <View />
+                            <View />
                         }
                         else {
-                          return (
-                            this.state.isLoadingMore &&
-                            <View style={{ flex: 1, padding: 10 }}>
-                              <ActivityIndicator size="small" />
-                            </View>
-                          )
+                            return (
+                                this.state.isLoadingMore &&
+                                <View style={{ flex: 1, padding: 10 }}>
+                                    <ActivityIndicator size="small" />
+                                </View>
+                            )
                         }
                     }}
 
@@ -213,6 +215,7 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'BangnaNew' : 'bangna-new',
+        paddingTop: 10,
     },
 });
 

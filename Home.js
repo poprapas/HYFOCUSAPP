@@ -141,11 +141,13 @@ export default class Home extends Component {
 
           <ScrollView>
 
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
               <Image source={require('./assets/images/banner.png')}
                 style={styles.logo} />
-              <Text style={styles.newfont}> --- ข่าวล่าสุด --- </Text>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.newfont}> --- ข่าวล่าสุด --- </Text>
+              </View>
 
             </View>
 
@@ -154,10 +156,10 @@ export default class Home extends Component {
               renderRow={(rowData) => <View style={styles.listView}>
                 <Text style={styles.titleText}> {rowData.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                 <Image source={{ uri: rowData.FEATURE }}
-                  style={{ 
-                    width: width-10, 
-                    height: (width-10) * 0.625
-                        }} 
+                  style={{
+                    width: width - 10,
+                    height: (width - 10) * 0.625
+                  }}
                 />
                 <TouchableOpacity
                   key={rowData.id}
@@ -363,23 +365,23 @@ const styles = StyleSheet.create({
   newfont: {
     fontSize: 27,
     paddingTop: 35,
+    alignSelf: 'center',
     color: 'white',
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
   },
   listView: {
     paddingLeft: 5,
     paddingRight: 5,
-    //paddingTop: 3, 
-    paddingBottom: 3,
+    paddingBottom: 2,
   },
   titleText: {
     fontSize: 16,
-    paddingTop: 5,
+    paddingTop: 10,
     fontWeight: 'normal',
     color: 'white',
     textAlign: 'center',
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    
+
   },
   moredetail: {
     fontSize: 14,
@@ -391,8 +393,8 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline'
   },
   advt_1: {
-    height: (width-48) * 0.526,
-    width: width-48,
+    height: (width - 48) * 0.526,
+    width: width - 48,
   },
   advt_2: {
     height: 120,

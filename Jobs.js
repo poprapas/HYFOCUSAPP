@@ -179,19 +179,40 @@ export default class Jobs extends Component {
           dataSource={this.state.dataSource}
           renderRow={(rowData) =>
             <View style={styles.listView}>
-              <View style={{ flexDirection: 'row', backgroundColor: 'white', justifyContent: 'space-around', paddingTop: 5 }}>
+              <View style={{
+                flexDirection: 'row',
+                backgroundColor: 'white',
+                justifyContent: 'space-around',
+                paddingTop: 2,
+                paddingBottom: 2,
+              }}>
 
-                <Image source={{ uri: rowData.IMG }}
-                  style={{ width: 105, height: 100 }} />
+                <View style={{ flex: 0.3 }}>
+                  <Image source={{ uri: rowData.IMG }}
+                    style={{
+                      width: 100,
+                      height: 100,
+                    }} />
+                </View>
 
-                <View style={{ flexDirection: 'column', paddingTop: 5 }}>
+                <View style={{
+                  flexDirection: 'column',
+                  paddingTop: Platform.OS == 'ios' ? 10 : 5,
+                  paddingLeft: 5,
+                  flex: 0.54
+                }}
+                >
                   <Text style={styles.titleText}> ตำแหน่ง : {rowData["​POSITION"]} </Text>
-                  <Text style={styles.titleText}> วุฒิการศึกษา : {rowData.CERTIFICATE} </Text>
+                  <Text style={styles.titleText}> วุฒิการศึกษา : {rowData.CERTIFICATE == "" ? '-' : rowData.CERTIFICATE} </Text>
                   <Text style={styles.titleText}> จังหวัด  : {rowData.PROVINCE} </Text>
                   <Text style={styles.titleText}> จำนวน : {rowData.RATE} ตำแหน่ง </Text>
                 </View>
 
-                <View style={{ paddingLeft: 5, paddingTop: 20 }}>
+                <View style={{
+                  paddingLeft: 5,
+                  paddingTop: Platform.OS == 'ios' ? 30 : 15,
+                  flex: 0.16,
+                }}>
                   <TouchableOpacity
                     key={rowData.id}
                     onPress={() => navigate('JobDetail',
@@ -282,6 +303,7 @@ const styles = StyleSheet.create({
     color: 'black',
     textAlign: 'left',
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+    paddingTop: Platform.OS == 'ios' ? 5 : 0,
   },
   more: {
     fontWeight: 'normal',

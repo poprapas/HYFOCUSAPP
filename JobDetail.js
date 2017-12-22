@@ -7,15 +7,14 @@ import {
     Image,
     Linking,
     ScrollView,
-    Dimensions
+    Dimensions,
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
 import HTMLView from 'react-native-htmlview';
 
-const { width } = Dimensions.get("window");
-const height = width * 1.08;
+const { width, height } = Dimensions.get("window");
 
 export default class WorkDetail extends Component {
 
@@ -47,63 +46,63 @@ export default class WorkDetail extends Component {
                 </View>
 
                 <View style = {styles.listView}>
-                    <ScrollView style={{height: height, width: "100%"}}>
+                    <ScrollView style={{height: height-170, width: "100%"}}>
 
                         <View style = {{alignItems: 'center', paddingBottom: 5}}>
                             <Image  source= {{uri: this.props.navigation.state.params.image}} 
-                                style={{width: 90, height: 80}}/>
+                                style={{width: 100, height: 100}}/>
                         </View>
 
                         <Text style={styles.company}> {this.props.navigation.state.params.company} </Text>
 
-                        <View style = {{flexDirection: 'row'}}>
+                        <View style = {{flexDirection: 'row', marginTop: 10}}>
                             <Text style={styles.topic}> ที่อยู่ : </Text>
                             <Text style={styles.detail}>{this.props.navigation.state.params.address} </Text>
                         </View>
 
-                        <View style = {{flexDirection: 'row'}}>
+                        <View style = {{flexDirection: 'row', marginTop: 10}}>
                             <Text style={styles.topic}> จังหวัด : </Text>
                             <Text style={styles.detail}>{this.props.navigation.state.params.province} </Text>
                         </View>
 
-                        <View style = {{flexDirection: 'row'}}>
+                        <View style = {{flexDirection: 'row', marginTop: 10}}>
                             <Text style={styles.topic}> เบอร์โทร : </Text>
                             <Text style={styles.detail}>{this.props.navigation.state.params.tel} </Text>
                         </View>
 
-                        <View style = {{flexDirection: 'row'}}>
+                        <View style = {{flexDirection: 'row', marginTop: 10}}>
                             <Text style={styles.topic}> อีเมลล์ : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.email} </Text>
+                            <Text style={styles.detail}>{this.props.navigation.state.params.email == "" ? '-': this.props.navigation.state.params.email} </Text>
                         </View>
 
-                        <View style = {{flexDirection: 'row'}}>
+                        <View style = {{flexDirection: 'row', marginTop: 10}}>
                             <Text style={styles.topic}> จำนวน : </Text>
                             <Text style={styles.detail}>{this.props.navigation.state.params.rate} ตำแหน่ง </Text>
                         </View>
 
-                        <View style = {{flexDirection: 'row'}}>
+                        <View style = {{flexDirection: 'row', marginTop: 10}}>
                             <Text style={styles.topic}> เงินเดือน : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.salary} </Text>
+                            <Text style={styles.detail}>{this.props.navigation.state.params.salary == "" ? '-': this.props.navigation.state.params.salary} </Text>
                         </View>
 
-                        <View style = {{flexDirection: 'row'}}>
+                        <View style = {{flexDirection: 'row', marginTop: 10}}>
                             <Text style={styles.topic}> ลักษณะงาน : </Text>
                             <Text style={styles.detail}>{this.props.navigation.state.params.style} </Text>
                         </View>
 
-                        <View style = {{flexDirection: 'row'}}>
+                        <View style = {{flexDirection: 'row', marginTop: 10}}>
                             <Text style={styles.topic}> วุฒิการศึกษา : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.certi} </Text>
+                            <Text style={styles.detail}>{this.props.navigation.state.params.certi == "" ? '-': this.props.navigation.state.params.certi} </Text>
                         </View>
 
-                        <View style = {{flexDirection: 'row'}}>
+                        <View style = {{flexDirection: 'row', marginTop: 10}}>
                             <Text style={styles.topic}> เพศ : </Text>
                             <Text style={styles.detail}>{this.props.navigation.state.params.sex} </Text>
                         </View>
 
                         <View style = {{paddingLeft: 4}}>
                             <HTMLView
-                                value={this.props.navigation.state.params.description}
+                                value={this.props.navigation.state.params.description.replace(/\r\n/g, '').replace(/&nbsp;/g, '')}
                                 stylesheet={styless}
                             />
                         </View>
@@ -132,8 +131,8 @@ const styles = StyleSheet.create({
 
     listView: {
         backgroundColor: 'white',
-        paddingLeft: 2,
-        paddingRight: 5,
+        paddingLeft: 1,
+        width: width,
     },
     company: {
         fontSize: 18,
@@ -146,12 +145,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color:'black',
         textAlign:'left',
+        width: 99,
     },
     detail: {
         fontSize: 14,
         fontWeight: 'normal',
         color:'black',
         textAlign:'left',
+        width: width-99
     },
     view: {
         fontSize: 14,

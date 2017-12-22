@@ -115,12 +115,12 @@ export default class ReviewDetail extends Component {
                     ]}
                 />
 
-                <View style={{ flexDirection: 'row', paddingBottom: 5, justifyContent: 'space-around'}}>
-
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />
-                    <Text style={styles.reviewfont}> ---- Review ---- </Text>
-
+                    <View style={{ flex: 1 }}>
+                        <Text style={styles.reviewfont}> ---- Review ---- </Text>
+                    </View>
                 </View>
 
                 <View style={styles.listView}>

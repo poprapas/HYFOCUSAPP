@@ -11,6 +11,7 @@ import {
     Dimensions,
     ScrollView,
     WebView,
+    Vibration,
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
@@ -117,11 +118,13 @@ export default class EatDetail extends Component {
                     ]}
                 />
 
-                <View style={{ flexDirection: 'row', paddingBottom: 5, justifyContent: 'space-around'}}>
+                <View style={{ flexDirection: 'row', paddingBottom: 5, justifyContent: 'space-between' }}>
 
                     <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />
-                    <Text style={styles.eatfont}> ---- Eat ---- </Text>
+                    <View style={{ flex: 1 }}>
+                        <Text style={styles.eatfont}> ---- Eat ---- </Text>
+                    </View>
 
                 </View>
 
