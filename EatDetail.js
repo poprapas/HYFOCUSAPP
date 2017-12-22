@@ -117,7 +117,7 @@ export default class EatDetail extends Component {
                     ]}
                 />
 
-                <View style={{ flexDirection: 'row', paddingBottom: 10 }}>
+                <View style={{ flexDirection: 'row', paddingBottom: 5, justifyContent: 'space-around'}}>
 
                     <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />
@@ -164,16 +164,13 @@ const styles = StyleSheet.create({
     },
     eatfont: {
         fontSize: 27,
-        paddingLeft: 18,
         paddingTop: 35,
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
-        paddingLeft: 7,
+        paddingLeft: 5,
         paddingRight: 5,
-        //paddingTop: 5, 
-        //paddingBottom: 20,
     },
     title: {
         fontSize: 16,

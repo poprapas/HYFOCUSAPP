@@ -120,7 +120,7 @@ export default class NewDetail extends Component {
                         <Image  source= {{uri: this.props.navigation.state.params.image}} 
                             style={{width: width-10, 
                                     height: (width-10) * 0.625}}/>
-                        <Text style={styles.title}> {this.props.navigation.state.params.title} </Text>
+                        <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                         <Text></Text>
                         <HTMLView
                             value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
@@ -145,16 +145,6 @@ const styles = StyleSheet.create({
         //alignItems: 'center',
         backgroundColor: Color.BROWN[400],
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
     logo: {
         height: 100,
         width: 150,
@@ -164,14 +154,12 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingTop: 35,
         color: 'white',
-        //alignSelf: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
         paddingLeft: 5, 
         paddingRight: 5, 
         paddingTop: 5, 
-        paddingBottom: 2,
     },
     title: {
         fontSize: 16,

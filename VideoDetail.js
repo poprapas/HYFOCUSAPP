@@ -87,7 +87,7 @@ export default class VideoDetail extends Component {
                       ]}
                 />
 
-                <View style={{flexDirection: 'row', paddingBottom: 10}}>
+                <View style={{flexDirection: 'row', paddingBottom: 5, justifyContent: 'space-around'}}>
 
                     <Image source={require('./assets/images/banner.png')} 
                         style={styles.logo} />
@@ -103,7 +103,7 @@ export default class VideoDetail extends Component {
                                 height: (width-10) * 0.625
                             }} 
                         />
-                        <Text style={styles.title}> {this.props.navigation.state.params.title} </Text>
+                        <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                         <Text></Text>
                         <HTMLView
                             value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
@@ -133,16 +133,13 @@ const styles = StyleSheet.create({
     },
     videofont: {
         fontSize: 27,
-        paddingLeft: 5,
         paddingTop: 35,
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
-        paddingLeft: 7, 
+        paddingLeft: 5, 
         paddingRight: 5, 
-        //paddingTop: 5, 
-        //paddingBottom: 20,
     },
     title: {
         fontSize: 16,

@@ -141,7 +141,7 @@ export default class Home extends Component {
 
           <ScrollView>
 
-            <View style={{ flexDirection: 'row', paddingBottom: 10 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
 
               <Image source={require('./assets/images/banner.png')}
                 style={styles.logo} />
@@ -152,7 +152,7 @@ export default class Home extends Component {
             <ListView
               dataSource={this.state.dataSource}
               renderRow={(rowData) => <View style={styles.listView}>
-                <Text style={styles.titleText}> {rowData.TOPIC} </Text>
+                <Text style={styles.titleText}> {rowData.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                 <Image source={{ uri: rowData.FEATURE }}
                   style={{ 
                     width: width-10, 
@@ -362,7 +362,6 @@ const styles = StyleSheet.create({
   },
   newfont: {
     fontSize: 27,
-    paddingLeft: 2,
     paddingTop: 35,
     color: 'white',
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',

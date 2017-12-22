@@ -64,7 +64,7 @@ export default class EventDetail extends Component {
                       ]}
                 />
 
-               <View style={{flexDirection: 'row', paddingBottom: 10}}>
+               <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
                     <Image source={require('./assets/images/banner.png')} 
                         style={styles.logo} />
                     <Text style={styles.eventfont}> -- ไปหม้ายโหม๋เรา -- </Text>
@@ -77,7 +77,7 @@ export default class EventDetail extends Component {
                                 width: width-10, 
                                 height: (width-10) * 0.25
                             }}/>
-                        <Text style={styles.title}> {this.props.navigation.state.params.title} </Text>
+                        <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                         <Text></Text>
                         <HTMLView
                             value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
@@ -109,16 +109,13 @@ const styles = StyleSheet.create({
     },
     eventfont: {
         fontSize: 24,
-        paddingLeft: 3,
         paddingTop: 35,
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
-        paddingLeft: 6, 
+        paddingLeft: 5, 
         paddingRight: 5, 
-        //paddingTop: 5, 
-        //paddingBottom: 20,
     },
     title: {
         fontSize: 16,
