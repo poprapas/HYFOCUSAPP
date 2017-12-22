@@ -43,7 +43,7 @@ export default class PeopleDetail extends Component {
 
     render() {
 
-        const { navigate } = this.props.navigation;
+        const { navigate, goBack } = this.props.navigation;
         let descript = this.props.navigation.state.params.description;
 
         return (
@@ -53,7 +53,8 @@ export default class PeopleDetail extends Component {
                     containerStyle={styles.bar}
                     backgroundColor={'black'}
                     leftIconName={'back'}
-                    onLeftPress={() => navigate('People')}
+                    onLeftPress={() => goBack()}
+                    icontitle={require('./assets/images/people-icon.png')}
                     title={'คนหาดใหญ่'}
                     rightIcons={[
                         {
@@ -73,8 +74,10 @@ export default class PeopleDetail extends Component {
                 </View>
 
                 <View style={styles.listView}>
-                    <ScrollView style={{ height: height - 175, width: "100%" }}>
-
+                    <ScrollView style={{
+                        height: Platform.OS == 'ios' ? height - 160 : height - 165,
+                        width: "100%"
+                    }}>
                         <View style={{ alignItems: 'center' }}>
                             <Image source={{ uri: this.props.navigation.state.params.image }}
                                 style={{
@@ -121,6 +124,7 @@ const styles = StyleSheet.create({
     listView: {
         paddingLeft: 5,
         paddingRight: 5,
+        paddingTop: 5,
     },
     title: {
         fontSize: 16,

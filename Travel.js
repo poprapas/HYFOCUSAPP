@@ -87,15 +87,30 @@ export default class Story extends Component {
 
     render() {
 
+        const { navigate } = this.props.navigation;
+
         if (this.state.isLoading) {
             return (
-                <View style={{ flex: 1, paddingTop: 20 }}>
-                    <ActivityIndicator />
+                <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
+                    <ActionBar
+                        containerStyle={styles.bar}
+                        backgroundColor={'black'}
+                        leftIconName={'menu'}
+                        onLeftPress={() => navigate('Tab')}
+                        icontitle={require('./assets/images/travel-icon.png')}
+                        title={'เที่ยวหาดใหญ่'}
+                        rightIcons={[
+                            {
+                                name: 'facebook',
+                                onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
+                                //onPress: () => navigate('Social'),
+                            },
+                        ]}
+                    />
+                    <ActivityIndicator style={{ paddingTop: 20 }} />
                 </View>
             );
         }
-
-        const { navigate } = this.props.navigation;
 
         return (
             <View style={styles.container}>
@@ -105,6 +120,7 @@ export default class Story extends Component {
                     backgroundColor={'black'}
                     leftIconName={'back'}
                     onLeftPress={() => navigate('Tab')}
+                    icontitle={require('./assets/images/travel-icon.png')}
                     title={'เที่ยวหาดใหญ่'}
                     rightIcons={[
                         {

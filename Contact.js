@@ -46,6 +46,7 @@ export default class Contact extends Component {
                       backgroundColor= {'black'}
                       leftIconName={'back'}
                       onLeftPress= {() => navigate('Tab')}
+                      icontitle={require('./assets/images/contact-icon.png')}
                       title={'ติดต่อเรา'} 
                       rightIcons={[
                         {

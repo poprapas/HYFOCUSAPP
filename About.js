@@ -13,44 +13,45 @@ import Color from 'react-native-material-color';
 
 export default class About extends Component {
 
-  render() {
+    render() {
 
-    const { navigate } = this.props.navigation;
+        const { navigate } = this.props.navigation;
 
         return (
             <View style={styles.container}>
-                
+
                 <ActionBar
-                      containerStyle={styles.bar}
-                      backgroundColor= {'black'}
-                      leftIconName={'back'}
-                      onLeftPress= {() => navigate('Tab')}
-                      title={'เกี่ยวกับ'} 
-                      rightIcons={[
+                    containerStyle={styles.bar}
+                    backgroundColor={'black'}
+                    leftIconName={'back'}
+                    onLeftPress={() => navigate('Tab')}
+                    icontitle={require('./assets/images/about-icon.png')}
+                    title={'เกี่ยวกับ'}
+                    rightIcons={[
                         {
-                          name: 'facebook', 
-                          onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                          //onPress: () => navigate('Social'),
+                            name: 'facebook',
+                            onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
+                            //onPress: () => navigate('Social'),
                         },
-                      ]}
+                    ]}
                 />
 
-                <View style={{paddingBottom: 20}}>
-                  <Image source={require('./assets/images/banner.png')} 
-                          style={styles.logo} />
+                <View style={{ paddingBottom: 20 }}>
+                    <Image source={require('./assets/images/banner.png')}
+                        style={styles.logo} />
                 </View>
 
                 <View style={styles.about}>
-                  <Text style={styles.detail}>
-                     เกี่ยวกับเรื่องราวของอำเภอหาดใหญ่และจังหวัดสงขลาและรวมไปถึง 
+                    <Text style={styles.detail}>
+                        เกี่ยวกับเรื่องราวของอำเภอหาดใหญ่และจังหวัดสงขลาและรวมไปถึง
                      Platform เกี่ยวกับการหางานและการซื้อ-ขาย เนื้อหาข่าวสารของ
-                     หาดใหญ่โฟกัสดอทคอม เน้นไปเรื่องขอการนำเสนอวิถีชีวิตของผู้คน 
+                     หาดใหญ่โฟกัสดอทคอม เน้นไปเรื่องขอการนำเสนอวิถีชีวิตของผู้คน
                      อาชีพ ข่าวสารที่เป็นกระแส ข่าวสารประจำวัน รวมไปถึง Event ต่างๆ
-                     โดยอ้างอิงข้อมูลจากเว็บไซต์ต่างๆ ผู้คน และหลักฐานทางเอกสาร 
+                     โดยอ้างอิงข้อมูลจากเว็บไซต์ต่างๆ ผู้คน และหลักฐานทางเอกสาร
                      โดยจะเป็นการบอกเล่าเรื่องราวในปัจจุบันและอดีตของเมืองหาดใหญ่
                      และจังหวัดสงขลาในด้านต่างๆ ข้อมูลจะมีการอัปเดตอยู่เสมอ นอก-
                      จากนั้นหาดใหญ่โฟกัสยังมีเว็บบอร์ดไว้สำหรับชาวหาดใหญ่และผู้
-                     คนทั่วไปสามารถเข้ามาตั้งกระทู้สอบถามและแสดงความคิดเห็นซึ่งกันและกัน 
+                     คนทั่วไปสามารถเข้ามาตั้งกระทู้สอบถามและแสดงความคิดเห็นซึ่งกันและกัน
                      ทั้งบอกเล่าเรื่องราว คนดังหาดใหญ่ ข่าวสาร ของกินหาด-
                      ใหญ่ เที่ยวหาดใหญ่ที่ไหนดี รีวิว เรื่องทั่วๆไป ทำให้เกิดเรื่องราวที่น่า
                      สนใจมากมายในวงกว้างอยู่เสมอ
@@ -93,8 +94,8 @@ const styles = StyleSheet.create({
     detail: {
         fontSize: 13,
         fontWeight: 'normal',
-        color:'black',
-        textAlign:'left',
+        color: 'black',
+        textAlign: 'left',
         fontFamily: 'Times New Roman',
     }
 

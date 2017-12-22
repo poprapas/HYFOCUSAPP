@@ -86,16 +86,30 @@ export default class People extends Component {
     }
 
     render() {
+        const { navigate, goBack } = this.props.navigation;
 
         if (this.state.isLoading) {
             return (
-                <View style={{ flex: 1, paddingTop: 20 }}>
-                    <ActivityIndicator />
+                <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
+                    <ActionBar
+                        containerStyle={styles.bar}
+                        backgroundColor={'black'}
+                        leftIconName={'menu'}
+                        onLeftPress={() => navigate('Tab')}
+                        icontitle={require('./assets/images/people-icon.png')}
+                        title={'คนหาดใหญ่'}
+                        rightIcons={[
+                            {
+                                name: 'facebook',
+                                onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
+                                //onPress: () => navigate('Social'),
+                            },
+                        ]}
+                    />
+                    <ActivityIndicator style={{ paddingTop: 20 }} />
                 </View>
             );
         }
-
-        const { navigate } = this.props.navigation;
 
         return (
             <View style={styles.container}>
@@ -105,6 +119,7 @@ export default class People extends Component {
                     backgroundColor={'black'}
                     leftIconName={'back'}
                     onLeftPress={() => navigate('Tab')}
+                    icontitle={require('./assets/images/people-icon.png')}
                     title={'คนหาดใหญ่'}
                     rightIcons={[
                         {
@@ -114,7 +129,7 @@ export default class People extends Component {
                         },
                     ]}
                 />
-                
+
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />

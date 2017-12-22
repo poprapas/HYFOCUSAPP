@@ -111,16 +111,30 @@ export default class Jobs extends Component {
     let textStyle = [
       styles[type + province],
     ];
+    const { navigate, goBack } = this.props.navigation;
 
     if (this.state.isLoading) {
       return (
-        <View style={{ flex: 1, paddingTop: 20 }}>
-          <ActivityIndicator />
+        <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
+          <ActionBar
+            containerStyle={styles.bar}
+            backgroundColor={'black'}
+            leftIconName={'menu'}
+            onLeftPress={() => navigate('Tab')}
+            icontitle={require('./assets/images/work-icon.png')}
+            title={'หางานหาดใหญ่'}
+            rightIcons={[
+              {
+                name: 'facebook',
+                onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
+                //onPress: () => navigate('Social'),
+              },
+            ]}
+          />
+          <ActivityIndicator style={{ paddingTop: 20 }} />
         </View>
       );
     }
-
-    const { navigate } = this.props.navigation;
 
     return (
 
@@ -131,6 +145,7 @@ export default class Jobs extends Component {
           backgroundColor={'black'}
           leftIconName={'back'}
           onLeftPress={() => navigate('Tab')}
+          icontitle={require('./assets/images/work-icon.png')}
           title={'หางานหาดใหญ่'}
           rightIcons={[
             {

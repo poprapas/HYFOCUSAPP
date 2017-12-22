@@ -25,6 +25,7 @@ export default class Room extends Component {
                       backgroundColor= {'black'}
                       leftIconName={'back'}
                       onLeftPress= {() => navigate('Tab')}
+                      icontitle={require('./assets/images/hotel-icon.png')}
                       title={'ที่พักหาดใหญ่'} 
                       rightIcons={[
                         {

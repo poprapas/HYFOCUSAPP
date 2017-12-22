@@ -43,7 +43,7 @@ export default class EventDetail extends Component {
 
     render() {
 
-        const { navigate } = this.props.navigation;
+        const { navigate, goBack } = this.props.navigation;
         let descript = this.props.navigation.state.params.description;
 
         return (
@@ -53,7 +53,8 @@ export default class EventDetail extends Component {
                     containerStyle={styles.bar}
                     backgroundColor={'black'}
                     leftIconName={'back'}
-                    onLeftPress={() => navigate('Event')}
+                    onLeftPress={() => goBack()}
+                    icontitles={"megaphone"}
                     title={'ไปหม้ายโหม๋เรา'}
                     rightIcons={[
                         {
@@ -73,7 +74,10 @@ export default class EventDetail extends Component {
                 </View>
 
                 <View style={styles.listView}>
-                    <ScrollView style={{ height: height - 175, width: "100%" }}>
+                    <ScrollView style={{
+                        height: Platform.OS == 'ios' ? height - 160 : height - 165,
+                        width: "100%"
+                    }}>
                         <Image source={{ uri: this.props.navigation.state.params.image }}
                             style={{
                                 width: width - 10,
@@ -118,6 +122,7 @@ const styles = StyleSheet.create({
     listView: {
         paddingLeft: 5,
         paddingRight: 5,
+        paddingTop: 5,
     },
     title: {
         fontSize: 16,

@@ -43,7 +43,7 @@ export default class StoryDetail extends Component {
 
     render() {
 
-        const { navigate } = this.props.navigation;
+        const { navigate, goBack } = this.props.navigation;
         let descript = this.props.navigation.state.params.description;
 
         return (
@@ -53,7 +53,8 @@ export default class StoryDetail extends Component {
                     containerStyle={styles.bar}
                     backgroundColor={'black'}
                     leftIconName={'back'}
-                    onLeftPress={() => navigate('Story')}
+                    onLeftPress={() => goBack()}
+                    icontitle={require('./assets/images/story-icon.png')}
                     title={'เรื่องราวหาดใหญ่'}
                     rightIcons={[
                         {
@@ -73,7 +74,10 @@ export default class StoryDetail extends Component {
                 </View>
 
                 <View style={styles.listView}>
-                    <ScrollView style={{ height: height - 175, width: "100%" }}>
+                    <ScrollView style={{
+                        height: Platform.OS == 'ios' ? height - 165 : height - 170,
+                        width: "100%"
+                    }}>
                         <Image source={{ uri: this.props.navigation.state.params.image }}
                             style={{
                                 width: width - 10,
@@ -119,6 +123,7 @@ const styles = StyleSheet.create({
     listView: {
         paddingLeft: 5,
         paddingRight: 5,
+        paddingTop: 5,
     },
     title: {
         fontSize: 16,

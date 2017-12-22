@@ -20,7 +20,7 @@ export default class WorkDetail extends Component {
 
     render() {
 
-        const { navigate } = this.props.navigation;
+        const { navigate, goBack } = this.props.navigation;
 
         return (
 
@@ -29,7 +29,8 @@ export default class WorkDetail extends Component {
                       containerStyle={styles.bar}
                       backgroundColor= {'black'}
                       leftIconName={'back'}
-                      onLeftPress= {() => navigate('Jobs')}
+                      onLeftPress= {() => goBack()}
+                      icontitle={require('./assets/images/work-icon.png')}
                       title={'หางานหาดใหญ่'} 
                       rightIcons={[
                         {
@@ -46,8 +47,10 @@ export default class WorkDetail extends Component {
                 </View>
 
                 <View style = {styles.listView}>
-                    <ScrollView style={{height: height-170, width: "100%"}}>
-
+                    <ScrollView style={{
+                        height: Platform.OS == 'ios' ? height-165 : height-170, 
+                        width: "100%"
+                    }}>
                         <View style = {{alignItems: 'center', paddingBottom: 5}}>
                             <Image  source= {{uri: this.props.navigation.state.params.image}} 
                                 style={{width: 100, height: 100}}/>
@@ -145,14 +148,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color:'black',
         textAlign:'left',
-        width: 99,
+        width: 98,
     },
     detail: {
         fontSize: 14,
         fontWeight: 'normal',
         color:'black',
         textAlign:'left',
-        width: width-99
+        width: width-98
     },
     view: {
         fontSize: 14,

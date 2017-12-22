@@ -30,45 +30,45 @@ export default class NewDetail extends Component {
             const a = node.children[0].attribs;
             return (
                 <Image
-                key={index} 
-                sstyle= {{
-                    width: (width / 2) * a.width / a.height,
-                    height: width / 2,
-                    alignSelf: 'center',
-                    marginVertical: 10,
-                }}
-                source={{
-                    uri: node.children[0].attribs.src
-                }}
-            />
+                    key={index}
+                    style={{
+                        width: (width / 2) * a.width / a.height,
+                        height: width / 2,
+                        alignSelf: 'center',
+                        marginVertical: 10,
+                    }}
+                    source={{
+                        uri: node.children[0].attribs.src
+                    }}
+                />
             )
         }
 
-        
+
         if (node.name == 'p' && node.children[0].name == 'iframe') {
             if (node.children[0].attribs.src.slice(0, 2) == '//') {
                 node.children[0].attribs.src = 'https:' + node.children[0].attribs.src
             };
             if (node.children[0].attribs.src.slice(12, 15) == 'you') {
                 return (
-                <WebView
-                    key={index}
-                    source={{
-                        uri: node.children[0].attribs.src
-                    }}
-                    style={{
-                        width: width-10, 
-                        height: (width-10) * 0.5625,
-                        alignSelf: 'center',
-                    }}
-                />
-            );
+                    <WebView
+                        key={index}
+                        source={{
+                            uri: node.children[0].attribs.src
+                        }}
+                        style={{
+                            width: width - 10,
+                            height: (width - 10) * 0.5625,
+                            alignSelf: 'center',
+                        }}
+                    />
+                );
 
             }
             else {
                 let a = node.children[0].attribs;
 
-                 return (
+                return (
                     <WebView
                         key={index}
                         source={{
@@ -98,28 +98,33 @@ export default class NewDetail extends Component {
             <View style={styles.container}>
 
                 <ActionBar
-                      containerStyle={styles.bar}
-                      backgroundColor= {'black'}
-                      leftIconName={'back'}
-                      onLeftPress= {() => navigate('Tab', {...this.props} )}
-                      title= {this.props.navigation.state.params.type} 
-                      rightIcons={[
+                    containerStyle={styles.bar}
+                    backgroundColor={'black'}
+                    leftIconName={'back'}
+                    onLeftPress={() => navigate('Tab', { ...this.props })}
+                    title={this.props.navigation.state.params.type}
+                    rightIcons={[
                         {
-                          name: 'facebook', 
-                           onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                          //onPress: () => navigate('Social'),
+                            name: 'facebook',
+                            onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
+                            //onPress: () => navigate('Social'),
                         },
-                      ]}
+                    ]}
                 />
 
-                <Image source={require('./assets/images/banner.png')} 
+                <Image source={require('./assets/images/banner.png')}
                     style={styles.logo} />
 
-                <View style = {styles.listView}>
-                    <ScrollView style={{height: height-175, width: "100%"}}>
-                        <Image  source= {{uri: this.props.navigation.state.params.image}} 
-                            style={{width: width-10, 
-                                    height: (width-10) * 0.625}}/>
+                <View style={styles.listView}>
+                    <ScrollView style={{
+                        height: Platform.OS == 'ios' ? height - 165 : height - 170,
+                        width: "100%"
+                    }}>
+                        <Image source={{ uri: this.props.navigation.state.params.image }}
+                            style={{
+                                width: width - 10,
+                                height: (width - 10) * 0.625
+                            }} />
                         <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                         <Text></Text>
                         <HTMLView
@@ -157,22 +162,22 @@ const styles = StyleSheet.create({
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
-        paddingLeft: 5, 
-        paddingRight: 5, 
-        paddingTop: 5, 
+        paddingLeft: 5,
+        paddingRight: 5,
+        paddingTop: 5,
     },
     title: {
         fontSize: 16,
         fontWeight: 'bold',
-        color:'white',
-        textAlign:'center',
+        color: 'white',
+        textAlign: 'center',
         fontFamily: 'Times New Roman'
     },
     view: {
         fontSize: 14,
         fontWeight: 'normal',
-        color:'white',
-        textAlign:'right',
+        color: 'white',
+        textAlign: 'right',
         fontFamily: 'Times New Roman'
     },
 });
@@ -181,9 +186,9 @@ const styless = StyleSheet.create({
     p: {
         fontSize: 15,
         fontWeight: 'normal',
-        color:'white',
-        textAlign:'left',
+        color: 'white',
+        textAlign: 'left',
         fontFamily: 'Times New Roman',
-        margin:0
+        margin: 0
     },
 });
