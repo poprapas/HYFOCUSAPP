@@ -98,7 +98,7 @@ export default class VideoDetail extends Component {
 
                 <View style={styles.listView}>
                     <ScrollView style={{
-                        height: Platform.OS == 'ios' ? height - 160 : height - 165,
+                        height: Platform.OS == 'ios' ? height - 165 : height - 170,
                         width: "100%"
                     }}>
                         <Image source={{ uri: this.props.navigation.state.params.image }}

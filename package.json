@@ -15,6 +15,8 @@
 		"react-native-button": "^2.2.0",
 		"react-native-drawer-layout": "^2.0.0",
 		"react-native-htmlview": "^0.12.1",
+		"react-native-looped-carousel": "^0.1.7",
+		"react-native-maps": "^0.19.0",
 		"react-native-material-color": "^1.0.15",
 		"react-native-material-dropdown": "^0.6.1",
 		"react-native-navigation-bar": "^0.2.1",

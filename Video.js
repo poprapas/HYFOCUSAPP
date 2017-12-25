@@ -87,6 +87,8 @@ export default class Video extends Component {
 
     render() {
 
+        const { navigate } = this.props.navigation;
+
         if (this.state.isLoading) {
             return (
                 <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
@@ -94,7 +96,7 @@ export default class Video extends Component {
                         containerStyle={styles.bar}
                         backgroundColor={'black'}
                         leftIconName={'menu'}
-                        onLeftPress={this.toggleDrawer}
+                        onLeftPress={() => navigate('Tab')}
                         icontitles={"play-video"}
                         title={'วิดีโอ'}
                         rightIcons={[
@@ -109,8 +111,6 @@ export default class Video extends Component {
                 </View>
             );
         }
-
-        const { navigate } = this.props.navigation;
 
         return (
             <View style={styles.container}>
@@ -142,12 +142,6 @@ export default class Video extends Component {
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) => <View style={styles.listView}>
                         <Text style={styles.titleText}> {rowData.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
-                        <Image source={{ uri: rowData.FEATURE }}
-                            style={{
-                                width: width - 10,
-                                height: (width - 10) * 0.625
-                            }}
-                        />
                         <TouchableOpacity
                             key={rowData.id}
                             onPress={() => navigate('VideoDetail',
@@ -160,6 +154,12 @@ export default class Video extends Component {
                                 }
                             )}
                         >
+                            <Image source={{ uri: rowData.FEATURE }}
+                                style={{
+                                    width: width - 10,
+                                    height: (width - 10) * 0.625
+                                }}
+                            />
                             <View>
                                 <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
                             </View>

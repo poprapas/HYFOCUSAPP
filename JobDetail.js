@@ -16,7 +16,7 @@ import HTMLView from 'react-native-htmlview';
 
 const { width, height } = Dimensions.get("window");
 
-export default class WorkDetail extends Component {
+export default class JobDetail extends Component {
 
     render() {
 

@@ -18,11 +18,12 @@ import {
 import Color from 'react-native-material-color';
 import { StackNavigator } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ActionBar from 'react-native-action-bar';
 import DrawerLayout from 'react-native-drawer-layout';
-import SwiperFlatList from 'react-native-swiper-flatlist'
 import Button from 'react-native-button';
-import SideMenu from "./SideMenu"
+import SideMenu from "./SideMenu";
+import Carousel from 'react-native-looped-carousel';
 
 const { width, height } = Dimensions.get("window");
 
@@ -32,7 +33,8 @@ export default class Home extends Component {
     this.state = {
       isLoading: true,
       drawerClosed: true,
-      cat: [],
+      slide: [],
+
     }
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -56,41 +58,22 @@ export default class Home extends Component {
 
   componentDidMount() {
 
-    //   let cat = [];
-
-    //   for(let i = 1; i <= 9; i++) {
-    //     fetch('https://www.hatyaifocus.com/rest/api.php?action=news&cat='+i+'&start=0&per_page=1')
-    //     .then((response) => response.json())
-    //     .then((responseJson) => { console.log(responseJson) 
-    //       cat.push(responseJson)
-    //       //let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    //       this.setState({
-    //         cat: cat,
-    //       })
-
-    //       if(i == 9){
-    //         this.setState({
-    //           isLoading: false,
-    //         })
-    //       }
-    //     })
-    //       .catch((error) => {
-    //        console.error(error);
-    //       });
-    //   }
-    // }
-
     return fetch('https://www.hatyaifocus.com/rest/api.php?action=news&cat=&start=0&per_page=10')
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson)
         let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-        this.setState({
-          isLoading: false,
-          dataSource: ds.cloneWithRows(responseJson),
-        }, function () {
-          // do something with new state
-        });
+        fetch('https://www.hatyaifocus.com/rest/api.php?action=slider')
+          .then((response2) => response2.json())
+          .then((responseJson2) => {
+            this.setState({
+              isLoading: false,
+              dataSource: ds.cloneWithRows(responseJson),
+              slide: responseJson2
+            }, function () {
+              // do something with new state
+            });
+          })
       })
       .catch((error) => {
         console.error(error);
@@ -107,7 +90,7 @@ export default class Home extends Component {
             backgroundColor={'black'}
             leftIconName={'menu'}
             onLeftPress={this.toggleDrawer}
-            icontitle = {require('./assets/images/home-icon.png')}
+            icontitle={require('./assets/images/home-icon.png')}
             title={'หน้าแรก'}
             rightIcons={[
               {
@@ -117,7 +100,7 @@ export default class Home extends Component {
               },
             ]}
           />
-          <ActivityIndicator style={{ paddingTop: 20}}/>
+          <ActivityIndicator style={{ paddingTop: 20 }} />
         </View>
       );
     }
@@ -126,7 +109,7 @@ export default class Home extends Component {
 
     return (
 
-      <View style={styles.container}>
+      <View style={styles.container} >
         <DrawerLayout
           drawerWidth={260}
           ref={drawerElement => {
@@ -144,7 +127,7 @@ export default class Home extends Component {
             backgroundColor={'black'}
             leftIconName={'menu'}
             onLeftPress={this.toggleDrawer}
-            icontitle = {require('./assets/images/home-icon.png')}
+            icontitle={require('./assets/images/home-icon.png')}
             title={'หน้าแรก'}
             rightIcons={[
               {
@@ -171,12 +154,6 @@ export default class Home extends Component {
               dataSource={this.state.dataSource}
               renderRow={(rowData) => <View style={styles.listView}>
                 <Text style={styles.titleText}> {rowData.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
-                <Image source={{ uri: rowData.FEATURE }}
-                  style={{
-                    width: width - 10,
-                    height: (width - 10) * 0.625
-                  }}
-                />
                 <TouchableOpacity
                   key={rowData.id}
                   onPress={() => navigate('NewDetail',
@@ -190,6 +167,12 @@ export default class Home extends Component {
                     }
                   )}
                 >
+                  <Image source={{ uri: rowData.FEATURE }}
+                    style={{
+                      width: width - 10,
+                      height: (width - 10) * 0.625
+                    }}
+                  />
                   <View>
                     <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
                   </View>
@@ -288,53 +271,44 @@ export default class Home extends Component {
               </Button>
             </View>
 
-            <View style={{ paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 50 }}>
-
-              <SwiperFlatList
+            <View style={{ paddingTop: 50, paddingBottom: 50 }}>
+              <Carousel
+                delay={2000}
+                style={{
+                  height: width * 0.526,
+                  width: width,
+                  borderWidth: 5,
+                  borderColor: 'white',
+                }}
                 autoplay
-                autoplayDelay={2}
-                autoplayLoop
-                index={0}
-                showPagination >
+                bullets
+                arrows
+                arrowsContainerStyle={{
+                  marginLeft: 5,
+                  marginRight: 5,
+                }}
+                leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
+                rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
+              >
+                {this.state.slide.map((prop, key) => {
+                  return (
+                    <View
+                      key={key}
+                      style={{
+                        backgroundColor: 'white',
+                        width: width,
+                      }}>
+                      <TouchableOpacity onPress={() => Linking.openURL(this.state.slide[key].URL)} >
+                        <Image
+                          source={{ uri: this.state.slide[key].FEATURE }}
+                          style={styles.advt_1}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  )
+                })}
 
-                <View style={{ backgroundColor: 'white', paddingRight: 4, paddingLeft: 4, paddingTop: 4 }}>
-                  <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/Mamon-Desserts-%E0%B8%84%E0%B8%B8%E0%B8%81%E0%B8%81%E0%B8%B5%E0%B9%89%E0%B9%81%E0%B8%9F%E0%B8%99%E0%B8%8B%E0%B8%B5%E0%B8%A1%E0%B8%B5%E0%B9%84%E0%B8%AA%E0%B9%89-%E0%B8%82%E0%B8%B2%E0%B8%A2%E0%B8%AA%E0%B9%88%E0%B8%87%E0%B8%97%E0%B8%B1%E0%B9%88%E0%B8%A7%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%97%E0%B8%A8-2361281234096567/')} >
-                    <Image
-                      source={{ uri: 'https://www.hatyaifocus.com/admin/upload/slider/65990f908c8c60d20ba78fcbca3144fc.jpg' }}
-                      style={styles.advt_1}
-                    />
-                  </TouchableOpacity>
-                </View>
-
-                <View style={{ backgroundColor: 'white', paddingRight: 4, paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }}>
-                  <TouchableOpacity onPress={() => Linking.openURL('https://www.hatyaifocus.com/บทความ/588-ของกินหาดใหญ่-อาม่าลอดช่องกึ่งศตวรรษ-%40ตลาดกิมหยง/')} >
-                    <Image
-                      source={{ uri: 'https://www.hatyaifocus.com/admin/upload/slider/a2f856e895de1b9f83a1778e885de440.jpg' }}
-                      style={styles.advt_1}
-                    />
-                  </TouchableOpacity>
-                </View>
-
-                <View style={{ backgroundColor: 'white', paddingRight: 4, paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }}>
-                  <TouchableOpacity onPress={() => Linking.openURL('https://www.hatyaifocus.com/บทความ/611-ของกินหาดใหญ่-สลัดคุณหนู-เมนูเพื่อสุขภาพ-|-ปุณณกันต์-ม.อ./')} >
-                    <Image
-                      source={{ uri: 'https://www.hatyaifocus.com/admin/upload/slider/545bf391b2297a227b49bc4d3c1e85eb.jpg' }}
-                      style={styles.advt_1}
-                    />
-                  </TouchableOpacity>
-                </View>
-
-                <View style={{ backgroundColor: 'white', paddingRight: 4, paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }}>
-                  <TouchableOpacity onPress={() => Linking.openURL('https://www.hatyaifocus.com/บทความ/623-เรื่องราวหาดใหญ่-ศาลาหลบเสือ-|-โบราณสถานเมืองสงขลา/')} >
-                    <Image
-                      source={{ uri: 'https://www.hatyaifocus.com/admin/upload/slider/6d3f6b4f9cc3a23120fd473001dda099.jpg' }}
-                      style={styles.advt_1}
-                    />
-                  </TouchableOpacity>
-                </View>
-
-              </SwiperFlatList>
-
+              </Carousel>
             </View>
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingBottom: 20 }}>
@@ -409,8 +383,8 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline'
   },
   advt_1: {
-    height: (width - 48) * 0.526,
-    width: width - 48,
+    height: width * 0.526,
+    width: width,
   },
   advt_2: {
     height: 120,
@@ -439,30 +413,4 @@ const styles = StyleSheet.create({
   },
 });
 
-
-// <FlatList
-            //       keyExtractor={(item, index) => index}
-            //       data={this.state.cat}
-            //       renderItem={({item}) =>  <View style= {styles.listView}>
-            //                                         <Text style={styles.titleText}> {item[0].CATID} </Text>
-            //                                         <Image  source= {{uri: item[0].FEATURE}} 
-            //                                         style={{width: 374, height: 190}}/>
-            //                                         <TouchableOpacity key={item[0].id} 
-            //                                                             onPress={() => navigate('New', 
-            //                                                                 {
-            //                                                                   type: item[0].CATID,
-            //                                                                   title: item[0].TOPIC,
-            //                                                                   image: item[0].FEATURE,
-            //                                                                   description: item[0].DESCRIPTION,
-            //                                                                   view: item[0].VIEWS,
-            //                                                                 }
-            //                                                             )}
-            //                                         >
-            //                                           <View>
-            //                                             <Text style={styles.moredetail}> >>> ดูทั้งหมด >>> </Text>
-            //                                           </View>
-            //                                         </TouchableOpacity>
-            //                                 </View> 
-            //                               }
-            // />
 

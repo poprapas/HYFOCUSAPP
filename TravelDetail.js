@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         width: 150,
     },
     travelfont: {
-        fontSize: 27,
+        fontSize: width * 0.07,
         paddingTop: 35,
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',

@@ -13,11 +13,15 @@
 #import <React/RCTRootView.h>
 #import "SplashScreen.h"
 
+@import GoogleMaps;
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
+  
+  [GMSServices provideAPIKey:@"AIzaSyCEHm882zfkeeD2HRhjzAMYjfCh_cfM5fA"];
   for (NSString* family in [UIFont familyNames])
   {
     NSLog(@"%@", family);
@@ -45,3 +49,4 @@
 }
 
 @end
+

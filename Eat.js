@@ -87,7 +87,7 @@ export default class Eat extends Component {
 
     render() {
 
-        const { navigate, goBack} = this.props.navigation;
+        const { navigate, goBack } = this.props.navigation;
 
         if (this.state.isLoading) {
             return (
@@ -144,12 +144,6 @@ export default class Eat extends Component {
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) => <View style={styles.listView}>
                         <Text style={styles.titleText}> {rowData.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
-                        <Image source={{ uri: rowData.FEATURE }}
-                            style={{
-                                width: width - 10,
-                                height: (width - 10) * 0.625
-                            }}
-                        />
                         <TouchableOpacity
                             key={rowData.id}
                             onPress={() => navigate('EatDetail',
@@ -162,6 +156,13 @@ export default class Eat extends Component {
                                 }
                             )}
                         >
+                            <Image source={{ uri: rowData.FEATURE }}
+                                style={{
+                                    width: width - 10,
+                                    height: (width - 10) * 0.625
+                                }}
+                            />
+                            
                             <View>
                                 <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
                             </View>

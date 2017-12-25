@@ -194,68 +194,68 @@ export default class Jobs extends Component {
           dataSource={this.state.dataSource}
           renderRow={(rowData) =>
             <View style={styles.listView}>
-              <View style={{
-                flexDirection: 'row',
-                backgroundColor: 'white',
-                justifyContent: 'space-around',
-                paddingTop: 2,
-                paddingBottom: 2,
-              }}>
-
-                <View style={{ flex: 0.3 }}>
-                  <Image source={{ uri: rowData.IMG }}
-                    style={{
-                      width: 100,
-                      height: 100,
-                    }} />
-                </View>
-
+              <TouchableOpacity
+                key={rowData.id}
+                onPress={() => navigate('JobDetail',
+                  {
+                    image: rowData.IMG,
+                    company: rowData.COMPANY,
+                    address: rowData.ADDRESS,
+                    province: rowData.PROVINCE,
+                    tel: rowData.TEL,
+                    email: rowData.EMAIL,
+                    position: rowData["POSITION"],
+                    rate: rowData.RATE,
+                    salary: rowData.SALARY,
+                    style: rowData.STYLE,
+                    certi: rowData.CERTIFICATE,
+                    sex: rowData.SEX,
+                    description: rowData.DESCRIPTION,
+                    date: rowData.DATE,
+                    view: rowData.VIEWS,
+                  }
+                )}
+              >
                 <View style={{
-                  flexDirection: 'column',
-                  paddingTop: Platform.OS == 'ios' ? 10 : 5,
-                  paddingLeft: 5,
-                  flex: 0.54
-                }}
-                >
-                  <Text style={styles.titleText}> ตำแหน่ง : {rowData["​POSITION"]} </Text>
-                  <Text style={styles.titleText}> วุฒิการศึกษา : {rowData.CERTIFICATE == "" ? '-' : rowData.CERTIFICATE} </Text>
-                  <Text style={styles.titleText}> จังหวัด  : {rowData.PROVINCE} </Text>
-                  <Text style={styles.titleText}> จำนวน : {rowData.RATE} ตำแหน่ง </Text>
-                </View>
-
-                <View style={{
-                  paddingLeft: 5,
-                  paddingTop: Platform.OS == 'ios' ? 30 : 15,
-                  flex: 0.16,
+                  flexDirection: 'row',
+                  backgroundColor: 'white',
+                  justifyContent: 'space-around',
+                  paddingTop: 2,
+                  paddingBottom: 2,
                 }}>
-                  <TouchableOpacity
-                    key={rowData.id}
-                    onPress={() => navigate('JobDetail',
-                      {
-                        image: rowData.IMG,
-                        company: rowData.COMPANY,
-                        address: rowData.ADDRESS,
-                        province: rowData.PROVINCE,
-                        tel: rowData.TEL,
-                        email: rowData.EMAIL,
-                        position: rowData["POSITION"],
-                        rate: rowData.RATE,
-                        salary: rowData.SALARY,
-                        style: rowData.STYLE,
-                        certi: rowData.CERTIFICATE,
-                        sex: rowData.SEX,
-                        description: rowData.DESCRIPTION,
-                        date: rowData.DATE,
-                        view: rowData.VIEWS,
-                      }
-                    )}
+
+                  <View style={{ flex: 0.3 }}>
+                    <Image source={{ uri: rowData.IMG }}
+                      style={{
+                        width: 100,
+                        height: 100,
+                      }} />
+                  </View>
+
+                  <View style={{
+                    flexDirection: 'column',
+                    paddingTop: Platform.OS == 'ios' ? 10 : 5,
+                    paddingLeft: 5,
+                    flex: 0.54
+                  }}
                   >
+                    <Text style={styles.titleText}> ตำแหน่ง : {rowData["​POSITION"]} </Text>
+                    <Text style={styles.titleText}> วุฒิการศึกษา : {rowData.CERTIFICATE == "" ? '-' : rowData.CERTIFICATE} </Text>
+                    <Text style={styles.titleText}> จังหวัด  : {rowData.PROVINCE} </Text>
+                    <Text style={styles.titleText}> จำนวน : {rowData.RATE} ตำแหน่ง </Text>
+                  </View>
+
+                  <View style={{
+                    paddingLeft: 5,
+                    paddingTop: Platform.OS == 'ios' ? 30 : 15,
+                    flex: 0.16,
+                  }}>
+
                     <Text style={styles.more}> > </Text>
-                  </TouchableOpacity>
+
+                  </View>
                 </View>
-
-              </View>
-
+              </TouchableOpacity>
             </View>
           }
 

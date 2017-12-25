@@ -38,6 +38,7 @@ import TravelDetail from "./TravelDetail"
 import People from "./People"
 import PeopleDetail from "./PeopleDetail"
 import Room from "./Room"
+import RoomDetail from "./RoomDetail"
 import About from "./About"
 import Contact from "./Contact"
 import NewDetail from "./NewDetail"
@@ -75,6 +76,7 @@ const AppNavigator = StackNavigator({
   People: { screen: People },
   PeopleDetail: { screen: PeopleDetail },
   Room: { screen: Room },
+  RoomDetail: { screen: RoomDetail },
   About: { screen: About },
   Contact: { screen: Contact },
   NewDetail: { screen: NewDetail },

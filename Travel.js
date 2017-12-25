@@ -144,12 +144,6 @@ export default class Story extends Component {
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) => <View style={styles.listView}>
                         <Text style={styles.titleText}> {rowData.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
-                        <Image source={{ uri: rowData.FEATURE }}
-                            style={{
-                                width: width - 10,
-                                height: (width - 10) * 0.625
-                            }}
-                        />
                         <TouchableOpacity
                             key={rowData.id}
                             onPress={() => navigate('TravelDetail',
@@ -162,6 +156,12 @@ export default class Story extends Component {
                                 }
                             )}
                         >
+                            <Image source={{ uri: rowData.FEATURE }}
+                                style={{
+                                    width: width - 10,
+                                    height: (width - 10) * 0.625
+                                }}
+                            />
                             <View>
                                 <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
                             </View>
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
         width: 150,
     },
     travelfont: {
-        fontSize: 27,
+        fontSize: width * 0.07,
         paddingTop: 35,
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',

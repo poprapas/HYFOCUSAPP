@@ -75,7 +75,7 @@ export default class PeopleDetail extends Component {
 
                 <View style={styles.listView}>
                     <ScrollView style={{
-                        height: Platform.OS == 'ios' ? height - 160 : height - 165,
+                        height: Platform.OS == 'ios' ? height - 165 : height - 170,
                         width: "100%"
                     }}>
                         <View style={{ alignItems: 'center' }}>
