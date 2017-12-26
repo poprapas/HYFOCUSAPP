@@ -263,14 +263,16 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
-        width: width - 120
+        width: width - 120,
+        paddingLeft: 10,
     },
     price: {
         fontSize: 14,
         fontWeight: 'normal',
         color: '#ff0000',
         textAlign: 'left',
-        width: width - 120
+        width: width - 120,
+        paddingLeft: 10,
     },
     date: {
         fontSize: 14,

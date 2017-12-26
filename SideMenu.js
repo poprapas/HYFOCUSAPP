@@ -36,104 +36,104 @@ class SideMenu extends Component {
   render() {
     return (
       <ScrollView>
-          <View style={styles.wrapper}>
-            <View style={styles.navSectionStyle}>
-              <Image source={require('./assets/images/story-icon.png')} style={{ height: 23, width: 23 }} />
-              <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Story')}>
-                เรื่องราวหาดใหญ่
+        <View style={styles.wrapper}>
+          <View style={styles.navSectionStyle}>
+            <Image source={require('./assets/images/story-icon.png')} style={{ height: 23, width: 23 }} />
+            <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Story')}>
+              เรื่องราวหาดใหญ่
               </Text>
-            </View>
+          </View>
 
-            <View style={styles.navSectionStyle}>
-              <Image source={require('./assets/images/work-icon.png')} style={{ height: 28, width: 28 }} />
-              <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Jobs')}>
-                หางานหาดใหญ่
+          <View style={styles.navSectionStyle}>
+            <Image source={require('./assets/images/work-icon.png')} style={{ height: 28, width: 28 }} />
+            <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Jobs')}>
+              หางานหาดใหญ่
               </Text>
-            </View>
+          </View>
 
-            <View style={styles.navSectionStyle}>
-              <Image source={require('./assets/images/eat-icon.png')} style={{ height: 25, width: 25 }} />
-              <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Eat')}>
-                ของกินหาดใหญ่
+          <View style={styles.navSectionStyle}>
+            <Image source={require('./assets/images/eat-icon.png')} style={{ height: 25, width: 25 }} />
+            <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Eat')}>
+              ของกินหาดใหญ่
               </Text>
-            </View>
+          </View>
 
-            <View style={styles.navSectionStyle}>
-              <Image source={require('./assets/images/travel-icon.png')} style={{ height: 25, width: 25 }} />
-              <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Travel')}>
-                เที่ยวหาดใหญ่
+          <View style={styles.navSectionStyle}>
+            <Image source={require('./assets/images/travel-icon.png')} style={{ height: 25, width: 25 }} />
+            <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Travel')}>
+              เที่ยวหาดใหญ่
               </Text>
-            </View>
+          </View>
 
-            <View style={styles.navSectionStyle}>
-              <Image source={require('./assets/images/people-icon.png')} style={{ height: 22, width: 22 }} />
-              <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('People')}>
-                คนหาดใหญ่
+          <View style={styles.navSectionStyle}>
+            <Image source={require('./assets/images/people-icon.png')} style={{ height: 22, width: 22 }} />
+            <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('People')}>
+              คนหาดใหญ่
               </Text>
-            </View>
+          </View>
 
-            <View style={styles.navSectionStyle}>
-              <Image source={require('./assets/images/hotel-icon.png')} style={{ height: 25, width: 25 }} />
-              <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Room')}>
-                ที่พักหาดใหญ่
+          <View style={styles.navSectionStyle}>
+            <Image source={require('./assets/images/hotel-icon.png')} style={{ height: 25, width: 25 }} />
+            <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Room')}>
+              ที่พักหาดใหญ่
               </Text>
-            </View>
+          </View>
 
-            <View style={styles.navSectionStyle}>
-              <Icon name="megaphone" size={25} color='white' />
-              <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Event')}>
-                ไปหม้ายโหม๋เรา
+          <View style={styles.navSectionStyle}>
+            <Icon name="megaphone" size={25} color='white' />
+            <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Event')}>
+              ไปหม้ายโหม๋เรา
               </Text>
-            </View>
+          </View>
 
-            <View style={styles.navSectionStyle}>
-              <Icon name="play-video" size={29} color='white' />
-              <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Video')}>
-                วิดีโอ
+          <View style={styles.navSectionStyle}>
+            <Icon name="play-video" size={29} color='white' />
+            <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Video')}>
+              วิดีโอ
               </Text>
-            </View>
+          </View>
 
-            <View style={styles.navSectionStyle}>
-              <Icons name="rate-review" size={25} color='white' />
-              <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Review')}>
-                รีวิว
+          <View style={styles.navSectionStyle}>
+            <Icons name="rate-review" size={25} color='white' />
+            <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Review')}>
+              รีวิว
               </Text>
-            </View>
+          </View>
 
-            <View style={styles.navSectionStyle}>
-              <Image source={require('./assets/images/about-icon.png')} style={{ height: 25, width: 25 }} />
-              <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('About')}>
-                เกี่ยวกับ
+          <View style={styles.navSectionStyle}>
+            <Image source={require('./assets/images/about-icon.png')} style={{ height: 25, width: 25 }} />
+            <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('About')}>
+              เกี่ยวกับ
               </Text>
-            </View>
+          </View>
 
-            <View style={styles.navSectionStyle}>
+          {/* <View style={styles.navSectionStyle}>
               <Image source={require('./assets/images/contact-icon.png')} style={{ height: 25, width: 25 }} />
               <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Contact')}>
                 ติดต่อ
               </Text>
-            </View>
+            </View> */}
 
-            <View style={styles.navSectionStyle}>
-              <Iconss name="tags" size={20} color='white' />
-              <Text style={styles.navItemStyle} onPress={() => Linking.openURL('https://www.hatyaifocus.com/board/forum.php')}>
-                เว็บบอร์ด
+          <View style={styles.navSectionStyle}>
+            <Iconss name="tags" size={20} color='white' />
+            <Text style={styles.navItemStyle} onPress={() => Linking.openURL('https://www.hatyaifocus.com/board/forum.php')}>
+              เว็บบอร์ด
               </Text>
-            </View>
-
           </View>
+
+        </View>
       </ScrollView>
-        );
+    );
   }
 }
 
 SideMenu.propTypes = {
-          navigation: PropTypes.object
+  navigation: PropTypes.object
 };
 
 const styles = StyleSheet.create({
-          navItemStyle: {
-          color: 'white',
+  navItemStyle: {
+    color: 'white',
     fontSize: 16,
     paddingLeft: 20,
     paddingTop: Platform.OS == 'ios' ? 9 : 6,
@@ -141,14 +141,14 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
   },
   navSectionStyle: {
-          backgroundColor: 'black',
+    backgroundColor: 'black',
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
   wrapper: {
-          backgroundColor: 'black',
+    backgroundColor: 'black',
     marginTop: Platform.OS == 'ios' ? 60 : 40,
     paddingTop: 1,
     paddingLeft: 45,

@@ -89,7 +89,6 @@ export default class Home extends Component {
             containerStyle={styles.bar}
             backgroundColor={'black'}
             leftIconName={'menu'}
-            onLeftPress={this.toggleDrawer}
             icontitle={require('./assets/images/home-icon.png')}
             title={'หน้าแรก'}
             rightIcons={[
@@ -181,27 +180,27 @@ export default class Home extends Component {
               }
             />
 
-            <View style={{ paddingLeft: 10, paddingRight: 280, paddingTop: 5, paddingBottom: 1 }}>
+            <View style={{ paddingRight: 165 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
                 style={styles.button}
                 onPress={() => navigate('NewSport')}>
                 ข่าวกีฬา >
-              </Button>
+            </Button>
             </View>
 
-            <View style={{ paddingLeft: 10, paddingRight: 200, paddingTop: 5, paddingBottom: 1 }}>
+            <View style={{ paddingRight: 80 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
                 style={styles.button}
                 onPress={() => navigate('NewSocial')}>
                 ข่าวสังคมและการเมือง >
-              </Button>
+            </Button>
             </View>
 
-            <View style={{ paddingLeft: 10, paddingRight: 250, paddingTop: 5, paddingBottom: 1 }}>
+            <View style={{ paddingRight: 130 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
@@ -211,7 +210,7 @@ export default class Home extends Component {
               </Button>
             </View>
 
-            <View style={{ paddingLeft: 10, paddingRight: 190, paddingTop: 5, paddingBottom: 1 }}>
+            <View style={{ paddingRight: 65 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
@@ -221,7 +220,7 @@ export default class Home extends Component {
               </Button>
             </View>
 
-            <View style={{ paddingLeft: 10, paddingRight: 270, paddingTop: 5, paddingBottom: 1 }}>
+            <View style={{ paddingRight: 150 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
@@ -231,7 +230,7 @@ export default class Home extends Component {
               </Button>
             </View>
 
-            <View style={{ paddingLeft: 10, paddingRight: 230, paddingTop: 5, paddingBottom: 1 }}>
+            <View style={{ paddingRight: 115 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
@@ -241,7 +240,7 @@ export default class Home extends Component {
               </Button>
             </View>
 
-            <View style={{ paddingLeft: 10, paddingRight: 140, paddingTop: 5, paddingBottom: 1 }}>
+            <View style={{ paddingRight: 25 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
@@ -251,17 +250,15 @@ export default class Home extends Component {
               </Button>
             </View>
 
-            <View style={{ paddingLeft: 10, paddingRight: 120, paddingTop: 5, paddingBottom: 1 }}>
-              <Button
-                containerStyle={styles.selectbutton}
-                disabledContainerStyle={{ backgroundColor: 'grey' }}
-                style={styles.button}
-                onPress={() => navigate('NewAdvertise')}>
-                ข่าวประชาสัมพันธ์และการท่องเที่ยว >
-              </Button>
-            </View>
+            <Button
+              containerStyle={styles.selectbutton}
+              disabledContainerStyle={{ backgroundColor: 'grey' }}
+              style={styles.button}
+              onPress={() => navigate('NewAdvertise')}>
+              ข่าวประชาสัมพันธ์และการท่องเที่ยว >
+            </Button>
 
-            <View style={{ paddingLeft: 10, paddingRight: 190, paddingTop: 5, paddingBottom: 1 }}>
+            <View style={{ paddingRight: 70 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
@@ -271,7 +268,7 @@ export default class Home extends Component {
               </Button>
             </View>
 
-            <View style={{ paddingTop: 50, paddingBottom: 50 }}>
+            <View style={{ paddingTop: 20, paddingBottom: 30 }}>
               <Carousel
                 delay={2000}
                 style={{
@@ -336,7 +333,7 @@ export default class Home extends Component {
           </ScrollView>
 
         </DrawerLayout>
-      </View>
+      </View >
     )
   }
 }
@@ -353,7 +350,7 @@ const styles = StyleSheet.create({
     width: 150,
   },
   newfont: {
-    fontSize: 27,
+    fontSize: width * 0.07,
     paddingTop: 35,
     alignSelf: 'center',
     color: 'white',
@@ -402,14 +399,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'normal',
     color: 'white',
-    textAlign: 'center',
-    paddingTop: 2
+    textAlign: 'left',
+    padding: 5,
   },
   selectbutton: {
     height: 30,
     overflow: 'hidden',
     borderRadius: 5,
     backgroundColor: 'black',
+    marginTop: 5,
+    marginLeft: 10,
+    marginRight: 140
   },
 });
 

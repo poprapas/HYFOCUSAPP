@@ -203,8 +203,9 @@ const styles = StyleSheet.create({
         width: 150,
     },
     eatfont: {
-        fontSize: 27,
+        fontSize: width * 0.07,
         paddingTop: 35,
+        alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },

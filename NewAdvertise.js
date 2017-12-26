@@ -193,8 +193,9 @@ const styles = StyleSheet.create({
         width: 150,
     },
     bannerfont: {
-        fontSize: 14,
-        paddingTop: 45,
+        fontSize: Platform.OS === 'ios' ? width * 0.04 : width * 0.035 ,
+        paddingTop: 35,
+        alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },

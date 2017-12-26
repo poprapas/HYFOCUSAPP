@@ -200,8 +200,9 @@ const styles = StyleSheet.create({
         width: 150,
     },
     eventfont: {
-        fontSize: 24,
+        fontSize: width * 0.06,
         paddingTop: 35,
+        alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },

@@ -14,11 +14,10 @@ import {
 
 import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
-import Button from 'react-native-button';
 
 const { width, height } = Dimensions.get("window");
 
-export default class Room extends Component {
+export default class Resort extends Component {
 
     constructor(props) {
         super(props);
@@ -36,7 +35,7 @@ export default class Room extends Component {
     }
 
     _fetchData(callback) {
-        fetch('https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=' + this.state.start + '&per_page=10')
+        fetch('https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=6&start=' + this.state.start + '&per_page=10')
             .then(response => response.json())
             .then(callback)
             .catch(error => {
@@ -71,7 +70,7 @@ export default class Room extends Component {
 
     componentDidMount() {
         //Start getting the first batch of data from reddit
-        this.fetchData(responseJson => {
+        this._fetchData(responseJson => {
             let ds = new ListView.DataSource({
                 rowHasChanged: (r1, r2) => r1 !== r2,
             });
@@ -137,7 +136,7 @@ export default class Room extends Component {
                     <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />
                     <View style={{ flex: 1 }}>
-                        <Text style={styles.roomfont}> --- ที่พักล่าสุด --- </Text>
+                        <Text style={styles.roomfont}> ---- Resort ---- </Text>
                     </View>
 
                 </View>
@@ -233,47 +232,6 @@ export default class Room extends Component {
                     }}
                 />
 
-                <View style={{  flexDirection: 'row', 
-                                paddingLeft: 1, 
-                                paddingTop: 4, 
-                                paddingBottom: 4,
-                                justifyContent: 'space-around'
-                            }}>
-
-                    <Button
-                        containerStyle={styles.selectbutton}
-                        disabledContainerStyle={{ backgroundColor: 'grey' }}
-                        style={styles.button}
-                        onPress={() => navigate('Hotel')}>
-                        Hotel >>
-                    </Button>
-
-                    <Button
-                        containerStyle={styles.selectbutton}
-                        disabledContainerStyle={{ backgroundColor: 'grey' }}
-                        style={styles.button}
-                        onPress={() => navigate('Apartment')}>
-                        Apartment >>
-                    </Button>
-
-                    <Button
-                        containerStyle={styles.selectbutton}
-                        disabledContainerStyle={{ backgroundColor: 'grey' }}
-                        style={styles.button}
-                        onPress={() => navigate('Resort')}>
-                        Resort >>
-                    </Button>
-
-                    <Button
-                        containerStyle={styles.selectbutton}
-                        disabledContainerStyle={{ backgroundColor: 'grey' }}
-                        style={styles.button}
-                        onPress={() => navigate('Guesthouse')}>
-                        Guesthouse >>
-                    </Button>
-
-                </View>
-
             </View>
         );
     }
@@ -321,18 +279,5 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         fontSize: 50,
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    },
-    button: {
-        fontSize: 14,
-        fontWeight: 'normal',
-        color: 'white',
-        textAlign: 'center',
-        padding: 5,
-    },
-    selectbutton: {
-        height: 30,
-        overflow: 'hidden',
-        borderRadius: 5,
-        backgroundColor: 'black',
-    },
+    }
 });

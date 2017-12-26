@@ -14,22 +14,23 @@ import {
 
 import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
-import { Dropdown } from 'react-native-material-dropdown';
+import Icon from 'react-native-vector-icons/dist/MaterialIcons';
+//import { Dropdown } from 'react-native-material-dropdown';
 
 export default class Jobs extends Component {
 
   constructor(props) {
     super(props);
 
-    this.onChangeText = this.onChangeText.bind(this);
-    this.typeRef = this.updateRef.bind(this, 'type');
-    this.provinceRef = this.updateRef.bind(this, 'province');
+    //this.onChangeText = this.onChangeText.bind(this);
+    // this.typeRef = this.updateRef.bind(this, 'type');
+    // this.provinceRef = this.updateRef.bind(this, 'province');
     this.fetchMore = this._fetchMore.bind(this);
     this.fetchData = this._fetchData.bind(this);
 
+    // type: 'ประเภท',
+    // province: 'จังหวัด',
     this.state = {
-      type: 'ประเภท',
-      province: 'จังหวัด',
       dataSource: null,
       isLoading: true,
       isLoadingMore: false,
@@ -37,21 +38,24 @@ export default class Jobs extends Component {
       _dataAfter: "",
       start: 0,
       end: false,
+      findposition: [],
+      find: '',
+      found: false,
     };
   }
 
-  onChangeText(text) {
-    ['type', 'provinceo']
-      .map((type) => ({ type, ref: this[type] }))
-      .filter(({ ref }) => ref && ref.isFocused())
-      .forEach(({ type, ref }) => {
-        this.setState({ [type]: text });
-      });
-  }
+  // onChangeText(text) {
+  //   ['type', 'provinceo']
+  //     .map((type) => ({ type, ref: this[type] }))
+  //     .filter(({ ref }) => ref && ref.isFocused())
+  //     .forEach(({ type, ref }) => {
+  //       this.setState({ [type]: text });
+  //     });
+  // }
 
-  updateRef(type, ref) {
-    this[type] = ref;
-  }
+  // updateRef(type, ref) {
+  //   this[type] = ref;
+  // }
 
   _fetchData(callback) {
     fetch('https://www.hatyaifocus.com/rest/api.php?action=jobs&start=' + this.state.start + '&per_page=10')
@@ -104,13 +108,34 @@ export default class Jobs extends Component {
     });
   }
 
+  findposition(find) {
+    this.setState({ find: find, found: false })
+    for (i = 0; i < this.state._data.length; i++) {
+      if (this.state._data[i]["​POSITION"].search(find) > -1) {
+        this.state.findposition[i] = true
+        this.setState({
+          found: true
+        })
+      }
+      else {
+        this.state.findposition[i] = false
+      }
+    }
+    let ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+    });
+    this.setState({
+      dataSource: ds.cloneWithRows(this.state.dataSource)
+    });
+  }
+
   render() {
 
-    let { type, province } = this.state;
+    // let { type, province } = this.state;
 
-    let textStyle = [
-      styles[type + province],
-    ];
+    // let textStyle = [
+    //   styles[type + province],
+    // ];
     const { navigate, goBack } = this.props.navigation;
 
     if (this.state.isLoading) {
@@ -159,7 +184,7 @@ export default class Jobs extends Component {
         <Image source={require('./assets/images/banner.png')}
           style={styles.logo} />
 
-        <View style={{ flexDirection: 'row' }}>
+        {/* <View style={{ flexDirection: 'row' }}>
           <View style={{ flex: 1, paddingRight: 20, paddingLeft: 10 }}>
             <Dropdown
               ref={this.typeRef}
@@ -178,85 +203,108 @@ export default class Jobs extends Component {
               onChangeText={this.onChangeText}
               data={provinceData}
             />
-          </View>
+          </View> */}
 
-          <View style={{ flex: 1, paddingRight: 10 }}>
-            <TextInput
-              style={styles.searchInput}
-              placeholder='ตำแหน่งงาน'
-              placeholderTextColor='black'
-              underlineColorAndroid="transparent"
-            />
-          </View>
+        <View style={styles.search}>
+
+          <Icon
+            name='search'
+            color='black'
+            size={20}
+          />
+
+          <TextInput
+            style={styles.searchInput}
+            placeholder=' ค้นหาตำแหน่งงาน'
+            placeholderTextColor='#686868'
+            underlineColorAndroid="transparent"
+            value={this.state.find}
+            onChangeText={(find) => this.findposition(find)}
+          />
+        </View>
+        {/* </View> */}
+
+        <View>
+          {this.state.findposition.length != 0  && !this.state.found ? 
+          
+          <Text style={{
+            fontSize: 17,
+            alignSelf: 'center',
+            paddingTop: 10,
+          }}>
+            ---- ไม่พบข้อมูล ----
+          </Text> : null}
         </View>
 
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={(rowData) =>
-            <View style={styles.listView}>
-              <TouchableOpacity
-                key={rowData.id}
-                onPress={() => navigate('JobDetail',
-                  {
-                    image: rowData.IMG,
-                    company: rowData.COMPANY,
-                    address: rowData.ADDRESS,
-                    province: rowData.PROVINCE,
-                    tel: rowData.TEL,
-                    email: rowData.EMAIL,
-                    position: rowData["POSITION"],
-                    rate: rowData.RATE,
-                    salary: rowData.SALARY,
-                    style: rowData.STYLE,
-                    certi: rowData.CERTIFICATE,
-                    sex: rowData.SEX,
-                    description: rowData.DESCRIPTION,
-                    date: rowData.DATE,
-                    view: rowData.VIEWS,
-                  }
-                )}
-              >
-                <View style={{
-                  flexDirection: 'row',
-                  backgroundColor: 'white',
-                  justifyContent: 'space-around',
-                  paddingTop: 2,
-                  paddingBottom: 2,
-                }}>
-
-                  <View style={{ flex: 0.3 }}>
-                    <Image source={{ uri: rowData.IMG }}
-                      style={{
-                        width: 100,
-                        height: 100,
-                      }} />
-                  </View>
-
+          renderRow={(rowData, sectionID, rowID) =>
+            <View>{this.state.findposition.length == 0 || this.state.findposition[rowID] ?
+              <View style={styles.listView}>
+                <TouchableOpacity
+                  key={rowData.id}
+                  onPress={() => navigate('JobDetail',
+                    {
+                      image: rowData.IMG,
+                      company: rowData.COMPANY,
+                      address: rowData.ADDRESS,
+                      province: rowData.PROVINCE,
+                      tel: rowData.TEL,
+                      email: rowData.EMAIL,
+                      position: rowData["​POSITION"],
+                      rate: rowData.RATE,
+                      salary: rowData.SALARY,
+                      style: rowData.STYLE,
+                      certi: rowData.CERTIFICATE,
+                      sex: rowData.SEX,
+                      description: rowData.DESCRIPTION,
+                      date: rowData.DATE,
+                      view: rowData.VIEWS,
+                    }
+                  )}
+                >
                   <View style={{
-                    flexDirection: 'column',
-                    paddingTop: Platform.OS == 'ios' ? 10 : 5,
-                    paddingLeft: 5,
-                    flex: 0.54
-                  }}
-                  >
-                    <Text style={styles.titleText}> ตำแหน่ง : {rowData["​POSITION"]} </Text>
-                    <Text style={styles.titleText}> วุฒิการศึกษา : {rowData.CERTIFICATE == "" ? '-' : rowData.CERTIFICATE} </Text>
-                    <Text style={styles.titleText}> จังหวัด  : {rowData.PROVINCE} </Text>
-                    <Text style={styles.titleText}> จำนวน : {rowData.RATE} ตำแหน่ง </Text>
-                  </View>
-
-                  <View style={{
-                    paddingLeft: 5,
-                    paddingTop: Platform.OS == 'ios' ? 30 : 15,
-                    flex: 0.16,
+                    flexDirection: 'row',
+                    backgroundColor: 'white',
+                    justifyContent: 'space-around',
+                    paddingTop: 2,
+                    paddingBottom: 2,
                   }}>
 
-                    <Text style={styles.more}> > </Text>
+                    <View style={{ flex: 0.3 }}>
+                      <Image source={{ uri: rowData.IMG }}
+                        style={{
+                          width: 100,
+                          height: 100,
+                          resizeMode: 'contain'
+                        }} />
+                    </View>
 
+                    <View style={{
+                      flexDirection: 'column',
+                      paddingTop: Platform.OS == 'ios' ? 10 : 5,
+                      paddingLeft: 5,
+                      flex: 0.54
+                    }}
+                    >
+                      <Text numberOfLines={1} style={styles.titleText}> ตำแหน่ง : {rowData["​POSITION"]} </Text>
+                      <Text style={styles.titleText}> วุฒิการศึกษา : {rowData.CERTIFICATE == "" ? '-' : rowData.CERTIFICATE} </Text>
+                      <Text style={styles.titleText}> จังหวัด  : {rowData.PROVINCE} </Text>
+                      <Text style={styles.titleText}> จำนวน : {rowData.RATE} ตำแหน่ง </Text>
+                    </View>
+
+                    <View style={{
+                      paddingLeft: 5,
+                      paddingTop: Platform.OS == 'ios' ? 30 : 15,
+                      flex: 0.16,
+                    }}>
+
+                      <Text style={styles.more}> > </Text>
+
+                    </View>
                   </View>
-                </View>
-              </TouchableOpacity>
-            </View>
+                </TouchableOpacity>
+              </View> : null}</View>
           }
 
           onEndReached={() =>
@@ -293,20 +341,18 @@ const styles = StyleSheet.create({
     height: 100,
     width: 150,
   },
+  search: {
+    flexDirection: 'row',
+    padding: 7,
+    margin: 5,
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 20,
+    backgroundColor: 'white',
+  },
   searchInput: {
-    height: 20,
-    padding: 4,
-    marginRight: 3,
-    marginTop: 35,
-    flexGrow: 0.5,
     fontSize: 14,
     color: 'black',
-    borderWidth: 2,
-    borderColor: 'black',
-    alignItems: 'center',
-    borderRadius: 4,
-    textAlign: 'center',
-    backgroundColor: 'white',
   },
   listView: {
     paddingTop: 2,
@@ -328,16 +374,16 @@ const styles = StyleSheet.create({
 });
 
 
-const typeData = [
-  { value: 'ราชการ' },
-  { value: 'เอกชน' },
-  { value: 'Part Time' },
-];
+// const typeData = [
+//   { value: 'ราชการ' },
+//   { value: 'เอกชน' },
+//   { value: 'Part Time' },
+// ];
 
-const provinceData = [
-  { value: 'สงขลา' },
-  { value: 'กระบี่' },
-  { value: 'ภูเก็ต' },
-  { value: 'ตรัง' },
-  { value: 'สตูล' },
-];
+// const provinceData = [
+//   { value: 'สงขลา' },
+//   { value: 'กระบี่' },
+//   { value: 'ภูเก็ต' },
+//   { value: 'ตรัง' },
+//   { value: 'สตูล' },
+// ];

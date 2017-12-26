@@ -29,10 +29,10 @@ export default class ReviewDetail extends Component {
                 <Image
                     key={index}
                     style={{
-                        width: (width / 2) * a.width / a.height,
-                        height: width / 2,
-                        alignSelf: 'center',
-                        marginVertical: 10,
+                        width: width,
+                        height: width * a.height / a.width,
+                        resizeMode: 'contain',
+                        marginVertical: 10
                     }}
                     source={{
                         uri: node.children[0].attribs.src
@@ -40,33 +40,6 @@ export default class ReviewDetail extends Component {
                 />
             )
         }
-
-        // if (node.name == 'p' && node.children[0].name == 'iframe') {
-        //     const a = node.children[0].attribs;
-        //     const iframeHtml = `<iframe src="${a.src}" 
-        //                                 height= 100%, 
-        //                                 width= 100%, 
-        //                                 frameborder= 0,
-        //                                 border= 0,
-        //                         >
-        //                         </iframe>`;
-        //     return (
-        //         <View key={index}
-        //             style={{
-        //                 alignSelf: 'center',
-        //                 width: (width / 2) * 16 / 9,
-        //                 height: width / 2,
-        //                 margin: 10
-        //             }}
-        //         >
-        //             <WebView source={{ html: iframeHtml }}
-        //                 style={{
-        //                     margin: -10
-        //                 }}
-        //             />
-        //         </View>
-        //     );
-        // }
 
         if (node.name == 'p' && node.children[0].name == 'iframe') {
             const a = node.children[0].attribs;
@@ -166,8 +139,9 @@ const styles = StyleSheet.create({
         width: 150,
     },
     reviewfont: {
-        fontSize: 26,
+        fontSize: width * 0.07,
         paddingTop: 35,
+        alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },

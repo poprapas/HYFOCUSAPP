@@ -205,6 +205,7 @@ const styles = StyleSheet.create({
     travelfont: {
         fontSize: width * 0.07,
         paddingTop: 35,
+        alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },

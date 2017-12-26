@@ -9,11 +9,14 @@ import {
     TextInput,
     Image,
     Linking,
+    Dimensions
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
 //import Emoticons from 'react-native-emoticons';
+
+const { width, height } = Dimensions.get("window");
 
 export default class Contact extends Component {
 
@@ -126,7 +129,7 @@ const styles = StyleSheet.create({
     },
     contact: {
         height: 150,
-        width: 384,
+        width: width,
     },
     input: {
         margin: 5,

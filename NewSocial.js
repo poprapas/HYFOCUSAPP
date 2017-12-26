@@ -191,10 +191,11 @@ const styles = StyleSheet.create({
         width: 150,
     },
     bannerfont: {
-        fontSize: 20,
+        fontSize: Platform.OS === 'ios' ? width * 0.055 : width * 0.05 ,
         paddingTop: 40,
+        alignSelf: 'center',
         color: 'white',
-        fontFamily: Platform.OS == 'ios' ? 'BangnaNew' : 'bangna-new',
+        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
         paddingLeft: 5,

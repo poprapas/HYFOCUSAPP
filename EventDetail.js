@@ -28,10 +28,10 @@ export default class EventDetail extends Component {
                 <Image
                     key={index}
                     style={{
-                        width: (width / 2) * a.width / a.height,
-                        height: width / 2,
-                        alignSelf: 'center',
-                        marginVertical: 10,
+                        width: width,
+                        height: width * a.height / a.width,
+                        resizeMode: 'contain',
+                        marginVertical: 10
                     }}
                     source={{
                         uri: node.children[0].attribs.src
@@ -114,8 +114,9 @@ const styles = StyleSheet.create({
         width: 150,
     },
     eventfont: {
-        fontSize: 24,
+        fontSize: width * 0.06,
         paddingTop: 35,
+        alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },

@@ -32,10 +32,10 @@ export default class NewDetail extends Component {
                 <Image
                     key={index}
                     style={{
-                        width: (width / 2) * a.width / a.height,
-                        height: width / 2,
-                        alignSelf: 'center',
-                        marginVertical: 10,
+                        width: width,
+                        height: width * a.height / a.width,
+                        resizeMode: 'contain',
+                        marginVertical: 10
                     }}
                     source={{
                         uri: node.children[0].attribs.src
@@ -43,7 +43,6 @@ export default class NewDetail extends Component {
                 />
             )
         }
-
 
         if (node.name == 'p' && node.children[0].name == 'iframe') {
             if (node.children[0].attribs.src.slice(0, 2) == '//') {
@@ -126,7 +125,6 @@ export default class NewDetail extends Component {
                                 height: (width - 10) * 0.625
                             }} />
                         <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
-                        <Text></Text>
                         <HTMLView
                             value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}
@@ -153,13 +151,6 @@ const styles = StyleSheet.create({
     logo: {
         height: 100,
         width: 150,
-    },
-    new: {
-        fontSize: 23,
-        paddingLeft: 5,
-        paddingTop: 35,
-        color: 'white',
-        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
         paddingLeft: 5,

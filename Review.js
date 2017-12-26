@@ -200,8 +200,9 @@ const styles = StyleSheet.create({
         width: 150,
     },
     reviewfont: {
-        fontSize: 26,
+        fontSize: width * 0.07,
         paddingTop: 35,
+        alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },

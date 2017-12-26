@@ -35,7 +35,7 @@ export default class Hotel extends Component {
     }
 
     _fetchData(callback) {
-        fetch('https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=1&for=rent' + this.state.start + '&per_page=10')
+        fetch('https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=1&start=' + this.state.start + '&per_page=10')
             .then(response => response.json())
             .then(callback)
             .catch(error => {
@@ -70,7 +70,7 @@ export default class Hotel extends Component {
 
     componentDidMount() {
         //Start getting the first batch of data from reddit
-        this.fetchData(responseJson => {
+        this._fetchData(responseJson => {
             let ds = new ListView.DataSource({
                 rowHasChanged: (r1, r2) => r1 !== r2,
             });
@@ -131,12 +131,12 @@ export default class Hotel extends Component {
                     ]}
                 />
 
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
 
                     <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />
                     <View style={{ flex: 1 }}>
-                        <Text style={styles.roomfont}> --- Hotel --- </Text>
+                        <Text style={styles.roomfont}> ---- Hotel ---- </Text>
                     </View>
 
                 </View>
@@ -190,19 +190,19 @@ export default class Hotel extends Component {
 
                                     <View style={{
                                         flexDirection: 'column',
-                                        paddingTop: Platform.OS == 'ios' ? 10 : 5,
+                                        paddingTop: Platform.OS == 'ios' ? 15 : 10,
                                         paddingLeft: 5,
                                         flex: 0.35,
                                     }}
                                     >
-                                        <Text style={styles.titleText}> {rowData.PROPERTY} </Text>
+                                        <Text numberOfLines = {1} style={styles.titleText}> {rowData.PROPERTY} </Text>
                                         <Text style={styles.titleText2}> ราคา : {rowData.PRICE} </Text>
                                         <Text style={styles.titleText2}> อำเภอ : {rowData.AMPHUR} </Text>
                                         <Text style={styles.titleText2}> จังหวัด  : {rowData.PROVINCE} </Text>
                                     </View>
 
                                     <View style={{
-                                        paddingTop: Platform.OS == 'ios' ? 40 : 20,
+                                        paddingTop: Platform.OS == 'ios' ? 40 : 25,
                                         flex: 0.15,
                                     }}>
 
@@ -251,6 +251,7 @@ const styles = StyleSheet.create({
     roomfont: {
         fontSize: width * 0.07,
         paddingTop: 35,
+        alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
@@ -259,7 +260,7 @@ const styles = StyleSheet.create({
         paddingBottom: 2
     },
     titleText: {
-        fontSize: 14.5,
+        fontSize: 15.5,
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',

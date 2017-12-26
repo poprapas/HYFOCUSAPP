@@ -18,8 +18,6 @@ import { StackNavigator, DrawerNavigator } from "react-navigation";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SplashScreen from 'react-native-splash-screen'
 
-
-import Photo from "./Photo"
 import Video from "./Video"
 import VideoDetail from "./VideoDetail"
 import Review from "./Review"
@@ -54,11 +52,13 @@ import NewBusiness from "./NewBusiness"
 import Event from "./Event"
 import EventDetail from "./EventDetail"
 import Hotel from "./Hotel"
+import Apartment from "./Apartment"
+import Resort from "./Resort"
+import Guesthouse from "./Guesthouse"
 
 const AppNavigator = StackNavigator({
   Tab: { screen: tabNavigator },
   Home: { screen: Home },
-  Photo: { screen: Photo },
   Video: { screen: Video },
   VideoDetail: { screen: VideoDetail },
   Review: { screen: Review },
@@ -93,6 +93,9 @@ const AppNavigator = StackNavigator({
   Event: { screen: Event },
   EventDetail: { screen: EventDetail },
   Hotel: { screen: Hotel },
+  Apartment: { screen: Apartment },
+  Resort: { screen: Resort },
+  Guesthouse: { screen: Guesthouse },
 },
   {
     initialRouteName: "Tab",
