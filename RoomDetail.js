@@ -198,7 +198,6 @@ export default class RoomDetail extends Component {
                             : null
                         }
                         <Text />
-
                         <Text style={styles.date}> วันที่: {this.props.navigation.state.params.date} </Text>
 
                     </ScrollView>

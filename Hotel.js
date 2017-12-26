@@ -14,11 +14,10 @@ import {
 
 import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
-import Button from 'react-native-button';
 
 const { width, height } = Dimensions.get("window");
 
-export default class Room extends Component {
+export default class Hotel extends Component {
 
     constructor(props) {
         super(props);
@@ -36,7 +35,7 @@ export default class Room extends Component {
     }
 
     _fetchData(callback) {
-        fetch('https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=' + this.state.start + '&per_page=10')
+        fetch('https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=1&for=rent' + this.state.start + '&per_page=10')
             .then(response => response.json())
             .then(callback)
             .catch(error => {
@@ -137,7 +136,7 @@ export default class Room extends Component {
                     <Image source={require('./assets/images/banner.png')}
                         style={styles.logo} />
                     <View style={{ flex: 1 }}>
-                        <Text style={styles.roomfont}> --- ที่พักล่าสุด --- </Text>
+                        <Text style={styles.roomfont}> --- Hotel --- </Text>
                     </View>
 
                 </View>
@@ -233,16 +232,6 @@ export default class Room extends Component {
                     }}
                 />
 
-                <View style={{ paddingLeft: 10, paddingRight: 280, paddingTop: 5, paddingBottom: 1 }}>
-                    <Button
-                        containerStyle={styles.selectbutton}
-                        disabledContainerStyle={{ backgroundColor: 'grey' }}
-                        style={styles.button}
-                        onPress={() => navigate('Hotel')}>
-                        Hotel >
-                    </Button>
-                </View>
-                
             </View>
         );
     }
@@ -289,18 +278,5 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         fontSize: 50,
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    },
-    button: {
-        fontSize: 14,
-        fontWeight: 'normal',
-        color: 'white',
-        textAlign: 'center',
-        paddingTop: 2
-    },
-    selectbutton: {
-        height: 30,
-        overflow: 'hidden',
-        borderRadius: 5,
-        backgroundColor: 'black',
-    },
+    }
 });

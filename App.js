@@ -53,6 +53,7 @@ import NewAdvertise from "./NewAdvertise"
 import NewBusiness from "./NewBusiness"
 import Event from "./Event"
 import EventDetail from "./EventDetail"
+import Hotel from "./Hotel"
 
 const AppNavigator = StackNavigator({
   Tab: { screen: tabNavigator },
@@ -91,6 +92,7 @@ const AppNavigator = StackNavigator({
   NewBusiness: { screen: NewBusiness },
   Event: { screen: Event },
   EventDetail: { screen: EventDetail },
+  Hotel: { screen: Hotel },
 },
   {
     initialRouteName: "Tab",
