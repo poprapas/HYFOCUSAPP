@@ -164,7 +164,6 @@ export default class Jobs extends Component {
     return (
 
       <View style={styles.container}>
-
         <ActionBar
           containerStyle={styles.bar}
           backgroundColor={'black'}
@@ -207,32 +206,36 @@ export default class Jobs extends Component {
 
         <View style={styles.search}>
 
-          <Icon
-            name='search'
-            color='black'
-            size={20}
-          />
+          <View style={{ paddingTop: Platform.OS == 'ios' ? 0 : 15, paddingLeft: Platform.OS == 'ios' ? 0 : 5 }}>
+            <Icon
+              name='search'
+              color='black'
+              size={20}
+            />
+          </View>
 
-          <TextInput
-            style={styles.searchInput}
-            placeholder=' ค้นหาตำแหน่งงาน'
-            placeholderTextColor='#686868'
-            underlineColorAndroid="transparent"
-            value={this.state.find}
-            onChangeText={(find) => this.findposition(find)}
-          />
+          <View style={{ flex: 1, paddingTop: 3 }}>
+            <TextInput
+              style={styles.searchInput}
+              placeholder=' ค้นหาตำแหน่ง...'
+              placeholderTextColor='#686868'
+              underlineColorAndroid="transparent"
+              value={this.state.find}
+              onChangeText={(find) => this.findposition(find)}
+            />
+          </View>
         </View>
         {/* </View> */}
 
         <View>
-          {this.state.findposition.length != 0  && !this.state.found ? 
-          
-          <Text style={{
-            fontSize: 17,
-            alignSelf: 'center',
-            paddingTop: 10,
-          }}>
-            ---- ไม่พบข้อมูล ----
+          {this.state.findposition.length != 0 && !this.state.found ?
+
+            <Text style={{
+              fontSize: 17,
+              alignSelf: 'center',
+              paddingTop: 10,
+            }}>
+              ---- ไม่พบข้อมูล ----
           </Text> : null}
         </View>
 
@@ -272,7 +275,8 @@ export default class Jobs extends Component {
                   }}>
 
                     <View style={{ flex: 0.3 }}>
-                      <Image source={{ uri: rowData.IMG }}
+                      <Image 
+                        source={{ uri: rowData.IMG }}
                         style={{
                           width: 100,
                           height: 100,
@@ -282,7 +286,7 @@ export default class Jobs extends Component {
 
                     <View style={{
                       flexDirection: 'column',
-                      paddingTop: Platform.OS == 'ios' ? 10 : 5,
+                      paddingTop: Platform.OS == 'ios' ? 15 : 5,
                       paddingLeft: 5,
                       flex: 0.54
                     }}
@@ -343,7 +347,8 @@ const styles = StyleSheet.create({
   },
   search: {
     flexDirection: 'row',
-    padding: 7,
+    justifyContent: 'flex-start',
+    padding: Platform.OS == 'ios' ? 5 : 0,
     margin: 5,
     borderWidth: 1,
     borderColor: 'black',

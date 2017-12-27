@@ -15,6 +15,7 @@ import Color from 'react-native-material-color';
 import HTMLView from 'react-native-htmlview';
 import Carousel from 'react-native-looped-carousel';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Icons from 'react-native-vector-icons/dist/MaterialIcons';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
 const { width, height } = Dimensions.get("window");
@@ -198,7 +199,18 @@ export default class RoomDetail extends Component {
                             : null
                         }
                         <Text />
-                        <Text style={styles.date}> วันที่: {this.props.navigation.state.params.date} </Text>
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                            <Icons
+                                name="access-time"
+                                size={15}
+                                color='black'
+                                style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
+                            />
+                            <Text style={styles.date}>
+                                {this.props.navigation.state.params.date}
+                            </Text>
+                        </View>
 
                     </ScrollView>
                 </View>
@@ -279,6 +291,7 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'right',
+        paddingLeft: 3,
     },
     gallery: {
         height: width * 0.62375,

@@ -97,7 +97,7 @@ export default class Review extends Component {
                         backgroundColor={'black'}
                         leftIconName={'menu'}
                         onLeftPress={() => navigate('Tab')}
-                        icontitless={"rate-review"}
+                        icontitlesss={"rate-review"}
                         title={'รีวิว'}
                         rightIcons={[
                             {
@@ -119,7 +119,7 @@ export default class Review extends Component {
                     backgroundColor={'black'}
                     leftIconName={'back'}
                     onLeftPress={() => navigate('Tab')}
-                    icontitless={"rate-review"}
+                    icontitlesss={"rate-review"}
                     title={'รีวิว'}
                     rightIcons={[
                         {

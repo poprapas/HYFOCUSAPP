@@ -13,6 +13,8 @@ import {
 import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
 import HTMLView from 'react-native-htmlview';
+import Icon from 'react-native-vector-icons/dist/Entypo';
+import Icons from 'react-native-vector-icons/dist/MaterialIcons';
 
 const { width, height } = Dimensions.get("window");
 
@@ -118,8 +120,30 @@ export default class JobDetail extends Component {
                             </View>
                         </View>
 
-                        <Text style={styles.view}> ผู้ชม: {this.props.navigation.state.params.view}  </Text>
-                        <Text style={styles.view}> วันที่: {this.props.navigation.state.params.date} </Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                            <Icon
+                                name="eye"
+                                size={15}
+                                color='black'
+                                style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
+                            />
+                            <Text style={styles.view}>
+                                {this.props.navigation.state.params.view}
+                            </Text>
+                        </View>
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                            <Icons
+                                name="access-time"
+                                size={15}
+                                color='black'
+                                style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
+                            />
+                            <Text style={styles.view}>
+                                {this.props.navigation.state.params.date}
+                            </Text>
+                        </View>
+
                     </ScrollView>
                 </View>
 
@@ -142,7 +166,8 @@ const styles = StyleSheet.create({
 
     listView: {
         backgroundColor: 'white',
-        paddingLeft: 1,
+        paddingLeft: 5,
+        paddingRight: 5,
         width: width,
     },
     company: {
@@ -177,6 +202,7 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'right',
+        paddingLeft: 3,
     },
 });
 

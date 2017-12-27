@@ -106,13 +106,14 @@ export default class New extends Component {
                     backgroundColor={'black'}
                     leftIconName={'back'}
                     onLeftPress={() => navigate('Tab')}
-                    title={'ข่าว'}
+                    icontitless={"newspaper-o"}
+                    title={'ข่าวธุรกิจและเทคโนโลยี'}
                     //title= {this.props.navigation.state.params.type} 
                     rightIcons={[
                         {
                             name: 'facebook',
                             onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                            //onPress: () => navigate('Social'),
+        
                         },
                     ]}
                 />

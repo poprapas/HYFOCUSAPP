@@ -136,8 +136,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     paddingLeft: 20,
-    paddingTop: Platform.OS == 'ios' ? 9 : 6,
-    paddingBottom: Platform.OS == 'ios' ? 9 : 6,
+    paddingTop: Platform.OS == 'ios' ? 15 : 6,
+    paddingBottom: Platform.OS == 'ios' ? 15 : 6,
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
   },
   navSectionStyle: {

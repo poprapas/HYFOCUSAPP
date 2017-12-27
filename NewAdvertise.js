@@ -107,13 +107,12 @@ export default class New extends Component {
                     backgroundColor={'black'}
                     leftIconName={'back'}
                     onLeftPress={() => navigate('Tab')}
-                    title={'ข่าว'}
-                    //title= {this.props.navigation.state.params.type} 
+                    icontitless={"newspaper-o"}
+                    title={'ข่าวประชาสัมพันธ์และการท่องเที่ยว'}
                     rightIcons={[
                         {
                             name: 'facebook',
                             onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                            //onPress: () => navigate('Social'),
                         },
                     ]}
                 />
@@ -194,7 +193,7 @@ const styles = StyleSheet.create({
     },
     bannerfont: {
         fontSize: Platform.OS === 'ios' ? width * 0.04 : width * 0.035 ,
-        paddingTop: 35,
+        paddingTop: 40,
         alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',

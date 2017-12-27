@@ -11,7 +11,8 @@ import {
   ListView,
   Linking,
   FlatList,
-  Dimensions
+  Dimensions,
+  StatusBar
 } from 'react-native';
 
 
@@ -57,7 +58,6 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-
     return fetch('https://www.hatyaifocus.com/rest/api.php?action=news&cat=&start=0&per_page=10')
       .then((response) => response.json())
       .then((responseJson) => {
@@ -72,6 +72,7 @@ export default class Home extends Component {
               slide: responseJson2
             }, function () {
               // do something with new state
+              StatusBar.setBarStyle('light-content', true);
             });
           })
       })

@@ -191,7 +191,7 @@ export default class Room extends Component {
 
                                     <View style={{
                                         flexDirection: 'column',
-                                        paddingTop: Platform.OS == 'ios' ? 15 : 10,
+                                        paddingTop: Platform.OS == 'ios' ? 20 : 10,
                                         paddingLeft: 5,
                                         flex: 0.35,
                                     }}

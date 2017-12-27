@@ -17,8 +17,8 @@ const AppNavigator = TabNavigator({
         screen: JobScreen,
         navigationOptions: {
             tabBarIcon: ({ tintColor }) => (
-                <Image source={require('./assets/images/work-icon.png')} 
-                    style={{height: 31, width: 31, tintColor: tintColor }}
+                <Image source={require('./assets/images/work-icon.png')}
+                    style={{ height: 31, width: 31, tintColor: tintColor }}
                 />
             )
         }
@@ -27,8 +27,8 @@ const AppNavigator = TabNavigator({
         screen: EatScreen,
         navigationOptions: {
             tabBarIcon: ({ tintColor }) => (
-                <Image source={require('./assets/images/eat-icon.png')} 
-                    style={{height: 27, width: 27, tintColor: tintColor }}
+                <Image source={require('./assets/images/eat-icon.png')}
+                    style={{ height: 27, width: 27, tintColor: tintColor }}
                 />
             )
         }
@@ -37,8 +37,8 @@ const AppNavigator = TabNavigator({
         screen: HomeScreen,
         navigationOptions: {
             tabBarIcon: ({ tintColor }) => (
-                <Image source={require('./assets/images/home-icon.png')} 
-                    style={{height: 27, width: 27, tintColor: tintColor }}
+                <Image source={require('./assets/images/home-icon.png')}
+                    style={{ height: 27, width: 27, tintColor: tintColor }}
                 />
             )
         }
@@ -47,8 +47,8 @@ const AppNavigator = TabNavigator({
         screen: TravelScreen,
         navigationOptions: {
             tabBarIcon: ({ tintColor }) => (
-                <Image source={require('./assets/images/travel-icon.png')} 
-                    style={{height: 27, width: 27, tintColor: tintColor }}
+                <Image source={require('./assets/images/travel-icon.png')}
+                    style={{ height: 27, width: 27, tintColor: tintColor }}
                 />
             )
         }
@@ -57,13 +57,13 @@ const AppNavigator = TabNavigator({
         screen: RoomScreen,
         navigationOptions: {
             tabBarIcon: ({ tintColor }) => (
-                <Image source={require('./assets/images/hotel-icon.png')} 
-                    style={{height: 27, width: 27, tintColor: tintColor }}
+                <Image source={require('./assets/images/hotel-icon.png')}
+                    style={{ height: 27, width: 27, tintColor: tintColor }}
                 />
             )
         }
     },
-   
+
 }, {
         initialRouteName: 'หน้าแรก',
         animationEnabled: true,
@@ -73,10 +73,10 @@ const AppNavigator = TabNavigator({
             Platform.OS == 'android' ? {
                 showIcon: true,
                 scrollEnabled: false,
-                labelStyle:{fontSize:10,margin:0},
-                indicatorStyle:{backgroundColor:'#ffffff'},
+                labelStyle: { fontSize: 10, margin: 0 },
+                indicatorStyle: { backgroundColor: '#ffffff' },
                 style: {
-                backgroundColor: 'black'
+                    backgroundColor: 'black'
                 }
             }
                 :

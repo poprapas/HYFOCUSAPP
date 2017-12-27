@@ -16,6 +16,8 @@ import {
 import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
 import HTMLView from 'react-native-htmlview';
+import Icon from 'react-native-vector-icons/dist/Entypo';
+import Icons from 'react-native-vector-icons/dist/MaterialIcons';
 
 const { width, height } = Dimensions.get("window");
 
@@ -78,7 +80,7 @@ export default class ReviewDetail extends Component {
                     backgroundColor={'black'}
                     leftIconName={'back'}
                     onLeftPress={() => goBack()}
-                    icontitless={"rate-review"}
+                    icontitlesss={"rate-review"}
                     title={'รีวิว'}
                     rightIcons={[
                         {
@@ -102,21 +104,42 @@ export default class ReviewDetail extends Component {
                         height: Platform.OS == 'ios' ? height - 165 : height - 170,
                         width: "100%"
                     }}>
+                         <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                         <Image source={{ uri: this.props.navigation.state.params.image }}
                             style={{
                                 width: width - 10,
                                 height: (width - 10) * 0.625
                             }}
                         />
-                        <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
-                        <Text></Text>
+                        <Text/>
                         <HTMLView
                             value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}
                             stylesheet={styless}
                         />
-                        <Text style={styles.view}> Views: {this.props.navigation.state.params.view} </Text>
-                        <Text style={styles.view}> Date: {this.props.navigation.state.params.date} </Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                            <Icon
+                                name="eye"
+                                size={15}
+                                color='white'
+                                style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
+                            />
+                            <Text style={styles.view}>
+                                {this.props.navigation.state.params.view}
+                            </Text>
+                        </View>
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                            <Icons
+                                name="access-time"
+                                size={15}
+                                color='white'
+                                style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
+                            />
+                            <Text style={styles.view}>
+                                {this.props.navigation.state.params.date}
+                            </Text>
+                        </View>
                     </ScrollView>
                 </View>
 
@@ -162,7 +185,8 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         color: 'white',
         textAlign: 'right',
-        fontFamily: 'Times New Roman'
+        fontFamily: 'Times New Roman',
+        paddingLeft: 3,
     },
 
 });
