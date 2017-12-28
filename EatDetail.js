@@ -11,7 +11,7 @@ import {
     Dimensions,
     ScrollView,
     WebView,
-    Vibration,
+    TouchableOpacity
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
@@ -63,10 +63,10 @@ export default class EatDetail extends Component {
                         alignSelf: 'center',
                     }}
                 >
-                    <WebView source={{ html: iframeHtml }} 
-                             style={{
-                                borderRadius: 5
-                             }}
+                    <WebView source={{ html: iframeHtml }}
+                        style={{
+                            borderRadius: 5
+                        }}
                     />
                 </View>
             );
@@ -99,17 +99,20 @@ export default class EatDetail extends Component {
 
                 <View style={{ flexDirection: 'row', paddingBottom: 5, justifyContent: 'space-between' }}>
 
-                    <Image source={require('./assets/images/banner.png')}
-                        style={styles.logo} />
+                    <TouchableOpacity onPress={() => navigate('Tab')}>
+                        <Image source={require('./assets/images/banner.png')}
+                            style={styles.logo} />
+                    </TouchableOpacity>
+
                     <View style={{ flex: 1 }}>
-                        <Text style={styles.eatfont}> ---- Eat ---- </Text>
+                        <Text style={styles.eatfont}> ----- Eat ----- </Text>
                     </View>
 
                 </View>
 
                 <View style={styles.listView}>
                     <ScrollView style={{
-                        height: Platform.OS == 'ios' ? height - 170 : height - 175,
+                        height: Platform.OS == 'ios' ? height - 165 : height - 170,
                         width: "100%"
                     }}>
                         <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
@@ -118,7 +121,7 @@ export default class EatDetail extends Component {
                                 width: width - 10,
                                 height: (width - 10) * 0.625
                             }} />
-                        <Text/>
+                        <Text />
                         <HTMLView
                             value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}
@@ -136,7 +139,7 @@ export default class EatDetail extends Component {
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 10 }}>
                             <Icons
                                 name="access-time"
                                 size={15}
@@ -170,7 +173,7 @@ const styles = StyleSheet.create({
     },
     eatfont: {
         fontSize: width * 0.07,
-        paddingTop: 35,
+        paddingTop: Platform.OS === 'ios' ? 40 : 35,
         alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
@@ -178,14 +181,15 @@ const styles = StyleSheet.create({
     listView: {
         paddingLeft: 5,
         paddingRight: 5,
-        paddingTop: 5,
+        paddingTop: 2,
     },
     title: {
-        fontSize: 16,
-        fontWeight: 'bold',
+        fontSize: 20,
         color: 'white',
         textAlign: 'center',
-        fontFamily: 'Times New Roman'
+        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+        paddingTop: 10,
+        paddingBottom: 10,
     },
     view: {
         fontSize: 14,
@@ -200,9 +204,17 @@ const styles = StyleSheet.create({
 
 const styless = StyleSheet.create({
     p: {
-        fontSize: 15,
+        fontSize: 18,
         fontWeight: 'normal',
         color: 'white',
+        textAlign: 'left',
+        fontFamily: 'Times New Roman',
+        paddingHorizontal: 5
+    },
+    a: {
+        fontSize: 18,
+        fontWeight: 'normal',
+        color: '#FFFF66',
         textAlign: 'left',
         fontFamily: 'Times New Roman'
     },

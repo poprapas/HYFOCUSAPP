@@ -43,19 +43,14 @@ export default class JobDetail extends Component {
                     ]}
                 />
 
-                <View style={{ paddingBottom: 6 }}>
-                    <Image source={require('./assets/images/banner.png')}
-                        style={styles.logo} />
-                </View>
-
                 <View style={styles.listView}>
                     <ScrollView style={{
-                        height: Platform.OS == 'ios' ? height - 165 : height - 170,
+                        height: height - 70,
                         width: "100%"
                     }}>
                         <View style={{ alignItems: 'center', paddingBottom: 5 }}>
                             <Image source={{ uri: this.props.navigation.state.params.image }}
-                                style={{ width: width, height: 100, resizeMode: 'contain'}} />
+                                style={{ width: width, height: 100, resizeMode: 'contain' }} />
                         </View>
 
                         <Text style={styles.company}> {this.props.navigation.state.params.company} </Text>
@@ -132,7 +127,7 @@ export default class JobDetail extends Component {
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 10 }}>
                             <Icons
                                 name="access-time"
                                 size={15}
@@ -155,9 +150,7 @@ export default class JobDetail extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //justifyContent: 'center',
-        //alignItems: 'center',
-        backgroundColor: Color.BROWN[400],
+        backgroundColor: 'white',
     },
     logo: {
         height: 100,
@@ -165,37 +158,35 @@ const styles = StyleSheet.create({
     },
 
     listView: {
-        backgroundColor: 'white',
-        paddingLeft: 5,
-        paddingRight: 5,
+        padding: 10,
         width: width,
     },
     company: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'center',
     },
     topic: {
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'left',
-        width: 98,
+        width: 110,
     },
     topic2: {
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'left',
         width: 150,
     },
     detail: {
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
-        width: width - 98
+        width: width - 110
     },
     view: {
         fontSize: 14,
@@ -208,7 +199,7 @@ const styles = StyleSheet.create({
 
 const styless = StyleSheet.create({
     p: {
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',

@@ -10,6 +10,7 @@ import {
     ListView,
     Dimensions,
     ScrollView,
+    TouchableOpacity
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
@@ -41,24 +42,6 @@ export default class StoryDetail extends Component {
                 />
             )
         }
-
-        // if (node.name == 'div' && node.children[0].name == 'img') {
-        //     const a = node.children[0].attribs;
-        //     return (
-        //         <Image
-        //             key={index}
-        //             style={{
-        //                 width: width,
-        //                 height: width * a.height / a.width,
-        //                 resizeMode: 'contain',
-        //                 marginVertical: 10
-        //             }}
-        //             source={{
-        //                 uri: node.children[0].attribs.src
-        //             }}
-        //         />
-        //     )
-        // }
     }
 
     render() {
@@ -86,8 +69,12 @@ export default class StoryDetail extends Component {
                 />
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Image source={require('./assets/images/banner.png')}
-                        style={styles.logo} />
+
+                    <TouchableOpacity onPress={() => navigate('Tab')}>
+                        <Image source={require('./assets/images/banner.png')}
+                            style={styles.logo} />
+                    </TouchableOpacity>
+
                     <View style={{ flex: 1 }}>
                         <Text style={styles.storyfont}> ---- Story ---- </Text>
                     </View>
@@ -105,7 +92,7 @@ export default class StoryDetail extends Component {
                                 height: (width - 10) * 0.625
                             }}
                         />
-                        <Text/>
+                        <Text />
                         <HTMLView
                             value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}
@@ -123,7 +110,7 @@ export default class StoryDetail extends Component {
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 10 }}>
                             <Icons
                                 name="access-time"
                                 size={15}
@@ -157,7 +144,7 @@ const styles = StyleSheet.create({
     },
     storyfont: {
         fontSize: width * 0.07,
-        paddingTop: 35,
+        paddingTop: Platform.OS === 'ios' ? 40 : 35,
         alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
@@ -165,14 +152,16 @@ const styles = StyleSheet.create({
     listView: {
         paddingLeft: 5,
         paddingRight: 5,
-        paddingTop: 5,
+        paddingTop: 2,
     },
     title: {
-        fontSize: 16,
-        fontWeight: 'bold',
+        fontSize: 20,
         color: 'white',
         textAlign: 'center',
-        fontFamily: 'Times New Roman'
+        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+        paddingTop: 10,
+        paddingBottom: 10
+
     },
     view: {
         fontSize: 14,
@@ -186,17 +175,18 @@ const styles = StyleSheet.create({
 
 const styless = StyleSheet.create({
     p: {
-        fontSize: 15,
+        fontSize: 18,
         fontWeight: 'normal',
         color: 'white',
+        textAlign: 'left',
+        fontFamily: 'Times New Roman',
+        paddingHorizontal: 5,
+    },
+    a: {
+        fontSize: 18,
+        fontWeight: 'normal',
+        color: '#FFFF66',
         textAlign: 'left',
         fontFamily: 'Times New Roman'
     },
-    div: {
-        fontSize: 15,
-        fontWeight: 'normal',
-        color: 'white',
-        textAlign: 'left',
-        fontFamily: 'Times New Roman'
-    }
 });

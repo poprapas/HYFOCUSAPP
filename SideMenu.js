@@ -100,12 +100,12 @@ class SideMenu extends Component {
               </Text>
           </View>
 
-          <View style={styles.navSectionStyle}>
+          {/* <View style={styles.navSectionStyle}>
             <Image source={require('./assets/images/about-icon.png')} style={{ height: 25, width: 25 }} />
             <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('About')}>
-              เกี่ยวกับ
+              เกี่ยวกับเรา
               </Text>
-          </View>
+          </View> */}
 
           {/* <View style={styles.navSectionStyle}>
               <Image source={require('./assets/images/contact-icon.png')} style={{ height: 25, width: 25 }} />

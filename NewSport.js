@@ -119,8 +119,11 @@ export default class New extends Component {
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
-                    <Image source={require('./assets/images/banner.png')}
-                        style={styles.logo} />
+                    <TouchableOpacity onPress={() => navigate('Tab')}>
+                        <Image source={require('./assets/images/banner.png')}
+                            style={styles.logo} />
+                    </TouchableOpacity>
+
                     <View style={{ flex: 1 }}>
                         <Text style={styles.bannerfont}> ---- ข่าวกีฬา ---- </Text>
                     </View>
@@ -130,7 +133,9 @@ export default class New extends Component {
                 <ListView
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) => <View style={styles.listView}>
-                        <Text style={styles.titleText}> {rowData.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
+                        <View style={{ paddingBottom: 5 }}>
+                            <Text style={styles.titleText}> {rowData.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
+                        </View>
                         <TouchableOpacity
                             key={rowData.id}
                             onPress={() => navigate('NewDetail',
@@ -150,7 +155,7 @@ export default class New extends Component {
                                     height: (width - 10) * 0.625
                                 }} />
 
-                            <View>
+                            <View style={{ paddingTop: 5 }}>
                                 <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
                             </View>
                         </TouchableOpacity>
@@ -192,8 +197,8 @@ const styles = StyleSheet.create({
         width: 150,
     },
     bannerfont: {
-        fontSize: Platform.OS === 'ios' ? width * 0.07 : width * 0.065 ,
-        paddingTop: 40,
+        fontSize: Platform.OS === 'ios' ? width * 0.07 : width * 0.065,
+        paddingTop: Platform.OS === 'ios' ? 40 : 35,
         alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
@@ -201,7 +206,8 @@ const styles = StyleSheet.create({
     listView: {
         paddingLeft: 5,
         paddingRight: 5,
-        paddingBottom: 2
+        paddingTop: 5,
+        paddingBottom: 20
     },
     moredetail: {
         fontSize: 14,
@@ -213,7 +219,7 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline'
     },
     titleText: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'normal',
         color: 'white',
         textAlign: 'center',

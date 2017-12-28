@@ -109,12 +109,9 @@ export default class NewDetail extends Component {
                     ]}
                 />
 
-                <Image source={require('./assets/images/banner.png')}
-                    style={styles.logo} />
-
                 <View style={styles.listView}>
                     <ScrollView style={{
-                        height: Platform.OS == 'ios' ? height - 165 : height - 170,
+                        height: height - 65,
                         width: "100%"
                     }}>
                         <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
@@ -142,7 +139,7 @@ export default class NewDetail extends Component {
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 10 }}>
                             <Icons
                                 name="access-time"
                                 size={15}
@@ -168,7 +165,7 @@ const styles = StyleSheet.create({
         flex: 1,
         //justifyContent: 'center',
         //alignItems: 'center',
-        backgroundColor: Color.BROWN[400],
+        backgroundColor: Color.BROWN[500],
     },
     logo: {
         height: 100,
@@ -177,14 +174,14 @@ const styles = StyleSheet.create({
     listView: {
         paddingLeft: 5,
         paddingRight: 5,
-        paddingTop: 5,
     },
     title: {
-        fontSize: 16,
-        fontWeight: 'bold',
+        fontSize: 24,
         color: 'white',
         textAlign: 'center',
-        fontFamily: 'Times New Roman'
+        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+        paddingBottom: 20,
+        paddingTop: 20
     },
     view: {
         fontSize: 14,
@@ -198,11 +195,18 @@ const styles = StyleSheet.create({
 
 const styless = StyleSheet.create({
     p: {
-        fontSize: 15,
+        fontSize: 18,
         fontWeight: 'normal',
         color: 'white',
         textAlign: 'left',
         fontFamily: 'Times New Roman',
-        margin: 0
+        paddingHorizontal: 5
+    },
+    a: {
+        fontSize: 18,
+        fontWeight: 'normal',
+        color: '#FFFF66',
+        textAlign: 'left',
+        fontFamily: 'Times New Roman'
     },
 });

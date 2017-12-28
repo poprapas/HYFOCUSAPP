@@ -45,14 +45,9 @@ export default class RoomDetail extends Component {
                     ]}
                 />
 
-                <View style={{ paddingBottom: 5 }}>
-                    <Image source={require('./assets/images/banner.png')}
-                        style={styles.logo} />
-                </View>
-
                 <View style={styles.listView}>
                     <ScrollView style={{
-                        height: Platform.OS == 'ios' ? height - 165 : height - 170,
+                        height: height - 50,
                         width: "100%",
                     }}>
 
@@ -98,118 +93,120 @@ export default class RoomDetail extends Component {
 
                         </Carousel>
 
-                        <Text style={styles.property}> {this.props.navigation.state.params.property} </Text>
+                        <View style={{ padding: 10 }}>
+                            <Text style={styles.property}> {this.props.navigation.state.params.property} </Text>
 
-                        <Text style={styles.topic1}>  สถานะ  </Text>
+                            <Text style={styles.topic1}>  สถานะ  </Text>
 
-                        <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                            <Text style={styles.topic}>  ความเป็นเจ้าของ : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.owner} </Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                            <Text style={styles.topic}>  ประเภท : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.type} </Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                            <Text style={styles.topic}>  ห้องนอน : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.bedroom} </Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                            <Text style={styles.topic}>  ห้องน้ำ : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.bathroom} </Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                            <Text style={styles.topic}>  เฟอร์นิเจอร์ : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.furni} </Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                            <Text style={styles.topic}>  สถานะทรัพย์สิน : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.status} </Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                            <Text style={styles.topic}>  ราคา : </Text>
-                            <Text style={styles.price}>{this.props.navigation.state.params.price} </Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                            <Text style={styles.topic}>  มัดจำ : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.deposit == "" ? '-' : this.props.navigation.state.params.deposit} </Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                            <Text style={styles.topic2}>  สิ่งอำนวยความสะดวก : </Text>
-                            <View>
-                                {this.props.navigation.state.params.feature.map((prop, key) => {
-                                    return (
-                                        <View key={key}>
-                                            <Text style={styles.feature}>{this.props.navigation.state.params.feature[key]} </Text>
-                                        </View>
-                                    )
-                                })
-                                }
+                            <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                                <Text style={styles.topic}>  ความเป็นเจ้าของ : </Text>
+                                <Text style={styles.detail}>{this.props.navigation.state.params.owner} </Text>
                             </View>
-                        </View>
 
-                        <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                            <Text style={styles.topic3}>  การบริการ : </Text>
-                            <View>
-                                {this.props.navigation.state.params.service.map((prop, key) => {
-                                    return (
-                                        <View key={key}>
-                                            <Text style={styles.service}>{this.props.navigation.state.params.service[key]} </Text>
-                                        </View>
-                                    )
-                                })
-                                }
+                            <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                                <Text style={styles.topic}>  ประเภท : </Text>
+                                <Text style={styles.detail}>{this.props.navigation.state.params.type} </Text>
                             </View>
-                        </View>
 
-                        <View style={{ marginTop: 5 }}>
-                            <Text style={styles.topic2}>  รายละเอียดเพิ่มเติม : </Text>
-                            <HTMLView
-                                value={this.props.navigation.state.params.descript.replace(/\r\n/g, '').replace(/&nbsp;/g, '')}
-                                stylesheet={styless}
-                            />
-                        </View>
+                            <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                                <Text style={styles.topic}>  ห้องนอน : </Text>
+                                <Text style={styles.detail}>{this.props.navigation.state.params.bedroom} </Text>
+                            </View>
 
-                        {this.props.navigation.state.params.latitude ?
+                            <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                                <Text style={styles.topic}>  ห้องน้ำ : </Text>
+                                <Text style={styles.detail}>{this.props.navigation.state.params.bathroom} </Text>
+                            </View>
 
-                            <MapView
-                                provider={PROVIDER_GOOGLE}
-                                style={styles.map}
-                                initialRegion={{
-                                    latitude: parseFloat(this.props.navigation.state.params.latitude),
-                                    longitude: parseFloat(this.props.navigation.state.params.longitude),
-                                    latitudeDelta: 0.01,
-                                    longitudeDelta: 0.01,
-                                }}
-                            >
-                                <MapView.Marker coordinate={{
-                                    latitude: parseFloat(this.props.navigation.state.params.latitude),
-                                    longitude: parseFloat(this.props.navigation.state.params.longitude),
-                                }}
+                            <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                                <Text style={styles.topic}>  เฟอร์นิเจอร์ : </Text>
+                                <Text style={styles.detail}>{this.props.navigation.state.params.furni} </Text>
+                            </View>
+
+                            <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                                <Text style={styles.topic}>  สถานะทรัพย์สิน : </Text>
+                                <Text style={styles.detail}>{this.props.navigation.state.params.status} </Text>
+                            </View>
+
+                            <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                                <Text style={styles.topic}>  ราคา : </Text>
+                                <Text style={styles.price}>{this.props.navigation.state.params.price} </Text>
+                            </View>
+
+                            <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                                <Text style={styles.topic}>  มัดจำ : </Text>
+                                <Text style={styles.detail}>{this.props.navigation.state.params.deposit == "" ? '-' : this.props.navigation.state.params.deposit} </Text>
+                            </View>
+
+                            <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                                <Text style={styles.topic2}>  สิ่งอำนวยความสะดวก : </Text>
+                                <View>
+                                    {this.props.navigation.state.params.feature.map((prop, key) => {
+                                        return (
+                                            <View key={key}>
+                                                <Text style={styles.feature}>{this.props.navigation.state.params.feature[key]} </Text>
+                                            </View>
+                                        )
+                                    })
+                                    }
+                                </View>
+                            </View>
+
+                            <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                                <Text style={styles.topic3}>  การบริการ : </Text>
+                                <View>
+                                    {this.props.navigation.state.params.service.map((prop, key) => {
+                                        return (
+                                            <View key={key}>
+                                                <Text style={styles.service}>{this.props.navigation.state.params.service[key]} </Text>
+                                            </View>
+                                        )
+                                    })
+                                    }
+                                </View>
+                            </View>
+
+                            <View style={{ marginTop: 5 }}>
+                                <Text style={styles.topic2}>  รายละเอียดเพิ่มเติม : </Text>
+                                <HTMLView
+                                    value={this.props.navigation.state.params.descript.replace(/\r\n/g, '').replace(/&nbsp;/g, '')}
+                                    stylesheet={styless}
                                 />
-                            </MapView>
-                            : null
-                        }
-                        <Text />
+                            </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                            <Icons
-                                name="access-time"
-                                size={15}
-                                color='black'
-                                style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
-                            />
-                            <Text style={styles.date}>
-                                {this.props.navigation.state.params.date}
-                            </Text>
+                            {this.props.navigation.state.params.latitude ?
+
+                                <MapView
+                                    provider={PROVIDER_GOOGLE}
+                                    style={styles.map}
+                                    initialRegion={{
+                                        latitude: parseFloat(this.props.navigation.state.params.latitude),
+                                        longitude: parseFloat(this.props.navigation.state.params.longitude),
+                                        latitudeDelta: 0.01,
+                                        longitudeDelta: 0.01,
+                                    }}
+                                >
+                                    <MapView.Marker coordinate={{
+                                        latitude: parseFloat(this.props.navigation.state.params.latitude),
+                                        longitude: parseFloat(this.props.navigation.state.params.longitude),
+                                    }}
+                                    />
+                                </MapView>
+                                : null
+                            }
+                            <Text />
+
+                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 10 }}>
+                                <Icons
+                                    name="access-time"
+                                    size={15}
+                                    color='black'
+                                    style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
+                                />
+                                <Text style={styles.date}>
+                                    {this.props.navigation.state.params.date}
+                                </Text>
+                            </View>
                         </View>
 
                     </ScrollView>
@@ -223,55 +220,51 @@ export default class RoomDetail extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //justifyContent: 'center',
-        //alignItems: 'center',
-        backgroundColor: Color.BROWN[400],
+        backgroundColor: 'white',
         ...StyleSheet.absoluteFillObject,
     },
     logo: {
         height: 100,
         width: 150,
     },
-
     listView: {
-        backgroundColor: 'white',
         width: width,
     },
     property: {
-        fontSize: 18,
+        fontSize: 22,
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'center',
     },
     topic1: {
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'left',
     },
     topic: {
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'left',
-        width: 120,
+        width: 140,
     },
     topic2: {
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'left',
-        width: 150,
+        width: 180,
     },
     topic3: {
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'left',
-        width: 85,
+        width: 100,
     },
     detail: {
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
@@ -283,7 +276,7 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         color: '#ff0000',
         textAlign: 'left',
-        width: width - 120,
+        width: width - 140,
         paddingLeft: 10,
     },
     date: {
@@ -298,14 +291,14 @@ const styles = StyleSheet.create({
         width: width,
     },
     feature: {
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
         paddingLeft: 5,
     },
     service: {
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
@@ -319,7 +312,7 @@ const styles = StyleSheet.create({
 
 const styless = StyleSheet.create({
     p: {
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',

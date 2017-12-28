@@ -77,10 +77,13 @@ const AppNavigator = TabNavigator({
                 indicatorStyle: { backgroundColor: '#ffffff' },
                 style: {
                     backgroundColor: 'black'
+                    
                 }
             }
                 :
-                {}
+                {style: { backgroundColor: 'black' },
+                activeTintColor: 'white',
+                inactiveTintColor: '#a0a0a0',}
     });
 
 export default AppNavigator

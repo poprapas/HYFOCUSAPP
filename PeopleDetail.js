@@ -10,6 +10,7 @@ import {
     ListView,
     Dimensions,
     ScrollView,
+    TouchableOpacity
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
@@ -68,8 +69,12 @@ export default class PeopleDetail extends Component {
                 />
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Image source={require('./assets/images/banner.png')}
-                        style={styles.logo} />
+
+                    <TouchableOpacity onPress={() => navigate('Tab')}>
+                        <Image source={require('./assets/images/banner.png')}
+                            style={styles.logo} />
+                    </TouchableOpacity>
+
                     <View style={{ flex: 1 }}>
                         <Text style={styles.peoplefont}> ---- วิถีชีวิต ---- </Text>
                     </View>
@@ -81,14 +86,14 @@ export default class PeopleDetail extends Component {
                         width: "100%"
                     }}>
                         <View style={{ alignItems: 'center' }}>
-                        <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
+                            <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                             <Image source={{ uri: this.props.navigation.state.params.image }}
                                 style={{
                                     width: width - 150,
                                     height: (width - 10) * 0.8
                                 }} />
                         </View>
-                        <Text/>
+                        <Text />
                         <HTMLView
                             value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}
@@ -106,7 +111,7 @@ export default class PeopleDetail extends Component {
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 10 }}>
                             <Icons
                                 name="access-time"
                                 size={15}
@@ -140,7 +145,7 @@ const styles = StyleSheet.create({
     },
     peoplefont: {
         fontSize: width * 0.07,
-        paddingTop: 35,
+        paddingTop: Platform.OS === 'ios' ? 40 : 35,
         alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
@@ -148,14 +153,15 @@ const styles = StyleSheet.create({
     listView: {
         paddingLeft: 5,
         paddingRight: 5,
-        paddingTop: 5,
+        paddingTop: 2,
     },
     title: {
-        fontSize: 16,
-        fontWeight: 'bold',
+        fontSize: 20,
         color: 'white',
         textAlign: 'center',
-        fontFamily: 'Times New Roman'
+        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+        paddingTop: 10,
+        paddingBottom: 10
     },
     view: {
         fontSize: 14,
@@ -170,11 +176,19 @@ const styles = StyleSheet.create({
 
 const styless = StyleSheet.create({
     p: {
-        fontSize: 15,
+        fontSize: 18,
         fontWeight: 'normal',
         color: 'white',
         textAlign: 'left',
+        fontFamily: 'Times New Roman',
+        paddingHorizontal: 5,
+    },
+    a: {
+        fontSize: 18,
+        fontWeight: 'normal',
+        color: '#FFFF66',
+        textAlign: 'left',
         fontFamily: 'Times New Roman'
-    }
+    },
 });
 

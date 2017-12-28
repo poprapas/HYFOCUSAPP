@@ -133,8 +133,11 @@ export default class Hotel extends Component {
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
 
-                    <Image source={require('./assets/images/banner.png')}
-                        style={styles.logo} />
+                    <TouchableOpacity onPress={() => navigate('Tab')}>
+                        <Image source={require('./assets/images/banner.png')}
+                            style={styles.logo} />
+                    </TouchableOpacity>
+
                     <View style={{ flex: 1 }}>
                         <Text style={styles.roomfont}> ---- Hotel ---- </Text>
                     </View>
@@ -195,7 +198,7 @@ export default class Hotel extends Component {
                                         flex: 0.35,
                                     }}
                                     >
-                                        <Text numberOfLines = {1} style={styles.titleText}> {rowData.PROPERTY} </Text>
+                                        <Text numberOfLines={1} style={styles.titleText}> {rowData.PROPERTY} </Text>
                                         <Text style={styles.titleText2}> ราคา : {rowData.PRICE} </Text>
                                         <Text style={styles.titleText2}> อำเภอ : {rowData.AMPHUR} </Text>
                                         <Text style={styles.titleText2}> จังหวัด  : {rowData.PROVINCE} </Text>
@@ -250,7 +253,7 @@ const styles = StyleSheet.create({
     },
     roomfont: {
         fontSize: width * 0.07,
-        paddingTop: 35,
+        paddingTop: Platform.OS === 'ios' ? 40 : 35,
         alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',

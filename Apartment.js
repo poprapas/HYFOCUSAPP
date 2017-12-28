@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
     },
     roomfont: {
         fontSize: width * 0.06,
-        paddingTop: 35,
+        paddingTop: Platform.OS === 'ios' ? 40 : 35,
         alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
