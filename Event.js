@@ -164,7 +164,8 @@ export default class Event extends Component {
                             <Image source={{ uri: rowData.FEATURE }}
                                 style={{
                                     width: width - 10,
-                                    height: (width - 10) * 0.25
+                                    height: (width - 10) * 0.25,
+                                    backgroundColor: '#6a5750'
                                 }} />
                             <View style={{ paddingTop: 5 }}>
                                 <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>

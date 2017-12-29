@@ -111,7 +111,7 @@ export default class NewDetail extends Component {
 
                 <View style={styles.listView}>
                     <ScrollView style={{
-                        height: height - 65,
+                        height: height - 60,
                         width: "100%"
                     }}>
                         <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
@@ -139,7 +139,7 @@ export default class NewDetail extends Component {
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 10 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 20 }}>
                             <Icons
                                 name="access-time"
                                 size={15}

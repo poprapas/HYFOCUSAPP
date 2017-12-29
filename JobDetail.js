@@ -81,13 +81,13 @@ export default class JobDetail extends Component {
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                            <Text style={styles.topic}> จำนวน : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.rate} ตำแหน่ง </Text>
+                            <Text style={styles.topic3}> จำนวน : </Text>
+                            <Text style={styles.detail2}>{this.props.navigation.state.params.rate} ตำแหน่ง </Text>
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                            <Text style={styles.topic}> เงินเดือน : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.salary == "" ? '-' : this.props.navigation.state.params.salary} </Text>
+                            <Text style={styles.topic3}> เงินเดือน : </Text>
+                            <Text style={styles.detail2}>{this.props.navigation.state.params.salary == "" ? '-' : this.props.navigation.state.params.salary} </Text>
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: 10 }}>
@@ -127,7 +127,7 @@ export default class JobDetail extends Component {
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 10 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 20 }}>
                             <Icons
                                 name="access-time"
                                 size={15}
@@ -181,10 +181,24 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         width: 150,
     },
+    topic3: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#ff0000',
+        textAlign: 'left',
+        width: 110,
+    },
     detail: {
         fontSize: 16,
         fontWeight: 'normal',
         color: 'black',
+        textAlign: 'left',
+        width: width - 110
+    },
+    detail2: {
+        fontSize: 16,
+        fontWeight: 'normal',
+        color: '#ff0000',
         textAlign: 'left',
         width: width - 110
     },

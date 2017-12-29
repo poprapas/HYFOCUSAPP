@@ -280,7 +280,7 @@ export default class Jobs extends Component {
                         style={{
                           width: 100,
                           height: 100,
-                          resizeMode: 'contain'
+                          resizeMode: 'contain',
                         }} />
                     </View>
 
@@ -294,7 +294,7 @@ export default class Jobs extends Component {
                       <Text numberOfLines={1} style={styles.titleText}> ตำแหน่ง : {rowData["​POSITION"]} </Text>
                       <Text style={styles.titleText}> วุฒิการศึกษา : {rowData.CERTIFICATE == "" ? '-' : rowData.CERTIFICATE} </Text>
                       <Text style={styles.titleText}> จังหวัด  : {rowData.PROVINCE} </Text>
-                      <Text style={styles.titleText}> จำนวน : {rowData.RATE} ตำแหน่ง </Text>
+                      <Text style={styles.titleText2}> จำนวน : {rowData.RATE} ตำแหน่ง </Text>
                     </View>
 
                     <View style={{
@@ -339,7 +339,7 @@ const styles = StyleSheet.create({
     flex: 1,
     //justifyContent: 'center',
     //alignItems: 'center',
-    backgroundColor: Color.BROWN[600],
+    backgroundColor: Color.BROWN[800],
   },
   logo: {
     height: 100,
@@ -364,9 +364,17 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
   },
   titleText: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: 'normal',
     color: 'black',
+    textAlign: 'left',
+    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+    paddingTop: Platform.OS == 'ios' ? 5 : 0,
+  },
+  titleText2: {
+    fontSize: 15,
+    fontWeight: 'normal',
+    color: '#ff0000',
     textAlign: 'left',
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     paddingTop: Platform.OS == 'ios' ? 5 : 0,

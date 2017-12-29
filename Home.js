@@ -176,7 +176,7 @@ export default class Home extends Component {
                     style={{
                       width: width - 10,
                       height: (width - 10) * 0.625,
-                      backgroundColor: '#C0C0C0'
+                      backgroundColor: '#6a5750'
                     }}
                   />
                   <View style={{ paddingTop: 5 }}>
@@ -187,95 +187,93 @@ export default class Home extends Component {
               }
             />
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 190 : 130 }}>
-              <Button
-                containerStyle={styles.selectbutton}
-                disabledContainerStyle={{ backgroundColor: 'grey' }}
-                style={styles.button}
-                onPress={() => navigate('NewSport')}>
-                ข่าวกีฬา >
+
+            <Button
+              containerStyle={styles.selectbutton}
+              disabledContainerStyle={{ backgroundColor: 'grey' }}
+              style={styles.button}
+              onPress={() => navigate('NewSport')}>
+              ข่าวกีฬา >
             </Button>
-            </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 120 : 50 }}>
-              <Button
-                containerStyle={styles.selectbutton}
-                disabledContainerStyle={{ backgroundColor: 'grey' }}
-                style={styles.button}
-                onPress={() => navigate('NewSocial')}>
-                ข่าวสังคมและการเมือง >
+
+
+            <Button
+              containerStyle={styles.selectbutton}
+              disabledContainerStyle={{ backgroundColor: 'grey' }}
+              style={styles.button}
+              onPress={() => navigate('NewSocial')}>
+              ข่าวสังคมและการเมือง >
             </Button>
-            </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 160 : 100 }}>
-              <Button
-                containerStyle={styles.selectbutton}
-                disabledContainerStyle={{ backgroundColor: 'grey' }}
-                style={styles.button}
-                onPress={() => navigate('NewEducation')}>
-                ข่าวการศึกษา >
+
+
+            <Button
+              containerStyle={styles.selectbutton}
+              disabledContainerStyle={{ backgroundColor: 'grey' }}
+              style={styles.button}
+              onPress={() => navigate('NewEducation')}>
+              ข่าวการศึกษา >
               </Button>
-            </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 110 : 35 }}>
-              <Button
-                containerStyle={styles.selectbutton}
-                disabledContainerStyle={{ backgroundColor: 'grey' }}
-                style={styles.button}
-                onPress={() => navigate('NewEconomy')}>
-                ข่าวเศรษฐกิจและการเงิน >
+
+
+            <Button
+              containerStyle={styles.selectbutton}
+              disabledContainerStyle={{ backgroundColor: 'grey' }}
+              style={styles.button}
+              onPress={() => navigate('NewEconomy')}>
+              ข่าวเศรษฐกิจและการเงิน >
               </Button>
-            </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 180 : 115 }}>
-              <Button
-                containerStyle={styles.selectbutton}
-                disabledContainerStyle={{ backgroundColor: 'grey' }}
-                style={styles.button}
-                onPress={() => navigate('NewEntertainment')}>
-                ข่าวบันเทิง >
+
+
+            <Button
+              containerStyle={styles.selectbutton}
+              disabledContainerStyle={{ backgroundColor: 'grey' }}
+              style={styles.button}
+              onPress={() => navigate('NewEntertainment')}>
+              ข่าวบันเทิง >
               </Button>
-            </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 150 : 80 }}>
-              <Button
-                containerStyle={styles.selectbutton}
-                disabledContainerStyle={{ backgroundColor: 'grey' }}
-                style={styles.button}
-                onPress={() => navigate('NewCrime')}>
-                ข่าวอาชญากรรม >
+
+            <Button
+              containerStyle={styles.selectbutton}
+              disabledContainerStyle={{ backgroundColor: 'grey' }}
+              style={styles.button}
+              onPress={() => navigate('NewCrime')}>
+              ข่าวอาชญากรรม >
               </Button>
-            </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 70 : 0 }}>
-              <Button
-                containerStyle={styles.selectbutton}
-                disabledContainerStyle={{ backgroundColor: 'grey' }}
-                style={styles.button}
-                onPress={() => navigate('NewScience')}>
-                ข่าววิทยาศาสตร์และสิ่งแวดล้อม >
+
+
+            <Button
+              containerStyle={styles.selectbutton}
+              disabledContainerStyle={{ backgroundColor: 'grey' }}
+              style={styles.button}
+              onPress={() => navigate('NewScience')}>
+              ข่าววิทยาศาสตร์และสิ่งแวดล้อม >
               </Button>
-            </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 60 : -10 }}>
-              <Button
-                containerStyle={styles.selectbutton}
-                disabledContainerStyle={{ backgroundColor: 'grey' }}
-                style={styles.button}
-                onPress={() => navigate('NewAdvertise')}>
-                ข่าวประชาสัมพันธ์และการท่องเที่ยว >
+
+            <Button
+              containerStyle={styles.selectbutton}
+              disabledContainerStyle={{ backgroundColor: 'grey' }}
+              style={styles.button}
+              onPress={() => navigate('NewAdvertise')}>
+              ข่าวประชาสัมพันธ์และการท่องเที่ยว >
             </Button>
-            </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 110 : 40 }}>
-              <Button
-                containerStyle={styles.selectbutton}
-                disabledContainerStyle={{ backgroundColor: 'grey' }}
-                style={styles.button}
-                onPress={() => navigate('NewBusiness')}>
-                ข่าวธุรกิจและเทคโนโลยี >
+
+
+            <Button
+              containerStyle={styles.selectbutton}
+              disabledContainerStyle={{ backgroundColor: 'grey' }}
+              style={styles.button}
+              onPress={() => navigate('NewBusiness')}>
+              ข่าวธุรกิจและเทคโนโลยี >
               </Button>
-            </View>
+
 
             <View style={{ paddingTop: 20, paddingBottom: 30 }}>
               <Carousel
@@ -319,14 +317,14 @@ export default class Home extends Component {
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingBottom: 20 }}>
 
-              <View style={{ backgroundColor: 'white', paddingRight: 1, paddingLeft: 1, paddingTop: 1, paddingBottom: 1 }}>
+              <View style={{ borderColor: 'white', borderWidth: 2 }}>
                 <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%99%E0%B8%95%E0%B9%8C-1380405395370823/')} >
                   <Image source={require('./assets/images/advt_2.jpg')}
                     style={styles.advt_2} />
                 </TouchableOpacity>
               </View>
 
-              <View style={{ backgroundColor: 'white', paddingRight: 1, paddingLeft: 1, paddingTop: 1, paddingBottom: 1 }}>
+              <View style={{ borderColor: 'white', borderWidth: 2 }}>
                 <Image source={require('./assets/images/advt_3.jpg')}
                   style={styles.advt_3} />
               </View>
@@ -394,32 +392,36 @@ const styles = StyleSheet.create({
     width: width,
   },
   advt_2: {
-    height: 120,
-    width: 180,
+    height: (width - 230) * 0.69,
+    width: width - 230,
   },
   advt_3: {
-    height: 120,
-    width: 170,
+    height: (width - 230) * 0.69,
+    width: width - 230,
   },
   advt_4: {
-    height: 38,
+    height: width * 0.1,
     width: width,
   },
   button: {
     fontSize: 14,
     fontWeight: 'normal',
+    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     color: 'white',
     textAlign: 'left',
     padding: 5,
+    marginTop: Platform.OS == 'ios' ? 5 : 0,
   },
   selectbutton: {
     height: 30,
     overflow: 'hidden',
     borderRadius: 5,
-    backgroundColor: 'black',
+    borderWidth: 1,
+    borderColor: '#30231d',
+    backgroundColor: '#795548',
     marginTop: 5,
-    marginLeft: 10,
-    marginRight: 140
+    marginLeft: 15,
+    alignSelf: 'flex-start'
   },
 });
 

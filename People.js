@@ -163,7 +163,8 @@ export default class People extends Component {
                             <Image source={{ uri: rowData.FEATURE }}
                                 style={{
                                     width: width - 150,
-                                    height: (width - 10) * 0.8
+                                    height: (width - 10) * 0.8,
+                                    backgroundColor: '#6a5750'
                                 }}
                             />
                             <View style={{ paddingTop: 5 }}>

@@ -165,7 +165,8 @@ export default class Story extends Component {
                             <Image source={{ uri: rowData.FEATURE }}
                                 style={{
                                     width: width - 10,
-                                    height: (width - 10) * 0.625
+                                    height: (width - 10) * 0.625,
+                                    backgroundColor: '#6a5750'
                                 }}
                             />
                             <View style={{ paddingTop: 5 }}>

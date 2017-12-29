@@ -188,6 +188,7 @@ export default class Resort extends Component {
                                             style={{
                                                 width: 150,
                                                 height: 115,
+                                                backgroundColor: '#6a5750'
                                             }} />
                                     </View>
 
@@ -263,7 +264,7 @@ const styles = StyleSheet.create({
         paddingBottom: 2
     },
     titleText: {
-        fontSize: 15.5,
+        fontSize: 16,
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
@@ -271,7 +272,7 @@ const styles = StyleSheet.create({
         paddingTop: Platform.OS == 'ios' ? 5 : 0,
     },
     titleText2: {
-        fontSize: 14,
+        fontSize: 15,
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
