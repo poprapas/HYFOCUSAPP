@@ -187,7 +187,7 @@ export default class Home extends Component {
               }
             />
 
-            <View style={{ paddingRight: 165 }}>
+            <View style={{ paddingRight: Platform.OS === 'ios' ? 160 : 130 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
