@@ -43,7 +43,6 @@ export default class VideoDetail extends Component {
                 />
             )
         }
-
         if (node.name == 'p' && node.children[0].name == 'iframe') {
             if (node.children[0].attribs.src.slice(0, 2) == '//') {
                 node.children[0].attribs.src = 'https:' + node.children[0].attribs.src
@@ -210,4 +209,11 @@ const styless = StyleSheet.create({
         textAlign: 'left',
         fontFamily: 'Times New Roman'
     },
+    h1: {
+        fontSize: 20,
+        fontWeight: 'normal',
+        color: '#DEB887',
+        textAlign: 'center',
+        fontFamily: 'Times New Roman',
+    }
 });

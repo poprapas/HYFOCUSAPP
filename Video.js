@@ -150,7 +150,7 @@ export default class Video extends Component {
                         </View>
                         <TouchableOpacity
                             key={rowData.id}
-                            onPress={() => navigate('TravelDetail',
+                            onPress={() => navigate('VideoDetail',
                                 {
                                     title: rowData.TOPIC,
                                     image: rowData.FEATURE,
