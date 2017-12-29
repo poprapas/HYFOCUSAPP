@@ -197,7 +197,7 @@ export default class Home extends Component {
             </Button>
             </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 120 : 130 }}>
+            <View style={{ paddingRight: Platform.OS === 'ios' ? 120 : 50 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
@@ -207,7 +207,7 @@ export default class Home extends Component {
             </Button>
             </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 160 : 130 }}>
+            <View style={{ paddingRight: Platform.OS === 'ios' ? 160 : 100 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
@@ -217,7 +217,7 @@ export default class Home extends Component {
               </Button>
             </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 110 : 130 }}>
+            <View style={{ paddingRight: Platform.OS === 'ios' ? 110 : 35 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
@@ -227,7 +227,7 @@ export default class Home extends Component {
               </Button>
             </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 180 : 130 }}>
+            <View style={{ paddingRight: Platform.OS === 'ios' ? 180 : 115 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
@@ -237,7 +237,7 @@ export default class Home extends Component {
               </Button>
             </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 150 : 130 }}>
+            <View style={{ paddingRight: Platform.OS === 'ios' ? 150 : 80 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
@@ -247,7 +247,7 @@ export default class Home extends Component {
               </Button>
             </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 70 : 130 }}>
+            <View style={{ paddingRight: Platform.OS === 'ios' ? 70 : 0 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
@@ -257,7 +257,7 @@ export default class Home extends Component {
               </Button>
             </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 60 : 130 }}>
+            <View style={{ paddingRight: Platform.OS === 'ios' ? 60 : -10 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
@@ -267,7 +267,7 @@ export default class Home extends Component {
             </Button>
             </View>
 
-            <View style={{ paddingRight: Platform.OS === 'ios' ? 110 : 130 }}>
+            <View style={{ paddingRight: Platform.OS === 'ios' ? 110 : 40 }}>
               <Button
                 containerStyle={styles.selectbutton}
                 disabledContainerStyle={{ backgroundColor: 'grey' }}
