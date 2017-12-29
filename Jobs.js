@@ -369,7 +369,7 @@ const styles = StyleSheet.create({
     color: 'black',
     textAlign: 'left',
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    paddingTop: Platform.OS == 'ios' ? 5 : 0,
+    paddingTop: Platform.OS == 'ios' ? 5 : 3,
   },
   titleText2: {
     fontSize: 15,
@@ -377,7 +377,7 @@ const styles = StyleSheet.create({
     color: '#ff0000',
     textAlign: 'left',
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    paddingTop: Platform.OS == 'ios' ? 5 : 0,
+    paddingTop: Platform.OS == 'ios' ? 5 : 3,
   },
   more: {
     fontWeight: 'normal',
