@@ -110,6 +110,14 @@ android {
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
     }
+    signingConfigs {
+        release {
+            storeFile file(HATYAIFOCUS_RELEASE_STORE_FILE)
+            storePassword HATYAIFOCUS_RELEASE_STORE_PASSWORD
+            keyAlias HATYAIFOCUS_RELEASE_KEY_ALIAS
+            keyPassword HATYAIFOCUS_RELEASE_KEY_PASSWORD
+        }
+    }
     splits {
         abi {
             reset()
@@ -122,6 +130,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release

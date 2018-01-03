@@ -46,11 +46,24 @@ export default class JobDetail extends Component {
                 <View style={styles.listView}>
                     <ScrollView style={{
                         height: height - 70,
-                        width: "100%"
+                        width: "100%",
                     }}>
-                        <View style={{ alignItems: 'center', paddingBottom: 5 }}>
+                        <View style={{
+                            marginBottom: 10,
+                            borderWidth: 1,
+                            borderColor: 'black',
+                            borderRadius: 2,
+                            width: 120,
+                            height: 100,
+                            overflow: 'hidden',
+                            alignSelf: 'center'
+                        }}>
                             <Image source={{ uri: this.props.navigation.state.params.image }}
-                                style={{ width: width, height: 100, resizeMode: 'contain' }} />
+                                style={{
+                                    width: 120,
+                                    height: 100,
+                                    resizeMode: 'contain',
+                                }} />
                         </View>
 
                         <Text style={styles.company}> {this.props.navigation.state.params.company} </Text>
@@ -105,9 +118,9 @@ export default class JobDetail extends Component {
                             <Text style={styles.detail}>{this.props.navigation.state.params.sex} </Text>
                         </View>
 
-                        <View style={{ marginTop: 10 }}>
+                        <View style={{ marginTop: 10, marginBottom: 40 }}>
                             <Text style={styles.topic2}> รายละเอียดเพิ่มเติม : </Text>
-                            <View style={{ paddingLeft: 4 }}>
+                            <View style={{ paddingLeft: 4, marginTop: 10 }}>
                                 <HTMLView
                                     value={this.props.navigation.state.params.description.replace(/\r\n/g, '').replace(/&nbsp;/g, '')}
                                     stylesheet={styless}
@@ -152,17 +165,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
     },
-    logo: {
-        height: 100,
-        width: 150,
-    },
-
     listView: {
         padding: 10,
         width: width,
     },
     company: {
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'center',
@@ -193,14 +201,14 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
-        width: width - 110
+        width: width - 120
     },
     detail2: {
         fontSize: 16,
         fontWeight: 'normal',
         color: '#ff0000',
         textAlign: 'left',
-        width: width - 110
+        width: width - 120
     },
     view: {
         fontSize: 14,
@@ -217,5 +225,13 @@ const styless = StyleSheet.create({
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
+        marginBottom: -20
+    }, 
+    strong: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'black',
+        textAlign: 'left',
+        marginBottom: -20
     }
 });

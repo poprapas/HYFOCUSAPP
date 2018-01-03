@@ -98,7 +98,7 @@ export default class TravelDetail extends Component {
                 <View style={{ flexDirection: 'row', paddingBottom: 5, justifyContent: 'space-between' }}>
 
                     <TouchableOpacity onPress={() => navigate('Tab')}>
-                        <Image source={require('./assets/images/banner.png')}
+                        <Image source={require('./assets/images/banner2.jpg')}
                             style={styles.logo} />
                     </TouchableOpacity>
 
@@ -164,12 +164,12 @@ const styles = StyleSheet.create({
         backgroundColor: Color.BROWN[500],
     },
     logo: {
-        height: 100,
+        height: 110,
         width: 150,
     },
     travelfont: {
         fontSize: width * 0.07,
-        paddingTop: Platform.OS === 'ios' ? 40 : 35,
+        paddingTop: Platform.OS === 'ios' ? 45 : 40,
         alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',

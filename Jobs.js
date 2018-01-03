@@ -10,12 +10,15 @@ import {
   Linking,
   ListView,
   ActivityIndicator,
+  Dimensions
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
 import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 //import { Dropdown } from 'react-native-material-dropdown';
+
+const { width, height } = Dimensions.get("window");
 
 export default class Jobs extends Component {
 
@@ -180,8 +183,18 @@ export default class Jobs extends Component {
           ]}
         />
 
-        <Image source={require('./assets/images/banner.png')}
-          style={styles.logo} />
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
+
+          <TouchableOpacity onPress={() => navigate('Tab')}>
+            <Image source={require('./assets/images/banner2.jpg')}
+              style={styles.logo} />
+          </TouchableOpacity>
+
+          <View style={{ flex: 1 }}>
+            <Text style={styles.jobfont}> -- หางานหาดใหญ่ -- </Text>
+          </View>
+
+        </View>
 
         {/* <View style={{ flexDirection: 'row' }}>
           <View style={{ flex: 1, paddingRight: 20, paddingLeft: 10 }}>
@@ -204,7 +217,7 @@ export default class Jobs extends Component {
             />
           </View> */}
 
-        <View style={styles.search}>
+        {/* <View style={styles.search}>
 
           <View style={{ paddingTop: Platform.OS == 'ios' ? 0 : 15, paddingLeft: Platform.OS == 'ios' ? 0 : 5 }}>
             <Icon
@@ -224,10 +237,10 @@ export default class Jobs extends Component {
               onChangeText={(find) => this.findposition(find)}
             />
           </View>
-        </View>
+        </View> */}
         {/* </View> */}
 
-        <View>
+        {/* <View>
           {this.state.findposition.length != 0 && !this.state.found ?
 
             <Text style={{
@@ -237,7 +250,7 @@ export default class Jobs extends Component {
             }}>
               ---- ไม่พบข้อมูล ----
           </Text> : null}
-        </View>
+        </View> */}
 
         <ListView
           dataSource={this.state.dataSource}
@@ -274,8 +287,8 @@ export default class Jobs extends Component {
                     paddingBottom: 2,
                   }}>
 
-                    <View style={{ flex: 0.3 }}>
-                      <Image 
+                    <View style={{ flex: 30 }}>
+                      <Image
                         source={{ uri: rowData.IMG }}
                         style={{
                           width: 100,
@@ -286,13 +299,13 @@ export default class Jobs extends Component {
 
                     <View style={{
                       flexDirection: 'column',
-                      paddingTop: Platform.OS == 'ios' ? 15 : 5,
+                      paddingTop: Platform.OS == 'ios' ? 12 : 5,
                       paddingLeft: 5,
-                      flex: 0.54
+                      flex: 54
                     }}
                     >
                       <Text numberOfLines={1} style={styles.titleText}> ตำแหน่ง : {rowData["​POSITION"]} </Text>
-                      <Text style={styles.titleText}> วุฒิการศึกษา : {rowData.CERTIFICATE == "" ? '-' : rowData.CERTIFICATE} </Text>
+                      <Text numberOfLines={1} style={styles.titleText}> วุฒิการศึกษา : {rowData.CERTIFICATE == "" ? '-' : rowData.CERTIFICATE} </Text>
                       <Text style={styles.titleText}> จังหวัด  : {rowData.PROVINCE} </Text>
                       <Text style={styles.titleText2}> จำนวน : {rowData.RATE} ตำแหน่ง </Text>
                     </View>
@@ -300,7 +313,7 @@ export default class Jobs extends Component {
                     <View style={{
                       paddingLeft: 5,
                       paddingTop: Platform.OS == 'ios' ? 30 : 15,
-                      flex: 0.16,
+                      flex: 16,
                     }}>
 
                       <Text style={styles.more}> > </Text>
@@ -342,8 +355,15 @@ const styles = StyleSheet.create({
     backgroundColor: Color.BROWN[800],
   },
   logo: {
-    height: 100,
+    height: 110,
     width: 150,
+  },
+  jobfont: {
+    fontSize: width * 0.06,
+    paddingTop: Platform.OS === 'ios' ? 45 : 40,
+    alignSelf: 'center',
+    color: 'white',
+    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
   },
   search: {
     flexDirection: 'row',
@@ -369,7 +389,7 @@ const styles = StyleSheet.create({
     color: 'black',
     textAlign: 'left',
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    paddingTop: Platform.OS == 'ios' ? 5 : 0,
+    paddingTop: Platform.OS == 'ios' ? 5 : 2,
   },
   titleText2: {
     fontSize: 15,
@@ -377,7 +397,7 @@ const styles = StyleSheet.create({
     color: '#ff0000',
     textAlign: 'left',
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    paddingTop: Platform.OS == 'ios' ? 5 : 0,
+    paddingTop: Platform.OS == 'ios' ? 5 : 2,
   },
   more: {
     fontWeight: 'normal',

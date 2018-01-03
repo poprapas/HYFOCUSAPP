@@ -166,12 +166,14 @@ export default class RoomDetail extends Component {
                                 </View>
                             </View>
 
-                            <View style={{ marginTop: 5 }}>
+                            <View style={{ marginTop: 5, }}>
                                 <Text style={styles.topic2}>  รายละเอียดเพิ่มเติม : </Text>
-                                <HTMLView
-                                    value={this.props.navigation.state.params.descript.replace(/\r\n/g, '').replace(/&nbsp;/g, '')}
-                                    stylesheet={styless}
-                                />
+                                <View style={{ paddingLeft: 4, marginTop: 10 }}>
+                                    <HTMLView
+                                        value={this.props.navigation.state.params.descript.replace(/\r\n/g, '').replace(/&nbsp;/g, '')}
+                                        stylesheet={styless}
+                                    />
+                                </View>
                             </View>
 
                             {this.props.navigation.state.params.latitude ?
@@ -194,9 +196,8 @@ export default class RoomDetail extends Component {
                                 </MapView>
                                 : null
                             }
-                            <Text />
 
-                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 20 }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 20, paddingTop: 10 }}>
                                 <Icons
                                     name="access-time"
                                     size={15}
@@ -241,6 +242,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'left',
+        paddingTop: 10
     },
     topic: {
         fontSize: 16,
@@ -316,6 +318,7 @@ const styless = StyleSheet.create({
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
-        paddingLeft: 5.
+        paddingLeft: 5,
+        marginBottom: Platform.OS === 'ios' ? -20 : -10,
     }
 });

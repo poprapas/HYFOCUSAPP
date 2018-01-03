@@ -134,7 +134,7 @@ export default class Hotel extends Component {
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
 
                     <TouchableOpacity onPress={() => navigate('Tab')}>
-                        <Image source={require('./assets/images/banner.png')}
+                        <Image source={require('./assets/images/banner2.jpg')}
                             style={styles.logo} />
                     </TouchableOpacity>
 
@@ -183,20 +183,20 @@ export default class Hotel extends Component {
                                     paddingBottom: 2,
                                 }}>
 
-                                    <View style={{ flex: 0.4 }}>
+                                    <View style={{ flex: 5, paddingLeft: 5 }}>
                                         <Image source={{ uri: rowData.GALLERY[0] }}
                                             style={{
-                                                width: 150,
                                                 height: 115,
+                                                resizeMode: 'cover',
                                                 backgroundColor: '#6a5750'
                                             }} />
                                     </View>
 
                                     <View style={{
                                         flexDirection: 'column',
-                                        paddingTop: Platform.OS == 'ios' ? 15 : 10,
+                                        paddingTop: Platform.OS == 'ios' ? 20 : 10,
                                         paddingLeft: 5,
-                                        flex: 0.35,
+                                        flex: 4,
                                     }}
                                     >
                                         <Text numberOfLines={1} style={styles.titleText}> {rowData.PROPERTY} </Text>
@@ -206,8 +206,8 @@ export default class Hotel extends Component {
                                     </View>
 
                                     <View style={{
-                                        paddingTop: Platform.OS == 'ios' ? 40 : 25,
-                                        flex: 0.15,
+                                        paddingTop: Platform.OS == 'ios' ? 45 : 25,
+                                        flex: 1,
                                     }}>
 
                                         <Text style={styles.more}> > </Text>
@@ -249,12 +249,12 @@ const styles = StyleSheet.create({
         backgroundColor: Color.BROWN[800],
     },
     logo: {
-        height: 100,
+        height: 110,
         width: 150,
     },
     roomfont: {
         fontSize: width * 0.07,
-        paddingTop: Platform.OS === 'ios' ? 40 : 35,
+        paddingTop: Platform.OS === 'ios' ? 45 : 40,
         alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     },
     more: {
         fontWeight: 'normal',
-        fontSize: 50,
+        fontSize: 40,
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     }
 });

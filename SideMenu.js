@@ -134,10 +134,10 @@ SideMenu.propTypes = {
 const styles = StyleSheet.create({
   navItemStyle: {
     color: 'white',
-    fontSize: 16,
+    fontSize: Platform.OS == 'ios' ? 20 : 16,
     paddingLeft: 20,
-    paddingTop: Platform.OS == 'ios' ? 15 : 6,
-    paddingBottom: Platform.OS == 'ios' ? 15 : 6,
+    paddingTop: Platform.OS == 'ios' ? 12 : 6,
+    paddingBottom: Platform.OS == 'ios' ? 12 : 6,
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
   },
   navSectionStyle: {
