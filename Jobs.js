@@ -10,7 +10,8 @@ import {
   Linking,
   ListView,
   ActivityIndicator,
-  Dimensions
+  Dimensions,
+  RefreshControl
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
@@ -44,6 +45,7 @@ export default class Jobs extends Component {
       findposition: [],
       find: '',
       found: false,
+      refreshing: false,
     };
   }
 
@@ -107,8 +109,18 @@ export default class Jobs extends Component {
         _data: data,
         _dataAfter: responseJson.data,
         start: 10,
+        refreshing: false,
       });
     });
+  }
+
+  _onRefresh() {
+    if (!this.state.refreshing) {
+      this.setState({
+        refreshing: true,
+        start: 0
+      }, this.componentDidMount)
+    }
   }
 
   findposition(find) {
@@ -141,7 +153,7 @@ export default class Jobs extends Component {
     // ];
     const { navigate, goBack } = this.props.navigation;
 
-    if (this.state.isLoading) {
+    if (this.state.isLoading || this.state.refreshing) {
       return (
         <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
           <ActionBar
@@ -159,6 +171,20 @@ export default class Jobs extends Component {
               },
             ]}
           />
+
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
+
+            <TouchableOpacity onPress={() => navigate('Tab')}>
+              <Image source={require('./assets/images/banner2.jpg')}
+                style={styles.logo} />
+            </TouchableOpacity>
+
+            <View style={{ flex: 1 }}>
+              <Text style={styles.jobfont}> -- หางานหาดใหญ่ -- </Text>
+            </View>
+
+          </View>
+
           <ActivityIndicator style={{ paddingTop: 20 }} />
         </View>
       );
@@ -253,6 +279,12 @@ export default class Jobs extends Component {
         </View> */}
 
         <ListView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}
+            />
+          }
           dataSource={this.state.dataSource}
           renderRow={(rowData, sectionID, rowID) =>
             <View>{this.state.findposition.length == 0 || this.state.findposition[rowID] ?

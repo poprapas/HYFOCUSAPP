@@ -12,7 +12,8 @@ import {
   Linking,
   FlatList,
   Dimensions,
-  StatusBar
+  StatusBar,
+  RefreshControl
 } from 'react-native';
 
 
@@ -35,7 +36,7 @@ export default class Home extends Component {
       isLoading: true,
       drawerClosed: true,
       slide: [],
-
+      refreshing: false,
     }
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -69,7 +70,8 @@ export default class Home extends Component {
             this.setState({
               isLoading: false,
               dataSource: ds.cloneWithRows(responseJson),
-              slide: responseJson2
+              slide: responseJson2,
+              refreshing: false
             }, function () {
               // do something with new state
               StatusBar.setBarStyle('light-content', true);
@@ -79,6 +81,13 @@ export default class Home extends Component {
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  _onRefresh() {
+    if (!this.state.refreshing) {
+      this.setState({ refreshing: true },
+        this.componentDidMount)
+    }
   }
 
   render() {
@@ -138,8 +147,16 @@ export default class Home extends Component {
             ]}
           />
 
-          <ScrollView>
+          <ScrollView
 
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh.bind(this)}
+              />
+            }
+
+          >
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
               <TouchableOpacity onPress={() => navigate('Tab')}>

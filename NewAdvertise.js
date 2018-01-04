@@ -10,7 +10,8 @@ import {
     Linking,
     ListView,
     ActivityIndicator,
-    Dimensions
+    Dimensions,
+    RefreshControl
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
@@ -32,6 +33,7 @@ export default class New extends Component {
             _dataAfter: "",
             start: 0,
             end: false,
+            refreshing: false,
         }
     }
 
@@ -83,21 +85,59 @@ export default class New extends Component {
                 _data: data,
                 _dataAfter: responseJson.data,
                 start: 10,
+                refreshing: false,
             });
         });
     }
 
+    _onRefresh() {
+        if (!this.state.refreshing) {
+            this.setState({
+                refreshing: true,
+                start: 0
+            }, this.componentDidMount)
+        }
+    }
+
     render() {
 
-        if (this.state.isLoading) {
+        const { navigate } = this.props.navigation;
+
+        if (this.state.isLoading || this.state.refreshing) {
             return (
-                <View style={{ flex: 1, paddingTop: 20 }}>
-                    <ActivityIndicator />
+                <View style={{ flex: 1, backgroundColor: Color.BROWN[600] }}>
+                    <ActionBar
+                        containerStyle={styles.bar}
+                        backgroundColor={'black'}
+                        leftIconName={'back'}
+                        onLeftPress={() => navigate('Tab')}
+                        icontitless={"newspaper-o"}
+                        title={'ข่าวประชาสัมพันธ์และการท่องเที่ยว'}
+                        rightIcons={[
+                            {
+                                name: 'facebook',
+                                onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
+                            },
+                        ]}
+                    />
+
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                        <TouchableOpacity onPress={() => navigate('Tab')}>
+                            <Image source={require('./assets/images/banner2.jpg')}
+                                style={styles.logo} />
+                        </TouchableOpacity>
+
+                        <View style={{ flex: 1 }}>
+                            <Text style={styles.bannerfont}> - ข่าวประชาสัมพันธ์และการท่องเที่ยว - </Text>
+                        </View>
+
+                    </View>
+
+                    <ActivityIndicator style={{ paddingTop: 20 }} />
                 </View>
             );
         }
-
-        const { navigate } = this.props.navigation;
 
         return (
             <View style={styles.container}>
@@ -131,6 +171,12 @@ export default class New extends Component {
                 </View>
 
                 <ListView
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={this._onRefresh.bind(this)}
+                        />
+                    }
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) => <View style={styles.listView}>
                         <View style={{ paddingBottom: 5 }}>
