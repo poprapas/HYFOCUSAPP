@@ -308,6 +308,7 @@ export default class Jobs extends Component {
                       description: rowData.DESCRIPTION,
                       date: rowData.DATE,
                       view: rowData.VIEWS,
+                      url: rowData.URL
                     }
                   )}
                 >

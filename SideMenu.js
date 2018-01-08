@@ -11,7 +11,8 @@ import {
   TouchableOpacity,
   Linking,
   Platform,
-  DrawerLayoutAndroid
+  DrawerLayoutAndroid,
+  PlatformIOS
 } from 'react-native';
 
 import DrawerMenuScreen from './DrawerMenuScreen';
@@ -100,12 +101,12 @@ class SideMenu extends Component {
               </Text>
           </View>
 
-          {/* <View style={styles.navSectionStyle}>
+          <View style={styles.navSectionStyle}>
             <Image source={require('./assets/images/about-icon.png')} style={{ height: 25, width: 25 }} />
             <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('About')}>
               เกี่ยวกับเรา
               </Text>
-          </View> */}
+          </View>
 
           {/* <View style={styles.navSectionStyle}>
               <Image source={require('./assets/images/contact-icon.png')} style={{ height: 25, width: 25 }} />
@@ -120,6 +121,14 @@ class SideMenu extends Component {
               เว็บบอร์ด
               </Text>
           </View>
+          {Platform.OS == 'ios' ?
+            <View style={styles.navSectionStyle}>
+              <Icons name="settings" size={25} color='white' />
+              <Text style={styles.navItemStyle} onPress={() => this.navigateToScreen('Setting')}>
+                ตั้งค่า
+              </Text>
+            </View> : null}
+
 
         </View>
       </ScrollView>

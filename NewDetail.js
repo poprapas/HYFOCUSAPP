@@ -12,7 +12,8 @@ import {
     Dimensions,
     WebView,
     FlatList,
-    PixelRatio
+    PixelRatio,
+    Share
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
@@ -103,8 +104,11 @@ export default class NewDetail extends Component {
                     title={this.props.navigation.state.params.type}
                     rightIcons={[
                         {
-                            name: 'facebook',
-                            onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
+                            name: 'share',
+                            onPress: () => Platform.OS == 'ios' ?
+                                Share.share({ url: this.props.navigation.state.params.url})
+                                :
+                                Share.share({ message: this.props.navigation.state.params.url})
                         },
                     ]}
                 />

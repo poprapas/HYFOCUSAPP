@@ -202,6 +202,7 @@ export default class Guesthouse extends Component {
                                         longitude: rowData.LONGITUDE,
                                         date: rowData.DATE,
                                         gallery: rowData.GALLERY,
+                                        url: rowData.URL
 
                                     }
                                 )}

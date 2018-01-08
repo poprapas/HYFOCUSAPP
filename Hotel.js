@@ -203,6 +203,7 @@ export default class Hotel extends Component {
                                         longitude: rowData.LONGITUDE,
                                         date: rowData.DATE,
                                         gallery: rowData.GALLERY,
+                                        url: rowData.URL
 
                                     }
                                 )}

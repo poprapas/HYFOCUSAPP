@@ -204,7 +204,7 @@ export default class Room extends Component {
                                         longitude: rowData.LONGITUDE,
                                         date: rowData.DATE,
                                         gallery: rowData.GALLERY,
-
+                                        url: rowData.URL
                                     }
                                 )}
                             >

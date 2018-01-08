@@ -19,6 +19,7 @@ import Video from './Video';
 import Review from './Review';
 import About from './About';
 import Contact from './Contact';
+import Setting from './Setting';
 
 import SideMenu from './SideMenu';
 
@@ -65,6 +66,10 @@ const DrawerMenuScreen = DrawerNavigator({
 	},
 	Contact: {
 		screen: Contact,
+		
+	},
+	Setting: {
+		screen: Setting,
 		
 	},
 }, {

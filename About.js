@@ -41,11 +41,6 @@ export default class About extends Component {
                     ]}
                 />
 
-                <View style={{ paddingBottom: 10 }}>
-                    <Image source={require('./assets/images/banner.png')}
-                        style={styles.logo} />
-                </View>
-
                 <ScrollView>
                     <View style={styles.about}>
                         <Text style={styles.main}>
@@ -63,140 +58,107 @@ export default class About extends Component {
                         </Text>
 
                         <View style={{ flexDirection: 'row' }}>
-                            <View style={{ width: 110 }}>
-                                <TouchableOpacity onPress={() => navigate('Story')}>
-                                    <Text style={styles.name}> เรื่องราวหาดใหญ่:</Text>
-                                </TouchableOpacity>
-                            </View>
 
-                            <View style={{ width: width - 110, paddingTop: 5 }}>
-                                <Text style={styles.main}>
+                            <TouchableOpacity onPress={() => navigate('Story')}>
+                                <Text style={styles.name}> เรื่องราวหาดใหญ่:</Text>
+                            </TouchableOpacity>
+
+                            <View style={{ paddingTop: 5 }}>
+                                <Text style={styles.detail}>
                                     เป็น Content บอกเล่าเรื่องราวเมืองหาดใหญ่และจังหวัดสงขลา รวมถึงข่าวสารและความรู้ทั่วไป
                                 </Text>
                             </View>
                         </View>
 
                         <View style={{ flexDirection: 'row' }}>
-                            <View style={{ width: 55 }}>
-                                <TouchableOpacity onPress={() => navigate('People')}>
-                                    <Text style={styles.name}> วิถีชีวิต:</Text>
-                                </TouchableOpacity>
-                            </View>
 
-                            <View style={{ width: width - 55, paddingTop: 5 }}>
-                                <Text style={styles.main}>
+                            <TouchableOpacity onPress={() => navigate('People')}>
+                                <Text style={styles.name}> วิถีชีวิต:</Text>
+                            </TouchableOpacity>
+
+                            <View style={{ paddingTop: 5 }}>
+                                <Text style={styles.detail}>
                                     เป็นการถ่ายทอดเรื่องราวผ่านการสัมภาษณ์ชีวิตของบุคคลและอาชีพที่น่าสนใจ
                                 </Text>
                             </View>
                         </View>
 
                         <View style={{ flexDirection: 'row' }}>
-                            <View style={{ width: 105 }}>
-                                <TouchableOpacity onPress={() => navigate('Jobs')}>
-                                    <Text style={styles.name}> หางานหาดใหญ่:</Text>
-                                </TouchableOpacity>
-                            </View>
 
-                            <View style={{ width: width - 105, paddingTop: 5 }}>
-                                <Text style={styles.main}>
+                            <TouchableOpacity onPress={() => navigate('Jobs')}>
+                                <Text style={styles.name}> หางานหาดใหญ่:</Text>
+                            </TouchableOpacity>
+
+                            <View style={{ paddingTop: 5 }}>
+                                <Text style={styles.detail}>
                                     เป็น Platform ค้นหางานและฝากประชาสัมพันธ์หาลูกจ้าง
                                 </Text>
                             </View>
                         </View>
 
                         <View style={{ flexDirection: 'row' }}>
-                            <View style={{ width: 107 }}>
-                                <TouchableOpacity onPress={() => navigate('Eat')}>
-                                    <Text style={styles.name}> ของกินหาดใหญ่:</Text>
-                                </TouchableOpacity>
-                            </View>
 
-                            <View style={{ width: width - 107, paddingTop: 5 }}>
-                                <Text style={styles.main}>
+                            <TouchableOpacity onPress={() => navigate('Eat')}>
+                                <Text style={styles.name}> ของกินหาดใหญ่:</Text>
+                            </TouchableOpacity>
+
+                            <View style={{ paddingTop: 5 }}>
+                                <Text style={styles.detail}>
                                     เป็นการแนะนำที่กิน-ที่เที่ยวที่น่าสนใจรอบๆ ตัวเมืองหาดใหญ่และสงขลา
                                 </Text>
                             </View>
                         </View>
 
                         <View style={{ flexDirection: 'row' }}>
-                            <View style={{ width: 105 }}>
-                                <TouchableOpacity onPress={() => navigate('Event')}>
-                                    <Text style={styles.name}> ไปหม้ายโหม๋เรา:</Text>
-                                </TouchableOpacity>
-                            </View>
 
-                            <View style={{ width: width - 105, paddingTop: 5 }}>
-                                <Text style={styles.main}>
+                            <TouchableOpacity onPress={() => navigate('Event')}>
+                                <Text style={styles.name}> ไปหม้ายโหม๋เรา:</Text>
+                            </TouchableOpacity>
+
+                            <View style={{ paddingTop: 5 }}>
+                                <Text style={styles.detail}>
                                     นำเสนองาน Event ที่น่าสนใจในอำเภอหาดใหญ่และพื้นที่ใกล้เคียง
                                 </Text>
                             </View>
                         </View>
 
                         <View style={{ flexDirection: 'row' }}>
-                            <View style={{ width: 45 }}>
-                                <TouchableOpacity onPress={() => navigate('Video')}>
-                                    <Text style={styles.name}> วิดีโอ:</Text>
-                                </TouchableOpacity>
-                            </View>
+                            <TouchableOpacity onPress={() => navigate('Video')}>
+                                <Text style={styles.name}> วิดีโอ:</Text>
+                            </TouchableOpacity>
 
-                            <View style={{ width: width - 45, paddingTop: 5 }}>
-                                <Text style={styles.main}>
+                            <View style={{ paddingTop: 5 }}>
+                                <Text style={styles.detail}>
                                     วีดีโอแนะนำที่กินและสถานที่ท่องเที่ยว รวมทั้งคลิปวีดีโอที่น่าสนใจรอบโลก
                                 </Text>
                             </View>
                         </View>
 
                         <View style={{ flexDirection: 'row' }}>
-                            <View style={{ width: 70 }}>
-                                <TouchableOpacity onPress={() => Linking.openURL('https://www.hatyaifocus.com/board/forum.php')}>
-                                    <Text style={styles.name}> เว็บบอร์ด:</Text>
-                                </TouchableOpacity>
-                            </View>
 
-                            <View style={{ width: width - 70, paddingTop: 5 }}>
-                                <Text style={styles.main}>
+                            <TouchableOpacity onPress={() => Linking.openURL('https://www.hatyaifocus.com/board/forum.php')}>
+                                <Text style={styles.name}> เว็บบอร์ด:</Text>
+                            </TouchableOpacity>
+
+                            <View style={{ paddingTop: 5 }}>
+                                <Text style={styles.detail}>
                                     บอร์ดกระดานข้อความพูดคุย ข่าวคราวเรื่องราว การซื้อขาย
                                 </Text>
                             </View>
                         </View>
 
                         <View style={{ flexDirection: 'row' }}>
-                            <View style={{ width: 40 }}>
-                                <TouchableOpacity onPress={() => navigate('Review')}>
-                                    <Text style={styles.name}> รีวิว:</Text>
-                                </TouchableOpacity>
-                            </View>
 
-                            <View style={{ width: width - 40, paddingTop: 5 }}>
-                                <Text style={styles.main}>
+                            <TouchableOpacity onPress={() => navigate('Review')}>
+                                <Text style={styles.name}> รีวิว:</Text>
+                            </TouchableOpacity>
+
+                            <View style={{ paddingTop: 5 }}>
+                                <Text style={styles.detail}>
                                     แนะนำสิ่งที่น่าสนใจ ไม่ว่าจะเป็นสินค้า ภาพยนตร์ สถานที่ ของกินต่างๆ
                                 </Text>
                             </View>
                         </View>
-
-                        <View style={{ paddingTop: 5 }}>
-                            <Text style={styles.topic}>
-                                Partner
-                            </Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ width: 120 }}>
-                                <TouchableOpacity onPress={() => navigate('Story')}>
-                                    <Text style={styles.name}> เรื่องราวหาดใหญ่:</Text>
-                                </TouchableOpacity>
-                            </View>
-
-                            <View style={{ width: width - 120, paddingTop: 5 }}>
-                                <Text style={styles.main}>
-                                    เป็น Content บอกเล่าเรื่องราวเมืองหาดใหญ่และจังหวัดสงขลา รวมถึงข่าวสารและความรู้ทั่วไป
-                                </Text>
-                            </View>
-                        </View>
-
-
-
-
 
 
                     </View>
@@ -210,42 +172,46 @@ export default class About extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //justifyContent: 'center',
-        //alignItems: 'center',
-        backgroundColor: Color.BROWN[800],
+        backgroundColor: 'white',
     },
-    logo: {
-        height: 100,
-        width: 150,
-    },
+
     about: {
         paddingTop: 10,
         paddingBottom: 10,
         paddingLeft: 10,
-        paddingRight: 5,
-        backgroundColor: 'white',
+        paddingRight: 5
     },
     main: {
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
         fontFamily: 'Times New Roman',
     },
+    detail: {
+        fontSize: 16,
+        fontWeight: 'normal',
+        color: 'black',
+        textAlign: 'left',
+        fontFamily: 'Times New Roman',
+        width: width - 150
+    },
     topic: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'left',
         fontFamily: 'Times New Roman',
+        paddingTop: 5
     },
     name: {
-        fontSize: 14,
+        fontSize: 16,
         paddingTop: 5,
         fontWeight: 'normal',
         color: '#0066ff',
         textAlign: 'left',
         fontFamily: 'Times New Roman',
-        textDecorationLine: 'underline'
+        textDecorationLine: 'underline',
+        width: 125
     },
 });

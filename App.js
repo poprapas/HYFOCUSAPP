@@ -55,6 +55,7 @@ import Hotel from "./Hotel"
 import Apartment from "./Apartment"
 import Resort from "./Resort"
 import Guesthouse from "./Guesthouse"
+import setting from "./Setting"
 
 const AppNavigator = StackNavigator({
   Tab: { screen: tabNavigator },
@@ -96,6 +97,7 @@ const AppNavigator = StackNavigator({
   Apartment: { screen: Apartment },
   Resort: { screen: Resort },
   Guesthouse: { screen: Guesthouse },
+  Setting: { screen: setting }
 },
   {
     initialRouteName: "Tab",

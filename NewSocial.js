@@ -104,7 +104,7 @@ export default class New extends Component {
 
         if (this.state.isLoading || this.state.refreshing) {
             return (
-                <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
+                <View style={{ flex: 1, backgroundColor: Color.BROWN[600] }}>
                     <ActionBar
                         containerStyle={styles.bar}
                         backgroundColor={'black'}
@@ -190,6 +190,7 @@ export default class New extends Component {
                                     description: rowData.DESCRIPTION,
                                     view: rowData.VIEWS,
                                     date: rowData.DATEIN,
+                                    url: rowData.URL
                                 }
                             )}
                         >

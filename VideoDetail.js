@@ -11,7 +11,8 @@ import {
     Dimensions,
     ScrollView,
     WebView,
-    TouchableOpacity
+    TouchableOpacity,
+    Share
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
@@ -83,9 +84,11 @@ export default class VideoDetail extends Component {
                     title={'วิดีโอ'}
                     rightIcons={[
                         {
-                            name: 'facebook',
-                            onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                            //onPress: () => navigate('Social'),
+                            name: 'share',
+                            onPress: () => Platform.OS == 'ios' ?
+                                Share.share({ url: this.props.navigation.state.params.url})
+                                :
+                                Share.share({ message: this.props.navigation.state.params.url})
                         },
                     ]}
                 />

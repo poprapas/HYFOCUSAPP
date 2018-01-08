@@ -8,6 +8,7 @@ import {
     Linking,
     ScrollView,
     Dimensions,
+    Share
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
@@ -38,9 +39,11 @@ export default class RoomDetail extends Component {
                     title={'ที่พักหาดใหญ่'}
                     rightIcons={[
                         {
-                            name: 'facebook',
-                            onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                            //onPress: () => navigate('Social'),
+                            name: 'share',
+                            onPress: () => Platform.OS == 'ios' ?
+                                Share.share({ url: this.props.navigation.state.params.url})
+                                :
+                                Share.share({ message: this.props.navigation.state.params.url})
                         },
                     ]}
                 />

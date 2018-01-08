@@ -8,6 +8,8 @@ import {
     Linking,
     ScrollView,
     Dimensions,
+    TouchableOpacity,
+    Share
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
@@ -15,10 +17,32 @@ import Color from 'react-native-material-color';
 import HTMLView from 'react-native-htmlview';
 import Icon from 'react-native-vector-icons/dist/Entypo';
 import Icons from 'react-native-vector-icons/dist/MaterialIcons';
+import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
+import Foundation from 'react-native-vector-icons/dist/Foundation';
+import Communications from 'react-native-communications';
 
 const { width, height } = Dimensions.get("window");
 
 export default class JobDetail extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            tel: ''
+        }
+    }
+
+    componentDidMount() {
+        if (['02', '03', '04', '05', '07'].indexOf(this.props.navigation.state.params.tel.replace(/\D/g, '').slice(0, 2)) >= 0) {
+            this.setState({
+                tel: this.props.navigation.state.params.tel.replace(/\D/g, '').slice(0, 9)
+            })
+        }
+        else {
+            this.setState({
+                tel: this.props.navigation.state.params.tel.replace(/\D/g, '').slice(0, 10)
+            })
+        }
+    }
 
     render() {
 
@@ -36,9 +60,11 @@ export default class JobDetail extends Component {
                     title={'หางานหาดใหญ่'}
                     rightIcons={[
                         {
-                            name: 'facebook',
-                            onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                            //onPress: () => navigate('Social'),
+                            name: 'share',
+                            onPress: () => Platform.OS == 'ios' ?
+                                Share.share({ url: this.props.navigation.state.params.url})
+                                :
+                                Share.share({ message: this.props.navigation.state.params.url})
                         },
                     ]}
                 />
@@ -85,12 +111,55 @@ export default class JobDetail extends Component {
 
                         <View style={{ flexDirection: 'row', marginTop: 10 }}>
                             <Text style={styles.topic}> เบอร์โทร : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.tel} </Text>
+                            <View style={{ width: width - 180, flexDirection: 'row' }}>
+                                <TouchableOpacity onPress={() => Communications.phonecall(this.state.tel, true)}
+                                    style={{
+                                        width: 30,
+                                        height: 20,
+                                        backgroundColor: '#88cc00',
+                                        borderRadius: 10,
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        marginRight: 10
+
+                                    }}
+                                >
+                                    <FontAwesome
+                                        name="phone"
+                                        size={15}
+                                        color='white'
+                                    />
+                                </TouchableOpacity>
+                                <Text style={styles.detail3}>{this.props.navigation.state.params.tel} </Text>
+                            </View>
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: 10 }}>
                             <Text style={styles.topic}> อีเมลล์ : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.email == "" ? '-' : this.props.navigation.state.params.email} </Text>
+                            <View style={{ width: width - 180, flexDirection: 'row' }}>
+                                {this.props.navigation.state.params.email == "" ? null :
+                                    <TouchableOpacity onPress={() => Communications.email([this.props.navigation.state.params.email], null, null, null, null)}
+                                        style={{
+                                            width: 30,
+                                            height: 20,
+                                            backgroundColor: '#00ace6',
+                                            borderRadius: 10,
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            marginRight: 10
+
+                                        }}
+                                    >
+                                        <Foundation
+                                            name="mail"
+                                            size={15}
+                                            color='white'
+                                        />
+                                    </TouchableOpacity>
+                                }
+                                <Text style={styles.detail3}>{this.props.navigation.state.params.email == "" ? '-' : this.props.navigation.state.params.email} </Text>
+                            </View>
+
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: 10 }}>
@@ -122,7 +191,7 @@ export default class JobDetail extends Component {
                             <Text style={styles.topic2}> รายละเอียดเพิ่มเติม : </Text>
                             <View style={{ paddingLeft: 4, marginTop: 10 }}>
                                 <HTMLView
-                                    value={this.props.navigation.state.params.description.replace(/\r\n/g, '').replace(/&nbsp;/g, '')}
+                                    value={this.props.navigation.state.params.description.replace(/\r\n/g, '').replace(/&nbsp;/g, '').replace(/<br \/>/g, '')}
                                     stylesheet={styless}
                                 />
                             </View>
@@ -201,7 +270,7 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
-        width: width - 120
+        width: width - 130
     },
     detail2: {
         fontSize: 16,
@@ -209,6 +278,12 @@ const styles = StyleSheet.create({
         color: '#ff0000',
         textAlign: 'left',
         width: width - 120
+    },
+    detail3: {
+        fontSize: 16,
+        fontWeight: 'normal',
+        color: 'black',
+        textAlign: 'left',
     },
     view: {
         fontSize: 14,
@@ -226,7 +301,7 @@ const styless = StyleSheet.create({
         color: 'black',
         textAlign: 'left',
         marginBottom: -20
-    }, 
+    },
     strong: {
         fontSize: 16,
         fontWeight: 'bold',

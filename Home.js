@@ -13,7 +13,8 @@ import {
   FlatList,
   Dimensions,
   StatusBar,
-  RefreshControl
+  RefreshControl,
+  Animated
 } from 'react-native';
 
 
@@ -37,6 +38,7 @@ export default class Home extends Component {
       drawerClosed: true,
       slide: [],
       refreshing: false,
+      progress: new Animated.Value(0),
     }
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -92,7 +94,7 @@ export default class Home extends Component {
 
   render() {
 
-    if (this.state.isLoading) {
+    if (this.state.isLoading || this.state.refreshing) {
       return (
         <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
           <ActionBar
@@ -109,6 +111,20 @@ export default class Home extends Component {
               },
             ]}
           />
+
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+
+            <TouchableOpacity onPress={() => navigate('Tab')}>
+              <Image source={require('./assets/images/banner2.jpg')}
+                style={styles.logo} />
+            </TouchableOpacity>
+
+            <View style={{ flex: 1 }}>
+              <Text style={styles.newfont}> --- ข่าวล่าสุด --- </Text>
+            </View>
+
+          </View>
+
           <ActivityIndicator style={{ paddingTop: 20 }} />
         </View>
       );
@@ -147,29 +163,27 @@ export default class Home extends Component {
             ]}
           />
 
-          <ScrollView
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
+            <TouchableOpacity onPress={() => navigate('Tab')}>
+              <Image source={require('./assets/images/banner2.jpg')}
+                style={styles.logo} />
+            </TouchableOpacity>
+
+            <View style={{ flex: 1 }}>
+              <Text style={styles.newfont}> --- ข่าวล่าสุด --- </Text>
+            </View>
+
+          </View>
+
+          <ScrollView
             refreshControl={
               <RefreshControl
                 refreshing={this.state.refreshing}
                 onRefresh={this._onRefresh.bind(this)}
               />
             }
-
           >
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-              <TouchableOpacity onPress={() => navigate('Tab')}>
-                <Image source={require('./assets/images/banner2.jpg')}
-                  style={styles.logo} />
-              </TouchableOpacity>
-
-              <View style={{ flex: 1 }}>
-                <Text style={styles.newfont}> --- ข่าวล่าสุด --- </Text>
-              </View>
-
-            </View>
-
             <ListView
               dataSource={this.state.dataSource}
               renderRow={(rowData) => <View style={styles.listView}>
@@ -186,6 +200,7 @@ export default class Home extends Component {
                       description: rowData.DESCRIPTION,
                       view: rowData.VIEWS,
                       date: rowData.DATEIN,
+                      url: rowData.URL
                     }
                   )}
                 >

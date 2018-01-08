@@ -197,7 +197,7 @@ export default class Apartment extends Component {
                                         longitude: rowData.LONGITUDE,
                                         date: rowData.DATE,
                                         gallery: rowData.GALLERY,
-
+                                        url: rowData.URL
                                     }
                                 )}
                             >

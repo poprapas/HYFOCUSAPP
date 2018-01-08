@@ -192,6 +192,7 @@ export default class New extends Component {
                                     description: rowData.DESCRIPTION,
                                     view: rowData.VIEWS,
                                     date: rowData.DATEIN,
+                                    url: rowData.URL
                                 }
                             )}
                         >

@@ -190,6 +190,7 @@ export default class Story extends Component {
                                     description: rowData.DESCRIPTION,
                                     view: rowData.VIEWS,
                                     date: rowData.DATEIN,
+                                    url: rowData.URL
                                 }
                             )}
                         >
