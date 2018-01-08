@@ -14,7 +14,8 @@ import {
   Dimensions,
   StatusBar,
   RefreshControl,
-  Animated
+  Animated,
+  AsyncStorage
 } from 'react-native';
 
 
@@ -27,10 +28,55 @@ import DrawerLayout from 'react-native-drawer-layout';
 import Button from 'react-native-button';
 import SideMenu from "./SideMenu";
 import Carousel from 'react-native-looped-carousel';
+import PushNotification from 'react-native-push-notification';
 
 const { width, height } = Dimensions.get("window");
 
 export default class Home extends Component {
+
+  _notificationAndroid(_this) {
+    let notificationTime = new Date();
+    if (notificationTime.getHours() < 18) {
+      notificationTime.setHours(18);
+      notificationTime.setMinutes(0);
+      notificationTime.setSeconds(0);
+      notificationTime.setMilliseconds(0);
+      PushNotification.localNotificationSchedule({
+        id: '14',
+        title: "HatyaiFocus",
+        date: new Date(notificationTime),
+        message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
+        color: '#a6ff00',
+        repeatType: 'day',
+      });
+    }
+  }
+  _notificationiOS(_this) {
+    PushNotification.configure({
+      permissions: {
+        alert: true,
+        badge: true,
+        sound: true
+      },
+      popInitialNotification: true,
+      requestPermissions: true,
+    });
+    let notificationTime = new Date();
+    // AsyncStorage.getItem('notificationDate').then((date) => {
+    //   if (date == null || notificationTime.toISOString().slice(0, 10) != date) {
+        notificationTime.setHours(18);
+        notificationTime.setMinutes(6);
+        notificationTime.setSeconds(0);
+        notificationTime.setMilliseconds(0);
+        PushNotification.localNotificationSchedule({
+          date: new Date(Date.now() + 5000),
+          message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
+        });
+      //   AsyncStorage.setItem('notificationDate', notificationTime.toISOString().slice(0, 10))
+      // }
+    // })
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -61,6 +107,13 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
+
+    if (Platform.OS == 'ios') {
+      this._notificationiOS(this);
+    } else {
+      this._notificationAndroid(this);
+    }
+
     return fetch('https://www.hatyaifocus.com/rest/api.php?action=news&cat=&start=0&per_page=10')
       .then((response) => response.json())
       .then((responseJson) => {
