@@ -42,7 +42,7 @@ export default class Home extends Component {
       notificationTime.setSeconds(0);
       notificationTime.setMilliseconds(0);
       PushNotification.localNotificationSchedule({
-        id: '14',
+        id: '1',
         title: "HatyaiFocus",
         date: new Date(notificationTime),
         message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
@@ -62,19 +62,19 @@ export default class Home extends Component {
       requestPermissions: true,
     });
     let notificationTime = new Date();
-    // AsyncStorage.getItem('notificationDate').then((date) => {
-    //   if (date == null || notificationTime.toISOString().slice(0, 10) != date) {
+    AsyncStorage.getItem('notificationDate').then((date) => {
+      if (date == null || notificationTime.toISOString().slice(0, 10) != date) {
         notificationTime.setHours(18);
-        notificationTime.setMinutes(6);
+        notificationTime.setMinutes(0);
         notificationTime.setSeconds(0);
         notificationTime.setMilliseconds(0);
         PushNotification.localNotificationSchedule({
           date: new Date(Date.now() + 5000),
           message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
         });
-      //   AsyncStorage.setItem('notificationDate', notificationTime.toISOString().slice(0, 10))
-      // }
-    // })
+        AsyncStorage.setItem('notificationDate', notificationTime.toISOString().slice(0, 10))
+      }
+    })
   }
 
   constructor(props) {
