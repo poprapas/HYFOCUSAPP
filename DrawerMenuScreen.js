@@ -23,6 +23,8 @@ import Setting from './Setting';
 
 import SideMenu from './SideMenu';
 
+const { width, height } = Dimensions.get("window");
+
 const DrawerMenuScreen = DrawerNavigator({
 	Story: {
 		screen: Story,

@@ -122,7 +122,7 @@ export default class Hotel extends Component {
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
 
-                        <TouchableOpacity onPress={() => navigate('Tab')}>
+                        <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
                             <Image source={require('./assets/images/banner2.jpg')}
                                 style={styles.logo} />
                         </TouchableOpacity>
@@ -133,7 +133,9 @@ export default class Hotel extends Component {
 
                     </View>
 
-                    <ActivityIndicator style={{ paddingTop: 20 }} />
+                    <ActivityIndicator
+                        style={{ paddingTop: 20 }}
+                        color='#cc9966' />
                 </View>
             );
         }
@@ -159,7 +161,7 @@ export default class Hotel extends Component {
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
 
-                    <TouchableOpacity onPress={() => navigate('Tab')}>
+                    <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
                         <Image source={require('./assets/images/banner2.jpg')}
                             style={styles.logo} />
                     </TouchableOpacity>
@@ -175,6 +177,7 @@ export default class Hotel extends Component {
                         <RefreshControl
                             refreshing={this.state.refreshing}
                             onRefresh={this._onRefresh.bind(this)}
+                            tintColor={'transparent'}
                         />
                     }
                     dataSource={this.state.dataSource}
@@ -227,7 +230,7 @@ export default class Hotel extends Component {
 
                                     <View style={{
                                         flexDirection: 'column',
-                                        paddingTop: Platform.OS == 'ios' ? 20 : 10,
+                                        paddingTop: 12,
                                         paddingLeft: 5,
                                         flex: 4,
                                     }}
@@ -302,7 +305,7 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'left',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        paddingTop: Platform.OS == 'ios' ? 5 : 0,
+        paddingTop: Platform.OS == 'ios' ? 8 : 0,
     },
     titleText2: {
         fontSize: 15,
@@ -310,7 +313,7 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'left',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        paddingTop: Platform.OS == 'ios' ? 5 : 0,
+        paddingTop: Platform.OS == 'ios' ? 8 : 0,
     },
     more: {
         fontWeight: 'normal',

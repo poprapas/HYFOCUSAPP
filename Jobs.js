@@ -174,7 +174,7 @@ export default class Jobs extends Component {
 
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
 
-            <TouchableOpacity onPress={() => navigate('Tab')}>
+            <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
               <Image source={require('./assets/images/banner2.jpg')}
                 style={styles.logo} />
             </TouchableOpacity>
@@ -211,7 +211,7 @@ export default class Jobs extends Component {
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
 
-          <TouchableOpacity onPress={() => navigate('Tab')}>
+          <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
             <Image source={require('./assets/images/banner2.jpg')}
               style={styles.logo} />
           </TouchableOpacity>

@@ -20,7 +20,6 @@ import {
 
 
 import Color from 'react-native-material-color';
-import { StackNavigator } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ActionBar from 'react-native-action-bar';
@@ -62,6 +61,7 @@ export default class Home extends Component {
       requestPermissions: true,
     });
     let notificationTime = new Date();
+    //AsyncStorage.clear()
     AsyncStorage.getItem('notificationDate').then((date) => {
       if (date == null || notificationTime.toISOString().slice(0, 10) != date) {
         notificationTime.setHours(18);
@@ -69,8 +69,9 @@ export default class Home extends Component {
         notificationTime.setSeconds(0);
         notificationTime.setMilliseconds(0);
         PushNotification.localNotificationSchedule({
-          date: new Date(Date.now() + 5000),
+          date: new Date(notificationTime),
           message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
+          foreground: true,
         });
         AsyncStorage.setItem('notificationDate', notificationTime.toISOString().slice(0, 10))
       }
@@ -108,6 +109,9 @@ export default class Home extends Component {
 
   componentDidMount() {
 
+    global.state = []
+
+
     if (Platform.OS == 'ios') {
       this._notificationiOS(this);
     } else {
@@ -117,7 +121,7 @@ export default class Home extends Component {
     return fetch('https://www.hatyaifocus.com/rest/api.php?action=news&cat=&start=0&per_page=10')
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson)
+        //console.log(responseJson)
         let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         fetch('https://www.hatyaifocus.com/rest/api.php?action=slider')
           .then((response2) => response2.json())
@@ -150,36 +154,54 @@ export default class Home extends Component {
     if (this.state.isLoading || this.state.refreshing) {
       return (
         <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
-          <ActionBar
-            containerStyle={styles.bar}
-            backgroundColor={'black'}
-            leftIconName={'menu'}
-            icontitle={require('./assets/images/home-icon.png')}
-            title={'หน้าแรก'}
-            rightIcons={[
-              {
-                name: 'facebook',
-                onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                //onPress: () => navigate('Social'),
-              },
-            ]}
-          />
 
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <DrawerLayout
+            drawerWidth={300}
+            ref={drawerElement => {
+              this.DRAWER = drawerElement;
+            }}
 
-            <TouchableOpacity onPress={() => navigate('Tab')}>
-              <Image source={require('./assets/images/banner2.jpg')}
-                style={styles.logo} />
-            </TouchableOpacity>
+            drawerPosition={DrawerLayout.positions.Left}
+            onDrawerOpen={this.setDrawerState}
+            onDrawerClose={this.setDrawerState}
+            renderNavigationView={() => <SideMenu {...this.props} />}
+          >
 
-            <View style={{ flex: 1 }}>
-              <Text style={styles.newfont}> --- ข่าวล่าสุด --- </Text>
+            <ActionBar
+              containerStyle={styles.bar}
+              backgroundColor={'black'}
+              leftIconName={'menu'}
+              onLeftPress={this.toggleDrawer}
+              icontitle={require('./assets/images/home-icon.png')}
+              title={'หน้าแรก'}
+              rightIcons={[
+                {
+                  name: 'facebook',
+                  onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
+                  //onPress: () => navigate('Social'),
+                },
+              ]}
+            />
+
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+
+              <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
+                <Image source={require('./assets/images/banner2.jpg')}
+                  style={styles.logo} />
+              </TouchableOpacity>
+
+              <View style={{ flex: 1 }}>
+                <Text style={styles.newfont}> --- ข่าวล่าสุด --- </Text>
+              </View>
+
             </View>
 
-          </View>
-
-          <ActivityIndicator style={{ paddingTop: 20 }} />
+            <ActivityIndicator
+              style={{ paddingTop: 20 }}
+              color='#cc9966' />
+          </DrawerLayout>
         </View>
+
       );
     }
 
@@ -189,7 +211,7 @@ export default class Home extends Component {
 
       <View style={styles.container} >
         <DrawerLayout
-          drawerWidth={260}
+          drawerWidth={300}
           ref={drawerElement => {
             this.DRAWER = drawerElement;
           }}
@@ -234,6 +256,7 @@ export default class Home extends Component {
               <RefreshControl
                 refreshing={this.state.refreshing}
                 onRefresh={this._onRefresh.bind(this)}
+                tintColor={'transparent'}
               />
             }
           >
@@ -271,94 +294,6 @@ export default class Home extends Component {
               </View>
               }
             />
-
-
-            <Button
-              containerStyle={styles.selectbutton}
-              disabledContainerStyle={{ backgroundColor: 'grey' }}
-              style={styles.button}
-              onPress={() => navigate('NewSport')}>
-              ข่าวกีฬา >
-            </Button>
-
-
-
-            <Button
-              containerStyle={styles.selectbutton}
-              disabledContainerStyle={{ backgroundColor: 'grey' }}
-              style={styles.button}
-              onPress={() => navigate('NewSocial')}>
-              ข่าวสังคมและการเมือง >
-            </Button>
-
-
-
-            <Button
-              containerStyle={styles.selectbutton}
-              disabledContainerStyle={{ backgroundColor: 'grey' }}
-              style={styles.button}
-              onPress={() => navigate('NewEducation')}>
-              ข่าวการศึกษา >
-              </Button>
-
-
-
-            <Button
-              containerStyle={styles.selectbutton}
-              disabledContainerStyle={{ backgroundColor: 'grey' }}
-              style={styles.button}
-              onPress={() => navigate('NewEconomy')}>
-              ข่าวเศรษฐกิจและการเงิน >
-              </Button>
-
-
-
-            <Button
-              containerStyle={styles.selectbutton}
-              disabledContainerStyle={{ backgroundColor: 'grey' }}
-              style={styles.button}
-              onPress={() => navigate('NewEntertainment')}>
-              ข่าวบันเทิง >
-              </Button>
-
-
-            <Button
-              containerStyle={styles.selectbutton}
-              disabledContainerStyle={{ backgroundColor: 'grey' }}
-              style={styles.button}
-              onPress={() => navigate('NewCrime')}>
-              ข่าวอาชญากรรม >
-              </Button>
-
-
-
-            <Button
-              containerStyle={styles.selectbutton}
-              disabledContainerStyle={{ backgroundColor: 'grey' }}
-              style={styles.button}
-              onPress={() => navigate('NewScience')}>
-              ข่าววิทยาศาสตร์และสิ่งแวดล้อม >
-              </Button>
-
-
-            <Button
-              containerStyle={styles.selectbutton}
-              disabledContainerStyle={{ backgroundColor: 'grey' }}
-              style={styles.button}
-              onPress={() => navigate('NewAdvertise')}>
-              ข่าวประชาสัมพันธ์และการท่องเที่ยว >
-            </Button>
-
-
-
-            <Button
-              containerStyle={styles.selectbutton}
-              disabledContainerStyle={{ backgroundColor: 'grey' }}
-              style={styles.button}
-              onPress={() => navigate('NewBusiness')}>
-              ข่าวธุรกิจและเทคโนโลยี >
-              </Button>
-
 
             <View style={{ paddingTop: 20, paddingBottom: 30 }}>
               <Carousel
@@ -489,12 +424,14 @@ const styles = StyleSheet.create({
     width: width,
   },
   button: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: 'normal',
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     color: 'white',
     textAlign: 'left',
-    padding: 5,
+    paddingLeft: 5,
+    paddingRight: 5,
+    paddingTop: Platform.OS == 'ios' ? 7.5 : 5,
     marginTop: Platform.OS == 'ios' ? 5 : 0,
   },
   selectbutton: {

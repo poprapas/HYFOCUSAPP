@@ -107,7 +107,7 @@ export default class Story extends Component {
                     <ActionBar
                         containerStyle={styles.bar}
                         backgroundColor={'black'}
-                        leftIconName={'menu'}
+                        leftIconName={'back'}
                         onLeftPress={() => navigate('Tab')}
                         icontitle={require('./assets/images/story-icon.png')}
                         title={'เรื่องราวหาดใหญ่'}
@@ -122,7 +122,7 @@ export default class Story extends Component {
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
-                        <TouchableOpacity onPress={() => navigate('Tab')}>
+                        <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
                             <Image source={require('./assets/images/banner2.jpg')}
                                 style={styles.logo} />
                         </TouchableOpacity>
@@ -132,7 +132,9 @@ export default class Story extends Component {
                         </View>
                     </View>
 
-                    <ActivityIndicator style={{ paddingTop: 20 }} />
+                    <ActivityIndicator
+                        style={{ paddingTop: 20 }}
+                        color='#cc9966' />
                 </View>
             );
         }
@@ -159,7 +161,7 @@ export default class Story extends Component {
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
-                    <TouchableOpacity onPress={() => navigate('Tab')}>
+                    <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
                         <Image source={require('./assets/images/banner2.jpg')}
                             style={styles.logo} />
                     </TouchableOpacity>
@@ -174,6 +176,7 @@ export default class Story extends Component {
                         <RefreshControl
                             refreshing={this.state.refreshing}
                             onRefresh={this._onRefresh.bind(this)}
+                            tintColor={'transparent'}
                         />
                     }
                     dataSource={this.state.dataSource}

@@ -47,14 +47,14 @@ export default class Contact extends Component {
                         <View style={{ paddingTop: 10 }}>
                             <Text style={styles.titleText}> เปลี่ยนแปลงการแจ้งเตือน </Text>
                         </View>
-                        <View style={{ paddingTop: 5 }}>
+                        <View style={{ paddingTop: 7 }}>
                             <Text style={styles.more}> > </Text>
                         </View>
                     </View>
 
                 </TouchableOpacity>
 
-                <View style={{
+                {/* <View style={{
                     flexDirection: 'row',
                     backgroundColor: 'white',
                     justifyContent: 'space-between',
@@ -65,7 +65,7 @@ export default class Contact extends Component {
                     <View style={{ paddingTop: 5 }}>
                         <Text style={styles.more}> > </Text>
                     </View>
-                </View>
+                </View> */}
 
             </View >
         );

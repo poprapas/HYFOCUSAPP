@@ -107,8 +107,8 @@ export default class Event extends Component {
                     <ActionBar
                         containerStyle={styles.bar}
                         backgroundColor={'black'}
-                        leftIconName={'menu'}
-                        onLeftPress={() => navigate('Tab')}
+                        leftIconName={'back'}
+                        onLeftPress={() => navigate('หน้าแรก')}
                         icontitles={"megaphone"}
                         title={'ไปหม้ายโหม๋เรา'}
                         rightIcons={[
@@ -121,7 +121,7 @@ export default class Event extends Component {
                     />
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
-                        <TouchableOpacity onPress={() => navigate('Tab')}>
+                        <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
                             <Image source={require('./assets/images/banner2.jpg')}
                                 style={styles.logo} />
                         </TouchableOpacity>
@@ -130,8 +130,9 @@ export default class Event extends Component {
                             <Text style={styles.eventfont}> -- ไปหม้ายโหม๋เรา -- </Text>
                         </View>
                     </View>
-
-                    <ActivityIndicator style={{ paddingTop: 20 }} />
+                    <ActivityIndicator
+                        style={{ paddingTop: 20 }}
+                        color='#cc9966' />
                 </View>
             );
         }
@@ -143,7 +144,7 @@ export default class Event extends Component {
                     containerStyle={styles.bar}
                     backgroundColor={'black'}
                     leftIconName={'back'}
-                    onLeftPress={() => navigate('Tab')}
+                    onLeftPress={() => navigate('หน้าแรก')}
                     icontitles={"megaphone"}
                     title={'ไปหม้ายโหม๋เรา'}
                     rightIcons={[
@@ -157,7 +158,7 @@ export default class Event extends Component {
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
-                    <TouchableOpacity onPress={() => navigate('Tab')}>
+                    <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
                         <Image source={require('./assets/images/banner2.jpg')}
                             style={styles.logo} />
                     </TouchableOpacity>
@@ -172,6 +173,7 @@ export default class Event extends Component {
                         <RefreshControl
                             refreshing={this.state.refreshing}
                             onRefresh={this._onRefresh.bind(this)}
+                            tintColor={'transparent'}
                         />
                     }
                     dataSource={this.state.dataSource}

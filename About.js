@@ -29,7 +29,7 @@ export default class About extends Component {
                     containerStyle={styles.bar}
                     backgroundColor={'black'}
                     leftIconName={'back'}
-                    onLeftPress={() => navigate('Tab')}
+                    onLeftPress={() => navigate('หน้าแรก')}
                     icontitle={require('./assets/images/about-icon.png')}
                     title={'เกี่ยวกับเรา'}
                     rightIcons={[
