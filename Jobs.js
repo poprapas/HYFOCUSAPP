@@ -185,7 +185,9 @@ export default class Jobs extends Component {
 
           </View>
 
-          <ActivityIndicator style={{ paddingTop: 20 }} />
+          <ActivityIndicator
+              style={{ paddingTop: 20 }}
+              color='#cc9966' />
         </View>
       );
     }
@@ -283,6 +285,7 @@ export default class Jobs extends Component {
             <RefreshControl
               refreshing={this.state.refreshing}
               onRefresh={this._onRefresh.bind(this)}
+              tintColor={'transparent'}
             />
           }
           dataSource={this.state.dataSource}

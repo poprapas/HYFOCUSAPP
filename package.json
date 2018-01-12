@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
+		"test": "jest",
+		"postinstall": "sed -i '' 's/\\[headers\\[@\"Content-Length\"\\] unsignedIntValue\\]/\\[headers\\[@\"Content-Length\"\\] intValue\\]/' ./node_modules/react-native/React/Base/RCTMultipartStreamReader.m"
 	},
 	"dependencies": {
 		"lottie-react-native": "^2.3.1",

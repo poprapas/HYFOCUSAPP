@@ -58,6 +58,7 @@ import Guesthouse from "./Guesthouse"
 import setting from "./Setting"
 
 const AppNavigator = StackNavigator({
+  
   Tab: { screen: tabNavigator },
   Home: { screen: Home },
   Video: { screen: Video },

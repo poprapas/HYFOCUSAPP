@@ -69,7 +69,7 @@ class SideMenu extends Component {
           {this.state.dropdown ?
             <View style={{ paddingLeft: 30, flex: 1, backgroundColor: '#111111' }}>
 
-              <TouchableOpacity onPress={() => this.navigateToScreen('หน้าแรก')}>
+              <TouchableOpacity onPress={() => this.navigateToScreen('Tab')}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวล่าสุด

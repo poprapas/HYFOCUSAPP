@@ -109,7 +109,7 @@ export default class Apartment extends Component {
                         containerStyle={styles.bar}
                         backgroundColor={'black'}
                         leftIconName={'menu'}
-                        onLeftPress={() => navigate('หน้าแรก')}
+                        onLeftPress={() => navigate('Tab')}
                         icontitle={require('./assets/images/hotel-icon.png')}
                         title={'ที่พักหาดใหญ่'}
                         rightIcons={[
@@ -122,8 +122,10 @@ export default class Apartment extends Component {
                     />
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
 
-                        <Image source={require('./assets/images/banner2.jpg')}
-                            style={styles.logo} />
+                        <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
+                            <Image source={require('./assets/images/banner2.jpg')}
+                                style={styles.logo} />
+                        </TouchableOpacity>
                         <View style={{ flex: 1 }}>
                             <Text style={styles.roomfont}> --- Apartment --- </Text>
                         </View>
@@ -144,7 +146,7 @@ export default class Apartment extends Component {
                     containerStyle={styles.bar}
                     backgroundColor={'black'}
                     leftIconName={'back'}
-                    onLeftPress={() => navigate('หน้าแรก')}
+                    onLeftPress={() => navigate('Tab')}
                     icontitle={require('./assets/images/hotel-icon.png')}
                     title={'ที่พักหาดใหญ่'}
                     rightIcons={[
@@ -162,7 +164,7 @@ export default class Apartment extends Component {
                         <Image source={require('./assets/images/banner2.jpg')}
                             style={styles.logo} />
                     </TouchableOpacity>
-                    
+
                     <View style={{ flex: 1 }}>
                         <Text style={styles.roomfont}> --- Apartment --- </Text>
                     </View>

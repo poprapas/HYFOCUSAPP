@@ -20,12 +20,16 @@ import Review from './Review';
 import About from './About';
 import Contact from './Contact';
 import Setting from './Setting';
+import Home from './Home';
 
 import SideMenu from './SideMenu';
 
 const { width, height } = Dimensions.get("window");
 
 const DrawerMenuScreen = DrawerNavigator({
+	// Home: {
+	// 	screen: Home,
+	// },
 	Story: {
 		screen: Story,
 		

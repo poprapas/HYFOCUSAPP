@@ -55,14 +55,15 @@ export default class RoomDetail extends Component {
                     }}>
 
                         <Carousel
-                            delay={2000}
+                            autoplay
+                            delay={5000}
                             style={{
                                 height: width * 0.62375,
                                 width: width,
                                 borderWidth: 5,
                                 borderColor: 'white',
                             }}
-                            autoplay
+                            //swipe = {false}
                             bullets
                             bulletStyle={{
                                 margin: 3
