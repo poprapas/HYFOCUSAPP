@@ -23,6 +23,18 @@ const { width, height } = Dimensions.get("window");
 
 export default class RoomDetail extends Component {
 
+    _onLayoutDidChange = (e) => {
+        const layout = e.nativeEvent.layout;
+        this.setState({ size: { width: layout.width, height: layout.height } });
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          size: { width, height },
+        }
+    }
+
     render() {
 
         const { navigate, goBack } = this.props.navigation;
@@ -41,9 +53,9 @@ export default class RoomDetail extends Component {
                         {
                             name: 'share',
                             onPress: () => Platform.OS == 'ios' ?
-                                Share.share({ url: this.props.navigation.state.params.url})
+                                Share.share({ url: this.props.navigation.state.params.url })
                                 :
-                                Share.share({ message: this.props.navigation.state.params.url})
+                                Share.share({ message: this.props.navigation.state.params.url })
                         },
                     ]}
                 />
@@ -54,48 +66,48 @@ export default class RoomDetail extends Component {
                         width: "100%",
                     }}>
 
-                        <Carousel
-                            autoplay
-                            delay={5000}
-                            style={{
-                                height: width * 0.62375,
-                                width: width,
-                                borderWidth: 5,
-                                borderColor: 'white',
-                            }}
-                            //swipe = {false}
-                            bullets
-                            bulletStyle={{
-                                margin: 3
-                            }}
-                            chosenBulletStyle={{
-                                margin: 3
-                            }}
-                            arrows
-                            arrowsContainerStyle={{
-                                marginLeft: 5,
-                                marginRight: 5,
-                            }}
-                            leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
-                            rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
-                        >
-                            {this.props.navigation.state.params.gallery.map((prop, key) => {
-                                return (
-                                    <View
-                                        key={key}
-                                        style={{
-                                            backgroundColor: 'white',
-                                            width: width
-                                        }}>
-                                        <Image
-                                            source={{ uri: this.props.navigation.state.params.gallery[key] }}
-                                            style={styles.gallery}
-                                        />
-                                    </View>
-                                )
-                            })}
+                        <View style={{ height: height/4 }}
+                            onLayout={this._onLayoutDidChange}
+                                >
+                                <Carousel
+                                    ref={(elm) => this.carousel = elm}
+                                    autoplay
+                                    delay={5000}
+                                    style = {this.state.size}
+                                    bullets
+                                    bulletStyle={{
+                                        margin: 3
+                                    }}
+                                    chosenBulletStyle={{
+                                        margin: 3
+                                    }}
+                                    arrows
+                                    arrowsContainerStyle={{
+                                        marginLeft: 5,
+                                        marginRight: 5,
+                                    }}
+                                    leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
+                                    rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
+                                >
 
-                        </Carousel>
+                                    {this.props.navigation.state.params.gallery.map((prop, key) => {
+                                        return (
+                                            <View
+                                                key={key.toString()}
+                                                style={{
+                                                    backgroundColor: 'white',
+                                                    width: width
+                                                }}>
+                                                <Image
+                                                    source={{ uri: prop }}
+                                                    style={styles.gallery}
+                                                />
+                                            </View>
+                                        )
+                                    })}
+
+                                </Carousel>
+                        </View>
 
                         <View style={{ padding: 10 }}>
                             <Text style={styles.property}> {this.props.navigation.state.params.property} </Text>
@@ -295,6 +307,7 @@ const styles = StyleSheet.create({
     gallery: {
         height: width * 0.62375,
         width: width,
+        resizeMode: 'cover'
     },
     feature: {
         fontSize: 16,
