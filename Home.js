@@ -15,7 +15,8 @@ import {
   StatusBar,
   RefreshControl,
   Animated,
-  AsyncStorage
+  AsyncStorage,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
 
@@ -78,6 +79,11 @@ export default class Home extends Component {
     })
   }
 
+  _onLayoutDidChange = (e) => {
+    const layout = e.nativeEvent.layout;
+    this.setState({ size: { width: layout.width + 10, height: layout.height } });
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -86,6 +92,7 @@ export default class Home extends Component {
       slide: [],
       refreshing: false,
       progress: new Animated.Value(0),
+      size: { width, height },
     }
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -294,45 +301,48 @@ export default class Home extends Component {
               </View>
               }
             />
-
-            <View style={{ paddingTop: 20, paddingBottom: 30 }}>
-              <Carousel
-                delay={2000}
-                style={{
-                  height: width * 0.526,
-                  width: width,
-                  borderWidth: 5,
-                  borderColor: 'white',
-                }}
-                autoplay
-                bullets
-                arrows
-                arrowsContainerStyle={{
-                  marginLeft: 5,
-                  marginRight: 5,
-                }}
-                leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
-                rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
+            <View style={{ 
+              borderWidth: 5, 
+              borderColor: 'white', 
+              top: 20, 
+              marginBottom: 30, 
+            }}>
+              <View style={{ height: width * 0.526 }}
+                onLayout={this._onLayoutDidChange}
               >
-                {this.state.slide.map((prop, key) => {
-                  return (
-                    <View
-                      key={key}
-                      style={{
-                        backgroundColor: 'white',
-                        width: width,
-                      }}>
-                      <TouchableOpacity onPress={() => Linking.openURL(this.state.slide[key].URL)} >
-                        <Image
-                          source={{ uri: this.state.slide[key].FEATURE }}
-                          style={styles.advt_1}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  )
-                })}
+                <Carousel
+                  delay={2000}
+                  style={this.state.size}
+                  autoplay
+                  bullets
+                  arrows
+                  arrowsContainerStyle={{
+                    marginLeft: 5,
+                    marginRight: 15,
+                  }}
+                  leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
+                  rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
+                >
+                  {this.state.slide.map((prop, key) => {
+                    return (
+                      <View
+                        key={key}
+                        style={{
+                          backgroundColor: 'white',
+                          width: width,
+                        }}>
+                        <TouchableWithoutFeedback onPress={() => Linking.openURL(this.state.slide[key].URL)} >
+                          <Image
+                            source={{ uri: this.state.slide[key].FEATURE }}
+                            style={styles.advt_1}
+                          />
+                        </TouchableWithoutFeedback>
+                      </View>
+                    )
+                  })}
 
-              </Carousel>
+                </Carousel>
+              </View>
             </View>
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingBottom: 20 }}>

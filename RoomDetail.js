@@ -31,7 +31,7 @@ export default class RoomDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          size: { width, height },
+        size: { width, height },
         }
     }
 
@@ -68,9 +68,8 @@ export default class RoomDetail extends Component {
 
                         <View style={{ height: height/4 }}
                             onLayout={this._onLayoutDidChange}
-                                >
+                        >
                                 <Carousel
-                                    ref={(elm) => this.carousel = elm}
                                     autoplay
                                     delay={5000}
                                     style = {this.state.size}
