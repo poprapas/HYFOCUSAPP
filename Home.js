@@ -23,7 +23,7 @@ import {
 import Color from 'react-native-material-color';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import ActionBar from 'react-native-action-bar';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import DrawerLayout from 'react-native-drawer-layout';
 import Button from 'react-native-button';
 import SideMenu from "./SideMenu";
@@ -33,6 +33,53 @@ import PushNotification from 'react-native-push-notification';
 const { width, height } = Dimensions.get("window");
 
 export default class Home extends Component {
+
+  static navigationOptions = ({ navigation }) => ({
+    headerTitle:
+      <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+        <Image
+          source={require('./assets/images/home-icon.png')}
+          style={{
+            width: 20,
+            height: 20,
+            top: Platform.OS == 'ios' ? 2 : 3,
+          }}
+        />
+        <Text style={{
+          textAlign: 'center',
+          fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+          fontSize: Platform.OS == 'ios' ? 18 : 15,
+          color: 'white',
+          paddingTop: Platform.OS == 'ios' ? 8 : 5,
+        }}> หน้าแรก
+        </Text>
+      </View>,
+    headerTitleStyle: {
+      alignSelf: 'center',
+    },
+    headerRight:
+      <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
+        <Ionicons
+          name="logo-facebook"
+          size={25}
+          color='white'
+          style={{
+            paddingHorizontal: 10
+          }}
+        />
+      </TouchableOpacity>,
+    headerLeft:
+      <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+        <Ionicons
+          name="md-menu"
+          size={30}
+          color='white'
+          style={{
+            paddingHorizontal: 10
+          }}
+        />
+      </TouchableOpacity>
+  })
 
   _notificationAndroid(_this) {
     let notificationTime = new Date();
@@ -81,7 +128,7 @@ export default class Home extends Component {
 
   _onLayoutDidChange = (e) => {
     const layout = e.nativeEvent.layout;
-    this.setState({ size: { width: layout.width + 10, height: layout.height } });
+    this.setState({ size: { width: layout.width, height: layout.height } });
   }
 
   constructor(props) {
@@ -94,30 +141,9 @@ export default class Home extends Component {
       progress: new Animated.Value(0),
       size: { width, height },
     }
-
-    this.toggleDrawer = this.toggleDrawer.bind(this);
-    this.setDrawerState = this.setDrawerState.bind(this);
-
-  }
-
-  setDrawerState() {
-    this.setState({
-      drawerClosed: !this.state.drawerClosed,
-    });
-  }
-
-  toggleDrawer = () => {
-    if (this.state.drawerClosed) {
-      this.DRAWER.openDrawer();               //edit 2 out -> error
-    } else {
-      this.DRAWER.closeDrawer();              //edit 2 out
-    }
   }
 
   componentDidMount() {
-
-    global.state = []
-
 
     if (Platform.OS == 'ios') {
       this._notificationiOS(this);
@@ -161,93 +187,9 @@ export default class Home extends Component {
     if (this.state.isLoading || this.state.refreshing) {
       return (
         <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
-
-          <DrawerLayout
-            drawerWidth={300}
-            ref={drawerElement => {
-              this.DRAWER = drawerElement;
-            }}
-
-            drawerPosition={DrawerLayout.positions.Left}
-            onDrawerOpen={this.setDrawerState}
-            onDrawerClose={this.setDrawerState}
-            renderNavigationView={() => <SideMenu {...this.props} />}
-          >
-
-            <ActionBar
-              containerStyle={styles.bar}
-              backgroundColor={'black'}
-              leftIconName={'menu'}
-              onLeftPress={this.toggleDrawer}
-              icontitle={require('./assets/images/home-icon.png')}
-              title={'หน้าแรก'}
-              rightIcons={[
-                {
-                  name: 'facebook',
-                  onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                  //onPress: () => navigate('Social'),
-                },
-              ]}
-            />
-
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-              <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-                <Image source={require('./assets/images/banner2.jpg')}
-                  style={styles.logo} />
-              </TouchableOpacity>
-
-              <View style={{ flex: 1 }}>
-                <Text style={styles.newfont}> --- ข่าวล่าสุด --- </Text>
-              </View>
-
-            </View>
-
-            <ActivityIndicator
-              style={{ paddingTop: 20 }}
-              color='#cc9966' />
-          </DrawerLayout>
-        </View>
-
-      );
-    }
-
-    const { navigate } = this.props.navigation;
-
-    return (
-
-      <View style={styles.container} >
-        <DrawerLayout
-          drawerWidth={300}
-          ref={drawerElement => {
-            this.DRAWER = drawerElement;
-          }}
-
-          drawerPosition={DrawerLayout.positions.Left}
-          onDrawerOpen={this.setDrawerState}
-          onDrawerClose={this.setDrawerState}
-          renderNavigationView={() => <SideMenu {...this.props} />}
-        >
-
-          <ActionBar
-            containerStyle={styles.bar}
-            backgroundColor={'black'}
-            leftIconName={'menu'}
-            onLeftPress={this.toggleDrawer}
-            icontitle={require('./assets/images/home-icon.png')}
-            title={'หน้าแรก'}
-            rightIcons={[
-              {
-                name: 'facebook',
-                onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                //onPress: () => navigate('Social'),
-              },
-            ]}
-          />
-
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
-            <TouchableOpacity onPress={() => navigate('Tab')}>
+            <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
               <Image source={require('./assets/images/banner2.jpg')}
                 style={styles.logo} />
             </TouchableOpacity>
@@ -258,118 +200,155 @@ export default class Home extends Component {
 
           </View>
 
-          <ScrollView
-            refreshControl={
-              <RefreshControl
-                refreshing={this.state.refreshing}
-                onRefresh={this._onRefresh.bind(this)}
-                tintColor={'transparent'}
-              />
-            }
-          >
-            <ListView
-              dataSource={this.state.dataSource}
-              renderRow={(rowData) => <View style={styles.listView}>
+          <ActivityIndicator
+            style={{ paddingTop: 20 }}
+            color='#cc9966' />
+        </View>
+      );
+    }
+
+    const { navigate } = this.props.navigation;
+
+    return (
+      <View style={styles.container} >
+
+        <View>
+          <StatusBar
+            backgroundColor="black"
+            barStyle="light-content"
+          />
+        </View>
+
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+
+          <TouchableOpacity onPress={() => navigate('Tab')}>
+            <Image source={require('./assets/images/banner2.jpg')}
+              style={styles.logo} />
+          </TouchableOpacity>
+
+          <View style={{ flex: 1 }}>
+            <Text style={styles.newfont}> --- ข่าวล่าสุด --- </Text>
+          </View>
+
+        </View>
+
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}
+              tintColor={'transparent'}
+            />
+          }
+        >
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={(rowData) => <View style={styles.listView}>
+              <TouchableOpacity
+                key={rowData.id}
+                onPress={() => navigate('NewDetail',
+                  {
+                    type: rowData.CATID,
+                    title: rowData.TOPIC,
+                    image: rowData.FEATURE,
+                    description: rowData.DESCRIPTION,
+                    view: rowData.VIEWS,
+                    date: rowData.DATEIN,
+                    url: rowData.URL
+                  }
+                )}
+              >
                 <View style={{ paddingBottom: 5 }}>
                   <Text style={styles.titleText}> {rowData.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                 </View>
-                <TouchableOpacity
-                  key={rowData.id}
-                  onPress={() => navigate('NewDetail',
-                    {
-                      type: rowData.CATID,
-                      title: rowData.TOPIC,
-                      image: rowData.FEATURE,
-                      description: rowData.DESCRIPTION,
-                      view: rowData.VIEWS,
-                      date: rowData.DATEIN,
-                      url: rowData.URL
-                    }
-                  )}
-                >
-                  <Image source={{ uri: rowData.FEATURE }}
-                    style={{
-                      width: width - 10,
-                      height: (width - 10) * 0.625,
-                      backgroundColor: '#6a5750'
-                    }}
-                  />
-                  <View style={{ paddingTop: 5 }}>
-                    <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              }
-            />
-            <View style={{ 
-              borderWidth: 5, 
-              borderColor: 'white', 
-              top: 20, 
-              marginBottom: 30, 
-            }}>
-              <View style={{ height: width * 0.526 }}
-                onLayout={this._onLayoutDidChange}
-              >
-                <Carousel
-                  delay={2000}
-                  style={this.state.size}
-                  autoplay
-                  bullets
-                  arrows
-                  arrowsContainerStyle={{
-                    marginLeft: 5,
-                    marginRight: 15,
+                <Image source={{ uri: rowData.FEATURE }}
+                  style={{
+                    width: width - 10,
+                    height: (width - 10) * 0.625,
+                    borderRadius: 10,
                   }}
-                  leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
-                  rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
-                >
-                  {this.state.slide.map((prop, key) => {
-                    return (
-                      <View
-                        key={key}
-                        style={{
-                          backgroundColor: 'white',
-                          width: width,
-                        }}>
-                        <TouchableWithoutFeedback onPress={() => Linking.openURL(this.state.slide[key].URL)} >
-                          <Image
-                            source={{ uri: this.state.slide[key].FEATURE }}
-                            style={styles.advt_1}
-                          />
-                        </TouchableWithoutFeedback>
-                      </View>
-                    )
-                  })}
+                />
+                <View style={{ paddingTop: 5 }}>
+                  <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
+                </View>
+                <View style={{
+                  height: 1,
+                  backgroundColor: 'rgba(240,240,240,0.2)',
+                  marginTop: 10
+                }}>
+                </View>
+              </TouchableOpacity>
+            </View>
+            }
+          />
+          <View style={{
+            padding: 5,
+            backgroundColor: 'white',
+            top: 20,
+            marginBottom: 30,
+          }}>
+            <View style={{ height: width * 0.526 }}
+              onLayout={this._onLayoutDidChange}
+            >
+              <Carousel
+                delay={2000}
+                style={this.state.size}
+                autoplay
+                bullets
+                arrows
+                arrowsContainerStyle={{
+                  marginLeft: 5,
+                  marginRight: 15,
+                }}
+                leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
+                rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
+              >
+                {this.state.slide.map((prop, key) => {
+                  return (
+                    <View
+                      key={key}
+                      style={{
+                        backgroundColor: 'white',
+                        width: width - 10,
+                      }}>
+                      <TouchableWithoutFeedback onPress={() => Linking.openURL(this.state.slide[key].URL)} >
+                        <Image
+                          source={{ uri: this.state.slide[key].FEATURE }}
+                          style={styles.advt_1}
+                        />
+                      </TouchableWithoutFeedback>
+                    </View>
+                  )
+                })}
 
-                </Carousel>
-              </View>
+              </Carousel>
+            </View>
+          </View>
+
+          <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingBottom: 20 }}>
+
+            <View style={{ borderColor: 'white', borderWidth: 2 }}>
+              <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%99%E0%B8%95%E0%B9%8C-1380405395370823/')} >
+                <Image source={require('./assets/images/advt_2.jpg')}
+                  style={styles.advt_2} />
+              </TouchableOpacity>
             </View>
 
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingBottom: 20 }}>
-
-              <View style={{ borderColor: 'white', borderWidth: 2 }}>
-                <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%99%E0%B8%95%E0%B9%8C-1380405395370823/')} >
-                  <Image source={require('./assets/images/advt_2.jpg')}
-                    style={styles.advt_2} />
-                </TouchableOpacity>
-              </View>
-
-              <View style={{ borderColor: 'white', borderWidth: 2 }}>
-                <Image source={require('./assets/images/advt_3.jpg')}
-                  style={styles.advt_3} />
-              </View>
-
+            <View style={{ borderColor: 'white', borderWidth: 2 }}>
+              <Image source={require('./assets/images/advt_3.jpg')}
+                style={styles.advt_3} />
             </View>
 
-            <Image source={require('./assets/images/advt_4.jpg')}
-              style={styles.advt_4} />
+          </View>
 
-            <Text></Text>
-            <Text></Text>
+          <Image source={require('./assets/images/advt_4.jpg')}
+            style={styles.advt_4} />
 
-          </ScrollView>
+          <Text></Text>
+          <Text></Text>
 
-        </DrawerLayout>
+        </ScrollView>
+
       </View >
     )
   }
@@ -378,8 +357,6 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'center',
-    //alignItems: 'center',
     backgroundColor: Color.BROWN[800],
   },
   logo: {
@@ -415,7 +392,7 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'right',
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    textDecorationLine: 'underline'
+    textDecorationLine: 'underline',
   },
   advt_1: {
     height: width * 0.526,

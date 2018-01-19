@@ -13,7 +13,8 @@ import {
     WebView,
     FlatList,
     PixelRatio,
-    Share
+    Share,
+    TouchableOpacity
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
@@ -21,10 +22,63 @@ import Color from 'react-native-material-color';
 import HTMLView from 'react-native-htmlview';
 import Icon from 'react-native-vector-icons/dist/Entypo';
 import Icons from 'react-native-vector-icons/dist/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
 
 const { width, height } = Dimensions.get("window");
 
 export default class NewDetail extends Component {
+
+    static navigationOptions = ({ navigation }) => ({
+        headerTitle:
+            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                <FontAwesome
+                    name="newspaper-o"
+                    size={18}
+                    color='white'
+                    style={{
+                        top: 5,
+                      }}
+                />
+                <Text style={{
+                    textAlign: 'center',
+                    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+                    fontSize: Platform.OS == 'ios' ? 18 : 15,
+                    color: 'white',
+                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                }}> {navigation.state.params.type}
+            </Text>
+            </View>,
+        headerTitleStyle: {
+            alignSelf: 'center',
+        },
+        headerRight:
+            <TouchableOpacity onPress={() => Platform.OS == 'ios' ?
+                Share.share({ url: navigation.state.params.url })
+                :
+                Share.share({ message: navigation.state.params.url })}>
+                <Feather
+                    name="share-2"
+                    size={20}
+                    color='white'
+                    style={{
+                        paddingHorizontal: 10
+                    }}
+                />
+            </TouchableOpacity>,
+        headerLeft:
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Ionicons
+                    name="ios-arrow-back"
+                    size={30}
+                    color='white'
+                    style={{
+                        paddingHorizontal: 10
+                    }}
+                />
+            </TouchableOpacity>
+    })
 
 
     renderNode(node, index, siblings, parent, defaultRenderer) {
@@ -94,24 +148,6 @@ export default class NewDetail extends Component {
 
         return (
             <View style={styles.container}>
-
-                <ActionBar
-                    containerStyle={styles.bar}
-                    backgroundColor={'black'}
-                    leftIconName={'back'}
-                    onLeftPress={() => navigate('Tab', { ...this.props })}
-                    icontitless={"newspaper-o"}
-                    title={this.props.navigation.state.params.type}
-                    rightIcons={[
-                        {
-                            name: 'share',
-                            onPress: () => Platform.OS == 'ios' ?
-                                Share.share({ url: this.props.navigation.state.params.url})
-                                :
-                                Share.share({ message: this.props.navigation.state.params.url})
-                        },
-                    ]}
-                />
 
                 <View style={styles.listView}>
                     <ScrollView style={{

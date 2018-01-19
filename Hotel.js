@@ -10,15 +10,64 @@ import {
     ActivityIndicator,
     Dimensions,
     TouchableOpacity,
-    RefreshControl
+    RefreshControl,
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
+import Feather from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const { width, height } = Dimensions.get("window");
 
 export default class Hotel extends Component {
+
+    static navigationOptions = ({ navigation }) => ({
+        headerTitle:
+            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                <Image
+                    source={require('./assets/images/hotel-icon.png')}
+                    style={{
+                        width: 25,
+                        height: 25,
+                        top: Platform.OS == 'ios' ? 0 : 3,
+                    }}
+                />
+                <Text style={{
+                    textAlign: 'center',
+                    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+                    fontSize: Platform.OS == 'ios' ? 18 : 15,
+                    color: 'white',
+                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                }}> ที่พักหาดใหญ่
+            </Text>
+            </View>,
+        headerTitleStyle: {
+            alignSelf: 'center',
+        },
+        headerRight:
+            <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
+                <Ionicons
+                    name="logo-facebook"
+                    size={25}
+                    color='white'
+                    style={{
+                        paddingHorizontal: 10
+                    }}
+                />
+            </TouchableOpacity>,
+        headerLeft:
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Ionicons
+                    name="ios-arrow-back"
+                    size={30}
+                    color='white'
+                    style={{
+                        paddingHorizontal: 10
+                    }}
+                />
+            </TouchableOpacity>
+    })
 
     constructor(props) {
         super(props);
@@ -104,22 +153,6 @@ export default class Hotel extends Component {
         if (this.state.isLoading || this.state.refreshing) {
             return (
                 <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
-                    <ActionBar
-                        containerStyle={styles.bar}
-                        backgroundColor={'black'}
-                        leftIconName={'menu'}
-                        onLeftPress={() => navigate('Tab')}
-                        icontitle={require('./assets/images/hotel-icon.png')}
-                        title={'ที่พักหาดใหญ่'}
-                        rightIcons={[
-                            {
-                                name: 'facebook',
-                                onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                                //onPress: () => navigate('Social'),
-                            },
-                        ]}
-                    />
-
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
 
                         <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
@@ -142,23 +175,6 @@ export default class Hotel extends Component {
 
         return (
             <View style={styles.container}>
-
-                <ActionBar
-                    containerStyle={styles.bar}
-                    backgroundColor={'black'}
-                    leftIconName={'back'}
-                    onLeftPress={() => navigate('Tab')}
-                    icontitle={require('./assets/images/hotel-icon.png')}
-                    title={'ที่พักหาดใหญ่'}
-                    rightIcons={[
-                        {
-                            name: 'facebook',
-                            onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                            //onPress: () => navigate('Social'),
-                        },
-                    ]}
-                />
-
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
 
                     <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
@@ -224,7 +240,8 @@ export default class Hotel extends Component {
                                             style={{
                                                 height: 115,
                                                 resizeMode: 'cover',
-                                                backgroundColor: '#6a5750'
+                                                //backgroundColor: '#6a5750',
+                                                borderRadius: 10
                                             }} />
                                     </View>
 
@@ -319,5 +336,6 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         fontSize: 40,
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+        color: '#696969'
     }
 });

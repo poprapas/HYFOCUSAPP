@@ -3,7 +3,7 @@ import {
     Platform,
     Image,
 } from 'react-native';
-import { TabNavigator } from "react-navigation";
+import { TabNavigator, DrawerNavigator } from "react-navigation";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import HomeScreen from "./Home"
@@ -11,8 +11,27 @@ import JobScreen from "./Jobs"
 import EatScreen from "./Eat"
 import TravelScreen from "./Travel"
 import RoomScreen from "./Room"
+import Story from './Story'
+import People from './People'
+import Room from './Room'
+import Events from './Event'
+import Video from './Video'
+import Review from './Review'
+import Contact from './Contact'
+import Setting from './Setting'
+import SideMenu from './SideMenu'
+import About from "./About"
+import NewSport from "./NewSport"
+import NewSocial from "./NewSocial"
+import NewEducation from "./NewEducation"
+import NewEconomy from "./NewEconomy"
+import NewEntertainment from "./NewEntertainment"
+import NewCrime from "./NewCrime"
+import NewScience from "./NewScience"
+import NewAdvertise from "./NewAdvertise"
+import NewBusiness from "./NewBusiness"
 
-export default AppNavigator = TabNavigator({
+const Tab = TabNavigator({
     หางาน: {
         screen: JobScreen,
         navigationOptions: {
@@ -77,12 +96,52 @@ export default AppNavigator = TabNavigator({
                 indicatorStyle: { backgroundColor: '#ffffff' },
                 style: {
                     backgroundColor: 'black'
-                    
+
                 }
             }
                 :
-                {style: { backgroundColor: 'black' },
-                activeTintColor: 'white',
-                inactiveTintColor: '#a0a0a0',}
+                {
+                    style: { backgroundColor: 'black' },
+                    activeTintColor: 'white',
+                    inactiveTintColor: '#a0a0a0',
+                }
     });
+
+export default Drawer = DrawerNavigator({
+    Tab: {
+        screen: Tab,
+        navigationOptions: {
+            headerMode: 'none'
+        }
+    },
+    Video: { screen: Video },
+    Review: { screen: Review },
+    About: { screen: About },
+    SideMenu: { screen: SideMenu },
+    Story: { screen: Story },
+    People: { screen: People },
+    NewSport: { screen: NewSport },
+    NewSocial: { screen: NewSocial },
+    NewEducation: { screen: NewEducation },
+    NewEconomy: { screen: NewEconomy },
+    NewEntertainment: { screen: NewEntertainment },
+    NewCrime: { screen: NewCrime },
+    NewScience: { screen: NewScience },
+    NewAdvertise: { screen: NewAdvertise },
+    NewBusiness: { screen: NewBusiness },
+    Event: { screen: Events },
+    Setting: { screen: Setting }
+}, {
+        initialRouteName: 'Tab',
+        drawerWidth: 300,
+        drawerPosition: 'left',
+        contentComponent: SideMenu,
+        contentOptions: {
+            activeTintColor: '#e91e63',
+        },
+        drawerOpenRoute: 'DrawerOpen',
+        drawerCloseRoute: 'DrawerClose',
+        drawerToggleRoute: 'DrawerToggle',
+    }
+);
 

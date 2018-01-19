@@ -27,16 +27,6 @@ const { width, height } = Dimensions.get("window");
 
 class SideMenu extends Component {
 
-  navigateToScreen = (DrawerMenuScreen) => {
-    const navigateAction = NavigationActions.navigate({
-      routeName: DrawerMenuScreen,
-      params: {},
-      action: NavigationActions.navigate({ routeName: 'DrawerMenuScreen' }),
-
-    });
-    this.props.navigation.dispatch(navigateAction);
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -51,7 +41,6 @@ class SideMenu extends Component {
         style={{
           height: height,
           backgroundColor: 'black',
-          marginTop: Platform.OS == 'ios' ? 60 : 40,
         }}
       >
         <View style={styles.wrapper}>
@@ -69,7 +58,7 @@ class SideMenu extends Component {
           {this.state.dropdown ?
             <View style={{ paddingLeft: 30, flex: 1, backgroundColor: '#111111' }}>
 
-              <TouchableOpacity onPress={() => this.navigateToScreen('Tab')}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('หน้าแรก')}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวล่าสุด
@@ -77,7 +66,14 @@ class SideMenu extends Component {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => this.navigateToScreen('NewSport')}>
+              <View style={{
+                height: 1,
+                backgroundColor: 'rgba(240,240,240,0.1)',
+                width
+              }}>
+              </View>
+
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewSport')}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวกีฬา
@@ -85,7 +81,14 @@ class SideMenu extends Component {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => this.navigateToScreen('NewSocial')}>
+              <View style={{
+                height: 1,
+                backgroundColor: 'rgba(240,240,240,0.1)',
+                width
+              }}>
+              </View>
+
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewSocial')}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวสัมคมและการเมือง
@@ -93,7 +96,14 @@ class SideMenu extends Component {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => this.navigateToScreen('NewEducation')}>
+              <View style={{
+                height: 1,
+                backgroundColor: 'rgba(240,240,240,0.1)',
+                width
+              }}>
+              </View>
+
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewEducation')}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวการศึกษา
@@ -101,7 +111,14 @@ class SideMenu extends Component {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => this.navigateToScreen('NewEconomy')}>
+              <View style={{
+                height: 1,
+                backgroundColor: 'rgba(240,240,240,0.1)',
+                width
+              }}>
+              </View>
+
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewEconomy')}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวเศรษฐกิจและการเงิน
@@ -109,7 +126,14 @@ class SideMenu extends Component {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => this.navigateToScreen('NewEntertainment')}>
+              <View style={{
+                height: 1,
+                backgroundColor: 'rgba(240,240,240,0.1)',
+                width
+              }}>
+              </View>
+
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewEntertainment')}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวบันเทิง
@@ -117,7 +141,14 @@ class SideMenu extends Component {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => this.navigateToScreen('NewCrime')}>
+              <View style={{
+                height: 1,
+                backgroundColor: 'rgba(240,240,240,0.1)',
+                width
+              }}>
+              </View>
+
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewCrime')}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวอาชญากรรม
@@ -125,7 +156,14 @@ class SideMenu extends Component {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => this.navigateToScreen('NewScience')}>
+              <View style={{
+                height: 1,
+                backgroundColor: 'rgba(240,240,240,0.1)',
+                width
+              }}>
+              </View>
+
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewScience')}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าววิทยาศาสตร์และสิ่งแวดล้อม
@@ -133,7 +171,14 @@ class SideMenu extends Component {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => this.navigateToScreen('NewAdvertise')}>
+              <View style={{
+                height: 1,
+                backgroundColor: 'rgba(240,240,240,0.1)',
+                width
+              }}>
+              </View>
+
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewAdvertise')}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวประชาสัมพันธ์และการท่องเที่ยว
@@ -141,7 +186,14 @@ class SideMenu extends Component {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => this.navigateToScreen('NewBusiness')}>
+              <View style={{
+                height: 1,
+                backgroundColor: 'rgba(240,240,240,0.1)',
+                width
+              }}>
+              </View>
+
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewBusiness')}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวธุรกิจและเทคโนโลยี
@@ -151,7 +203,14 @@ class SideMenu extends Component {
             </View>
             : null}
 
-          <TouchableOpacity onPress={() => this.navigateToScreen('Story')}>
+          <View style={{
+            height: 1,
+            backgroundColor: 'rgba(240,240,240,0.2)',
+            width
+          }}>
+          </View>
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Story')}>
             <View style={styles.navSectionStyle}>
               <Image source={require('./assets/images/story-icon.png')} style={{ height: 23, width: 28 }} />
               <Text style={styles.navItemStyle}>
@@ -160,7 +219,14 @@ class SideMenu extends Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.navigateToScreen('หางาน')}>
+          <View style={{
+            height: 1,
+            backgroundColor: 'rgba(240,240,240,0.2)',
+            width
+          }}>
+          </View>
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('หางาน')}>
             <View style={styles.navSectionStyle}>
               <Image source={require('./assets/images/work-icon.png')} style={{ height: 28, width: 28 }} />
               <Text style={styles.navItemStyle}>
@@ -169,7 +235,14 @@ class SideMenu extends Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.navigateToScreen('ของกิน')}>
+          <View style={{
+            height: 1,
+            backgroundColor: 'rgba(240,240,240,0.2)',
+            width
+          }}>
+          </View>
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('ของกิน')}>
             <View style={styles.navSectionStyle}>
               <Image source={require('./assets/images/eat-icon.png')} style={{ height: 25, width: 28 }} />
               <Text style={styles.navItemStyle}>
@@ -178,7 +251,14 @@ class SideMenu extends Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.navigateToScreen('ที่เที่ยว')}>
+          <View style={{
+            height: 1,
+            backgroundColor: 'rgba(240,240,240,0.2)',
+            width
+          }}>
+          </View>
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('ที่เที่ยว')}>
             <View style={styles.navSectionStyle}>
               <Image source={require('./assets/images/travel-icon.png')} style={{ height: 25, width: 28 }} />
               <Text style={styles.navItemStyle}>
@@ -187,7 +267,14 @@ class SideMenu extends Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.navigateToScreen('People')}>
+          <View style={{
+            height: 1,
+            backgroundColor: 'rgba(240,240,240,0.2)',
+            width
+          }}>
+          </View>
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('People')}>
             <View style={styles.navSectionStyle}>
               <Image source={require('./assets/images/people-icon.png')} style={{ height: 22, width: 28 }} />
               <Text style={styles.navItemStyle}>
@@ -196,7 +283,14 @@ class SideMenu extends Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.navigateToScreen('ที่พัก')}>
+          <View style={{
+            height: 1,
+            backgroundColor: 'rgba(240,240,240,0.2)',
+            width
+          }}>
+          </View>
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('ที่พัก')}>
             <View style={styles.navSectionStyle}>
               <Image source={require('./assets/images/hotel-icon.png')} style={{ height: 25, width: 28 }} />
               <Text style={styles.navItemStyle}>
@@ -205,7 +299,14 @@ class SideMenu extends Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.navigateToScreen('Event')}>
+          <View style={{
+            height: 1,
+            backgroundColor: 'rgba(240,240,240,0.2)',
+            width
+          }}>
+          </View>
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Event')}>
             <View style={styles.navSectionStyle}>
               <Icon name="megaphone" size={25} color='white' style={{ width: 28 }} />
               <Text style={styles.navItemStyle}>
@@ -214,7 +315,14 @@ class SideMenu extends Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.navigateToScreen('Video')}>
+          <View style={{
+            height: 1,
+            backgroundColor: 'rgba(240,240,240,0.2)',
+            width
+          }}>
+          </View>
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Video')}>
             <View style={styles.navSectionStyle}>
               <Icon name="play-video" size={29} color='white' style={{ width: 28 }} />
               <Text style={styles.navItemStyle}>
@@ -223,7 +331,14 @@ class SideMenu extends Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.navigateToScreen('Review')}>
+          <View style={{
+            height: 1,
+            backgroundColor: 'rgba(240,240,240,0.2)',
+            width
+          }}>
+          </View>
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Review')}>
             <View style={styles.navSectionStyle}>
               <Icons name="rate-review" size={25} color='white' style={{ width: 28 }} />
               <Text style={styles.navItemStyle}>
@@ -232,7 +347,14 @@ class SideMenu extends Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.navigateToScreen('About')}>
+          <View style={{
+            height: 1,
+            backgroundColor: 'rgba(240,240,240,0.2)',
+            width
+          }}>
+          </View>
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('About')}>
             <View style={styles.navSectionStyle}>
               <Image source={require('./assets/images/about-icon.png')} style={{ height: 25, width: 28 }} />
               <Text style={styles.navItemStyle}>
@@ -240,6 +362,13 @@ class SideMenu extends Component {
               </Text>
             </View>
           </TouchableOpacity>
+
+          <View style={{
+            height: 1,
+            backgroundColor: 'rgba(240,240,240,0.2)',
+            width
+          }}>
+          </View>
 
           <TouchableOpacity onPress={() => Linking.openURL('https://www.hatyaifocus.com/board/forum.php')}>
             <View style={styles.navSectionStyle}>
@@ -250,16 +379,32 @@ class SideMenu extends Component {
             </View>
           </TouchableOpacity>
 
+          <View style={{
+            height: 1,
+            backgroundColor: 'rgba(240,240,240,0.2)',
+            width
+          }}>
+          </View>
+
           {
             Platform.OS == 'ios' ?
-              <TouchableOpacity onPress={() => this.navigateToScreen('Setting')}>
-                <View style={styles.navSectionStyle}>
-                  <Icons name="settings" size={25} color='white' style={{ width: 28 }} />
-                  <Text style={styles.navItemStyle}>
-                    ตั้งค่า
+              <View>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Setting')}>
+                  <View style={styles.navSectionStyle}>
+                    <Icons name="settings" size={25} color='white' style={{ width: 28 }} />
+                    <Text style={styles.navItemStyle}>
+                      ตั้งค่า
                   </Text>
+                  </View>
+                </TouchableOpacity>
+
+                < View style={{
+                  height: 1,
+                  backgroundColor: 'rgba(240,240,240,0.2)',
+                  width
+                }}>
                 </View>
-              </TouchableOpacity> : null
+              </View> : null
           }
 
         </View>
@@ -277,10 +422,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: Platform.OS == 'ios' ? 20 : 16,
     paddingLeft: 10,
-    paddingTop: Platform.OS == 'ios' ? 12 : 6,
-    paddingBottom: Platform.OS == 'ios' ? 12 : 6,
+    paddingTop: Platform.OS == 'ios' ? 16 : 6,
+    paddingBottom: Platform.OS == 'ios' ? 8 : 3,
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    width: 240
+    width: 240,
   },
   navSectionStyle: {
     backgroundColor: 'black',

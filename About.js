@@ -13,10 +13,58 @@ import {
 
 import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const { width, height } = Dimensions.get("window");
 
 export default class About extends Component {
+
+    static navigationOptions = ({ navigation }) => ({
+        headerTitle:
+          <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+            <Image
+              source={require('./assets/images/about-icon.png')}
+              style={{
+                width: 20,
+                height: 20,
+                top: Platform.OS == 'ios' ? 2 : 3,
+              }}
+            />
+            <Text style={{
+              textAlign: 'center',
+              fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+              fontSize: Platform.OS == 'ios' ? 18 : 15,
+              color: 'white',
+              paddingTop: Platform.OS == 'ios' ? 8 : 5,
+            }}> เกี่ยวกับเรา
+            </Text>
+          </View>,
+        headerTitleStyle: {
+          alignSelf: 'center',
+        },
+        headerRight:
+          <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
+            <Ionicons
+              name="logo-facebook"
+              size={25}
+              color='white'
+              style={{
+                paddingHorizontal: 10
+              }}
+            />
+          </TouchableOpacity>,
+        headerLeft:
+          <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+            <Ionicons
+              name="md-menu"
+              size={30}
+              color='white'
+              style={{
+                paddingHorizontal: 10
+              }}
+            />
+          </TouchableOpacity>
+      })
 
     render() {
 
@@ -24,23 +72,6 @@ export default class About extends Component {
 
         return (
             <View style={styles.container}>
-
-                <ActionBar
-                    containerStyle={styles.bar}
-                    backgroundColor={'black'}
-                    leftIconName={'back'}
-                    onLeftPress={() => navigate('หน้าแรก')}
-                    icontitle={require('./assets/images/about-icon.png')}
-                    title={'เกี่ยวกับเรา'}
-                    rightIcons={[
-                        {
-                            name: 'facebook',
-                            onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                            //onPress: () => navigate('Social'),
-                        },
-                    ]}
-                />
-
                 <ScrollView>
                     <View style={styles.about}>
                         <Text style={styles.main}>

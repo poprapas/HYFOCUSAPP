@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { 
-	Button, 
-	Platform, 
+import {
+	Button,
+	Platform,
 	ScrollView,
 	Dimensions,
 } from 'react-native';
-import { DrawerNavigator, SafeAreaView } from 'react-navigation';
+import { DrawerNavigator } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+import Home2 from './Home';
 import Story from './Story';
 import Jobs from './Jobs';
 import Eat from './Eat';
@@ -20,72 +21,38 @@ import Review from './Review';
 import About from './About';
 import Contact from './Contact';
 import Setting from './Setting';
-import Home from './Home';
-
+import Tab from './Navigator';
 import SideMenu from './SideMenu';
+
 
 const { width, height } = Dimensions.get("window");
 
-const DrawerMenuScreen = DrawerNavigator({
-	// Home: {
-	// 	screen: Home,
-	// },
-	Story: {
-		screen: Story,
-		
+export default Drawer = DrawerNavigator({
+	Video: {
+		screen: Video
 	},
 	Jobs: {
-		screen: Jobs,
-		
+		screen: Jobs
 	},
 	Eat: {
-		screen: Eat,
-		
+		screen: Eat
 	},
-	Travel: {
-		screen: Travel,
-		
-	},
-	People: {
-		screen: People,
-		
-	},
-	Room: {
-		screen: Room,
-		
-	},
-	Event: {
-		screen: Event,
-		
-	},
-	Video: {
-		screen: Video,
-		
-	},
-	Review: {
-		screen: Review,
-		
-	},
-	About: {
-		screen: About,
-		
-	},
-	Contact: {
-		screen: Contact,
-		
-	},
-	Setting: {
-		screen: Setting,
-		
-	},
+	// Tab: {
+	// 	screen: Tab
+	// }
+	// Home: {
+	// 	screen: Home
+	// }
 }, {
+		//initialRouteName: 'Home',
 		drawerWidth: 300,
 		drawerPosition: 'left',
-		contentComponent: SideMenu,
+		contentComponent: props => <SideMenu {...this.props} />,
 		contentOptions: {
-      		activeTintColor: '#e91e63',
-    	},
+			activeTintColor: '#e91e63',
+		},
+		drawerOpenRoute: 'DrawerOpen',
+		drawerCloseRoute: 'DrawerClose',
+		drawerToggleRoute: 'DrawerToggle'
 	}
 );
-
-export default DrawerMenuScreen;

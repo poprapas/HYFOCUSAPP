@@ -10,8 +10,57 @@ import {
 
 import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
 
 export default class Contact extends Component {
+
+    static navigationOptions = ({ navigation }) => ({
+        headerTitle:
+            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                <MaterialIcons
+                    name="settings"
+                    size={20}
+                    color='white'
+                    style={{
+                        top: 2
+                    }}
+                />
+                <Text style={{
+                    textAlign: 'center',
+                    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+                    fontSize: Platform.OS == 'ios' ? 18 : 15,
+                    color: 'white',
+                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                }}> ตั้งค่า
+            </Text>
+            </View>,
+        headerTitleStyle: {
+            alignSelf: 'center',
+        },
+        headerRight:
+            <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
+                <Ionicons
+                    name="logo-facebook"
+                    size={25}
+                    color='white'
+                    style={{
+                        paddingHorizontal: 10
+                    }}
+                />
+            </TouchableOpacity>,
+        headerLeft:
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Ionicons
+                    name="ios-arrow-back"
+                    size={30}
+                    color='white'
+                    style={{
+                        paddingHorizontal: 10
+                    }}
+                />
+            </TouchableOpacity>
+    })
 
     render() {
 
@@ -19,21 +68,6 @@ export default class Contact extends Component {
 
         return (
             <View style={styles.container}>
-                <ActionBar
-                    containerStyle={styles.bar}
-                    backgroundColor={'black'}
-                    leftIconName={'back'}
-                    onLeftPress={() => navigate('Tab')}
-                    icontitlesss={"settings"}
-                    title={'ตั้งค่า'}
-                    rightIcons={[
-                        {
-                            name: 'facebook',
-                            onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                        },
-                    ]}
-                />
-
                 <TouchableOpacity
                     onPress={() => Linking.openURL('app-settings:')}
                 >
@@ -89,5 +123,6 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         fontSize: 50,
         fontFamily: 'WDBBangna',
+        color: '#696969'
     }
 });

@@ -11,100 +11,60 @@ import {
   Text,
   View,
   AppRegistry,
+  StatusBar
 } from 'react-native';
 
 import tabNavigator from './Navigator'
-import { StackNavigator, DrawerNavigator } from "react-navigation";
+import { StackNavigator } from "react-navigation";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SplashScreen from 'react-native-splash-screen'
 
-import Video from "./Video"
 import VideoDetail from "./VideoDetail"
-import Review from "./Review"
 import ReviewDetail from "./ReviewDetail"
-import Home from "./Home"
-import DrawerMenuScreen from "./DrawerMenuScreen"
-import SideMenu from "./SideMenu"
-import Story from "./Story"
 import StoryDetail from "./StoryDetail"
-import Jobs from "./Jobs"
 import JobDetail from "./JobDetail"
-import Eat from "./Eat"
 import EatDetail from "./EatDetail"
-import Travel from "./Travel"
 import TravelDetail from "./TravelDetail"
-import People from "./People"
 import PeopleDetail from "./PeopleDetail"
-import Room from "./Room"
 import RoomDetail from "./RoomDetail"
-import About from "./About"
-import Contact from "./Contact"
 import NewDetail from "./NewDetail"
-import NewSport from "./NewSport"
-import NewSocial from "./NewSocial"
-import NewEducation from "./NewEducation"
-import NewEconomy from "./NewEconomy"
-import NewEntertainment from "./NewEntertainment"
-import NewCrime from "./NewCrime"
-import NewScience from "./NewScience"
-import NewAdvertise from "./NewAdvertise"
-import NewBusiness from "./NewBusiness"
-import Event from "./Event"
 import EventDetail from "./EventDetail"
 import Hotel from "./Hotel"
 import Apartment from "./Apartment"
 import Resort from "./Resort"
 import Guesthouse from "./Guesthouse"
-import setting from "./Setting"
+import Tab from './Tab'
 
 const AppNavigator = StackNavigator({
-  
-  Tab: { screen: tabNavigator },
-  Home: { screen: Home },
-  Video: { screen: Video },
+  Tab: { screen: Tab },
   VideoDetail: { screen: VideoDetail },
-  Review: { screen: Review },
-  ReviewDetail: { screen: ReviewDetail },
-  About: { screen: About },
-  DrawerMenuScreen: { screen: DrawerMenuScreen },
-  SideMenu: { screen: SideMenu },
-  Story: { screen: Story },
-  StoryDetail: { screen: StoryDetail },
-  Jobs: { screen: Jobs },
-  JobDetail: { screen: JobDetail },
-  Eat: { screen: Eat },
-  EatDetail: { screen: EatDetail },
-  Travel: { screen: Travel },
-  TravelDetail: { screen: TravelDetail },
-  People: { screen: People },
-  PeopleDetail: { screen: PeopleDetail },
-  Room: { screen: Room },
-  RoomDetail: { screen: RoomDetail },
-  About: { screen: About },
-  Contact: { screen: Contact },
   NewDetail: { screen: NewDetail },
-  NewSport: { screen: NewSport },
-  NewSocial: { screen: NewSocial },
-  NewEducation: { screen: NewEducation },
-  NewEconomy: { screen: NewEconomy },
-  NewEntertainment: { screen: NewEntertainment },
-  NewCrime: { screen: NewCrime },
-  NewScience: { screen: NewScience },
-  NewAdvertise: { screen: NewAdvertise },
-  NewBusiness: { screen: NewBusiness },
-  Event: { screen: Event },
+  ReviewDetail: { screen: ReviewDetail },
+  StoryDetail: { screen: StoryDetail },
+  JobDetail: { screen: JobDetail },
+  EatDetail: { screen: EatDetail },
+  TravelDetail: { screen: TravelDetail },
+  PeopleDetail: { screen: PeopleDetail },
+  RoomDetail: { screen: RoomDetail },
   EventDetail: { screen: EventDetail },
   Hotel: { screen: Hotel },
   Apartment: { screen: Apartment },
   Resort: { screen: Resort },
   Guesthouse: { screen: Guesthouse },
-  Setting: { screen: setting }
 },
   {
     initialRouteName: "Tab",
     swipeEnabled: false,
-    headerMode: "none",
-      transitionConfig: () => ({
+    headerMode: "float",
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: 'black',
+      },
+      headerBackTitleStyle: {
+        color: 'white'
+      }
+    },
+    transitionConfig: () => ({
       screenInterpolator: sceneProps => {
         const { layout, position, scene } = sceneProps;
         const { index } = scene;
@@ -123,19 +83,19 @@ const AppNavigator = StackNavigator({
       }
     })
   });
-  
+
 
 export default class App extends Component {
 
   componentDidMount() {
-      // do stuff while splash screen is shown
-        // After having done stuff (such as async tasks) hide the splash screen
-        SplashScreen.hide();
+    // do stuff while splash screen is shown
+    // After having done stuff (such as async tasks) hide the splash screen
+    SplashScreen.hide();
   }
 
   render() {
     return (
-      <AppNavigator />
+        <AppNavigator />
     );
   }
 }

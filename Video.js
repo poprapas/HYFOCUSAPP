@@ -15,10 +15,59 @@ import {
 
 import Color from 'react-native-material-color';
 import ActionBar from 'react-native-action-bar';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Foundation from 'react-native-vector-icons/dist/Foundation';
 
 const { width, height } = Dimensions.get("window");
 
 export default class Video extends Component {
+
+    static navigationOptions = ({ navigation }) => ({
+        headerTitle:
+            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                <Foundation
+                    name="play-video"
+                    size={20}
+                    color='white'
+                    style={{
+                        top: 5
+                    }}
+                />
+                <Text style={{
+                    textAlign: 'center',
+                    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+                    fontSize: Platform.OS == 'ios' ? 18 : 15,
+                    color: 'white',
+                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                }}> วิดีโอ
+            </Text>
+            </View>,
+        headerTitleStyle: {
+            alignSelf: 'center',
+        },
+        headerRight:
+            <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
+                <Ionicons
+                    name="logo-facebook"
+                    size={25}
+                    color='white'
+                    style={{
+                        paddingHorizontal: 10
+                    }}
+                />
+            </TouchableOpacity>,
+        headerLeft:
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Ionicons
+                    name="ios-arrow-back"
+                    size={30}
+                    color='white'
+                    style={{
+                        paddingHorizontal: 10
+                    }}
+                />
+            </TouchableOpacity>
+    })
 
     constructor(props) {
         super(props);
@@ -104,22 +153,6 @@ export default class Video extends Component {
         if (this.state.isLoading || this.state.refreshing) {
             return (
                 <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
-                    <ActionBar
-                        containerStyle={styles.bar}
-                        backgroundColor={'black'}
-                        leftIconName={'back'}
-                        onLeftPress={() => navigate('Tab')}
-                        icontitles={"play-video"}
-                        title={'วิดีโอ'}
-                        rightIcons={[
-                            {
-                                name: 'facebook',
-                                onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                                //onPress: () => navigate('Social'),
-                            },
-                        ]}
-                    />
-
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
                         <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
@@ -141,22 +174,6 @@ export default class Video extends Component {
 
         return (
             <View style={styles.container}>
-                <ActionBar
-                    containerStyle={styles.bar}
-                    backgroundColor={'black'}
-                    leftIconName={'back'}
-                    onLeftPress={() => navigate('Tab')}
-                    icontitles={"play-video"}
-                    title={'วิดีโอ'}
-                    rightIcons={[
-                        {
-                            name: 'facebook',
-                            onPress: () => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/'),
-                            //onPress: () => navigate('Social'),
-                        },
-                    ]}
-                />
-
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
                     <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
@@ -179,9 +196,6 @@ export default class Video extends Component {
                     }
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) => <View style={styles.listView}>
-                        <View style={{ paddingBottom: 5 }}>
-                            <Text style={styles.titleText}> {rowData.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
-                        </View>
                         <TouchableOpacity
                             key={rowData.id}
                             onPress={() => navigate('VideoDetail',
@@ -195,16 +209,25 @@ export default class Video extends Component {
                                 }
                             )}
                         >
+                            <View style={{ paddingBottom: 5 }}>
+                                <Text style={styles.titleText}> {rowData.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
+                            </View>
                             <Image source={{ uri: rowData.FEATURE }}
                                 style={{
                                     width: width - 10,
                                     height: (width - 10) * 0.625,
-                                    backgroundColor: '#6a5750'
+                                    //backgroundColor: '#6a5750',
+                                    borderRadius: 10
                                 }}
                             />
                             <View style={{ paddingTop: 5 }}>
                                 <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
                             </View>
+                            <View style={{
+                                height: 1,
+                                backgroundColor: 'rgba(240,240,240,0.2)',
+                                marginTop: 10
+                            }}></View>
                         </TouchableOpacity>
                     </View>
                     }

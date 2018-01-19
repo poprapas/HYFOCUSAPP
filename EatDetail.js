@@ -20,10 +20,62 @@ import Color from 'react-native-material-color';
 import HTMLView from 'react-native-htmlview';
 import Icon from 'react-native-vector-icons/dist/Entypo';
 import Icons from 'react-native-vector-icons/dist/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 
 const { width, height } = Dimensions.get("window");
 
 export default class EatDetail extends Component {
+
+    static navigationOptions = ({ navigation }) => ({
+        headerTitle:
+            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                <Image
+                    source={require('./assets/images/eat-icon.png')}
+                    style={{
+                        width: 25,
+                        height: 25,
+                        top: Platform.OS == 'ios' ? 0 : 3,
+                    }}
+                />
+                <Text style={{
+                    textAlign: 'center',
+                    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+                    fontSize: Platform.OS == 'ios' ? 18 : 15,
+                    color: 'white',
+                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                }}> ของกินหาดใหญ่
+            </Text>
+            </View>,
+        headerTitleStyle: {
+            alignSelf: 'center',
+        },
+        headerRight:
+            <TouchableOpacity onPress={() => Platform.OS == 'ios' ?
+                Share.share({ url: navigation.state.params.url })
+                :
+                Share.share({ message: navigation.state.params.url })}>
+                <Feather
+                    name="share-2"
+                    size={20}
+                    color='white'
+                    style={{
+                        paddingHorizontal: 10
+                    }}
+                />
+            </TouchableOpacity>,
+        headerLeft:
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Ionicons
+                    name="ios-arrow-back"
+                    size={30}
+                    color='white'
+                    style={{
+                        paddingHorizontal: 10
+                    }}
+                />
+            </TouchableOpacity>
+    })
 
     renderNode(node, index, siblings, parent, defaultRenderer) {
 
@@ -82,23 +134,6 @@ export default class EatDetail extends Component {
         return (
 
             <View style={styles.container}>
-                <ActionBar
-                    containerStyle={styles.bar}
-                    backgroundColor={'black'}
-                    leftIconName={'back'}
-                    onLeftPress={() => goBack()}
-                    icontitle={require('./assets/images/eat-icon.png')}
-                    title={'ของกินหาดใหญ่'}
-                    rightIcons={[
-                        {
-                            name: 'share',
-                            onPress: () => Platform.OS == 'ios' ?
-                                Share.share({ url: this.props.navigation.state.params.url})
-                                :
-                                Share.share({ message: this.props.navigation.state.params.url})
-                        },
-                    ]}
-                />
 
                 <View style={{ flexDirection: 'row', paddingBottom: 5, justifyContent: 'space-between' }}>
 
