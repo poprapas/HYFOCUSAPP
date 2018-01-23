@@ -386,26 +386,23 @@ class SideMenu extends Component {
           }}>
           </View>
 
-          {
-            Platform.OS == 'ios' ?
-              <View>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Setting')}>
-                  <View style={styles.navSectionStyle}>
-                    <Icons name="settings" size={25} color='white' style={{ width: 28 }} />
-                    <Text style={styles.navItemStyle}>
-                      ตั้งค่า
-                  </Text>
-                  </View>
-                </TouchableOpacity>
+          <View>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Setting')}>
+              <View style={styles.navSectionStyle}>
+                <Icons name="settings" size={25} color='white' style={{ width: 28 }} />
+                <Text style={styles.navItemStyle}>
+                  ตั้งค่า
+                </Text>
+              </View>
+            </TouchableOpacity>
 
-                < View style={{
-                  height: 1,
-                  backgroundColor: 'rgba(240,240,240,0.2)',
-                  width
-                }}>
-                </View>
-              </View> : null
-          }
+            <View style={{
+              height: 1,
+              backgroundColor: 'rgba(240,240,240,0.2)',
+              width
+            }}>
+            </View>
+          </View>
 
         </View>
       </ScrollView >

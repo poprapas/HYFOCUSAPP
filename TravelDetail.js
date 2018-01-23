@@ -133,7 +133,7 @@ export default class TravelDetail extends Component {
 
             <View style={styles.container}>
 
-                <View style={{ flexDirection: 'row', paddingBottom: 5, justifyContent: 'space-between' }}>
+                {/* <View style={{ flexDirection: 'row', paddingBottom: 5, justifyContent: 'space-between' }}>
 
                     <TouchableOpacity onPress={() => navigate('Tab')}>
                         <Image source={require('./assets/images/banner2.jpg')}
@@ -144,11 +144,11 @@ export default class TravelDetail extends Component {
                         <Text style={styles.travelfont}> ---- Travel ---- </Text>
                     </View>
 
-                </View>
+                </View> */}
 
                 <View style={styles.listView}>
                     <ScrollView style={{
-                        height: Platform.OS == 'ios' ? height - 170 : height - 175,
+                        height: Platform.OS == 'ios' ? height - 50 : height - 65,
                         width: "100%"
                     }}>
                         <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>

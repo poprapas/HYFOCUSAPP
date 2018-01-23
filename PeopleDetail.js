@@ -105,7 +105,7 @@ export default class PeopleDetail extends Component {
         return (
 
             <View style={styles.container}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
                     <TouchableOpacity onPress={() => navigate('Tab')}>
                         <Image source={require('./assets/images/banner2.jpg')}
@@ -115,11 +115,11 @@ export default class PeopleDetail extends Component {
                     <View style={{ flex: 1 }}>
                         <Text style={styles.peoplefont}> ---- วิถีชีวิต ---- </Text>
                     </View>
-                </View>
+                </View> */}
 
                 <View style={styles.listView}>
                     <ScrollView style={{
-                        height: Platform.OS == 'ios' ? height - 165 : height - 170,
+                        height: Platform.OS == 'ios' ? height - 50 : height - 65,
                         width: "100%"
                     }}>
                         <View style={{ alignItems: 'center' }}>

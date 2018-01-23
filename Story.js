@@ -153,7 +153,7 @@ export default class Story extends Component {
         if (this.state.isLoading || this.state.refreshing) {
             return (
                 <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
                         <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
                             <Image source={require('./assets/images/banner2.jpg')}
@@ -163,7 +163,7 @@ export default class Story extends Component {
                         <View style={{ flex: 1 }}>
                             <Text style={styles.storyfont}> ---- Story ---- </Text>
                         </View>
-                    </View>
+                    </View> */}
 
                     <ActivityIndicator
                         style={{ paddingTop: 20 }}
@@ -175,7 +175,7 @@ export default class Story extends Component {
 
         return (
             <View style={styles.container}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
                     <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
                         <Image source={require('./assets/images/banner2.jpg')}
@@ -185,7 +185,7 @@ export default class Story extends Component {
                     <View style={{ flex: 1 }}>
                         <Text style={styles.storyfont}> ---- Story ---- </Text>
                     </View>
-                </View>
+                </View> */}
 
                 <ListView
                     refreshControl={

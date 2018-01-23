@@ -175,7 +175,7 @@ export default class Jobs extends Component {
     if (this.state.isLoading || this.state.refreshing) {
       return (
         <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
+          {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
 
             <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
               <Image source={require('./assets/images/banner2.jpg')}
@@ -185,6 +185,60 @@ export default class Jobs extends Component {
             <View style={{ flex: 1 }}>
               <Text style={styles.jobfont}> - หางานหาดใหญ่ - </Text>
             </View>
+
+          </View> */}
+
+          <View style={{ flexDirection: 'row' }}>
+            <View style={styles.search}>
+
+              <View style={{
+                alignSelf: 'center',
+                paddingLeft: Platform.OS == 'ios' ? 0 : 5,
+              }}>
+                <Icon
+                  name='search'
+                  color='black'
+                  size={20}
+                />
+              </View>
+
+              <View style={{ flexDirection: 'column' }}>
+                <TextInput
+                  style={styles.searchInput}
+                  placeholder=' ค้นหาตำแหน่ง...'
+                  placeholderTextColor='#686868'
+                  underlineColorAndroid="transparent"
+                  value={this.state.find}
+                  onChangeText={(find) => this.setState({ find: find })}
+                />
+              </View>
+              <TouchableOpacity
+                onPress={() => this.setState({ find: '' })}
+                style={{ alignSelf: 'center' }}>
+                <Ionicons
+                  name='md-close-circle'
+                  color='black'
+                  size={20}
+                />
+              </TouchableOpacity>
+
+            </View>
+
+
+            <TouchableOpacity
+              onPress={() => this.search()}
+              style={{
+                alignSelf: 'center',
+                marginRight: 5,
+                borderRadius: 10,
+                backgroundColor: 'black',
+                overflow: 'hidden'
+              }}
+            >
+              <Text style={styles.button}>
+                ค้นหา
+            </Text>
+            </TouchableOpacity>
 
           </View>
 
@@ -199,7 +253,7 @@ export default class Jobs extends Component {
 
       <View style={styles.container}>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
+        {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
 
           <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
             <Image source={require('./assets/images/banner2.jpg')}
@@ -210,7 +264,7 @@ export default class Jobs extends Component {
             <Text style={styles.jobfont}> - หางานหาดใหญ่ - </Text>
           </View>
 
-        </View>
+        </View> */}
         <View style={{ flexDirection: 'row' }}>
           <View style={styles.search}>
 
@@ -266,7 +320,6 @@ export default class Jobs extends Component {
         </View>
 
         <View>
-          {console.log(this.state.dataSource.rowIdentities[0].length)}
           {this.state.dataSource.rowIdentities[0].length == 0 ?
             <Text style={{
               fontSize: 18,
@@ -428,7 +481,7 @@ const styles = StyleSheet.create({
     color: 'black',
     textAlign: 'left',
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    paddingTop: Platform.OS == 'ios' ? 5 : 2,
+    paddingTop: Platform.OS == 'ios' ? 6 : 2,
   },
   titleText2: {
     fontSize: 15,

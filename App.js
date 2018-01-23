@@ -29,10 +29,10 @@ import PeopleDetail from "./PeopleDetail"
 import RoomDetail from "./RoomDetail"
 import NewDetail from "./NewDetail"
 import EventDetail from "./EventDetail"
-import Hotel from "./Hotel"
-import Apartment from "./Apartment"
-import Resort from "./Resort"
-import Guesthouse from "./Guesthouse"
+//import Hotel from "./Hotel"
+//import Apartment from "./Apartment"
+//import Resort from "./Resort"
+//import Guesthouse from "./Guesthouse"
 import Tab from './Tab'
 
 const AppNavigator = StackNavigator({
@@ -47,10 +47,10 @@ const AppNavigator = StackNavigator({
   PeopleDetail: { screen: PeopleDetail },
   RoomDetail: { screen: RoomDetail },
   EventDetail: { screen: EventDetail },
-  Hotel: { screen: Hotel },
-  Apartment: { screen: Apartment },
-  Resort: { screen: Resort },
-  Guesthouse: { screen: Guesthouse },
+  //Hotel: { screen: Hotel },
+  //Apartment: { screen: Apartment },
+  //Resort: { screen: Resort },
+  //Guesthouse: { screen: Guesthouse },
 },
   {
     initialRouteName: "Tab",

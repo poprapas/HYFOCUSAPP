@@ -14,7 +14,8 @@ import {
     FlatList,
     PixelRatio,
     Share,
-    TouchableOpacity
+    TouchableOpacity,
+    AsyncStorage
 } from 'react-native';
 
 import ActionBar from 'react-native-action-bar';
@@ -25,10 +26,24 @@ import Icons from 'react-native-vector-icons/dist/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
+//import StarRating from 'react-native-star-rating';
 
 const { width, height } = Dimensions.get("window");
 
 export default class NewDetail extends Component {
+
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         starCount: 0,
+    //     };
+    // }
+
+    // onStarRatingPress(rating) {
+    //     this.setState({
+    //         starCount: rating,
+    //     });
+    // }
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
@@ -39,7 +54,7 @@ export default class NewDetail extends Component {
                     color='white'
                     style={{
                         top: 5,
-                      }}
+                    }}
                 />
                 <Text style={{
                     textAlign: 'center',
@@ -48,12 +63,13 @@ export default class NewDetail extends Component {
                     color: 'white',
                     paddingTop: Platform.OS == 'ios' ? 8 : 5,
                 }}> {navigation.state.params.type}
-            </Text>
+                </Text>
             </View>,
         headerTitleStyle: {
             alignSelf: 'center',
         },
         headerRight:
+        
             <TouchableOpacity onPress={() => Platform.OS == 'ios' ?
                 Share.share({ url: navigation.state.params.url })
                 :
@@ -151,7 +167,7 @@ export default class NewDetail extends Component {
 
                 <View style={styles.listView}>
                     <ScrollView style={{
-                        height: height - 60,
+                        height: Platform.OS == 'ios' ? height - 70 : height - 80,
                         width: "100%"
                     }}>
                         <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
@@ -179,7 +195,7 @@ export default class NewDetail extends Component {
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 20 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                             <Icons
                                 name="access-time"
                                 size={15}
@@ -190,6 +206,29 @@ export default class NewDetail extends Component {
                                 {this.props.navigation.state.params.date}
                             </Text>
                         </View>
+
+                        {/* <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 10 }}>
+
+                            <Text style={styles.star}>
+                                ให้คะแนน :
+                            </Text>
+
+                            <View style={{ paddingLeft: 5 }}>
+                                <StarRating
+                                    disabled={false}
+                                    emptyStar={'ios-star-outline'}
+                                    fullStar={'ios-star'}
+                                    halfStar={'ios-star-half'}
+                                    iconSet={'Ionicons'}
+                                    maxStars={5}
+                                    rating={this.state.starCount}
+                                    selectedStar={(rating) => this.onStarRatingPress(rating)}
+                                    starColor={'#ff9933'}
+                                    emptyStarColor={'white'}
+                                    starSize={20}
+                                />
+                            </View>
+                        </View> */}
 
                     </ScrollView>
 
@@ -231,6 +270,14 @@ const styles = StyleSheet.create({
         fontFamily: 'Times New Roman',
         paddingLeft: 3,
     },
+    star: {
+        fontSize: 16,
+        fontWeight: 'normal',
+        color: 'white',
+        textAlign: 'right',
+        fontFamily: 'Times New Roman',
+        paddingLeft: 3,
+    }
 });
 
 const styless = StyleSheet.create({

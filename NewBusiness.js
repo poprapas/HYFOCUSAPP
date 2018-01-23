@@ -154,7 +154,7 @@ export default class New extends Component {
         if (this.state.isLoading || this.state.refreshing) {
             return (
                 <View style={{ flex: 1, backgroundColor: Color.BROWN[600] }}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
                         <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
                             <Image source={require('./assets/images/banner2.jpg')}
@@ -165,7 +165,7 @@ export default class New extends Component {
                             <Text style={styles.bannerfont}> - ข่าวธุรกิจและเทคโนโลยี - </Text>
                         </View>
 
-                    </View>
+                    </View> */}
                     <ActivityIndicator
                         style={{ paddingTop: 20 }}
                         color='#d2a679' />
@@ -175,7 +175,7 @@ export default class New extends Component {
 
         return (
             <View style={styles.container}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
                     <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
                         <Image source={require('./assets/images/banner2.jpg')}
@@ -186,7 +186,7 @@ export default class New extends Component {
                         <Text style={styles.bannerfont}> - ข่าวธุรกิจและเทคโนโลยี - </Text>
                     </View>
 
-                </View>
+                </View> */}
 
                 <ListView
                     refreshControl={

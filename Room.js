@@ -82,11 +82,28 @@ export default class Room extends Component {
             start: 0,
             end: false,
             refreshing: false,
+            page: 'all'
         }
     }
 
     _fetchData(callback) {
-        fetch('https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=' + this.state.start + '&per_page=10')
+        let url = ''
+        if(this.state.page == 'all'){
+            url = 'https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=' + this.state.start + '&per_page=10'
+        }
+        else if (this.state.page == 'hotel'){
+            url = 'https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=1&start=' + this.state.start + '&per_page=10'
+        }
+        else if (this.state.page == 'apartment'){
+            url = 'https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=5&start=' + this.state.start + '&per_page=10'
+        }
+        else if (this.state.page == 'resort'){
+            url = 'https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=6&start=' + this.state.start + '&per_page=10'
+        }
+        else {
+            url = 'https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=7&start=' + this.state.start + '&per_page=10'
+        }  
+        fetch(url)
             .then(response => response.json())
             .then(callback)
             .catch(error => {
@@ -146,6 +163,20 @@ export default class Room extends Component {
         }
     }
 
+    gotoOtherpage(page){
+        this.setState({
+            dataSource: null,
+            isLoading: true,
+            isLoadingMore: false,
+            _data: null,
+            _dataAfter: "",
+            start: 0,
+            end: false,
+            refreshing: false,
+            page: page
+        }, this.componentDidMount)
+    }
+
     render() {
 
         const { navigate } = this.props.navigation;
@@ -153,7 +184,7 @@ export default class Room extends Component {
         if (this.state.isLoading || this.state.refreshing) {
             return (
                 <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
+                    {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
 
                         <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
                             <Image source={require('./assets/images/banner2.jpg')}
@@ -164,7 +195,7 @@ export default class Room extends Component {
                             <Text style={styles.roomfont}> --- ที่พักล่าสุด --- </Text>
                         </View>
 
-                    </View>
+                    </View> */}
 
                     <ActivityIndicator
                         style={{ paddingTop: 20 }}
@@ -175,7 +206,7 @@ export default class Room extends Component {
 
         return (
             <View style={styles.container}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
+                {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
 
                     <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
                         <Image source={require('./assets/images/banner2.jpg')}
@@ -186,7 +217,7 @@ export default class Room extends Component {
                         <Text style={styles.roomfont}> --- ที่พักล่าสุด --- </Text>
                     </View>
 
-                </View>
+                </View> */}
 
                 <ListView
                     refreshControl={
@@ -290,42 +321,48 @@ export default class Room extends Component {
 
                 <View style={{
                     flexDirection: 'row',
-                    paddingLeft: 1,
-                    paddingTop: 4,
-                    paddingBottom: 4,
+                    paddingTop: 5,
+                    paddingBottom: 5,
                     justifyContent: 'space-around'
                 }}>
-
                     <Button
                         containerStyle={styles.selectbutton}
                         disabledContainerStyle={{ backgroundColor: 'grey' }}
                         style={styles.button}
-                        onPress={() => navigate('Hotel')}>
-                        Hotel >>
+                        onPress={() => this.gotoOtherpage('all') }>
+                        All
                     </Button>
 
                     <Button
                         containerStyle={styles.selectbutton}
                         disabledContainerStyle={{ backgroundColor: 'grey' }}
                         style={styles.button}
-                        onPress={() => navigate('Apartment')}>
-                        Apartment >>
+                        onPress={() => this.gotoOtherpage('hotel') }>
+                        Hotel
                     </Button>
 
                     <Button
                         containerStyle={styles.selectbutton}
                         disabledContainerStyle={{ backgroundColor: 'grey' }}
                         style={styles.button}
-                        onPress={() => navigate('Resort')}>
-                        Resort >>
+                        onPress={() => this.gotoOtherpage('apartment') }>
+                        Apartment
                     </Button>
 
                     <Button
                         containerStyle={styles.selectbutton}
                         disabledContainerStyle={{ backgroundColor: 'grey' }}
                         style={styles.button}
-                        onPress={() => navigate('Guesthouse')}>
-                        Guesthouse >>
+                        onPress={() => this.gotoOtherpage('resort') }>
+                        Resort
+                    </Button>
+
+                    <Button
+                        containerStyle={styles.selectbutton}
+                        disabledContainerStyle={{ backgroundColor: 'grey' }}
+                        style={styles.button}
+                        onPress={() => this.gotoOtherpage('guesthouse') }>
+                        Guesthouse
                     </Button>
 
                 </View>
@@ -338,8 +375,6 @@ export default class Room extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //justifyContent: 'center',
-        //alignItems: 'center',
         backgroundColor: Color.BROWN[800],
     },
     logo: {
@@ -380,13 +415,13 @@ const styles = StyleSheet.create({
         color: '#696969'
     },
     button: {
-        fontSize: 14,
+        fontSize: Platform.OS == 'ios' ? width / 30 : width / 40,
         fontWeight: 'normal',
         color: 'white',
         textAlign: 'center',
         padding: 5,
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        marginTop: Platform.OS == 'ios' ? 5 : 0,
+        marginTop: Platform.OS == 'ios' ? 5 : 2,
     },
     selectbutton: {
         height: 30,
@@ -395,5 +430,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#30231d',
         backgroundColor: '#795548',
+        width: Platform.OS == 'ios' ? width / 5.3 : width / 5.5
     },
 });

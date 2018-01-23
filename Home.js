@@ -82,21 +82,27 @@ export default class Home extends Component {
   })
 
   _notificationAndroid(_this) {
-    let notificationTime = new Date();
-    if (notificationTime.getHours() < 18) {
-      notificationTime.setHours(18);
-      notificationTime.setMinutes(0);
-      notificationTime.setSeconds(0);
-      notificationTime.setMilliseconds(0);
-      PushNotification.localNotificationSchedule({
-        id: '1',
-        title: "HatyaiFocus",
-        date: new Date(notificationTime),
-        message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
-        color: '#a6ff00',
-        repeatType: 'day',
-      });
-    }
+    AsyncStorage.getItem('notification').then((data) => {
+      console.log(data)
+      if (data == null || data == 'true') {
+        let notificationTime = new Date();
+        if (notificationTime.getHours() < 18) {
+          notificationTime.setHours(18);
+          notificationTime.setMinutes(0);
+          notificationTime.setSeconds(0);
+          notificationTime.setMilliseconds(0);
+          PushNotification.localNotificationSchedule({
+            id: '1',
+            title: "HatyaiFocus",
+            date: new Date(notificationTime),
+            message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
+            color: '#a6ff00',
+            repeatType: 'day',
+          });
+        }
+      }
+    })
+
   }
   _notificationiOS(_this) {
     PushNotification.configure({
@@ -151,7 +157,7 @@ export default class Home extends Component {
       this._notificationAndroid(this);
     }
 
-    return fetch('https://www.hatyaifocus.com/rest/api.php?action=news&cat=&start=0&per_page=10')
+    return fetch('https://www.hatyaifocus.com/rest/api.php?action=news&cat=&ID=&start=0&per_page=10')
       .then((response) => response.json())
       .then((responseJson) => {
         //console.log(responseJson)
@@ -182,12 +188,44 @@ export default class Home extends Component {
     }
   }
 
+  favorite(action, id) {
+    AsyncStorage.getItem('favorite').then((data) => {
+      console.log(JSON.parse(data))
+      let main = []
+      if (data == null) {
+        AsyncStorage.setItem('favorite', JSON.stringify([[action, id]]))
+      }
+      else {
+        let newdata = JSON.parse(data)
+        let found = false
+        for(let i in newdata){
+          if ( newdata[i][0] == action && newdata[i][1] == id)
+            found = true
+        } 
+        if( !found ){
+          newdata.push([action, id])
+          AsyncStorage.setItem('favorite', JSON.stringify(newdata))
+        }
+      }
+    })
+    //AsyncStorage.removeItem('favorite')
+
+  }
+
   render() {
 
     if (this.state.isLoading || this.state.refreshing) {
       return (
         <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+
+          <View>
+            <StatusBar
+              backgroundColor="black"
+              barStyle="light-content"
+            />
+          </View>
+
+          {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
             <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
               <Image source={require('./assets/images/banner2.jpg')}
@@ -198,7 +236,7 @@ export default class Home extends Component {
               <Text style={styles.newfont}> --- ข่าวล่าสุด --- </Text>
             </View>
 
-          </View>
+          </View> */}
 
           <ActivityIndicator
             style={{ paddingTop: 20 }}
@@ -219,7 +257,7 @@ export default class Home extends Component {
           />
         </View>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
           <TouchableOpacity onPress={() => navigate('Tab')}>
             <Image source={require('./assets/images/banner2.jpg')}
@@ -230,7 +268,7 @@ export default class Home extends Component {
             <Text style={styles.newfont}> --- ข่าวล่าสุด --- </Text>
           </View>
 
-        </View>
+        </View> */}
 
         <ScrollView
           refreshControl={
@@ -268,8 +306,19 @@ export default class Home extends Component {
                     borderRadius: 10,
                   }}
                 />
-                <View style={{ paddingTop: 5 }}>
+                <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                  <TouchableOpacity onPress={() => this.favorite('news', rowData.ID)}>
+                    <MaterialIcons
+                      name="star-border"
+                      size={20}
+                      color='white'
+                    />
+                  </TouchableOpacity>
+
+
                   <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
+
                 </View>
                 <View style={{
                   height: 1,
