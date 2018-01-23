@@ -81,27 +81,34 @@ export default class Room extends Component {
             start: 0,
             end: false,
             refreshing: false,
-            page: 'all'
+            page: 'all',
+            isMounted: true
         }
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            isMounted: false
+        })
     }
 
     _fetchData(callback) {
         let url = ''
-        if(this.state.page == 'all'){
+        if (this.state.page == 'all') {
             url = 'https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=' + this.state.start + '&per_page=10'
         }
-        else if (this.state.page == 'hotel'){
+        else if (this.state.page == 'hotel') {
             url = 'https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=1&start=' + this.state.start + '&per_page=10'
         }
-        else if (this.state.page == 'apartment'){
+        else if (this.state.page == 'apartment') {
             url = 'https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=5&start=' + this.state.start + '&per_page=10'
         }
-        else if (this.state.page == 'resort'){
+        else if (this.state.page == 'resort') {
             url = 'https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=6&start=' + this.state.start + '&per_page=10'
         }
         else {
             url = 'https://www.hatyaifocus.com/rest/api.php?action=rooms&cat=7&start=' + this.state.start + '&per_page=10'
-        }  
+        }
         fetch(url)
             .then(response => response.json())
             .then(callback)
@@ -123,13 +130,15 @@ export default class Room extends Component {
                 }
                 else {
                     const data = this.state._data.concat(responseJson);
-                    this.setState({
-                        dataSource: this.state.dataSource.cloneWithRows(data),
-                        isLoadingMore: false,
-                        _data: data,
-                        _dataAfter: responseJson.data,
-                        start: this.state.start + 10,
-                    });
+                    if (this.state.isMounted) {
+                        this.setState({
+                            dataSource: this.state.dataSource.cloneWithRows(data),
+                            isLoadingMore: false,
+                            _data: data,
+                            _dataAfter: responseJson.data,
+                            start: this.state.start + 10,
+                        });
+                    }
                 }
             });
         }
@@ -142,14 +151,16 @@ export default class Room extends Component {
                 rowHasChanged: (r1, r2) => r1 !== r2,
             });
             const data = responseJson;
-            this.setState({
-                dataSource: ds.cloneWithRows(data),
-                isLoading: false,
-                _data: data,
-                _dataAfter: responseJson.data,
-                start: 10,
-                refreshing: false,
-            });
+            if (this.state.isMounted) {
+                this.setState({
+                    dataSource: ds.cloneWithRows(data),
+                    isLoading: false,
+                    _data: data,
+                    _dataAfter: responseJson.data,
+                    start: 10,
+                    refreshing: false,
+                });
+            }
         });
     }
 
@@ -162,18 +173,20 @@ export default class Room extends Component {
         }
     }
 
-    gotoOtherpage(page){
-        this.setState({
-            dataSource: null,
-            isLoading: true,
-            isLoadingMore: false,
-            _data: null,
-            _dataAfter: "",
-            start: 0,
-            end: false,
-            refreshing: false,
-            page: page
-        }, this.componentDidMount)
+    gotoOtherpage(page) {
+        if (this.state.isMounted) {
+            this.setState({
+                dataSource: null,
+                isLoading: true,
+                isLoadingMore: false,
+                _data: null,
+                _dataAfter: "",
+                start: 0,
+                end: false,
+                refreshing: false,
+                page: page
+            }, this.componentDidMount)
+        }
     }
 
     render() {
@@ -328,7 +341,7 @@ export default class Room extends Component {
                         containerStyle={styles.selectbutton}
                         disabledContainerStyle={{ backgroundColor: 'grey' }}
                         style={styles.button}
-                        onPress={() => this.gotoOtherpage('all') }>
+                        onPress={() => this.gotoOtherpage('all')}>
                         All
                     </Button>
 
@@ -336,7 +349,7 @@ export default class Room extends Component {
                         containerStyle={styles.selectbutton}
                         disabledContainerStyle={{ backgroundColor: 'grey' }}
                         style={styles.button}
-                        onPress={() => this.gotoOtherpage('hotel') }>
+                        onPress={() => this.gotoOtherpage('hotel')}>
                         Hotel
                     </Button>
 
@@ -344,7 +357,7 @@ export default class Room extends Component {
                         containerStyle={styles.selectbutton}
                         disabledContainerStyle={{ backgroundColor: 'grey' }}
                         style={styles.button}
-                        onPress={() => this.gotoOtherpage('apartment') }>
+                        onPress={() => this.gotoOtherpage('apartment')}>
                         Apartment
                     </Button>
 
@@ -352,7 +365,7 @@ export default class Room extends Component {
                         containerStyle={styles.selectbutton}
                         disabledContainerStyle={{ backgroundColor: 'grey' }}
                         style={styles.button}
-                        onPress={() => this.gotoOtherpage('resort') }>
+                        onPress={() => this.gotoOtherpage('resort')}>
                         Resort
                     </Button>
 
@@ -360,7 +373,7 @@ export default class Room extends Component {
                         containerStyle={styles.selectbutton}
                         disabledContainerStyle={{ backgroundColor: 'grey' }}
                         style={styles.button}
-                        onPress={() => this.gotoOtherpage('guesthouse') }>
+                        onPress={() => this.gotoOtherpage('guesthouse')}>
                         Guesthouse
                     </Button>
 

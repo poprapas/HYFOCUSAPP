@@ -80,6 +80,7 @@ export default class Eat extends Component {
             start: 0,
             end: false,
             refreshing: false,
+            isMounted: true
         }
     }
 
@@ -105,13 +106,15 @@ export default class Eat extends Component {
                 }
                 else {
                     const data = this.state._data.concat(responseJson);
-                    this.setState({
-                        dataSource: this.state.dataSource.cloneWithRows(data),
-                        isLoadingMore: false,
-                        _data: data,
-                        _dataAfter: responseJson.data,
-                        start: this.state.start + 10,
-                    });
+                    if (this.state.isMounted) {
+                        this.setState({
+                            dataSource: this.state.dataSource.cloneWithRows(data),
+                            isLoadingMore: false,
+                            _data: data,
+                            _dataAfter: responseJson.data,
+                            start: this.state.start + 10,
+                        });
+                    }
                 }
             });
         }
@@ -124,15 +127,23 @@ export default class Eat extends Component {
                 rowHasChanged: (r1, r2) => r1 !== r2,
             });
             const data = responseJson;
-            this.setState({
-                dataSource: ds.cloneWithRows(data),
-                isLoading: false,
-                _data: data,
-                _dataAfter: responseJson.data,
-                start: 10,
-                refreshing: false,
-            });
+            if (this.state.isMounted) {
+                this.setState({
+                    dataSource: ds.cloneWithRows(data),
+                    isLoading: false,
+                    _data: data,
+                    _dataAfter: responseJson.data,
+                    start: 10,
+                    refreshing: false,
+                });
+            }
         });
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            isMounted: false
+        })
     }
 
     _onRefresh() {

@@ -20,16 +20,8 @@ import Review from './Review'
 import Setting from './Setting'
 import SideMenu from './SideMenu'
 import About from "./About"
-import NewSport from "./NewSport"
-import NewSocial from "./NewSocial"
-import NewEducation from "./NewEducation"
-import NewEconomy from "./NewEconomy"
-import NewEntertainment from "./NewEntertainment"
-import NewCrime from "./NewCrime"
-import NewScience from "./NewScience"
-import NewAdvertise from "./NewAdvertise"
-import NewBusiness from "./NewBusiness"
-import favorite from "./Favorite"
+import New from "./New"
+import Favorite from "./Favorite"
 
 const Tab = TabNavigator({
     หางาน: {
@@ -120,15 +112,7 @@ export default Drawer = DrawerNavigator({
     SideMenu: { screen: SideMenu },
     Story: { screen: Story },
     People: { screen: People },
-    NewSport: { screen: NewSport },
-    NewSocial: { screen: NewSocial },
-    NewEducation: { screen: NewEducation },
-    NewEconomy: { screen: NewEconomy },
-    NewEntertainment: { screen: NewEntertainment },
-    NewCrime: { screen: NewCrime },
-    NewScience: { screen: NewScience },
-    NewAdvertise: { screen: NewAdvertise },
-    NewBusiness: { screen: NewBusiness },
+    New: { screen: New },
     Event: { screen: Events },
     Setting: { screen: Setting },
     Favorite: { screen: Favorite }

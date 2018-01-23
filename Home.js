@@ -21,7 +21,7 @@ import {
 
 
 import Color from 'react-native-material-color';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DrawerLayout from 'react-native-drawer-layout';
@@ -83,7 +83,7 @@ export default class Home extends Component {
 
   _notificationAndroid(_this) {
     AsyncStorage.getItem('notification').then((data) => {
-      console.log(data)
+      //console.log(data)
       if (data == null || data == 'true') {
         let notificationTime = new Date();
         if (notificationTime.getHours() < 18) {
@@ -141,15 +141,23 @@ export default class Home extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      drawerClosed: true,
       slide: [],
       refreshing: false,
       progress: new Animated.Value(0),
       size: { width, height },
+      isMounted: true
     }
   }
 
+  componentWillUnmount() {
+    this.setState({
+      isMounted: false
+    })
+  }
+
   componentDidMount() {
+
+    //AsyncStorage.removeItem('favorite')
 
     if (Platform.OS == 'ios') {
       this._notificationiOS(this);
@@ -165,15 +173,17 @@ export default class Home extends Component {
         fetch('https://www.hatyaifocus.com/rest/api.php?action=slider')
           .then((response2) => response2.json())
           .then((responseJson2) => {
-            this.setState({
-              isLoading: false,
-              dataSource: ds.cloneWithRows(responseJson),
-              slide: responseJson2,
-              refreshing: false
-            }, function () {
-              // do something with new state
-              StatusBar.setBarStyle('light-content', true);
-            });
+            if (this.state.isMounted) {
+              this.setState({
+                isLoading: false,
+                dataSource: ds.cloneWithRows(responseJson),
+                slide: responseJson2,
+                refreshing: false
+              }, function () {
+                // do something with new state
+                StatusBar.setBarStyle('light-content', true);
+              })
+            };
           })
       })
       .catch((error) => {
@@ -190,7 +200,7 @@ export default class Home extends Component {
 
   favorite(action, id) {
     AsyncStorage.getItem('favorite').then((data) => {
-      console.log(JSON.parse(data))
+      //console.log(JSON.parse(data))
       let main = []
       if (data == null) {
         AsyncStorage.setItem('favorite', JSON.stringify([[action, id]]))
@@ -198,18 +208,17 @@ export default class Home extends Component {
       else {
         let newdata = JSON.parse(data)
         let found = false
-        for(let i in newdata){
-          if ( newdata[i][0] == action && newdata[i][1] == id)
+        for (let i in newdata) {
+          if (newdata[i][0] == action && newdata[i][1] == id)
             found = true
-        } 
-        if( !found ){
+        }
+        if (!found) {
           newdata.push([action, id])
           AsyncStorage.setItem('favorite', JSON.stringify(newdata))
         }
       }
     })
     //AsyncStorage.removeItem('favorite')
-
   }
 
   render() {
@@ -292,7 +301,8 @@ export default class Home extends Component {
                     description: rowData.DESCRIPTION,
                     view: rowData.VIEWS,
                     date: rowData.DATEIN,
-                    url: rowData.URL
+                    url: rowData.URL,
+                    id: rowData.ID
                   }
                 )}
               >
@@ -309,17 +319,20 @@ export default class Home extends Component {
                 <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'space-between' }}>
 
                   <TouchableOpacity onPress={() => this.favorite('news', rowData.ID)}>
-                    <MaterialIcons
-                      name="star-border"
-                      size={20}
+                    <Feather
+                      name="download"
+                      size={16}
                       color='white'
+                      style={{
+                        top: 7
+                      }}
                     />
                   </TouchableOpacity>
-
 
                   <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
 
                 </View>
+
                 <View style={{
                   height: 1,
                   backgroundColor: 'rgba(240,240,240,0.2)',

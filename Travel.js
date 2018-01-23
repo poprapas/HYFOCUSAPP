@@ -80,6 +80,7 @@ export default class Story extends Component {
             start: 0,
             end: false,
             refreshing: false,
+            isMounted: true
         }
     }
 
@@ -105,13 +106,15 @@ export default class Story extends Component {
                 }
                 else {
                     const data = this.state._data.concat(responseJson);
-                    this.setState({
-                        dataSource: this.state.dataSource.cloneWithRows(data),
-                        isLoadingMore: false,
-                        _data: data,
-                        _dataAfter: responseJson.data,
-                        start: this.state.start + 10,
-                    });
+                    if (this.state.isMounted) {
+                        this.setState({
+                            dataSource: this.state.dataSource.cloneWithRows(data),
+                            isLoadingMore: false,
+                            _data: data,
+                            _dataAfter: responseJson.data,
+                            start: this.state.start + 10,
+                        });
+                    }
                 }
             });
         }
@@ -124,15 +127,23 @@ export default class Story extends Component {
                 rowHasChanged: (r1, r2) => r1 !== r2,
             });
             const data = responseJson;
-            this.setState({
-                dataSource: ds.cloneWithRows(data),
-                isLoading: false,
-                _data: data,
-                _dataAfter: responseJson.data,
-                start: 10,
-                refreshing: false,
-            });
+            if (this.state.isMounted) {
+                this.setState({
+                    dataSource: ds.cloneWithRows(data),
+                    isLoading: false,
+                    _data: data,
+                    _dataAfter: responseJson.data,
+                    start: 10,
+                    refreshing: false,
+                });
+            }
         });
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            isMounted: false
+        })
     }
 
     _onRefresh() {
@@ -233,24 +244,24 @@ export default class Story extends Component {
                             </View>
                         </TouchableOpacity>
                     </View>
-                        }
+                    }
 
                     onEndReached={() =>
-                            this.fetchMore()}
-                        renderFooter={() => {
-                            if (this.state.end) {
-                                <View />
-                            }
-                            else {
-                                return (
-                                    this.state.isLoadingMore &&
-                                    <View style={{ flex: 1, padding: 10 }}>
-                                        <ActivityIndicator size="small" />
-                                    </View>
-                                )
-                            }
-                        }}
-                        />
+                        this.fetchMore()}
+                    renderFooter={() => {
+                        if (this.state.end) {
+                            <View />
+                        }
+                        else {
+                            return (
+                                this.state.isLoadingMore &&
+                                <View style={{ flex: 1, padding: 10 }}>
+                                    <ActivityIndicator size="small" />
+                                </View>
+                            )
+                        }
+                    }}
+                />
 
             </View>
         );
@@ -258,31 +269,31 @@ export default class Story extends Component {
 }
 
 const styles = StyleSheet.create({
-                    container: {
-                    flex: 1,
+    container: {
+        flex: 1,
         //justifyContent: 'center',
         //alignItems: 'center',
         backgroundColor: Color.BROWN[800],
     },
     logo: {
-                    height: 110,
+        height: 110,
         width: 150,
     },
     travelfont: {
-                    fontSize: width * 0.07,
+        fontSize: width * 0.07,
         paddingTop: Platform.OS === 'ios' ? 45 : 40,
         alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
-                    paddingLeft: 5,
+        paddingLeft: 5,
         paddingRight: 5,
         paddingTop: 5,
         paddingBottom: 20
     },
     moredetail: {
-                    fontSize: 14,
+        fontSize: 14,
         fontWeight: 'normal',
         color: 'white',
         textAlign: 'right',
@@ -291,7 +302,7 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline'
     },
     titleText: {
-                    fontSize: 18,
+        fontSize: 18,
         fontWeight: 'normal',
         color: 'white',
         textAlign: 'center',

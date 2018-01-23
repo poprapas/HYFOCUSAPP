@@ -70,7 +70,7 @@ class SideMenu extends Component {
               }}>
               </View>
 
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewSport')}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('New', {cat: 1, topic: 'ข่าวกีฬา'})}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวกีฬา
@@ -85,7 +85,7 @@ class SideMenu extends Component {
               }}>
               </View>
 
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewSocial')}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('New', {cat: 2, topic: 'ข่าวสัมคมและการเมือง'})}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวสัมคมและการเมือง
@@ -100,7 +100,7 @@ class SideMenu extends Component {
               }}>
               </View>
 
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewEducation')}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('New', {cat: 3, topic: 'ข่าวการศึกษา'})}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวการศึกษา
@@ -115,7 +115,7 @@ class SideMenu extends Component {
               }}>
               </View>
 
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewEconomy')}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('New', {cat: 4, topic: 'ข่าวเศรษฐกิจและการเงิน'})}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวเศรษฐกิจและการเงิน
@@ -130,7 +130,7 @@ class SideMenu extends Component {
               }}>
               </View>
 
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewEntertainment')}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('New', {cat: 5, topic: 'ข่าวบันเทิง'})}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวบันเทิง
@@ -145,7 +145,7 @@ class SideMenu extends Component {
               }}>
               </View>
 
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewCrime')}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('New', {cat: 6, topic: 'ข่าวอาชญากรรม'})}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวอาชญากรรม
@@ -160,7 +160,7 @@ class SideMenu extends Component {
               }}>
               </View>
 
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewScience')}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('New', {cat: 7, topic: 'ข่าววิทยาศาสตร์และสิ่งแวดล้อม'})}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าววิทยาศาสตร์และสิ่งแวดล้อม
@@ -175,7 +175,7 @@ class SideMenu extends Component {
               }}>
               </View>
 
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewAdvertise')}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('New', {cat: 8, topic: 'ข่าวประชาสัมพันธ์และการท่องเที่ยว'})}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวประชาสัมพันธ์และการท่องเที่ยว
@@ -190,7 +190,7 @@ class SideMenu extends Component {
               }}>
               </View>
 
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('NewBusiness')}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('New', {cat: 9, topic: 'ข่าวธุรกิจและเทคโนโลยี'})}>
                 <View style={[styles.navSectionStyle, { backgroundColor: '#111111' }]}>
                   <Text style={[styles.navItemStyle, { fontSize: Platform.OS == 'ios' ? 18 : 14, backgroundColor: '#111111' }]}>
                     ข่าวธุรกิจและเทคโนโลยี
@@ -351,11 +351,11 @@ class SideMenu extends Component {
           }}>
           </View>
 
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('About')}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Favorite')}>
             <View style={styles.navSectionStyle}>
-              <Image source={require('./assets/images/about-icon.png')} style={{ height: 25, width: 28 }} />
+              <Icons name="star" size={25} color='white' style={{ width: 28 }} />
               <Text style={styles.navItemStyle}>
-                เกี่ยวกับเรา
+                ข่าวโปรด
               </Text>
             </View>
           </TouchableOpacity>
@@ -366,6 +366,7 @@ class SideMenu extends Component {
             width
           }}>
           </View>
+
 
           <TouchableOpacity onPress={() => this.props.navigation.navigate('About')}>
             <View style={styles.navSectionStyle}>

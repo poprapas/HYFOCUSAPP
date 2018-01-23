@@ -68,20 +68,52 @@ export default class NewDetail extends Component {
             alignSelf: 'center',
         },
         headerRight:
-        
-            <TouchableOpacity onPress={() => Platform.OS == 'ios' ?
-                Share.share({ url: navigation.state.params.url })
-                :
-                Share.share({ message: navigation.state.params.url })}>
-                <Feather
-                    name="share-2"
-                    size={20}
-                    color='white'
-                    style={{
-                        paddingHorizontal: 10
-                    }}
-                />
-            </TouchableOpacity>,
+            <View style={{ flexDirection: 'row' }}>
+
+                <TouchableOpacity onPress={() => {
+                    AsyncStorage.getItem('favorite').then((data) => {
+                        //console.log(JSON.parse(data))
+                        let main = []
+                        if (data == null) {
+                            AsyncStorage.setItem('favorite', JSON.stringify(['news', navigation.state.params.id]))
+                        }
+                        else {
+                            let newdata = JSON.parse(data)
+                            let found = false
+                            for (let i in newdata) {
+                                if (newdata[i][0] == 'news' && newdata[i][1] == navigation.state.params.id)
+                                    found = true
+                            }
+                            if (!found) {
+                                newdata.push(['news', navigation.state.params.id])
+                                AsyncStorage.setItem('favorite', JSON.stringify(newdata))
+                            }
+                        }
+                    })
+                    //AsyncStorage.removeItem('favorite')
+                }}>
+                    <Feather
+                        name="download"
+                        size={20}
+                        color='white'
+                    />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => Platform.OS == 'ios' ?
+                    Share.share({ url: navigation.state.params.url })
+                    :
+                    Share.share({ message: navigation.state.params.url })}>
+                    <Feather
+                        name="share-2"
+                        size={20}
+                        color='white'
+                        style={{
+                            paddingHorizontal: 10
+                        }}
+                    />
+                </TouchableOpacity>
+            </View>
+        ,
         headerLeft:
             <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Ionicons
@@ -94,7 +126,6 @@ export default class NewDetail extends Component {
                 />
             </TouchableOpacity>
     })
-
 
     renderNode(node, index, siblings, parent, defaultRenderer) {
 
@@ -133,7 +164,7 @@ export default class NewDetail extends Component {
                             alignSelf: 'center',
                         }}
                     />
-                );
+                );1`1                                                                                                                                                                   1`
 
             }
             else {
@@ -157,10 +188,8 @@ export default class NewDetail extends Component {
     }
 
     render() {
-
         const { navigate } = this.props.navigation;
         let descript = this.props.navigation.state.params.description;
-
         return (
             <View style={styles.container}>
 

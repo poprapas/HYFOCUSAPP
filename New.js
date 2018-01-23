@@ -11,12 +11,14 @@ import {
     ListView,
     ActivityIndicator,
     Dimensions,
-    RefreshControl
+    RefreshControl,
+    AsyncStorage
 } from 'react-native';
 
 import Color from 'react-native-material-color';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 
 const { width, height } = Dimensions.get("window");
 
@@ -39,8 +41,8 @@ export default class New extends Component {
                     fontSize: Platform.OS == 'ios' ? 18 : 15,
                     color: 'white',
                     paddingTop: Platform.OS == 'ios' ? 8 : 5,
-                }}> ข่าวการศึกษา
-            </Text>
+                }}> {navigation.state.params.topic}
+                </Text>
             </View>,
         headerTitleStyle: {
             alignSelf: 'center',
@@ -82,17 +84,20 @@ export default class New extends Component {
             start: 0,
             end: false,
             refreshing: false,
+            isMounted: true
         }
     }
 
     _fetchData(callback) {
-        fetch('https://www.hatyaifocus.com/rest/api.php?action=news&cat=3&start=' + this.state.start + '&per_page=10')
+
+        fetch('https://www.hatyaifocus.com/rest/api.php?action=news&cat=' + this.props.navigation.state.params.cat + '&start=' + this.state.start + '&per_page=10')
             .then(response => response.json())
             .then(callback)
             .catch(error => {
                 console.error(error);
             });
     }
+
 
     _fetchMore() {
         if (!this.state.isLoadingMore) {
@@ -107,13 +112,15 @@ export default class New extends Component {
                 }
                 else {
                     const data = this.state._data.concat(responseJson);
-                    this.setState({
-                        dataSource: this.state.dataSource.cloneWithRows(data),
-                        isLoadingMore: false,
-                        _data: data,
-                        _dataAfter: responseJson.data,
-                        start: this.state.start + 10,
-                    });
+                    if (this.state.isMounted) {
+                        this.setState({
+                            dataSource: this.state.dataSource.cloneWithRows(data),
+                            isLoadingMore: false,
+                            _data: data,
+                            _dataAfter: responseJson.data,
+                            start: this.state.start + 10,
+                        });
+                    }
                 }
             });
         }
@@ -126,15 +133,23 @@ export default class New extends Component {
                 rowHasChanged: (r1, r2) => r1 !== r2,
             });
             const data = responseJson;
-            this.setState({
-                dataSource: ds.cloneWithRows(data),
-                isLoading: false,
-                _data: data,
-                _dataAfter: responseJson.data,
-                start: 10,
-                refreshing: false,
-            });
+            if (this.state.isMounted) {
+                this.setState({
+                    dataSource: ds.cloneWithRows(data),
+                    isLoading: false,
+                    _data: data,
+                    _dataAfter: responseJson.data,
+                    start: 10,
+                    refreshing: false,
+                });
+            }
         });
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            isMounted: false
+        })
     }
 
     _onRefresh() {
@@ -144,6 +159,29 @@ export default class New extends Component {
                 start: 0
             }, this.componentDidMount)
         }
+    }
+
+    favorite(action, id) {
+        AsyncStorage.getItem('favorite').then((data) => {
+            //console.log(JSON.parse(data))
+            let main = []
+            if (data == null) {
+                AsyncStorage.setItem('favorite', JSON.stringify([[action, id]]))
+            }
+            else {
+                let newdata = JSON.parse(data)
+                let found = false
+                for (let i in newdata) {
+                    if (newdata[i][0] == action && newdata[i][1] == id)
+                        found = true
+                }
+                if (!found) {
+                    newdata.push([action, id])
+                    AsyncStorage.setItem('favorite', JSON.stringify(newdata))
+                }
+            }
+        })
+        //AsyncStorage.removeItem('favorite')
     }
 
     render() {
@@ -161,7 +199,7 @@ export default class New extends Component {
                         </TouchableOpacity>
 
                         <View style={{ flex: 1 }}>
-                            <Text style={styles.bannerfont}> --- ข่าวการศึกษา --- </Text>
+                            <Text style={styles.bannerfont}> ---- ข่าวกีฬา ---- </Text>
                         </View>
 
                     </View> */}
@@ -182,7 +220,7 @@ export default class New extends Component {
                     </TouchableOpacity>
 
                     <View style={{ flex: 1 }}>
-                        <Text style={styles.bannerfont}> --- ข่าวการศึกษา --- </Text>
+                        <Text style={styles.bannerfont}> ---- ข่าวกีฬา ---- </Text>
                     </View>
 
                 </View> */}
@@ -222,9 +260,23 @@ export default class New extends Component {
                                     borderRadius: 10
                                 }} />
 
-                            <View style={{ paddingTop: 5 }}>
+                            <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                                <TouchableOpacity onPress={() => this.favorite('news', rowData.ID)}>
+                                    <Feather
+                                        name="download"
+                                        size={16}
+                                        color='white'
+                                        style={{
+                                            top: 7
+                                        }}
+                                    />
+                                </TouchableOpacity>
+
                                 <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
+
                             </View>
+
                             <View style={{
                                 height: 1,
                                 backgroundColor: 'rgba(240,240,240,0.2)',
@@ -270,8 +322,8 @@ const styles = StyleSheet.create({
         width: 150,
     },
     bannerfont: {
-        fontSize: Platform.OS === 'ios' ? width * 0.06 : width * 0.055,
-        paddingTop: Platform.OS === 'ios' ? 50 : 45,
+        fontSize: Platform.OS === 'ios' ? width * 0.07 : width * 0.065,
+        paddingTop: Platform.OS === 'ios' ? 45 : 40,
         alignSelf: 'center',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
