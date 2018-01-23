@@ -17,7 +17,6 @@ import Room from './Room'
 import Events from './Event'
 import Video from './Video'
 import Review from './Review'
-import Contact from './Contact'
 import Setting from './Setting'
 import SideMenu from './SideMenu'
 import About from "./About"
@@ -30,6 +29,7 @@ import NewCrime from "./NewCrime"
 import NewScience from "./NewScience"
 import NewAdvertise from "./NewAdvertise"
 import NewBusiness from "./NewBusiness"
+import favorite from "./Favorite"
 
 const Tab = TabNavigator({
     หางาน: {
@@ -130,7 +130,8 @@ export default Drawer = DrawerNavigator({
     NewAdvertise: { screen: NewAdvertise },
     NewBusiness: { screen: NewBusiness },
     Event: { screen: Events },
-    Setting: { screen: Setting }
+    Setting: { screen: Setting },
+    Favorite: { screen: Favorite }
 }, {
         initialRouteName: 'Tab',
         drawerWidth: 300,

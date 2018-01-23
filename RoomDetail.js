@@ -12,7 +12,6 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
 import HTMLView from 'react-native-htmlview';
 import Carousel from 'react-native-looped-carousel';

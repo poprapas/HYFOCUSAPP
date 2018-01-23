@@ -16,7 +16,6 @@ import {
     Share
 } from 'react-native';
 
-import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
 import HTMLView from 'react-native-htmlview';
 import Icon from 'react-native-vector-icons/dist/Entypo';

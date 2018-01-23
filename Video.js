@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 
 import Color from 'react-native-material-color';
-import ActionBar from 'react-native-action-bar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Foundation from 'react-native-vector-icons/dist/Foundation';
 

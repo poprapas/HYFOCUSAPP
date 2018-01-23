@@ -13,7 +13,6 @@ import {
     RefreshControl
 } from 'react-native';
 
-import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
 import Button from 'react-native-button';
 import Ionicons from 'react-native-vector-icons/Ionicons';

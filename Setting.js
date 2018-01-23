@@ -9,7 +9,6 @@ import {
     AsyncStorage
 } from 'react-native';
 
-import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
@@ -17,7 +16,7 @@ import Communications from 'react-native-communications';
 import { Switch } from 'react-native-switch';
 import PushNotification from 'react-native-push-notification';
 
-export default class Contact extends Component {
+export default class Setting extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:

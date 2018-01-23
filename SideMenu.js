@@ -11,13 +11,10 @@ import {
   TouchableOpacity,
   Linking,
   Platform,
-  DrawerLayoutAndroid,
   PlatformIOS,
   Dimensions,
 } from 'react-native';
 
-import DrawerMenuScreen from './DrawerMenuScreen';
-import DrawerLayout from 'react-native-drawer-layout';
 import Icon from 'react-native-vector-icons/dist/Foundation';
 import Icons from 'react-native-vector-icons/dist/MaterialIcons';
 import Iconss from 'react-native-vector-icons/dist/FontAwesome';
@@ -343,6 +340,22 @@ class SideMenu extends Component {
               <Icons name="rate-review" size={25} color='white' style={{ width: 28 }} />
               <Text style={styles.navItemStyle}>
                 รีวิว
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          <View style={{
+            height: 1,
+            backgroundColor: 'rgba(240,240,240,0.2)',
+            width
+          }}>
+          </View>
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('About')}>
+            <View style={styles.navSectionStyle}>
+              <Image source={require('./assets/images/about-icon.png')} style={{ height: 25, width: 28 }} />
+              <Text style={styles.navItemStyle}>
+                เกี่ยวกับเรา
               </Text>
             </View>
           </TouchableOpacity>

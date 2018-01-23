@@ -11,7 +11,6 @@ import {
     Dimensions
 } from 'react-native';
 
-import ActionBar from 'react-native-action-bar';
 import Color from 'react-native-material-color';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
