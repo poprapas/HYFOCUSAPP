@@ -5,17 +5,14 @@ import {
     Text,
     View,
     Image,
-    ActivityIndicator,
-    ListView,
+    TouchableHighlight,
     Linking,
-    ScrollView,
+    ListView,
     Dimensions,
-    WebView,
-    FlatList,
-    PixelRatio,
-    Share,
+    ScrollView,
     TouchableOpacity,
-    AsyncStorage
+    Share,
+    WebView
 } from 'react-native';
 
 import Color from 'react-native-material-color';
@@ -24,33 +21,53 @@ import Icon from 'react-native-vector-icons/dist/Entypo';
 import Icons from 'react-native-vector-icons/dist/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
-import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
-import Toast, { DURATION } from 'react-native-easy-toast'
+import Foundation from 'react-native-vector-icons/dist/Foundation';
 
 const { width, height } = Dimensions.get("window");
-let ref = null
 
-export default class NewDetail extends Component {
-
+export default class ContentDetail extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                <FontAwesome
-                    name="newspaper-o"
-                    size={18}
-                    color='white'
-                    style={{
-                        top: 5,
-                    }}
-                />
+                {navigation.state.params.cat == 1 ?
+                    <Image
+                        source={require('./assets/images/story-icon.png')}
+                        style={{
+                            width: 25,
+                            height: 25,
+                            top: Platform.OS == 'ios' ? 0 : 3,
+                        }}
+                    /> :
+                    navigation.state.params.cat == 2 ?
+                        <Image
+                            source={require('./assets/images/people-icon.png')}
+                            style={{
+                                width: 25,
+                                height: 25,
+                                top: Platform.OS == 'ios' ? 0 : 3,
+                            }}
+                        />
+                        :
+                        navigation.state.params.cat == 3 ?
+                            <Image
+                                source={require('./assets/images/eat-icon.png')}
+                                style={{
+                                    width: 25,
+                                    height: 25,
+                                    top: Platform.OS == 'ios' ? 0 : 3,
+                                }}
+                            />
+                            : null
+
+                }
                 <Text style={{
                     textAlign: 'center',
                     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
                     fontSize: Platform.OS == 'ios' ? 18 : 15,
                     color: 'white',
-                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
-                }}> {navigation.state.params.type}
+                    paddingTop: Platform.OS == 'ios' ? 9 : 5,
+                }}> {navigation.state.params.topic}
                 </Text>
             </View>,
         headerTitleStyle: {
@@ -69,8 +86,7 @@ export default class NewDetail extends Component {
                         paddingHorizontal: 10
                     }}
                 />
-            </TouchableOpacity>
-        ,
+            </TouchableOpacity>,
         headerLeft:
             <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Ionicons
@@ -105,71 +121,83 @@ export default class NewDetail extends Component {
         }
 
         if (node.name == 'p' && node.children[0].name == 'iframe') {
-            if (node.children[0].attribs.src.slice(0, 2) == '//') {
-                node.children[0].attribs.src = 'https:' + node.children[0].attribs.src
-            };
-            if (node.children[0].attribs.src.slice(12, 15) == 'you') {
-                return (
-                    <WebView
-                        key={index}
-                        source={{
-                            uri: node.children[0].attribs.src
-                        }}
+            const a = node.children[0].attribs;
+            const iframeHtml = `<iframe src="${a.src}" 
+                                        height= 220, 
+                                        width= ${width - 10}, 
+
+                                >
+                                </iframe>`;
+            return (
+                <View key={index}
+                    style={{
+                        width: width,
+                        height: 230,
+                        marginLeft: -20,
+                        paddingBottom: 10,
+                        alignSelf: 'center',
+                    }}
+                >
+                    <WebView source={{ html: iframeHtml }}
                         style={{
-                            width: width - 10,
-                            height: (width - 10) * 0.5625,
-                            alignSelf: 'center',
+                            borderRadius: 5
                         }}
                     />
-                )
-            }
-            else {
-                let a = node.children[0].attribs;
-                return (
-                    <WebView
-                        key={index}
-                        bounces={false}
-                        source={{
-                            uri: a.src
-                        }}
-                        style={{
-                            width: width,
-                            height: a.height < a.width ? (width * a.height / a.width) - 35 : width * a.height / a.width,
-                            //resizeMode: 'contain',
-                        }}
-                    />
-                );
-            }
+                </View>
+            );
         }
+
+    }
+
+    renderImage(catID) {
+        if (catID == 1 || catID == 3) {
+            return <Image source={{ uri: this.props.navigation.state.params.image }}
+                style={{
+                    width: width - 10,
+                    height: (width - 10) * 0.625
+                }}
+            />
+        } else if (catID == 2) {
+            return <Image source={{ uri: this.props.navigation.state.params.image }}
+                style={{
+                    width: width - 150,
+                    height: (width - 10) * 0.8,
+                    alignSelf: 'center'
+                }}
+            /> 
+        }
+        return null 
     }
 
     render() {
 
-        const { navigate } = this.props.navigation;
+        const { navigate, goBack } = this.props.navigation;
         let descript = this.props.navigation.state.params.description;
 
         return (
+
             <View style={styles.container}>
                 <View style={styles.listView}>
                     <ScrollView style={{
-                        height: Platform.OS == 'ios' ? height - 70 : height - 80,
+                        height: Platform.OS == 'ios' ? height - 50 : height - 65,
                         width: "100%"
                     }}>
-
                         <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
-                        <Image source={{ uri: this.props.navigation.state.params.image }}
-                            style={{
-                                width: width - 10,
-                                height: (width - 10) * 0.625
-                            }} />
+                        
+                        {this.renderImage.bind(this)(this.props.navigation.state.params.cat)}
+
                         <Text />
                         <HTMLView
                             value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}
                             stylesheet={styless}
                         />
-
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingTop: 40 }}>
+                        
+                        <View style={{ 
+                            flexDirection: 'row', 
+                            justifyContent: 'flex-end', 
+                            paddingTop: this.props.navigation.state.params.cat == 3 || this.props.navigation.state.params.cat ==  8 ? 0 : 30
+                             }}>
                             <Icon
                                 name="eye"
                                 size={15}
@@ -181,7 +209,7 @@ export default class NewDetail extends Component {
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 20 }}>
                             <Icons
                                 name="access-time"
                                 size={15}
@@ -192,9 +220,10 @@ export default class NewDetail extends Component {
                                 {this.props.navigation.state.params.date}
                             </Text>
                         </View>
-
                     </ScrollView>
                 </View>
+
+
 
             </View>
         );
@@ -209,20 +238,29 @@ const styles = StyleSheet.create({
         backgroundColor: Color.BROWN[500],
     },
     logo: {
-        height: 100,
+        height: 110,
         width: 150,
+    },
+    storyfont: {
+        fontSize: width * 0.07,
+        paddingTop: Platform.OS === 'ios' ? 45 : 40,
+        alignSelf: 'center',
+        color: 'white',
+        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
     listView: {
         paddingLeft: 5,
         paddingRight: 5,
+        paddingTop: 2,
     },
     title: {
-        fontSize: 24,
+        fontSize: 20,
         color: 'white',
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        paddingBottom: 20,
-        paddingTop: 20
+        paddingTop: 10,
+        paddingBottom: 10
+
     },
     view: {
         fontSize: 14,
@@ -232,14 +270,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Times New Roman',
         paddingLeft: 3,
     },
-    star: {
-        fontSize: 16,
-        fontWeight: 'normal',
-        color: 'white',
-        textAlign: 'right',
-        fontFamily: 'Times New Roman',
-        paddingLeft: 3,
-    }
 });
 
 const styless = StyleSheet.create({

@@ -43,7 +43,7 @@ export default class VideoDetail extends Component {
                     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
                     fontSize: Platform.OS == 'ios' ? 18 : 15,
                     color: 'white',
-                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                    paddingTop: Platform.OS == 'ios' ? 9 : 5,
                 }}> วิดีโอ
             </Text>
             </View>,

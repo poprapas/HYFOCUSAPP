@@ -37,7 +37,7 @@ export default class Room extends Component {
                     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
                     fontSize: Platform.OS == 'ios' ? 18 : 15,
                     color: 'white',
-                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                    paddingTop: Platform.OS == 'ios' ? 9 : 5,
                 }}> ที่พักหาดใหญ่
             </Text>
             </View>,
@@ -124,9 +124,11 @@ export default class Room extends Component {
             })
             this.fetchData(responseJson => {
                 if (responseJson == null) {
-                    this.setState({
-                        end: true
-                    })
+                    if (this.state.isMounted) {
+                        this.setState({
+                            end: true
+                        })
+                    }
                 }
                 else {
                     const data = this.state._data.concat(responseJson);

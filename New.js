@@ -19,6 +19,8 @@ import Color from 'react-native-material-color';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import Toast, { DURATION } from 'react-native-easy-toast'
+import * as utils from './Util'
 
 const { width, height } = Dimensions.get("window");
 
@@ -40,7 +42,7 @@ export default class New extends Component {
                     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
                     fontSize: Platform.OS == 'ios' ? 18 : 15,
                     color: 'white',
-                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                    paddingTop: Platform.OS == 'ios' ? 9 : 5,
                 }}> {navigation.state.params.topic}
                 </Text>
             </View>,
@@ -162,27 +164,31 @@ export default class New extends Component {
     }
 
     favorite(action, id) {
-        AsyncStorage.getItem('favorite').then((data) => {
-            //console.log(JSON.parse(data))
-            let main = []
-            if (data == null) {
-                AsyncStorage.setItem('favorite', JSON.stringify([[action, id]]))
-            }
-            else {
-                let newdata = JSON.parse(data)
-                let found = false
-                for (let i in newdata) {
-                    if (newdata[i][0] == action && newdata[i][1] == id)
-                        found = true
-                }
-                if (!found) {
-                    newdata.push([action, id])
-                    AsyncStorage.setItem('favorite', JSON.stringify(newdata))
-                }
-            }
-        })
-        //AsyncStorage.removeItem('favorite')
+        utils.addFavorite(action, id)
     }
+
+    // favorite(action, id) {
+    //     AsyncStorage.getItem('favorite').then((data) => {
+    //         //console.log(JSON.parse(data))
+    //         let main = []
+    //         if (data == null) {
+    //             AsyncStorage.setItem('favorite', JSON.stringify([[action, id]]))
+    //         }
+    //         else {
+    //             let newdata = JSON.parse(data)
+    //             let found = false
+    //             for (let i in newdata) {
+    //                 if (newdata[i][0] == action && newdata[i][1] == id)
+    //                     found = true
+    //             }
+    //             if (!found) {
+    //                 newdata.push([action, id])
+    //                 AsyncStorage.setItem('favorite', JSON.stringify(newdata))
+    //             }
+    //         }
+    //     })
+    //     //AsyncStorage.removeItem('favorite')
+    // }
 
     render() {
 
@@ -259,31 +265,53 @@ export default class New extends Component {
                                     //backgroundColor: '#6a5750',
                                     borderRadius: 10
                                 }} />
+                        </TouchableOpacity>
 
-                            <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'space-between' }}>
 
-                                <TouchableOpacity onPress={() => this.favorite('news', rowData.ID)}>
-                                    <Feather
-                                        name="download"
-                                        size={16}
-                                        color='white'
-                                        style={{
-                                            top: 7
-                                        }}
-                                    />
-                                </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => {
+                                this.favorite('news', rowData.ID)
+                                this.refs.toast.show('เพิ่มข่าวไปยังข่าวโปรดแล้ว!', 2000);
+                            }}>
+                                <Feather
+                                    name="download"
+                                    size={16}
+                                    color='white'
+                                    style={{
+                                        top: 7,
+                                        width: 30,
+                                        margin: 3
+                                    }}
+                                />
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                key={rowData.id}
+                                onPress={() => navigate('NewDetail',
+                                    {
+                                        type: rowData.CATID,
+                                        title: rowData.TOPIC,
+                                        image: rowData.FEATURE,
+                                        description: rowData.DESCRIPTION,
+                                        view: rowData.VIEWS,
+                                        date: rowData.DATEIN,
+                                        url: rowData.URL
+                                    }
+                                )}
+                            >
 
                                 <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
+                            </TouchableOpacity>
 
-                            </View>
+                        </View>
 
-                            <View style={{
-                                height: 1,
-                                backgroundColor: 'rgba(240,240,240,0.2)',
-                                marginTop: 10
-                            }}>
-                            </View>
-                        </TouchableOpacity>
+                        <View style={{
+                            height: 1,
+                            backgroundColor: 'rgba(240,240,240,0.2)',
+                            marginTop: 10
+                        }}>
+                        </View>
                     </View>
                     }
 
@@ -303,6 +331,20 @@ export default class New extends Component {
                         }
                     }}
 
+                />
+
+                <Toast
+                    ref="toast"
+                    style={{
+                        backgroundColor: '#707070',
+                        borderRadius: 15
+                    }}
+                    position='bottom'
+                    positionValue={Platform.OS == 'ios' ? 110 : 130}
+                    fadeInDuration={750}
+                    fadeOutDuration={1000}
+                    opacity={0.9}
+                    textStyle={{ color: 'white' }}
                 />
 
             </View>

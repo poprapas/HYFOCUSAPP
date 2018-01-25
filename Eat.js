@@ -36,7 +36,7 @@ export default class Eat extends Component {
                     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
                     fontSize: Platform.OS == 'ios' ? 18 : 15,
                     color: 'white',
-                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                    paddingTop: Platform.OS == 'ios' ? 9 : 5,
                 }}> ของกินหาดใหญ่
             </Text>
             </View>,
@@ -210,14 +210,16 @@ export default class Eat extends Component {
                     renderRow={(rowData) => <View style={styles.listView}>
                         <TouchableOpacity
                             key={rowData.id}
-                            onPress={() => navigate('EatDetail',
+                            onPress={() => navigate('ContentDetail',
                                 {
                                     title: rowData.TOPIC,
                                     image: rowData.FEATURE,
                                     description: rowData.DESCRIPTION,
                                     view: rowData.VIEWS,
                                     date: rowData.DATEIN,
-                                    url: rowData.URL
+                                    url: rowData.URL,
+                                    topic: 'ของกินหาดใหญ่',
+                                    cat: 3
                                 }
                             )}
                         >

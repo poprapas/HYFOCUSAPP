@@ -103,7 +103,8 @@ export default Drawer = DrawerNavigator({
     Tab: {
         screen: Tab,
         navigationOptions: {
-            headerMode: 'none'
+            headerMode: 'none',
+            drawerLockMode: 'locked-closed'
         }
     },
     Video: { screen: Video },

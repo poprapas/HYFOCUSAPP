@@ -41,7 +41,7 @@ export default class StoryDetail extends Component {
                     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
                     fontSize: Platform.OS == 'ios' ? 18 : 15,
                     color: 'white',
-                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                    paddingTop: Platform.OS == 'ios' ? 9 : 5,
                 }}> เรื่องราวหาดใหญ่
             </Text>
             </View>,

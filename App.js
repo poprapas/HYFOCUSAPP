@@ -30,6 +30,7 @@ import RoomDetail from "./RoomDetail"
 import NewDetail from "./NewDetail"
 import EventDetail from "./EventDetail"
 import Tab from './Tab'
+import ContentDetail from "./ContentDetail"
 
 const AppNavigator = StackNavigator({
   Tab: { screen: Tab },
@@ -43,6 +44,7 @@ const AppNavigator = StackNavigator({
   PeopleDetail: { screen: PeopleDetail },
   RoomDetail: { screen: RoomDetail },
   EventDetail: { screen: EventDetail },
+  ContentDetail: { screen: ContentDetail },
 },
   {
     initialRouteName: "Tab",

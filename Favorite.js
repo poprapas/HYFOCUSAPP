@@ -17,6 +17,7 @@ import Color from 'react-native-material-color';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Swipeout from 'react-native-swipeout';
+import * as utils from './Util'
 
 const { width, height } = Dimensions.get("window");
 
@@ -28,7 +29,7 @@ export default class Favorite extends Component {
                 <MaterialIcons
                     name="star"
                     size={20}
-                    color='white'
+                    color='#edad35'
                     style={{
                         top: 3
                     }}
@@ -38,7 +39,7 @@ export default class Favorite extends Component {
                     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
                     fontSize: Platform.OS == 'ios' ? 18 : 15,
                     color: 'white',
-                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                    paddingTop: Platform.OS == 'ios' ? 9 : 5,
                 }}> ข่าวโปรด
             </Text>
             </View>,
@@ -79,23 +80,22 @@ export default class Favorite extends Component {
     }
 
     componentDidMount() {
-        AsyncStorage.getItem('favorite').then((data) => {
+        AsyncStorage.getItem('fav').then((data) => {
             //console.log(data)
-            data = JSON.parse(data)
-            if (!data || data.length == 0) {
-                this.setState({
-                    isLoading: false
-                })
+            if (!data || data == '{}') {
+                this.setState({isLoading: false})
+                return
             }
+            const items = JSON.parse(data)
             let datatemp = []
-            for (let i in data) {
-                let url = 'https://www.hatyaifocus.com/rest/api.php?action=' + data[i][0] + '&cat=&ID=' + data[i][1]
+            Object.keys(items).forEach((key) => {
+                let url = 'https://www.hatyaifocus.com/rest/api.php?action=' + items[key][0] + '&cat=&ID=' + items[key][1]
                 fetch(url)
                     .then((response) => response.json())
                     .then((responseJson) => {
                         //console.log(responseJson)
                         datatemp.push(responseJson)
-                        if (datatemp.length == data.length) {
+                        if (datatemp.length == Object.keys(items).length) {
                             this.setState({
                                 isLoading: false,
                                 d: datatemp
@@ -105,8 +105,9 @@ export default class Favorite extends Component {
                     .catch((error) => {
                         console.error(error);
                     });
-            }
+            })
         })
+        //AsyncStorage.removeItem('favorite')
     }
 
     render() {
@@ -162,21 +163,13 @@ export default class Favorite extends Component {
                                             onPress: () => {
                                                 this.state.d.splice(index, 1)
                                                 this.forceUpdate()
-                                                let dataSave = []
-
-                                                for (let i in this.state.d) {
-                                                    if (this.state.d[i] != null) {
-                                                        dataSave.push(['news', this.state.d[i][0].ID])
-                                                    }
-                                                }
-                                                AsyncStorage.setItem('favorite', JSON.stringify(dataSave))
+                                                utils.removeFavorite('news', this.state.delete)
                                             },
                                             text: 'Delete', type: 'delete'
                                         }]
                                     }
 
                                 >
-                                    {console.log(item)}
                                     {item ?
                                         <TouchableOpacity
                                             key={item[0].id}

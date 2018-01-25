@@ -38,7 +38,7 @@ export default class People extends Component {
                     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
                     fontSize: Platform.OS == 'ios' ? 18 : 15,
                     color: 'white',
-                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                    paddingTop: Platform.OS == 'ios' ? 9 : 5,
                 }}> คนหาดใหญ่
             </Text>
             </View>,
@@ -82,6 +82,7 @@ export default class People extends Component {
             start: 0,
             end: false,
             refreshing: false,
+            isMounted: true
         }
     }
 
@@ -107,13 +108,15 @@ export default class People extends Component {
                 }
                 else {
                     const data = this.state._data.concat(responseJson);
-                    this.setState({
-                        dataSource: this.state.dataSource.cloneWithRows(data),
-                        isLoadingMore: false,
-                        _data: data,
-                        _dataAfter: responseJson.data,
-                        start: this.state.start + 10,
-                    });
+                    if (this.state.isMounted) {
+                        this.setState({
+                            dataSource: this.state.dataSource.cloneWithRows(data),
+                            isLoadingMore: false,
+                            _data: data,
+                            _dataAfter: responseJson.data,
+                            start: this.state.start + 10,
+                        });
+                    }
                 }
             });
         }
@@ -126,15 +129,23 @@ export default class People extends Component {
                 rowHasChanged: (r1, r2) => r1 !== r2,
             });
             const data = responseJson;
-            this.setState({
-                dataSource: ds.cloneWithRows(data),
-                isLoading: false,
-                _data: data,
-                _dataAfter: responseJson.data,
-                start: 10,
-                refreshing: false,
-            });
+            if (this.state.isMounted) {
+                this.setState({
+                    dataSource: ds.cloneWithRows(data),
+                    isLoading: false,
+                    _data: data,
+                    _dataAfter: responseJson.data,
+                    start: 10,
+                    refreshing: false,
+                });
+            }
         });
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            isMounted: false
+        })
     }
 
     _onRefresh() {
@@ -196,14 +207,16 @@ export default class People extends Component {
                     renderRow={(rowData) => <View style={styles.listView}>
                         <TouchableOpacity
                             key={rowData.id}
-                            onPress={() => navigate('PeopleDetail',
+                            onPress={() => navigate('ContentDetail',
                                 {
                                     title: rowData.TOPIC,
                                     image: rowData.FEATURE,
                                     description: rowData.DESCRIPTION,
                                     view: rowData.VIEWS,
                                     date: rowData.DATEIN,
-                                    url: rowData.URL
+                                    url: rowData.URL,
+                                    topic: 'คนหาดใหญ่',
+                                    cat: 2
                                 }
                             )}
                         >
