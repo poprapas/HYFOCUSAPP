@@ -207,14 +207,16 @@ export default class Review extends Component {
                     renderRow={(rowData) => <View style={styles.listView}>
                         <TouchableOpacity
                             key={rowData.id}
-                            onPress={() => navigate('ReviewDetail',
+                            onPress={() => navigate('ContentDetail',
                                 {
                                     title: rowData.TOPIC,
                                     image: rowData.FEATURE,
                                     description: rowData.DESCRIPTION,
                                     view: rowData.VIEWS,
                                     date: rowData.DATEIN,
-                                    url: rowData.URL
+                                    url: rowData.URL,
+                                    topic: 'รีวิว',
+                                    cat: 5
                                 }
                             )}
                         >

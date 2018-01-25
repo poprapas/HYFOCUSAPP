@@ -24,6 +24,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import Foundation from 'react-native-vector-icons/dist/Foundation';
 
 const { width, height } = Dimensions.get("window");
+let _this = null
 
 export default class ContentDetail extends Component {
 
@@ -58,8 +59,47 @@ export default class ContentDetail extends Component {
                                     top: Platform.OS == 'ios' ? 0 : 3,
                                 }}
                             />
-                            : null
-
+                            :
+                            navigation.state.params.cat == 4 ?
+                                <Foundation
+                                    name="play-video"
+                                    size={20}
+                                    color='white'
+                                    style={{
+                                        top: 5
+                                    }}
+                                />
+                                :
+                                navigation.state.params.cat == 5 ?
+                                    <Icons
+                                        name="rate-review"
+                                        size={20}
+                                        color='white'
+                                        style={{
+                                            top: 5
+                                        }}
+                                    />
+                                    :
+                                    navigation.state.params.cat == 7 ?
+                                        <Foundation
+                                            name="megaphone"
+                                            size={20}
+                                            color='white'
+                                            style={{
+                                                top: 5
+                                            }}
+                                        />
+                                        :
+                                        navigation.state.params.cat == 8 ?
+                                            <Image
+                                                source={require('./assets/images/travel-icon.png')}
+                                                style={{
+                                                    width: 25,
+                                                    height: 25,
+                                                    top: Platform.OS == 'ios' ? 0 : 3,
+                                                }}
+                                            />
+                                            : null
                 }
                 <Text style={{
                     textAlign: 'center',
@@ -119,38 +159,75 @@ export default class ContentDetail extends Component {
                 />
             )
         }
-
-        if (node.name == 'p' && node.children[0].name == 'iframe') {
+        else if (node.name == 'p' && node.children[0].name == 'iframe') {
             const a = node.children[0].attribs;
-            const iframeHtml = `<iframe src="${a.src}" 
-                                        height= 220, 
-                                        width= ${width - 10}, 
-
-                                >
-                                </iframe>`;
-            return (
-                <View key={index}
-                    style={{
-                        width: width,
-                        height: 230,
-                        marginLeft: -20,
-                        paddingBottom: 10,
-                        alignSelf: 'center',
-                    }}
-                >
-                    <WebView source={{ html: iframeHtml }}
+            if (a.src.slice(0, 2) == '//') {
+                a.src = 'https:' + a.src
+            };
+            if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
+                const iframeHtml =
+                    `<iframe src="${a.src}" 
+                        height= 220, 
+                        width= ${width - 10}, 
+                    >
+                    </iframe>`;
+                return (
+                    <View key={index}
                         style={{
-                            borderRadius: 5
+                            width: width,
+                            height: 230,
+                            marginLeft: -20,
+                            paddingBottom: 10,
+                            alignSelf: 'center',
+                        }}
+                    >
+                        <WebView
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{ html: iframeHtml }}
+                            style={{
+                                backgroundColor: 'transparent',
+                            }}
+                        />
+                    </View>
+                );
+            }
+            else if (a.src.slice(12, 15) == 'you') {
+                return (
+                    <WebView
+                        key={index}
+                        source={{
+                            uri: a.src
+                        }}
+                        style={{
+                            width: width - 10,
+                            height: (width - 10) * 0.5625,
+                            alignSelf: 'center',
                         }}
                     />
-                </View>
-            );
+                );
+            }
+            else {
+                return (
+                    <WebView
+                        key={index}
+                        bounces={false}
+                        source={{
+                            uri: a.src
+                        }}
+                        style={{
+                            width: width,
+                            height: a.height < a.width ? (width * a.height / a.width) - 35 : width * a.height / a.width,
+                            //resizeMode: 'contain',
+                        }}
+                    />
+                );
+            }
         }
-
     }
 
     renderImage(catID) {
-        if (catID == 1 || catID == 3) {
+        if (catID == 1 || catID == 3 || catID == 4 || catID == 5 || catID == 8) {
             return <Image source={{ uri: this.props.navigation.state.params.image }}
                 style={{
                     width: width - 10,
@@ -164,9 +241,20 @@ export default class ContentDetail extends Component {
                     height: (width - 10) * 0.8,
                     alignSelf: 'center'
                 }}
-            /> 
+            />
+        } else if (catID == 7) {
+            return <Image source={{ uri: this.props.navigation.state.params.image }}
+                style={{
+                    width: width - 10,
+                    height: (width - 10) * 0.25
+                }}
+            />
         }
-        return null 
+        return null
+    }
+
+    componentDidMount() {
+        _this = this
     }
 
     render() {
@@ -183,21 +271,22 @@ export default class ContentDetail extends Component {
                         width: "100%"
                     }}>
                         <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
-                        
+
                         {this.renderImage.bind(this)(this.props.navigation.state.params.cat)}
 
                         <Text />
+
                         <HTMLView
                             value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}
                             stylesheet={styless}
                         />
-                        
-                        <View style={{ 
-                            flexDirection: 'row', 
-                            justifyContent: 'flex-end', 
-                            paddingTop: this.props.navigation.state.params.cat == 3 || this.props.navigation.state.params.cat ==  8 ? 0 : 30
-                             }}>
+
+                        <View style={{
+                            flexDirection: 'row',
+                            justifyContent: 'flex-end',
+                            paddingTop: this.props.navigation.state.params.cat == 3 ? 0 : 30
+                        }}>
                             <Icon
                                 name="eye"
                                 size={15}

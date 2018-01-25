@@ -211,14 +211,16 @@ export default class Story extends Component {
                     renderRow={(rowData) => <View style={styles.listView}>
                         <TouchableOpacity
                             key={rowData.id}
-                            onPress={() => navigate('TravelDetail',
+                            onPress={() => navigate('ContentDetail',
                                 {
                                     title: rowData.TOPIC,
                                     image: rowData.FEATURE,
                                     description: rowData.DESCRIPTION,
                                     view: rowData.VIEWS,
                                     date: rowData.DATEIN,
-                                    url: rowData.URL
+                                    url: rowData.URL,
+                                    topic: 'เที่ยวหาดใหญ่',
+                                    cat: 8
                                 }
                             )}
                         >

@@ -19,31 +19,17 @@ import { StackNavigator } from "react-navigation";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SplashScreen from 'react-native-splash-screen'
 
-import VideoDetail from "./VideoDetail"
-import ReviewDetail from "./ReviewDetail"
-import StoryDetail from "./StoryDetail"
 import JobDetail from "./JobDetail"
-import EatDetail from "./EatDetail"
-import TravelDetail from "./TravelDetail"
-import PeopleDetail from "./PeopleDetail"
 import RoomDetail from "./RoomDetail"
 import NewDetail from "./NewDetail"
-import EventDetail from "./EventDetail"
 import Tab from './Tab'
 import ContentDetail from "./ContentDetail"
 
 const AppNavigator = StackNavigator({
   Tab: { screen: Tab },
-  VideoDetail: { screen: VideoDetail },
   NewDetail: { screen: NewDetail },
-  ReviewDetail: { screen: ReviewDetail },
-  StoryDetail: { screen: StoryDetail },
   JobDetail: { screen: JobDetail },
-  EatDetail: { screen: EatDetail },
-  TravelDetail: { screen: TravelDetail },
-  PeopleDetail: { screen: PeopleDetail },
   RoomDetail: { screen: RoomDetail },
-  EventDetail: { screen: EventDetail },
   ContentDetail: { screen: ContentDetail },
 },
   {

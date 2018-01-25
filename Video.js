@@ -208,7 +208,7 @@ export default class Video extends Component {
                     renderRow={(rowData) => <View style={styles.listView}>
                         <TouchableOpacity
                             key={rowData.id}
-                            onPress={() => navigate('VideoDetail',
+                            onPress={() => navigate('ContentDetail',
                                 {
                                     title: rowData.TOPIC,
                                     image: rowData.FEATURE,

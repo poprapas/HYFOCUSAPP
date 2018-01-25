@@ -335,13 +335,15 @@ const styless = StyleSheet.create({
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
-        marginBottom: -20
+        marginBottom: Platform.OS == 'ios' ? -30 : -20,
+        lineHeight: 22,
     },
     strong: {
         fontSize: 16,
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'left',
-        marginBottom: -20
+        marginBottom: -20,
+        lineHeight: 22,
     }
 });
