@@ -224,15 +224,18 @@ export default class Jobs extends Component {
                   onChangeText={(find) => this.setState({ find: find })}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => this.setState({ find: '' })}
-                style={{ alignSelf: 'center' }}>
-                <Ionicons
-                  name='md-close-circle'
-                  color='black'
-                  size={20}
-                />
-              </TouchableOpacity>
+
+              {this.state.find == '' ? null :
+                <TouchableOpacity
+                  onPress={() => this.setState({ find: '' })}
+                  style={{ alignSelf: 'center' }}>
+                  <Ionicons
+                    name='md-close-circle'
+                    color='black'
+                    size={20}
+                  />
+                </TouchableOpacity>
+              }
 
             </View>
 
@@ -301,15 +304,18 @@ export default class Jobs extends Component {
                 onChangeText={(find) => this.setState({ find: find })}
               />
             </View>
-            <TouchableOpacity
-              onPress={() => this.setState({ find: '' })}
-              style={{ alignSelf: 'center' }}>
-              <Ionicons
-                name='md-close-circle'
-                color='black'
-                size={20}
-              />
-            </TouchableOpacity>
+            
+            {this.state.find == '' ? null :
+              <TouchableOpacity
+                onPress={() => this.setState({ find: '' })}
+                style={{ alignSelf: 'center' }}>
+                <Ionicons
+                  name='md-close-circle'
+                  color='black'
+                  size={20}
+                />
+              </TouchableOpacity>
+            }
 
           </View>
 

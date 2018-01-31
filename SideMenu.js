@@ -42,6 +42,22 @@ class SideMenu extends Component {
       >
         <View style={styles.wrapper}>
 
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('หน้าแรก')}>
+            <View style={styles.navSectionStyle}>
+              <Image source={require('./assets/images/home-icon.png')} style={{ height: 23, width: 28 }} />
+              <Text style={styles.navItemStyle}>
+                หน้าแรก
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          <View style={{
+            height: 1,
+            backgroundColor: 'rgba(240,240,240,0.2)',
+            width
+          }}>
+          </View>
+
           <TouchableOpacity onPress={() => this.setState({ dropdown: !this.state.dropdown })}>
             <View style={styles.navSectionStyle}>
               <Iconss name="newspaper-o" size={20} color='white' style={{ width: 28 }} />

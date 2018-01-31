@@ -65,19 +65,19 @@ export default class Setting extends Component {
             </TouchableOpacity>
     })
 
-    controlNotification(val){
+    controlNotification(val) {
         AsyncStorage.setItem('notification', val + '')
         PushNotification.cancelAllLocalNotifications()
     }
 
-    componentDidMount(){
+    componentDidMount() {
         AsyncStorage.getItem('notification').then((data) => {
-            if(data == null || data == 'true'){
+            if (data == null || data == 'true') {
                 this.setState({
                     notification: true
                 })
             }
-            else{
+            else {
                 this.setState({
                     notification: false
                 })
@@ -88,9 +88,9 @@ export default class Setting extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          notification: null,
+            notification: null,
         }
-      }
+    }
 
     render() {
 
@@ -130,8 +130,8 @@ export default class Setting extends Component {
                         <View style={{ paddingTop: 5 }}>
                             <Text style={styles.titleText}> เปลี่ยนแปลงการแจ้งเตือน </Text>
                         </View>
-                        <View style={{ 
-                            paddingTop: 2, 
+                        <View style={{
+                            paddingTop: 2,
                             paddingRight: 5,
                         }}>
                             <Switch
@@ -152,8 +152,31 @@ export default class Setting extends Component {
                     </View>
                 }
 
-                {Platform.OS == 'ios' ? null :
+                {Platform.OS == 'ios' ?
 
+                    <TouchableOpacity onPress={() => {
+                    parseInt(Platform.Version, 10) == 11 ?
+                        Linking.openURL('https://itunes.apple.com/us/app/appName/id1331300096?mt=8&action=write-review').catch(err => console.error('An error occurred', err))
+                        :
+                        Linking.openURL('https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8&id1331300096').catch(err => console.error('An error occurred', err));
+                    }
+                    }>
+                        <View style={{
+                            flexDirection: 'row',
+                            backgroundColor: 'white',
+                            justifyContent: 'space-between',
+                            borderBottomColor: '#A9A9A9',
+                            borderBottomWidth: 1
+                        }}>
+                            <View style={{ paddingTop: 10 }}>
+                                <Text style={styles.titleText}> ให้คะแนนเรา </Text>
+                            </View>
+                            <View style={{ paddingTop: Platform.OS == 'ios' ? 7 : 0 }}>
+                                <Text style={styles.more}> > </Text>
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                    :
                     <TouchableOpacity onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=com.hyfocusapp')}>
                         <View style={{
                             flexDirection: 'row',
