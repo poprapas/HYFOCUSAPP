@@ -10,12 +10,14 @@ import {
     Dimensions,
     FlatList,
     Image,
-    ActivityIndicator
+    ActivityIndicator,
+    Alert
 } from 'react-native';
 
 import Color from 'react-native-material-color';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Swipeout from 'react-native-swipeout';
 import * as utils from './Util'
 
@@ -40,17 +42,33 @@ export default class Favorite extends Component {
                     fontSize: Platform.OS == 'ios' ? 18 : 15,
                     color: 'white',
                     paddingTop: Platform.OS == 'ios' ? 9 : 5,
-                }}> ข่าวโปรด
+                }}> บุ๊คมาร์ค
             </Text>
             </View>,
         headerTitleStyle: {
             alignSelf: 'center',
         },
         headerRight:
-            <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
-                <Ionicons
-                    name="logo-facebook"
-                    size={25}
+            <TouchableOpacity
+                onPress={() =>
+                    Alert.alert(
+                        'บุ๊คมาร์ค',
+                        'ลบข่าวที่บันทึกไว้ทั้งหมด?',
+                        [
+                            {
+                                text: 'ยืนยัน', onPress: () => {
+                                    utils.clearFavorite()
+                                    navigation.goBack()
+                                }
+                            },
+                            { text: 'ยกเลิก', onPress: () => null, style: 'cancel' }
+                        ]
+                    )
+                }
+            >
+                <EvilIcons
+                    name="trash"
+                    size={29}
                     color='white'
                     style={{
                         paddingHorizontal: 10
@@ -83,31 +101,29 @@ export default class Favorite extends Component {
         AsyncStorage.getItem('fav').then((data) => {
             //console.log(data)
             if (!data || data == '{}') {
-                this.setState({isLoading: false})
+                this.setState({ isLoading: false })
                 return
             }
             const items = JSON.parse(data)
-            let datatemp = []
+            let url = 'https://www.hatyaifocus.com/rest/api.php?action=news&ID='
             Object.keys(items).forEach((key) => {
-                let url = 'https://www.hatyaifocus.com/rest/api.php?action=' + items[key][0] + '&cat=&ID=' + items[key][1]
-                fetch(url)
-                    .then((response) => response.json())
-                    .then((responseJson) => {
-                        //console.log(responseJson)
-                        datatemp.push(responseJson)
-                        if (datatemp.length == Object.keys(items).length) {
-                            this.setState({
-                                isLoading: false,
-                                d: datatemp
-                            })
-                        }
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
+                url += items[key][1] + ','
             })
+            url = url.slice(0, -1)
+            //console.log(url)
+            fetch(url)
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    //console.log(responseJson)
+                    this.setState({
+                        isLoading: false,
+                        d: responseJson
+                    })
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
         })
-        //AsyncStorage.removeItem('favorite')
     }
 
     render() {
@@ -135,7 +151,7 @@ export default class Favorite extends Component {
                         top: 15,
                         color: 'white'
                     }}>
-                        --- ไม่มีข่าวโปรด ---
+                        --- ไม่มีข่าวที่บันทึกไว้ ---
                     </Text> :
 
                     <FlatList
@@ -147,7 +163,7 @@ export default class Favorite extends Component {
                                 <Swipeout
                                     autoClose={true}
                                     onOpen={() => this.setState({
-                                        delete: item["0"].ID
+                                        delete: item.ID
                                     })
                                     }
                                     onClose={() => {
@@ -168,27 +184,26 @@ export default class Favorite extends Component {
                                             text: 'Delete', type: 'delete'
                                         }]
                                     }
-
                                 >
                                     {item ?
                                         <TouchableOpacity
-                                            key={item[0].id}
+                                            key={item.ID}
                                             onPress={() => navigate('NewDetail',
                                                 {
-                                                    type: item[0].CATID,
-                                                    title: item[0].TOPIC,
-                                                    image: item[0].FEATURE,
-                                                    description: item[0].DESCRIPTION,
-                                                    view: item[0].VIEWS,
-                                                    date: item[0].DATEIN,
-                                                    url: item[0].URL
+                                                    type: item.CATID,
+                                                    title: item.TOPIC,
+                                                    image: item.FEATURE,
+                                                    description: item.DESCRIPTION,
+                                                    view: item.VIEWS,
+                                                    date: item.DATEIN,
+                                                    url: item.URL
                                                 }
                                             )}
                                         >
                                             <View style={{ paddingBottom: 5 }}>
-                                                <Text style={styles.titleText}> {item[0].TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
+                                                <Text style={styles.titleText}> {item.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                                             </View>
-                                            <Image source={{ uri: item[0].FEATURE }}
+                                            <Image source={{ uri: item.FEATURE }}
                                                 style={{
                                                     width: width - 10,
                                                     height: (width - 10) * 0.625,

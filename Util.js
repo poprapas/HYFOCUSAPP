@@ -29,3 +29,8 @@ export function removeFavorite(action, id) {
         AsyncStorage.setItem('fav', JSON.stringify(items))
     })
 }
+
+export function clearFavorite() {
+    AsyncStorage.setItem('fav', JSON.stringify({}))
+}
+

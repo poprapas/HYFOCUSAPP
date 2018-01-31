@@ -86,7 +86,8 @@ export default class New extends Component {
             start: 0,
             end: false,
             refreshing: false,
-            isMounted: true
+            isMounted: true,
+            favorite: {}
         }
     }
 
@@ -135,16 +136,20 @@ export default class New extends Component {
                 rowHasChanged: (r1, r2) => r1 !== r2,
             });
             const data = responseJson;
-            if (this.state.isMounted) {
-                this.setState({
-                    dataSource: ds.cloneWithRows(data),
-                    isLoading: false,
-                    _data: data,
-                    _dataAfter: responseJson.data,
-                    start: 10,
-                    refreshing: false,
-                });
-            }
+            AsyncStorage.getItem('fav').then((d) => {
+                if (!d){ d = '[]'}
+                if (this.state.isMounted) {
+                    this.setState({
+                        dataSource: ds.cloneWithRows(data),
+                        isLoading: false,
+                        _data: data,
+                        _dataAfter: responseJson.data,
+                        start: 10,
+                        refreshing: false,
+                        favorite: JSON.parse(d)
+                    });
+                }
+            })
         });
     }
 
@@ -163,32 +168,16 @@ export default class New extends Component {
         }
     }
 
-    favorite(action, id) {
-        utils.addFavorite(action, id)
-    }
+    favorite(action, id, favorite) {
+        if (favorite) {
+          utils.addFavorite(action, id)
+        }
+        else{
+          utils.removeFavorite(action, id)
+        }
+        this.forceUpdate()
+      }
 
-    // favorite(action, id) {
-    //     AsyncStorage.getItem('favorite').then((data) => {
-    //         //console.log(JSON.parse(data))
-    //         let main = []
-    //         if (data == null) {
-    //             AsyncStorage.setItem('favorite', JSON.stringify([[action, id]]))
-    //         }
-    //         else {
-    //             let newdata = JSON.parse(data)
-    //             let found = false
-    //             for (let i in newdata) {
-    //                 if (newdata[i][0] == action && newdata[i][1] == id)
-    //                     found = true
-    //             }
-    //             if (!found) {
-    //                 newdata.push([action, id])
-    //                 AsyncStorage.setItem('favorite', JSON.stringify(newdata))
-    //             }
-    //         }
-    //     })
-    //     //AsyncStorage.removeItem('favorite')
-    // }
 
     render() {
 
@@ -197,18 +186,7 @@ export default class New extends Component {
         if (this.state.isLoading || this.state.refreshing) {
             return (
                 <View style={{ flex: 1, backgroundColor: Color.BROWN[600] }}>
-                    {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
-                        <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-                            <Image source={require('./assets/images/banner2.jpg')}
-                                style={styles.logo} />
-                        </TouchableOpacity>
-
-                        <View style={{ flex: 1 }}>
-                            <Text style={styles.bannerfont}> ---- ข่าวกีฬา ---- </Text>
-                        </View>
-
-                    </View> */}
                     <ActivityIndicator
                         style={{ paddingTop: 20 }}
                         color='#d2a679' />
@@ -218,18 +196,6 @@ export default class New extends Component {
 
         return (
             <View style={styles.container}>
-                {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-                    <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-                        <Image source={require('./assets/images/banner2.jpg')}
-                            style={styles.logo} />
-                    </TouchableOpacity>
-
-                    <View style={{ flex: 1 }}>
-                        <Text style={styles.bannerfont}> ---- ข่าวกีฬา ---- </Text>
-                    </View>
-
-                </View> */}
 
                 <ListView
                     refreshControl={
@@ -241,6 +207,7 @@ export default class New extends Component {
                     }
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) => <View style={styles.listView}>
+                        {console.log(rowData)}
                         <TouchableOpacity
                             key={rowData.id}
                             onPress={() => navigate('NewDetail',
@@ -269,18 +236,17 @@ export default class New extends Component {
 
                         <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'space-between' }}>
 
-
                             <TouchableOpacity onPress={() => {
-                                this.favorite('news', rowData.ID)
-                                this.refs.toast.show('เพิ่มข่าวไปยังข่าวโปรดแล้ว!', 2000);
+                                rowData.favorite = !rowData.favorite
+                                this.favorite('news', rowData.ID, rowData.favorite)
+                                this.refs.toast.show(rowData.favorite ? 'เพิ่มข่าวไปยังบุ๊คมาร์คแล้ว!' : 'ลบข่าวออกจากบุ๊คมาร์คแล้ว!', 1800)
                             }}>
-                                <Feather
-                                    name="download"
-                                    size={16}
-                                    color='white'
+                                <Ionicons
+                                    name={rowData.favorite || this.state.favorite['news_' + rowData.ID] ? "md-star" : "md-star-outline"}
+                                    size={25}
+                                    color={'#edad35'}
                                     style={{
-                                        top: 7,
-                                        width: 30,
+                                        width: 25,
                                         margin: 3
                                     }}
                                 />

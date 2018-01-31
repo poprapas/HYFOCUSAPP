@@ -211,7 +211,7 @@ class SideMenu extends Component {
             <View style={styles.navSectionStyle}>
               <Icons name="star" size={25} color='white' style={{ width: 28 }} />
               <Text style={styles.navItemStyle}>
-                ข่าวโปรด
+                บุ๊คมาร์ค
               </Text>
             </View>
           </TouchableOpacity>

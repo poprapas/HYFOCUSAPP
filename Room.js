@@ -198,19 +198,6 @@ export default class Room extends Component {
         if (this.state.isLoading || this.state.refreshing) {
             return (
                 <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
-                    {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
-
-                        <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-                            <Image source={require('./assets/images/banner2.jpg')}
-                                style={styles.logo} />
-                        </TouchableOpacity>
-
-                        <View style={{ flex: 1 }}>
-                            <Text style={styles.roomfont}> --- ที่พักล่าสุด --- </Text>
-                        </View>
-
-                    </View> */}
-
                     <ActivityIndicator
                         style={{ paddingTop: 20 }}
                         color='#cc9966' />
@@ -220,19 +207,6 @@ export default class Room extends Component {
 
         return (
             <View style={styles.container}>
-                {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
-
-                    <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-                        <Image source={require('./assets/images/banner2.jpg')}
-                            style={styles.logo} />
-                    </TouchableOpacity>
-
-                    <View style={{ flex: 1 }}>
-                        <Text style={styles.roomfont}> --- ที่พักล่าสุด --- </Text>
-                    </View>
-
-                </View> */}
-
                 <ListView
                     refreshControl={
                         <RefreshControl

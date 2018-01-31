@@ -148,7 +148,9 @@ export default class Home extends Component {
       refreshing: false,
       progress: new Animated.Value(0),
       size: { width, height },
-      isMounted: true
+      isMounted: true,
+      update: false,
+      favorite: {}
     }
   }
 
@@ -176,17 +178,21 @@ export default class Home extends Component {
         fetch('https://www.hatyaifocus.com/rest/api.php?action=slider')
           .then((response2) => response2.json())
           .then((responseJson2) => {
-            if (this.state.isMounted) {
-              this.setState({
-                isLoading: false,
-                dataSource: ds.cloneWithRows(responseJson),
-                slide: responseJson2,
-                refreshing: false
-              }, function () {
-                // do something with new state
-                StatusBar.setBarStyle('light-content', true);
-              })
-            };
+            AsyncStorage.getItem('fav').then((data) => {
+              if (!data){ data = '[]'}
+              if (this.state.isMounted) {
+                this.setState({
+                  isLoading: false,
+                  dataSource: responseJson,
+                  slide: responseJson2,
+                  refreshing: false,
+                  favorite: JSON.parse(data)
+                }, function () {
+                  // do something with new state
+                  StatusBar.setBarStyle('light-content', true);
+                })
+              };
+            })
           })
       })
       .catch((error) => {
@@ -201,8 +207,13 @@ export default class Home extends Component {
     }
   }
 
-  favorite(action, id) {
-    utils.addFavorite(action, id)
+  favorite(action, id, favorite) {
+    if (favorite) {
+      utils.addFavorite(action, id)
+    }
+    else{
+      utils.removeFavorite(action, id)
+    }
   }
 
   render() {
@@ -217,19 +228,6 @@ export default class Home extends Component {
               barStyle="light-content"
             />
           </View>
-
-          {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-            <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-              <Image source={require('./assets/images/banner2.jpg')}
-                style={styles.logo} />
-            </TouchableOpacity>
-
-            <View style={{ flex: 1 }}>
-              <Text style={styles.newfont}> --- ข่าวล่าสุด --- </Text>
-            </View>
-
-          </View> */}
 
           <ActivityIndicator
             style={{ paddingTop: 20 }}
@@ -250,19 +248,6 @@ export default class Home extends Component {
           />
         </View>
 
-        {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-          <TouchableOpacity onPress={() => navigate('Tab')}>
-            <Image source={require('./assets/images/banner2.jpg')}
-              style={styles.logo} />
-          </TouchableOpacity>
-
-          <View style={{ flex: 1 }}>
-            <Text style={styles.newfont}> --- ข่าวล่าสุด --- </Text>
-          </View>
-
-        </View> */}
-
         <ScrollView
           refreshControl={
             <RefreshControl
@@ -272,28 +257,29 @@ export default class Home extends Component {
             />
           }
         >
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={(rowData) => <View style={styles.listView}>
+          <FlatList
+            data={this.state.dataSource}
+            keyExtractor={(item, index) => index}
+            extraData={this.state.update}
+            renderItem={({ item }) => <View style={styles.flatList}>
               <TouchableOpacity
-                key={rowData.id}
                 onPress={() => navigate('NewDetail',
                   {
-                    type: rowData.CATID,
-                    title: rowData.TOPIC,
-                    image: rowData.FEATURE,
-                    description: rowData.DESCRIPTION,
-                    view: rowData.VIEWS,
-                    date: rowData.DATEIN,
-                    url: rowData.URL,
-                    id: rowData.ID
+                    type: item.CATID,
+                    title: item.TOPIC,
+                    image: item.FEATURE,
+                    description: item.DESCRIPTION,
+                    view: item.VIEWS,
+                    date: item.DATEIN,
+                    url: item.URL,
+                    id: item.ID
                   }
                 )}
               >
                 <View style={{ paddingBottom: 5 }}>
-                  <Text style={styles.titleText}> {rowData.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
+                  <Text style={styles.titleText}> {item.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                 </View>
-                <Image source={{ uri: rowData.FEATURE }}
+                <Image source={{ uri: item.FEATURE }}
                   style={{
                     width: width - 10,
                     height: (width - 10) * 0.625,
@@ -305,33 +291,35 @@ export default class Home extends Component {
               <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'space-between' }}>
 
                 <TouchableOpacity onPress={() => {
-                  this.favorite('news', rowData.ID)
-                  this.refs.toast.show('เพิ่มข่าวไปยังข่าวโปรดแล้ว!', 2000);
+                  item.favorite = !item.favorite
+                  this.favorite('news', item.ID, item.favorite)
+                  this.refs.toast.show(item.favorite ? 'เพิ่มข่าวไปยังบุ๊คมาร์คแล้ว!' : 'ลบข่าวออกจากบุ๊คมาร์คแล้ว!', 1800)
+                  this.setState({
+                    update: !this.state.update,
+                  })
                 }}>
-                  <Feather
-                    name="download"
-                    size={17}
-                    color='white'
+                  <Ionicons
+                    name={item.favorite || this.state.favorite['news_' + item.ID] ? "md-star" : "md-star-outline"}
+                    size={25}
+                    color={'#edad35'}
                     style={{
-                      top: 7,
-                      width: 30,
+                      width: 25,
                       margin: 3
                     }}
                   />
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  key={rowData.id}
                   onPress={() => navigate('NewDetail',
                     {
-                      type: rowData.CATID,
-                      title: rowData.TOPIC,
-                      image: rowData.FEATURE,
-                      description: rowData.DESCRIPTION,
-                      view: rowData.VIEWS,
-                      date: rowData.DATEIN,
-                      url: rowData.URL,
-                      id: rowData.ID
+                      type: item.CATID,
+                      title: item.TOPIC,
+                      image: item.FEATURE,
+                      description: item.DESCRIPTION,
+                      view: item.VIEWS,
+                      date: item.DATEIN,
+                      url: item.URL,
+                      id: item.ID
                     }
                   )}
                 >
@@ -455,7 +443,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
   },
-  listView: {
+  flatList: {
     paddingLeft: 5,
     paddingRight: 5,
     paddingTop: 5,
