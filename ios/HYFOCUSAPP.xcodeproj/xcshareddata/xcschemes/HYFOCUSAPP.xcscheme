@@ -31,7 +31,7 @@
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
                BuildableName = "HYFOCUSAPP.app"
                BlueprintName = "HYFOCUSAPP"
-               ReferencedContainer = "container:HYFOCUSAPP.xcodeproj">
+               ReferencedContainer = "container:../../../../Library/Mobile Documents/com~apple~CloudDocs/Documents/GitHub/HYFOCUSAPP/ios/HYFOCUSAPP.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
                BuildableName = "HYFOCUSAPPTests.xctest"
                BlueprintName = "HYFOCUSAPPTests"
-               ReferencedContainer = "container:HYFOCUSAPP.xcodeproj">
+               ReferencedContainer = "container:../../../../Library/Mobile Documents/com~apple~CloudDocs/Documents/GitHub/HYFOCUSAPP/ios/HYFOCUSAPP.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -64,7 +64,7 @@
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
                BuildableName = "HYFOCUSAPPTests.xctest"
                BlueprintName = "HYFOCUSAPPTests"
-               ReferencedContainer = "container:HYFOCUSAPP.xcodeproj">
+               ReferencedContainer = "container:../../../../Library/Mobile Documents/com~apple~CloudDocs/Documents/GitHub/HYFOCUSAPP/ios/HYFOCUSAPP.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -74,14 +74,14 @@
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "HYFOCUSAPP.app"
             BlueprintName = "HYFOCUSAPP"
-            ReferencedContainer = "container:HYFOCUSAPP.xcodeproj">
+            ReferencedContainer = "container:../../../../Library/Mobile Documents/com~apple~CloudDocs/Documents/GitHub/HYFOCUSAPP/ios/HYFOCUSAPP.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       language = ""
@@ -98,7 +98,7 @@
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "HYFOCUSAPP.app"
             BlueprintName = "HYFOCUSAPP"
-            ReferencedContainer = "container:HYFOCUSAPP.xcodeproj">
+            ReferencedContainer = "container:../../../../Library/Mobile Documents/com~apple~CloudDocs/Documents/GitHub/HYFOCUSAPP/ios/HYFOCUSAPP.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -124,7 +124,7 @@
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "HYFOCUSAPP.app"
             BlueprintName = "HYFOCUSAPP"
-            ReferencedContainer = "container:HYFOCUSAPP.xcodeproj">
+            ReferencedContainer = "container:../../../../Library/Mobile Documents/com~apple~CloudDocs/Documents/GitHub/HYFOCUSAPP/ios/HYFOCUSAPP.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
