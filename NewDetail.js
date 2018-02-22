@@ -85,7 +85,7 @@ export default class NewDetail extends Component {
     })
 
     renderNode(node, index, siblings, parent, defaultRenderer) {
-
+        console.log(node)
         if (node.name == 'p' && node.children[0].name == 'img') {
             const a = node.children[0].attribs;
             return (
@@ -95,16 +95,16 @@ export default class NewDetail extends Component {
                         width: width,
                         height: width * a.height / a.width,
                         resizeMode: 'contain',
-                        marginVertical: 10
+                        marginVertical: 10,
                     }}
                     source={{
-                        uri: node.children[0].attribs.src
+                        uri: a.src
                     }}
                 />
             )
         }
-
-        if (node.name == 'p' && node.children[0].name == 'iframe') {
+        //console.log(node)
+        else if ((node.name == 'p' || node.name == 'div') && node.children[0].name == 'iframe') {
             if (node.children[0].attribs.src.slice(0, 2) == '//') {
                 node.children[0].attribs.src = 'https:' + node.children[0].attribs.src
             };
@@ -112,6 +112,8 @@ export default class NewDetail extends Component {
                 return (
                     <WebView
                         key={index}
+                        bounces={false}
+                        scrollEnabled={false}
                         source={{
                             uri: node.children[0].attribs.src
                         }}
@@ -124,7 +126,7 @@ export default class NewDetail extends Component {
                 )
             }
             else {
-                let a = node.children[0].attribs;
+                const a = node.children[0].attribs;
                 return (
                     <WebView
                         key={index}
@@ -140,6 +142,94 @@ export default class NewDetail extends Component {
                     />
                 );
             }
+        }
+        else if (node.name == 'p' && node.children[1] && node.children[1].name == 'iframe') {
+            const a = node.children[1].attribs
+            if (a.src.slice(0, 2) == '//') {
+                a.src = 'https:' + a.src
+            };
+            if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
+                const iframeHtml =
+                    `<iframe src="${a.src}" 
+                        height= 220, 
+                        width= ${width - 10}, 
+                    >
+                    </iframe>`;
+                return (
+                    <View key={index}
+                        style={{
+                            width: width,
+                            height: 230,
+                            marginLeft: -20,
+                            paddingBottom: 10,
+                            alignSelf: 'center',
+                        }}
+                    >
+                        <WebView
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{ html: iframeHtml }}
+                            style={{
+                                backgroundColor: 'transparent',
+                            }}
+                        />
+                    </View>
+                );
+            }
+            else if (a.src.slice(12, 15) == 'you') {
+                console.log('tetrtrt', node)
+                return (
+                    <View
+                        key={index}
+                        style={{
+                            width: width - 10,
+                            height: (width - 10) * 0.5625,
+                            alignSelf: 'center',
+                        }}>
+                        <WebView
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{
+                                uri: a.src
+                            }}
+                            style={{
+                                width: width - 10,
+                                height: (width - 10) * 0.5625,
+                                alignSelf: 'center',
+                            }}
+                        />
+                    </View>
+                );
+            }
+            else {
+                return (
+                    <View
+                        key={index}
+                        style={{
+                            width: width - 10,
+                            height: (width - 10) * 0.5625,
+                            alignSelf: 'center',
+                            backgroundColor: 'transparent',
+                        }}>
+                        <WebView
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{
+                                uri: a.src
+                            }}
+                            style={{
+                                //width: width,
+                                height: a.height <= a.width ? (width * a.height / a.width) - 35 : width * a.height / a.width,
+                                //resizeMode: 'contain',
+                                backgroundColor: 'transparent'
+                            }}
+                        />
+                    </View>
+                );
+            }
+        }
+        else if (node.name == 'br') {
+            return null
         }
     }
 
@@ -159,8 +249,8 @@ export default class NewDetail extends Component {
                         <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                         <Image source={{ uri: this.props.navigation.state.params.image }}
                             style={{
-                                width: width - 10,
-                                height: (width - 10) * 0.625
+                                height: (width - 10) * 0.625,
+                                resizeMode: 'contain'
                             }} />
                         <Text />
                         <HTMLView
@@ -251,7 +341,7 @@ const styless = StyleSheet.create({
         fontFamily: 'Times New Roman',
         paddingHorizontal: 5,
         lineHeight: 28,
-        marginBottom: Platform.OS == 'ios' ? -35 : -25
+        marginBottom: Platform.OS == 'ios' ? -35 : -25,
     },
     a: {
         fontSize: 18,
@@ -260,4 +350,7 @@ const styless = StyleSheet.create({
         textAlign: 'left',
         fontFamily: 'Times New Roman'
     },
+    br: {
+        height: 0
+    }
 });

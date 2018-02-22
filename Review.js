@@ -142,9 +142,7 @@ export default class Review extends Component {
     }
 
     componentWillUnmount() {
-        this.setState({
-            isMounted: false
-        })
+        this.state.isMounted = false
     }
 
     _onRefresh() {
@@ -163,17 +161,6 @@ export default class Review extends Component {
         if (this.state.isLoading || this.state.refreshing) {
             return (
                 <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
-                    {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-                        <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-                            <Image source={require('./assets/images/banner2.jpg')}
-                                style={styles.logo} />
-                        </TouchableOpacity>
-
-                        <View style={{ flex: 1 }}>
-                            <Text style={styles.reviewfont}> ---- Review ---- </Text>
-                        </View>
-                    </View> */}
                     <ActivityIndicator
                         style={{ paddingTop: 20 }}
                         color='#cc9966' />
@@ -183,18 +170,6 @@ export default class Review extends Component {
 
         return (
             <View style={styles.container}>
-                {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-                    <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-                        <Image source={require('./assets/images/banner2.jpg')}
-                            style={styles.logo} />
-                    </TouchableOpacity>
-
-                    <View style={{ flex: 1 }}>
-                        <Text style={styles.reviewfont}> ---- Review ---- </Text>
-                    </View>
-                </View> */}
-
                 <ListView
                     refreshControl={
                         <RefreshControl

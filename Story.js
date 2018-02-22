@@ -142,9 +142,7 @@ export default class Story extends Component {
     }
 
     componentWillUnmount() {
-        this.setState({
-            isMounted: false
-        })
+        this.state.isMounted = false
     }
 
     _onRefresh() {

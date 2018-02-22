@@ -87,11 +87,9 @@ export default class Room extends Component {
     }
 
     componentWillUnmount() {
-        this.setState({
-            isMounted: false
-        })
+        this.state.isMounted = false
     }
-
+    
     _fetchData(callback) {
         let url = ''
         if (this.state.page == 'all') {

@@ -93,8 +93,13 @@ export default class Favorite extends Component {
         this.state = {
             isLoading: true,
             d: [],
-            delete: null
+            delete: null,
+            isMounted: true,
         }
+    }
+
+    componentWillUnmount() {
+        this.state.isMounted = false
     }
 
     componentDidMount() {
@@ -115,10 +120,12 @@ export default class Favorite extends Component {
                 .then((response) => response.json())
                 .then((responseJson) => {
                     //console.log(responseJson)
-                    this.setState({
-                        isLoading: false,
-                        d: responseJson
-                    })
+                    if (this.state.isMounted) {
+                        this.setState({
+                            isLoading: false,
+                            d: responseJson
+                        })
+                    }
                 })
                 .catch((error) => {
                     console.error(error);

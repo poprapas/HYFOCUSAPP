@@ -137,7 +137,7 @@ export default class New extends Component {
             });
             const data = responseJson;
             AsyncStorage.getItem('fav').then((d) => {
-                if (!d){ d = '[]'}
+                if (!d) { d = '[]' }
                 if (this.state.isMounted) {
                     this.setState({
                         dataSource: ds.cloneWithRows(data),
@@ -154,9 +154,7 @@ export default class New extends Component {
     }
 
     componentWillUnmount() {
-        this.setState({
-            isMounted: false
-        })
+        this.state.isMounted = false
     }
 
     _onRefresh() {
@@ -170,13 +168,13 @@ export default class New extends Component {
 
     favorite(action, id, favorite) {
         if (favorite) {
-          utils.addFavorite(action, id)
+            utils.addFavorite(action, id)
         }
-        else{
-          utils.removeFavorite(action, id)
+        else {
+            utils.removeFavorite(action, id)
         }
         this.forceUpdate()
-      }
+    }
 
 
     render() {

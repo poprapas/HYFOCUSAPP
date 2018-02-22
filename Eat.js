@@ -141,9 +141,7 @@ export default class Eat extends Component {
     }
 
     componentWillUnmount() {
-        this.setState({
-            isMounted: false
-        })
+        this.state.isMounted =  false
     }
 
     _onRefresh() {

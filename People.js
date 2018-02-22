@@ -143,9 +143,7 @@ export default class People extends Component {
     }
 
     componentWillUnmount() {
-        this.setState({
-            isMounted: false
-        })
+        this.state.isMounted = false
     }
 
     _onRefresh() {
@@ -163,17 +161,6 @@ export default class People extends Component {
         if (this.state.isLoading || this.state.refreshing) {
             return (
                 <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
-                    {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-                        <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-                            <Image source={require('./assets/images/banner2.jpg')}
-                                style={styles.logo} />
-                        </TouchableOpacity>
-
-                        <View style={{ flex: 1 }}>
-                            <Text style={styles.peoplefont}> ---- วิถีชีวิต ---- </Text>
-                        </View>
-                    </View> */}
                     <ActivityIndicator
                         style={{ paddingTop: 20 }}
                         color='#cc9966' />
@@ -183,18 +170,6 @@ export default class People extends Component {
 
         return (
             <View style={styles.container}>
-                {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-                    <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-                        <Image source={require('./assets/images/banner2.jpg')}
-                            style={styles.logo} />
-                    </TouchableOpacity>
-
-                    <View style={{ flex: 1 }}>
-                        <Text style={styles.peoplefont}> ---- วิถีชีวิต ---- </Text>
-                    </View>
-                </View> */}
-
                 <ListView
                     refreshControl={
                         <RefreshControl
@@ -225,11 +200,11 @@ export default class People extends Component {
                             </View>
                             <Image source={{ uri: rowData.FEATURE }}
                                 style={{
-                                    width: width - 150,
-                                    height: (width - 10) * 0.8,
-                                    //backgroundColor: '#6a5750',
+                                    width: (width - 150) * 0.8,
+                                    height: (width - 150),
+                                    alignSelf: 'center',
                                     borderRadius: 10,
-                                    alignSelf: 'center'
+
                                 }}
                             />
                             <View style={{ paddingTop: 5 }}>

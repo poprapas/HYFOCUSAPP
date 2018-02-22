@@ -141,7 +141,7 @@ export default class ContentDetail extends Component {
     })
 
     renderNode(node, index, siblings, parent, defaultRenderer) {
-
+        console.log(node)
         if (node.name == 'p' && node.children[0].name == 'img') {
             const a = node.children[0].attribs;
             return (
@@ -159,8 +159,9 @@ export default class ContentDetail extends Component {
                 />
             )
         }
-        else if (node.name == 'p' && node.children[0].name == 'iframe') {
+        else if ((node.name == 'p' || node.name == 'div') && node.children[0].name == 'iframe') {
             const a = node.children[0].attribs;
+            //console.log(a)
             if (a.src.slice(0, 2) == '//') {
                 a.src = 'https:' + a.src
             };
@@ -196,6 +197,8 @@ export default class ContentDetail extends Component {
                 return (
                     <WebView
                         key={index}
+                        bounces={false}
+                        scrollEnabled={false}
                         source={{
                             uri: a.src
                         }}
@@ -209,18 +212,113 @@ export default class ContentDetail extends Component {
             }
             else {
                 return (
-                    <WebView
+                    <View
                         key={index}
-                        bounces={false}
-                        source={{
-                            uri: a.src
-                        }}
+                        style={{
+                            width: width - 10,
+                            height: (width - 10) * 0.5625,
+                            alignSelf: 'center',
+                            backgroundColor: 'transparent'
+                        }}>
+                        <WebView
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{
+                                uri: a.src
+                            }}
+                            style={{
+                                //width: width,
+                                height: a.height <= a.width ? (width * a.height / a.width) - 35 : width * a.height / a.width,
+                                //resizeMode: 'contain',
+                                backgroundColor: 'transparent'
+                            }}
+                        />
+                    </View>
+                );
+            }
+        }
+        else if (node.name == 'p' && node.children[1] && node.children[1].name == 'iframe') {
+            const a = node.children[1].attribs
+            if (a.src.slice(0, 2) == '//') {
+                a.src = 'https:' + a.src
+            };
+            if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
+                const iframeHtml =
+                    `<iframe src="${a.src}" 
+                        height= 220, 
+                        width= ${width - 10}, 
+                    >
+                    </iframe>`;
+                return (
+                    <View key={index}
                         style={{
                             width: width,
-                            height: a.height < a.width ? (width * a.height / a.width) - 35 : width * a.height / a.width,
-                            //resizeMode: 'contain',
+                            height: 230,
+                            marginLeft: -20,
+                            paddingBottom: 10,
+                            alignSelf: 'center',
                         }}
-                    />
+                    >
+                        <WebView
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{ html: iframeHtml }}
+                            style={{
+                                backgroundColor: 'transparent',
+                            }}
+                        />
+                    </View>
+                );
+            }
+            else if (a.src.slice(12, 15) == 'you') {
+                console.log(a.src)
+                return (
+                    <View
+                        style={{
+                            width: width - 10,
+                            height: (width - 10) * 0.5625,
+                            alignSelf: 'center',
+                        }}>
+                        <WebView
+                            key={index}
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{
+                                uri: a.src
+                            }}
+                            style={{
+                                width: width - 10,
+                                height: (width - 10) * 0.5625,
+                                alignSelf: 'center',
+                            }}
+                        />
+                    </View>
+                );
+            }
+            else {
+                return (
+                    <View
+                        style={{
+                            width: width - 10,
+                            height: (width - 10) * 0.5625,
+                            alignSelf: 'center',
+                            backgroundColor: 'transparent'
+                        }}>
+                        <WebView
+                            key={index}
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{
+                                uri: a.src
+                            }}
+                            style={{
+                                //width: width,
+                                height: a.height <= a.width ? (width * a.height / a.width) - 35 : width * a.height / a.width,
+                                //resizeMode: 'contain',
+                                backgroundColor: 'transparent'
+                            }}
+                        />
+                    </View>
                 );
             }
         }
@@ -230,15 +328,16 @@ export default class ContentDetail extends Component {
         if (catID == 1 || catID == 3 || catID == 4 || catID == 5 || catID == 8) {
             return <Image source={{ uri: this.props.navigation.state.params.image }}
                 style={{
-                    width: width - 10,
-                    height: (width - 10) * 0.625
+                    //width: (width - 10),
+                    height: (width - 10) * 0.75,
+                    resizeMode: 'contain'
                 }}
             />
         } else if (catID == 2) {
             return <Image source={{ uri: this.props.navigation.state.params.image }}
                 style={{
-                    width: width - 150,
-                    height: (width - 10) * 0.8,
+                    width: (width - 150) * 0.8,
+                    height: (width - 150),
                     alignSelf: 'center'
                 }}
             />

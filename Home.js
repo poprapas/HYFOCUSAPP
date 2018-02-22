@@ -155,9 +155,7 @@ export default class Home extends Component {
   }
 
   componentWillUnmount() {
-    this.setState({
-      isMounted: false
-    })
+    this.state.isMounted =  false
   }
 
   componentDidMount() {
@@ -341,8 +339,7 @@ export default class Home extends Component {
           <View style={{
             padding: 5,
             backgroundColor: 'white',
-            top: 20,
-            marginBottom: 30,
+            marginTop: 20
           }}>
             <View style={{ height: width * 0.526 }}
               onLayout={this._onLayoutDidChange}
@@ -382,29 +379,8 @@ export default class Home extends Component {
             </View>
           </View>
 
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingBottom: 20 }}>
-
-            <View style={{ borderColor: 'white', borderWidth: 2 }}>
-              <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%99%E0%B8%95%E0%B9%8C-1380405395370823/')} >
-                <View>
-                  <Image source={require('./assets/images/advt_2.jpg')}
-                    style={styles.advt_2} />
-                </View>
-              </TouchableOpacity>
-            </View>
-
-            <View style={{ borderColor: 'white', borderWidth: 2 }}>
-              <Image source={require('./assets/images/advt_3.jpg')}
-                style={styles.advt_3} />
-            </View>
-
-          </View>
-
           <Image source={require('./assets/images/advt_4.jpg')}
             style={styles.advt_4} />
-
-          <Text></Text>
-          <Text></Text>
 
         </ScrollView>
 
@@ -471,17 +447,10 @@ const styles = StyleSheet.create({
     height: width * 0.526,
     width: width,
   },
-  advt_2: {
-    height: (width - 230) * 0.69,
-    width: width - 230,
-  },
-  advt_3: {
-    height: (width - 230) * 0.69,
-    width: width - 230,
-  },
   advt_4: {
     height: width * 0.1,
     width: width,
+    marginVertical: 20
   },
   button: {
     fontSize: 15,

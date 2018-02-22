@@ -150,9 +150,7 @@ export default class Jobs extends Component {
   }
 
   componentWillUnmount() {
-    this.setState({
-      isMounted: false
-    })
+    this.state.isMounted = false
   }
 
   _onRefresh() {
@@ -304,7 +302,7 @@ export default class Jobs extends Component {
                 onChangeText={(find) => this.setState({ find: find })}
               />
             </View>
-            
+
             {this.state.find == '' ? null :
               <TouchableOpacity
                 onPress={() => this.setState({ find: '' })}
