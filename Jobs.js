@@ -185,19 +185,6 @@ export default class Jobs extends Component {
     if (this.state.isLoading || this.state.refreshing) {
       return (
         <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
-          {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
-
-            <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-              <Image source={require('./assets/images/banner2.jpg')}
-                style={styles.logo} />
-            </TouchableOpacity>
-
-            <View style={{ flex: 1 }}>
-              <Text style={styles.jobfont}> - หางานหาดใหญ่ - </Text>
-            </View>
-
-          </View> */}
-
           <View style={{ flexDirection: 'row' }}>
             <View style={styles.search}>
 

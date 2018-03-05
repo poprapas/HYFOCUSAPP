@@ -25,13 +25,13 @@ import Icons from 'react-native-vector-icons/dist/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
-import Toast, { DURATION } from 'react-native-easy-toast'
+import Toast, { DURATION } from 'react-native-easy-toast';
+import DeviceInfo from 'react-native-device-info';
 
 const { width, height } = Dimensions.get("window");
 let ref = null
 
 export default class NewDetail extends Component {
-
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
@@ -85,7 +85,7 @@ export default class NewDetail extends Component {
     })
 
     renderNode(node, index, siblings, parent, defaultRenderer) {
-        console.log(node)
+        //console.log(node)
         if (node.name == 'p' && node.children[0].name == 'img') {
             const a = node.children[0].attribs;
             return (
@@ -103,7 +103,6 @@ export default class NewDetail extends Component {
                 />
             )
         }
-        //console.log(node)
         else if ((node.name == 'p' || node.name == 'div') && node.children[0].name == 'iframe') {
             if (node.children[0].attribs.src.slice(0, 2) == '//') {
                 node.children[0].attribs.src = 'https:' + node.children[0].attribs.src
@@ -177,7 +176,6 @@ export default class NewDetail extends Component {
                 );
             }
             else if (a.src.slice(12, 15) == 'you') {
-                console.log('tetrtrt', node)
                 return (
                     <View
                         key={index}
@@ -231,6 +229,58 @@ export default class NewDetail extends Component {
         else if (node.name == 'br') {
             return null
         }
+
+        else if (node.name == 'ol' && node.children["0"].name == 'li' && node.children["0"].children[2] && node.children["0"].children[2].children["0"].name == 'img') {
+
+            const a = node.children["0"].children[2].children["0"].attribs;
+            return (
+                <View key={index}>
+                    <Text
+                        style={{
+                            fontSize: 18,
+                            fontWeight: 'normal',
+                            color: 'white',
+                            textAlign: 'left',
+                            fontFamily: 'Times New Roman',
+                            paddingHorizontal: 5
+                        }}
+                    >
+                        {node.attribs.start}. {(node.children["0"].children["0"].children["0"].data).replace(/&ndash;/g, '').replace(/&nbsp;/g, '')}
+                    </Text>
+                    <Image
+                        style={{
+                            width: width - 20,
+                            height: (width - 20) * a.height / a.width,
+                            resizeMode: 'contain',
+                            marginVertical: 10,
+                        }}
+                        source={{
+                            uri: a.src
+                        }}
+                    />
+                </View>
+            )
+        }
+
+        else if (node.name == 'ol' && node.children["0"].name == 'li') {
+            //console.log(node.children["0"].children[2])
+            return (
+                <Text
+                    key={index}
+                    style={{
+                        fontSize: 18,
+                        fontWeight: 'normal',
+                        color: 'white',
+                        textAlign: 'left',
+                        fontFamily: 'Times New Roman',
+                        paddingHorizontal: 5
+                    }}
+                >
+                    {node.attribs.start}. {(node.children["0"].children["0"].children["0"].data).replace(/&ndash;/g, '').replace(/&nbsp;/g, '')}
+                </Text>
+            )
+        }
+        
     }
 
     render() {
@@ -254,9 +304,12 @@ export default class NewDetail extends Component {
                             }} />
                         <Text />
                         <HTMLView
-                            value={descript.replace(/\r\n/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
+                            value={descript.replace(/\r\n\t/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}
+                            //renderNode={null}
                             stylesheet={styless}
+                            textComponentProps={{ style: { color: '#ffffff' } }}
+
                         />
 
                         <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingTop: 40 }}>
@@ -278,7 +331,7 @@ export default class NewDetail extends Component {
                                 color='white'
                                 style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
                             />
-                            <Text style={styles.view}>
+                            <Text style={[styles.view, { paddingBottom: DeviceInfo.getModel() == 'iPhone X' ? 40 : 0 }]}>
                                 {this.props.navigation.state.params.date}
                             </Text>
                         </View>
@@ -312,7 +365,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingBottom: 20,
-        paddingTop: 20
+        paddingTop: 20,
+        lineHeight: Platform.OS == 'ios' ? 32 :  42
     },
     view: {
         fontSize: 14,
@@ -352,5 +406,5 @@ const styless = StyleSheet.create({
     },
     br: {
         height: 0
-    }
+    },
 });

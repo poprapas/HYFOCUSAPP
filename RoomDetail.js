@@ -20,6 +20,7 @@ import Icons from 'react-native-vector-icons/dist/MaterialIcons';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
+import DeviceInfo from 'react-native-device-info';
 
 const { width, height } = Dimensions.get("window");
 
@@ -253,7 +254,7 @@ export default class RoomDetail extends Component {
                                     color='black'
                                     style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
                                 />
-                                <Text style={styles.date}>
+                                <Text style={[styles.view, { paddingBottom: DeviceInfo.getModel() == 'iPhone X' ? 25 : 0 }]}>
                                     {this.props.navigation.state.params.date}
                                 </Text>
                             </View>

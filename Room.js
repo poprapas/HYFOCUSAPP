@@ -401,7 +401,7 @@ const styles = StyleSheet.create({
         color: '#696969'
     },
     button: {
-        fontSize: Platform.OS == 'ios' ? width / 30 : width / 40,
+        fontSize: Platform.OS == 'ios' ? width / 35 : width / 40,
         fontWeight: 'normal',
         color: 'white',
         textAlign: 'center',

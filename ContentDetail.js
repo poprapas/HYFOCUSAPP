@@ -22,6 +22,7 @@ import Icons from 'react-native-vector-icons/dist/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import Foundation from 'react-native-vector-icons/dist/Foundation';
+import DeviceInfo from 'react-native-device-info';
 
 const { width, height } = Dimensions.get("window");
 let _this = null
@@ -271,7 +272,7 @@ export default class ContentDetail extends Component {
                 );
             }
             else if (a.src.slice(12, 15) == 'you') {
-                console.log(a.src)
+                //console.log(a.src)
                 return (
                     <View
                         style={{
@@ -404,7 +405,7 @@ export default class ContentDetail extends Component {
                                 color='white'
                                 style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
                             />
-                            <Text style={styles.view}>
+                            <Text style={[styles.view, { paddingBottom: DeviceInfo.getModel() == 'iPhone X' ? 40 : 0 }]}>
                                 {this.props.navigation.state.params.date}
                             </Text>
                         </View>
@@ -447,7 +448,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: 10,
-        paddingBottom: 10
+        paddingBottom: 10,
+        lineHeight: Platform.OS == 'ios' ? 28 :  35
 
     },
     view: {
@@ -468,7 +470,7 @@ const styless = StyleSheet.create({
         textAlign: 'left',
         fontFamily: 'Times New Roman',
         paddingHorizontal: 5,
-        lineHeight: 28,
+        lineHeight: Platform.OS == 'ios' ? 28 :  35,
         marginBottom: Platform.OS == 'ios' ? -35 : -25
     },
     a: {

@@ -11,6 +11,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +31,8 @@ public class MainApplication extends Application implements ReactApplication {
           new ReactNativePushNotificationPackage(),
           new MapsPackage(),
           new VectorIconsPackage(),
-          new SplashScreenReactPackage()
+          new SplashScreenReactPackage(),
+          new RNDeviceInfo()
       );
     }
 

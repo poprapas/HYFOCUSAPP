@@ -279,6 +279,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: 10,
+        lineHeight: Platform.OS == 'ios' ? 28 :  35
     },
 
 });

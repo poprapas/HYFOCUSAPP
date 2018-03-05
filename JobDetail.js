@@ -21,6 +21,7 @@ import Foundation from 'react-native-vector-icons/dist/Foundation';
 import Communications from 'react-native-communications';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
+import DeviceInfo from 'react-native-device-info';
 
 const { width, height } = Dimensions.get("window");
 
@@ -106,7 +107,7 @@ export default class JobDetail extends Component {
 
                 <View style={styles.listView}>
                     <ScrollView style={{
-                        height: height - 70,
+                        height: DeviceInfo.getModel() == 'iPhone X' ? height - 90 : height - 70,
                         width: "100%",
                     }}>
                         <View style={{
@@ -117,7 +118,8 @@ export default class JobDetail extends Component {
                             width: 120,
                             height: 100,
                             overflow: 'hidden',
-                            alignSelf: 'center'
+                            alignSelf: 'center',
+                            marginTop: 10
                         }}>
                             <Image source={{ uri: this.props.navigation.state.params.image }}
                                 style={{
@@ -270,7 +272,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     listView: {
-        padding: 10,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingBottom: 10,
         width: width,
     },
     company: {
