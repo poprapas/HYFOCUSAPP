@@ -160,19 +160,19 @@ export default class ContentDetail extends Component {
                 />
             )
         }
-        else if ((node.name == 'p' || node.name == 'div') && node.children[0].name == 'iframe') {
+        else if ((node.name == 'p' || node.name == 'div') && node.children[0] && node.children[0].name == 'iframe') {
+            console.log(node)
             const a = node.children[0].attribs;
-            //console.log(a)
             if (a.src.slice(0, 2) == '//') {
                 a.src = 'https:' + a.src
             };
             if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
                 const iframeHtml =
                     `<iframe src="${a.src}" 
-                        height= 220, 
-                        width= ${width - 10}, 
-                    >
-                    </iframe>`;
+                            height= 220, 
+                            width= ${width - 10}, 
+                        >
+                        </iframe>`;
                 return (
                     <View key={index}
                         style={{
@@ -323,6 +323,84 @@ export default class ContentDetail extends Component {
                 );
             }
         }
+        // else if ((node.name == 'p' || node.name == 'div') && node.children[0] && node.children[0].name == 'iframe') {
+        // console.log(node)
+        //     const a = node.children[0].attribs;
+        //     if (a.src.slice(0, 2) == '//') {
+        //         a.src = 'https:' + a.src
+        //     };
+        //     if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
+        //         const iframeHtml =
+        //             `<iframe src="${a.src}" 
+        //                 height= 220, 
+        //                 width= ${width - 10}, 
+        //             >
+        //             </iframe>`;
+        //         return (
+        //             <View key={index}
+        //                 style={{
+        //                     width: width,
+        //                     height: 230,
+        //                     marginLeft: -20,
+        //                     paddingBottom: 10,
+        //                     alignSelf: 'center',
+        //                 }}
+        //             >
+        //                 <WebView
+        //                     bounces={false}
+        //                     scrollEnabled={false}
+        //                     source={{ html: iframeHtml }}
+        //                     style={{
+        //                         backgroundColor: 'transparent',
+        //                     }}
+        //                 />
+        //             </View>
+        //         );
+        //     }
+        //     else if (a.src.slice(12, 15) == 'you') {
+        //         return (
+        //             <WebView
+        //                 key={index}
+        //                 bounces={false}
+        //                 scrollEnabled={false}
+        //                 source={{
+        //                     uri: a.src
+        //                 }}
+        //                 style={{
+        //                     width: width - 10,
+        //                     height: (width - 10) * 0.5625,
+        //                     alignSelf: 'center',
+        //                 }}
+        //             />
+        //         );
+        //     }
+        //     else {
+        //         return (
+        //             <View
+        //                 key={index}
+        //                 style={{
+        //                     width: width - 10,
+        //                     height: (width - 10) * 0.5625,
+        //                     alignSelf: 'center',
+        //                     backgroundColor: 'transparent'
+        //                 }}>
+        //                 <WebView
+        //                     bounces={false}
+        //                     scrollEnabled={false}
+        //                     source={{
+        //                         uri: a.src
+        //                     }}
+        //                     style={{
+        //                         //width: width,
+        //                         height: a.height <= a.width ? (width * a.height / a.width) - 35 : width * a.height / a.width,
+        //                         //resizeMode: 'contain',
+        //                         backgroundColor: 'transparent'
+        //                     }}
+        //                 />
+        //             </View>
+        //         );
+        //     }
+        // }
     }
 
     renderImage(catID) {
@@ -449,7 +527,7 @@ const styles = StyleSheet.create({
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: 10,
         paddingBottom: 10,
-        lineHeight: Platform.OS == 'ios' ? 28 :  35
+        lineHeight: Platform.OS == 'ios' ? 28 : 35
 
     },
     view: {
@@ -470,7 +548,7 @@ const styless = StyleSheet.create({
         textAlign: 'left',
         fontFamily: 'Times New Roman',
         paddingHorizontal: 5,
-        lineHeight: Platform.OS == 'ios' ? 28 :  35,
+        lineHeight: Platform.OS == 'ios' ? 28 : 35,
         marginBottom: Platform.OS == 'ios' ? -35 : -25
     },
     a: {

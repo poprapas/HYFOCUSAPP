@@ -161,18 +161,6 @@ export default class Video extends Component {
         if (this.state.isLoading || this.state.refreshing) {
             return (
                 <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
-                    {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-                        <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-                            <Image source={require('./assets/images/banner2.jpg')}
-                                style={styles.logo} />
-                        </TouchableOpacity>
-
-                        <View style={{ flex: 1 }}>
-                            <Text style={styles.videofont}> ---- Video ---- </Text>
-                        </View>
-                    </View> */}
-
                     <ActivityIndicator
                         style={{ paddingTop: 20 }}
                         color='#cc9966' />
@@ -182,18 +170,6 @@ export default class Video extends Component {
 
         return (
             <View style={styles.container}>
-                {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-                    <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-                        <Image source={require('./assets/images/banner2.jpg')}
-                            style={styles.logo} />
-                    </TouchableOpacity>
-
-                    <View style={{ flex: 1 }}>
-                        <Text style={styles.videofont}> ---- Video ---- </Text>
-                    </View>
-                </View> */}
-
                 <ListView
                     refreshControl={
                         <RefreshControl
@@ -303,7 +279,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: 10,
-        lineHeight: Platform.OS == 'ios' ? 28 :  35
+        lineHeight: Platform.OS == 'ios' ? 28 : 35
     },
 
 });
