@@ -160,7 +160,10 @@ export default class ContentDetail extends Component {
                 />
             )
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9763b2739a573d06343f7930ae5d7cefa9b80d1e
         else if ((node.name == 'p' || node.name == 'div')  && node.children[0] && node.children[0].name == 'iframe') {
             const a = node.children[0].attribs;
             //console.log(a)
