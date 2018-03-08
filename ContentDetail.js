@@ -160,93 +160,88 @@ export default class ContentDetail extends Component {
                 />
             )
         }
-<<<<<<< HEAD
-        else if ((node.name == 'p' || node.name == 'div') && node.children[0] && node.children[0].name == 'iframe') {
-            console.log(node)
+
+        else if ((node.name == 'p' || node.name == 'div')  && node.children[0] && node.children[0].name == 'iframe') {
             const a = node.children[0].attribs;
-=======
-        // else if ((node.name == 'p' || node.name == 'div')  && node.children[0] && node.children[0].name == 'iframe') {
-        //     const a = node.children[0].attribs;
-        //     //console.log(a)
-        //     if (a.src.slice(0, 2) == '//') {
-        //         a.src = 'https:' + a.src
-        //     };
-        //     if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
-        //         const iframeHtml =
-        //             `<iframe src="${a.src}" 
-        //                 height= 220, 
-        //                 width= ${width - 10}, 
-        //             >
-        //             </iframe>`;
-        //         return (
-        //             <View key={index}
-        //                 style={{
-        //                     width: width,
-        //                     height: 230,
-        //                     marginLeft: -20,
-        //                     paddingBottom: 10,
-        //                     alignSelf: 'center',
-        //                 }}
-        //             >
-        //                 <WebView
-        //                     bounces={false}
-        //                     scrollEnabled={false}
-        //                     source={{ html: iframeHtml }}
-        //                     style={{
-        //                         backgroundColor: 'transparent',
-        //                     }}
-        //                 />
-        //             </View>
-        //         );
-        //     }
-        //     else if (a.src.slice(12, 15) == 'you') {
-        //         return (
-        //             <WebView
-        //                 key={index}
-        //                 bounces={false}
-        //                 scrollEnabled={false}
-        //                 source={{
-        //                     uri: a.src
-        //                 }}
-        //                 style={{
-        //                     width: width - 10,
-        //                     height: (width - 10) * 0.5625,
-        //                     alignSelf: 'center',
-        //                 }}
-        //             />
-        //         );
-        //     }
-        //     else {
-        //         return (
-        //             <View
-        //                 key={index}
-        //                 style={{
-        //                     width: width - 10,
-        //                     height: (width - 10) * 0.5625,
-        //                     alignSelf: 'center',
-        //                     backgroundColor: 'transparent'
-        //                 }}>
-        //                 <WebView
-        //                     bounces={false}
-        //                     scrollEnabled={false}
-        //                     source={{
-        //                         uri: a.src
-        //                     }}
-        //                     style={{
-        //                         //width: width,
-        //                         height: a.height <= a.width ? (width * a.height / a.width) - 35 : width * a.height / a.width,
-        //                         //resizeMode: 'contain',
-        //                         backgroundColor: 'transparent'
-        //                     }}
-        //                 />
-        //             </View>
-        //         );
-        //     }
-        // }
+            //console.log(a)
+            if (a.src.slice(0, 2) == '//') {
+                a.src = 'https:' + a.src
+            };
+            if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
+                const iframeHtml =
+                    `<iframe src="${a.src}" 
+                        height= 220, 
+                        width= ${width - 10}, 
+                    >
+                    </iframe>`;
+                return (
+                    <View key={index}
+                        style={{
+                            width: width,
+                            height: 230,
+                            marginLeft: -20,
+                            paddingBottom: 10,
+                            alignSelf: 'center',
+                        }}
+                    >
+                        <WebView
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{ html: iframeHtml }}
+                            style={{
+                                backgroundColor: 'transparent',
+                            }}
+                        />
+                    </View>
+                );
+            }
+            else if (a.src.slice(12, 15) == 'you') {
+                return (
+                    <WebView
+                        key={index}
+                        bounces={false}
+                        scrollEnabled={false}
+                        source={{
+                            uri: a.src
+                        }}
+                        style={{
+                            width: width - 10,
+                            height: (width - 10) * 0.5625,
+                            alignSelf: 'center',
+                        }}
+                    />
+                );
+            }
+            else {
+                return (
+                    <View
+                        key={index}
+                        style={{
+                            width: width - 10,
+                            height: (width - 10) * 0.5625,
+                            alignSelf: 'center',
+                            backgroundColor: 'transparent'
+                        }}>
+                        <WebView
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{
+                                uri: a.src
+                            }}
+                            style={{
+                                //width: width,
+                                height: a.height <= a.width ? (width * a.height / a.width) - 35 : width * a.height / a.width,
+                                //resizeMode: 'contain',
+                                backgroundColor: 'transparent'
+                            }}
+                        />
+                    </View>
+                );
+            }
+        }
         else if (node.name == 'p' && node.children[1] && node.children[1].name == 'iframe') {
             //console.log(node.name == 'p' && node.children[1] && node.children[1].name == 'iframe')
             const a = node.children[1].attribs
->>>>>>> 486f0c5266799c8450a2fdcff67803574191f98e
             if (a.src.slice(0, 2) == '//') {
                 a.src = 'https:' + a.src
             };
