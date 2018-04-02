@@ -6,12 +6,12 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  AppRegistry,
-  StatusBar
+    Platform,
+    StyleSheet,
+    Text,
+    View,
+    AppRegistry,
+    StatusBar
 } from 'react-native';
 
 import tabNavigator from './Navigator'
@@ -26,56 +26,61 @@ import Tab from './Tab'
 import ContentDetail from "./ContentDetail"
 
 const AppNavigator = StackNavigator({
-  Tab: { screen: Tab },
-  NewDetail: { screen: NewDetail },
-  JobDetail: { screen: JobDetail },
-  RoomDetail: { screen: RoomDetail },
-  ContentDetail: { screen: ContentDetail },
+    Tab: { screen: Tab },
+    NewDetail: { screen: NewDetail },
+    JobDetail: { screen: JobDetail },
+    RoomDetail: { screen: RoomDetail },
+    ContentDetail: { screen: ContentDetail },
 },
-  {
-    initialRouteName: "Tab",
-    swipeEnabled: false,
-    headerMode: "float",
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: 'black',
-      },
-      headerBackTitleStyle: {
-        color: 'white'
-      }
-    },
-    transitionConfig: () => ({
-      screenInterpolator: sceneProps => {
-        const { layout, position, scene } = sceneProps;
-        const { index } = scene;
+    {
+        initialRouteName: "Tab",
+        swipeEnabled: false,
+        headerMode: "float",
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: 'black',
+            },
+            headerBackTitleStyle: {
+                color: 'white'
+            }
+        },
+        transitionConfig: () => ({
+            screenInterpolator: sceneProps => {
+                const { layout, position, scene } = sceneProps;
+                const { index } = scene;
 
-        const translateX = position.interpolate({
-          inputRange: [index - 1, index, index + 1],
-          outputRange: [layout.initWidth, 0, 0]
-        });
+                const translateX = position.interpolate({
+                    inputRange: [index - 1, index, index + 1],
+                    outputRange: [layout.initWidth, 0, 0]
+                });
 
-        const opacity = position.interpolate({
-          inputRange: [index - 1, index - 0.99, index, index + 0.99, index + 1],
-          outputRange: [0, 1, 1, 0.3, 0]
-        });
+                const opacity = position.interpolate({
+                    inputRange: [index - 1, index - 0.99, index, index + 0.99, index + 1],
+                    outputRange: [0, 1, 1, 0.3, 0]
+                });
 
-        return { opacity, transform: [{ translateX }] }
-      }
-    })
-  });
+                return { opacity, transform: [{ translateX }] }
+            }
+        })
+    });
 
 
 export default class App extends Component {
 
-  componentDidMount() {
-    // do stuff while splash screen is shown
-    // After having done stuff (such as async tasks) hide the splash screen
-    SplashScreen.hide();
-  }
+    componentDidMount() {
 
-  render() {
-    return (
-        <AppNavigator />
-    );
-  }
+        StatusBar.setBackgroundColor('black')
+        StatusBar.setBarStyle("light-content")
+        StatusBar.setHidden(false)
+
+        // do stuff while splash screen is shown
+        // After having done stuff (such as async tasks) hide the splash screen
+        SplashScreen.hide();
+    }
+
+    render() {
+        return (
+            <AppNavigator />
+        );
+    }
 }

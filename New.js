@@ -205,7 +205,6 @@ export default class New extends Component {
                     }
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) => <View style={styles.listView}>
-                        {console.log(rowData)}
                         <TouchableOpacity
                             key={rowData.id}
                             onPress={() => navigate('NewDetail',

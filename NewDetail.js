@@ -85,7 +85,7 @@ export default class NewDetail extends Component {
     })
 
     renderNode(node, index, siblings, parent, defaultRenderer) {
-        //console.log(node)
+        console.log(node)
         if (node.name == 'p' && node.children[0].name == 'img') {
             const a = node.children[0].attribs;
             return (
@@ -126,22 +126,35 @@ export default class NewDetail extends Component {
             }
             else {
                 const a = node.children[0].attribs;
+                //console.log(node)
                 return (
-                    <WebView
+                    <View
                         key={index}
-                        bounces={false}
-                        source={{
-                            uri: a.src
-                        }}
                         style={{
-                            width: width,
-                            height: a.height < a.width ? (width * a.height / a.width) - 35 : width * a.height / a.width,
-                            //resizeMode: 'contain',
-                        }}
-                    />
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            alignSelf: 'center',
+                            backgroundColor: 'transparent',
+                            width: width - 10,
+                            height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width
+                        }}>
+                        <WebView
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{
+                                uri: a.src
+                            }}
+                            style={{
+                                width: a.height <= a.width ? width - 10 : width - 100,
+                                height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width,
+                            }}
+                        />
+                    </View>
+                    //null
                 );
             }
         }
+
         else if (node.name == 'p' && node.children[1] && node.children[1].name == 'iframe') {
             const a = node.children[1].attribs
             if (a.src.slice(0, 2) == '//') {
@@ -204,10 +217,9 @@ export default class NewDetail extends Component {
                     <View
                         key={index}
                         style={{
-                            width: width - 10,
-                            height: (width - 10) * 0.5625,
                             alignSelf: 'center',
                             backgroundColor: 'transparent',
+                            height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width
                         }}>
                         <WebView
                             bounces={false}
@@ -216,17 +228,123 @@ export default class NewDetail extends Component {
                                 uri: a.src
                             }}
                             style={{
-                                //width: width,
-                                height: a.height <= a.width ? (width * a.height / a.width) - 35 : width * a.height / a.width,
-                                //resizeMode: 'contain',
-                                backgroundColor: 'transparent'
+                                width: a.height <= a.width ? width - 10 : width - 100,
+                                height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width,
                             }}
                         />
                     </View>
                 );
             }
         }
-        else if (node.name == 'br') {
+        else if (node.name == 'p' && node.children[2] && node.children[2].name == 'iframe') {
+            const a = node.children[2].attribs
+            if (a.src.slice(0, 2) == '//') {
+                a.src = 'https:' + a.src
+            };
+            if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
+                const iframeHtml =
+                    `<iframe src="${a.src}" 
+                        height= 220, 
+                        width= ${width - 10}, 
+                    >
+                    </iframe>`;
+                return (
+                    <View key={index}
+                        style={{
+                            width: width,
+                            height: 230,
+                            marginLeft: -20,
+                            paddingBottom: 10,
+                            alignSelf: 'center',
+                        }}
+                    >
+                        <WebView
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{ html: iframeHtml }}
+                            style={{
+                                backgroundColor: 'transparent',
+                            }}
+                        />
+                    </View>
+                );
+            }
+            else if (a.src.slice(12, 15) == 'you') {
+                return (
+                    <View
+                        key={index}
+                        style={{
+                            width: width - 10,
+                            height: (width - 10) * 0.5625,
+                            alignSelf: 'center',
+                        }}>
+                        <WebView
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{
+                                uri: a.src
+                            }}
+                            style={{
+                                width: width - 10,
+                                height: (width - 10) * 0.5625,
+                                alignSelf: 'center',
+                            }}
+                        />
+                    </View>
+                );
+            }
+            else {
+                return (
+                    <View
+                        key={index}
+                        style={{
+                            alignSelf: 'center',
+                            backgroundColor: 'transparent',
+                            height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width
+                        }}>
+                        <WebView
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{
+                                uri: a.src
+                            }}
+                            style={{
+                                width: a.height <= a.width ? width - 10 : width - 100,
+                                height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width,
+                            }}
+                        />
+                    </View>
+                );
+            }
+        }
+        // else if (node.name == 'br' && node.children[0] && node.children[0].name == 'iframe' ) {
+        //     const a = node.children[0].attribs
+        //     return (
+        //         <View
+        //             key={index}
+        //             style={{
+        //                 justifyContent: 'center',
+        //                 alignItems: 'center',
+        //                 alignSelf: 'center',
+        //                 backgroundColor: 'transparent',
+        //                 width: width - 10,
+        //                 height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width
+        //             }}>
+        //             <WebView
+        //                 bounces={false}
+        //                 scrollEnabled={false}
+        //                 source={{
+        //                     uri: a.src
+        //                 }}
+        //                 style={{
+        //                     width: a.height <= a.width ? width - 10 : width - 100,
+        //                     height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width,
+        //                 }}
+        //             />
+        //         </View>
+        //     )
+        // }
+        else if (node.name == 'br'){
             return null
         }
 
@@ -243,8 +361,7 @@ export default class NewDetail extends Component {
                             textAlign: 'left',
                             fontFamily: 'Times New Roman',
                             paddingHorizontal: 5
-                        }}
-                    >
+                        }}>
                         {node.attribs.start}. {(node.children["0"].children["0"].children["0"].data).replace(/&ndash;/g, '').replace(/&nbsp;/g, '')}
                     </Text>
                     <Image
@@ -280,7 +397,40 @@ export default class NewDetail extends Component {
                 </Text>
             )
         }
-        
+
+        else if (node.name == 'p' && node.parent && node.parent.name == 'div') {
+            //console.log('>>', node)
+            let text = ''
+            node.children.map(data => {
+                //console.log('))))', data)
+                if (data.data) {
+                    text = text + data.data + ' '
+                }
+                else {
+                    text = text + data.children["0"].data + ' '
+                }
+            })
+            text = text.replace(/&quot;/g, '\"')
+            //console.log(text)
+            return (
+                <Text
+                    key={index}
+                    style={{
+                        fontSize: 18,
+                        fontWeight: 'normal',
+                        color: 'white',
+                    }}
+                >
+                    {text}
+                </Text>
+            )
+        }
+
+        // else if(node.name == 'strong' && node.parent && node.parent.name == 'p' && node.parent.parent && node.parent.parent.name == 'div'){
+        //     console.log('+++++',node.children)
+        //     return null
+        // }
+
     }
 
     render() {
@@ -295,7 +445,6 @@ export default class NewDetail extends Component {
                         height: Platform.OS == 'ios' ? height - 70 : height - 80,
                         width: "100%"
                     }}>
-
                         <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                         <Image source={{ uri: this.props.navigation.state.params.image }}
                             style={{
@@ -303,12 +452,14 @@ export default class NewDetail extends Component {
                                 resizeMode: 'contain'
                             }} />
                         <Text />
+
                         <HTMLView
                             value={descript.replace(/\r\n\t/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}
                             //renderNode={null}
                             stylesheet={styless}
                             textComponentProps={{ style: { color: '#ffffff' } }}
+                            style={{ flex: 1 }}
 
                         />
 
@@ -366,7 +517,7 @@ const styles = StyleSheet.create({
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingBottom: 20,
         paddingTop: 20,
-        lineHeight: Platform.OS == 'ios' ? 32 :  42
+        lineHeight: Platform.OS == 'ios' ? 32 : 42
     },
     view: {
         fontSize: 14,
@@ -405,6 +556,6 @@ const styless = StyleSheet.create({
         fontFamily: 'Times New Roman'
     },
     br: {
-        height: 0
+        height: 2
     },
 });

@@ -220,13 +220,6 @@ export default class Home extends Component {
       return (
         <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
 
-          <View>
-            <StatusBar
-              backgroundColor="black"
-              barStyle="light-content"
-            />
-          </View>
-
           <ActivityIndicator
             style={{ paddingTop: 20 }}
             color='#cc9966' />
