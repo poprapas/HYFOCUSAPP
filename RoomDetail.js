@@ -51,9 +51,11 @@ export default class RoomDetail extends Component {
         },
         headerRight:
             <TouchableOpacity onPress={() => Platform.OS == 'ios' ?
-                Share.share({ url: navigation.state.params.url })
+                fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + navigation.state.params.url)
+                    .then((response) => response.text())
+                    .then((responseJson) => { Share.share({ url: responseJson, message: 'ที่พัก : ' + navigation.state.params.property }) })
                 :
-                Share.share({ message: navigation.state.params.url })}>
+                Share.share({ message: decodeURI(navigation.state.params.url) })}>
                 <Feather
                     name="share-2"
                     size={20}
@@ -84,7 +86,7 @@ export default class RoomDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        size: { width, height },
+            size: { width, height },
         }
     }
 
@@ -101,46 +103,46 @@ export default class RoomDetail extends Component {
                         width: "100%",
                     }}>
 
-                        <View style={{ height: height/4 }}
+                        <View style={{ height: height / 4 }}
                             onLayout={this._onLayoutDidChange}
                         >
-                                <Carousel
-                                    autoplay
-                                    delay={5000}
-                                    style = {this.state.size}
-                                    bullets
-                                    bulletStyle={{
-                                        margin: 3
-                                    }}
-                                    chosenBulletStyle={{
-                                        margin: 3
-                                    }}
-                                    arrows
-                                    arrowsContainerStyle={{
-                                        marginLeft: 5,
-                                        marginRight: 5,
-                                    }}
-                                    leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
-                                    rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
-                                >
+                            <Carousel
+                                autoplay
+                                delay={5000}
+                                style={this.state.size}
+                                bullets
+                                bulletStyle={{
+                                    margin: 3
+                                }}
+                                chosenBulletStyle={{
+                                    margin: 3
+                                }}
+                                arrows
+                                arrowsContainerStyle={{
+                                    marginLeft: 5,
+                                    marginRight: 5,
+                                }}
+                                leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
+                                rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
+                            >
 
-                                    {this.props.navigation.state.params.gallery.map((prop, key) => {
-                                        return (
-                                            <View
-                                                key={key.toString()}
-                                                style={{
-                                                    backgroundColor: 'white',
-                                                    width: width
-                                                }}>
-                                                <Image
-                                                    source={{ uri: prop }}
-                                                    style={styles.gallery}
-                                                />
-                                            </View>
-                                        )
-                                    })}
+                                {this.props.navigation.state.params.gallery.map((prop, key) => {
+                                    return (
+                                        <View
+                                            key={key.toString()}
+                                            style={{
+                                                backgroundColor: 'white',
+                                                width: width
+                                            }}>
+                                            <Image
+                                                source={{ uri: prop }}
+                                                style={styles.gallery}
+                                            />
+                                        </View>
+                                    )
+                                })}
 
-                                </Carousel>
+                            </Carousel>
                         </View>
 
                         <View style={{ padding: 10 }}>

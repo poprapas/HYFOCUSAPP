@@ -57,10 +57,21 @@ export default class NewDetail extends Component {
             alignSelf: 'center',
         },
         headerRight:
-            <TouchableOpacity onPress={() => Platform.OS == 'ios' ?
-                Share.share({ url: navigation.state.params.url })
-                :
-                Share.share({ message: navigation.state.params.url })}>
+            <TouchableOpacity onPress={() =>
+                //alert(decodeURI(navigation.state.params.url))
+                // Platform.OS == 'ios' ?
+                //     Share.share({ url:  decodeURI(navigation.state.params.url) })
+                //     :
+                //     Share.share({ message: decodeURI(navigation.state.params.url) })
+
+                Platform.OS == 'ios' ?
+                    fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + navigation.state.params.url)
+                        .then((response) => response.text())
+                        .then((responseJson) => { Share.share({ url: responseJson, message: navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'") }) })
+                    :
+                    Share.share({ message: decodeURI(navigation.state.params.url) })
+
+            }>
                 <Feather
                     name="share-2"
                     size={20}
@@ -85,7 +96,7 @@ export default class NewDetail extends Component {
     })
 
     renderNode(node, index, siblings, parent, defaultRenderer) {
-        console.log(node)
+        //console.log(node)
         if (node.name == 'p' && node.children[0].name == 'img') {
             const a = node.children[0].attribs;
             return (
@@ -344,7 +355,7 @@ export default class NewDetail extends Component {
         //         </View>
         //     )
         // }
-        else if (node.name == 'br'){
+        else if (node.name == 'br') {
             return null
         }
 

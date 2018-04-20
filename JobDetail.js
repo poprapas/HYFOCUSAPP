@@ -52,9 +52,11 @@ export default class JobDetail extends Component {
         },
         headerRight:
             <TouchableOpacity onPress={() => Platform.OS == 'ios' ?
-                Share.share({ url: navigation.state.params.url })
+                fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + navigation.state.params.url)
+                    .then((response) => response.text())
+                    .then((responseJson) => { Share.share({ url: responseJson, message: 'หางาน : ' + navigation.state.params.company }) })
                 :
-                Share.share({ message: navigation.state.params.url })}>
+                Share.share({ message: decodeURI(navigation.state.params.url) })}>
                 <Feather
                     name="share-2"
                     size={20}
