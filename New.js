@@ -224,11 +224,13 @@ export default class New extends Component {
                             </View>
                             <Image source={{ uri: rowData.FEATURE }}
                                 style={{
+                                    height: (width - 10) * 0.525,
+                                    resizeMode: 'contain',
                                     width: width - 10,
-                                    height: (width - 10) * 0.625,
-                                    //backgroundColor: '#6a5750',
-                                    borderRadius: 10
-                                }} />
+                                    borderRadius: 10,
+                                    overflow: 'hidden',
+                                }}
+                            />
                         </TouchableOpacity>
 
                         <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -264,7 +266,7 @@ export default class New extends Component {
                                 )}
                             >
 
-                                <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
+                                <Text style={styles.moredetail}> >>> อ่านต่อ >>> </Text>
                             </TouchableOpacity>
 
                         </View>
@@ -355,6 +357,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: 10,
-        lineHeight: Platform.OS == 'ios' ? 28 :  35
+        lineHeight: Platform.OS == 'ios' ? 28 : 35
     },
 });

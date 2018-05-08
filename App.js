@@ -68,8 +68,9 @@ const AppNavigator = StackNavigator({
 export default class App extends Component {
 
     componentDidMount() {
-
-        StatusBar.setBackgroundColor('black')
+        if (Platform.OS == 'android') {
+            StatusBar.setBackgroundColor('black')
+        }
         StatusBar.setBarStyle("light-content")
         StatusBar.setHidden(false)
 

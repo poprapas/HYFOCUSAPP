@@ -206,7 +206,7 @@ export default class Event extends Component {
                                     borderRadius: 10
                                 }} />
                             <View style={{ paddingTop: 5 }}>
-                                <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
+                                <Text style={styles.moredetail}> >>> อ่านต่อ >>> </Text>
                             </View>
                             <View style={{
                                 height: 1,

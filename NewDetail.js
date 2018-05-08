@@ -27,6 +27,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
 import Toast, { DURATION } from 'react-native-easy-toast';
 import DeviceInfo from 'react-native-device-info';
+import Lightbox from 'react-native-lightbox';
 
 const { width, height } = Dimensions.get("window");
 let ref = null
@@ -100,18 +101,38 @@ export default class NewDetail extends Component {
         if (node.name == 'p' && node.children[0].name == 'img') {
             const a = node.children[0].attribs;
             return (
-                <Image
-                    key={index}
-                    style={{
-                        width: width,
-                        height: width * a.height / a.width,
-                        resizeMode: 'contain',
-                        marginVertical: 10,
-                    }}
-                    source={{
-                        uri: a.src
-                    }}
-                />
+                <Lightbox key={index} underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
+                    {Platform.OS == 'ios' ?
+                        <ScrollView
+                            minimumZoomScale={1}
+                            maximumZoomScale={2}
+                            centerContent={true}
+                        >
+                            <Image
+                                style={{
+                                    width: width,
+                                    height: width * a.height / a.width,
+                                    resizeMode: 'contain',
+                                    marginVertical: 10,
+                                }}
+                                source={{
+                                    uri: a.src
+                                }}
+                            />
+                        </ScrollView> :
+                        <Image
+                            style={{
+                                width: width,
+                                height: width * a.height / a.width,
+                                resizeMode: 'contain',
+                                marginVertical: 10,
+                            }}
+                            source={{
+                                uri: a.src
+                            }}
+                        />
+                    }
+                </Lightbox>
             )
         }
         else if ((node.name == 'p' || node.name == 'div') && node.children[0].name == 'iframe') {
@@ -457,13 +478,26 @@ export default class NewDetail extends Component {
                         width: "100%"
                     }}>
                         <Text style={styles.title}> {this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
-                        <Image source={{ uri: this.props.navigation.state.params.image }}
-                            style={{
-                                height: (width - 10) * 0.625,
-                                resizeMode: 'contain'
-                            }} />
+                        <Lightbox underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
+                            {Platform.OS == 'ios' ?
+                                <ScrollView
+                                    minimumZoomScale={1}
+                                    maximumZoomScale={2}
+                                    centerContent={true}
+                                >
+                                    <Image source={{ uri: this.props.navigation.state.params.image }}
+                                        style={{
+                                            height: (width - 10) * 0.625,
+                                            resizeMode: 'contain'
+                                        }} />
+                                </ScrollView> :
+                                <Image source={{ uri: this.props.navigation.state.params.image }}
+                                    style={{
+                                        height: (width - 10) * 0.625,
+                                        resizeMode: 'contain'
+                                    }} />}
+                        </Lightbox>
                         <Text />
-
                         <HTMLView
                             value={descript.replace(/\r\n\t/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}

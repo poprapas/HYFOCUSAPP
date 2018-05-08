@@ -207,7 +207,7 @@ export default class Review extends Component {
                                 }}
                             />
                             <View style={{ paddingTop: 5 }}>
-                                <Text style={styles.moredetail}> >>> ดูเพิ่มเติม >>> </Text>
+                                <Text style={styles.moredetail}> >>> อ่านต่อ >>> </Text>
                             </View>
                             <View style={{
                                 height: 1,

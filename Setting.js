@@ -15,6 +15,7 @@ import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
 import Communications from 'react-native-communications';
 import { Switch } from 'react-native-switch';
 import PushNotification from 'react-native-push-notification';
+import DeviceInfo from 'react-native-device-info';
 
 export default class Setting extends Component {
 
@@ -66,12 +67,17 @@ export default class Setting extends Component {
     })
 
     controlNotification(val) {
-        AsyncStorage.setItem('notification', val + '')
+        AsyncStorage.setItem('notification', val + '',
+            () => this.setState({
+                notification: val
+            })
+        )
         PushNotification.cancelAllLocalNotifications()
     }
 
     componentDidMount() {
         AsyncStorage.getItem('notification').then((data) => {
+            console.log(data)
             if (data == null || data == 'true') {
                 this.setState({
                     notification: true
@@ -88,7 +94,7 @@ export default class Setting extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            notification: null,
+            notification: true,
         }
     }
 
@@ -100,100 +106,170 @@ export default class Setting extends Component {
             <View style={styles.container}>
 
                 {Platform.OS == 'ios' ?
+                    <View>
 
-                    <TouchableOpacity onPress={() => Linking.openURL('app-settings:')}>
                         <View style={{
                             flexDirection: 'row',
                             backgroundColor: 'white',
                             justifyContent: 'space-between',
                             borderBottomColor: '#A9A9A9',
-                            borderBottomWidth: 1
+                            borderBottomWidth: 1,
+                            paddingVertical: 10,
+                            paddingLeft: 10,
                         }}>
-                            <View style={{ paddingTop: 10 }}>
-                                <Text style={styles.titleText}> เปลี่ยนแปลงการแจ้งเตือน </Text>
-                            </View>
-                            <View style={{ paddingTop: Platform.OS == 'ios' ? 7 : 0 }}>
-                                <Text style={styles.more}> > </Text>
-                            </View>
+                            <Text style={styles.titleText}>เวอร์ชั่น</Text>
+                            <Text style={styles.version}>{DeviceInfo.getVersion()}</Text>
                         </View>
-                    </TouchableOpacity> :
 
-                    <View style={{
-                        flexDirection: 'row',
-                        backgroundColor: 'white',
-                        justifyContent: 'space-between',
-                        borderBottomColor: '#A9A9A9',
-                        borderBottomWidth: 1,
-                        paddingBottom: 5,
-                        paddingTop: 5
-                    }}>
-                        <View style={{ paddingTop: 5 }}>
-                            <Text style={styles.titleText}> เปลี่ยนแปลงการแจ้งเตือน </Text>
-                        </View>
+                        {/* <TouchableOpacity onPress={() => Linking.openURL('app-settings:')}>
+                            <View style={{
+                                flexDirection: 'row',
+                                backgroundColor: 'white',
+                                justifyContent: 'space-between',
+                                borderBottomColor: '#A9A9A9',
+                                borderBottomWidth: 1,
+                                paddingVertical: 10,
+                                paddingLeft: 5
+                            }}>
+                                <Text style={styles.titleText}> เปลี่ยนแปลงการแจ้งเตือน </Text>
+                                <Ionicons
+                                    name="ios-arrow-forward"
+                                    size={30}
+                                    color='#696969'
+                                    style={{
+                                        alignSelf: 'center',
+                                        paddingRight: 20
+                                    }}
+                                />
+                            </View>
+                        </TouchableOpacity> */}
+
                         <View style={{
-                            paddingTop: 2,
-                            paddingRight: 5,
+                            flexDirection: 'row',
+                            backgroundColor: 'white',
+                            justifyContent: 'space-between',
+                            borderBottomColor: '#A9A9A9',
+                            borderBottomWidth: 1,
+                            paddingRight: 10,
+                            paddingTop: 10,
+                            paddingBottom: 5,
+                            paddingLeft: 5
                         }}>
+                            <Text style={styles.titleText}> เปลี่ยนแปลงการแจ้งเตือน </Text>
                             <Switch
                                 value={this.state.notification}
                                 onValueChange={(val) => this.controlNotification(val)}
                                 disabled={false}
-                                activeText={'On'}
-                                inActiveText={'Off'}
-                                circleSize={27}
-                                barHeight={27}
-                                circleBorderWidth={2}
+                                activeText={''}
+                                inActiveText={''}
+                                circleSize={23}
+                                barHeight={23}
+                                circleBorderWidth={1}
                                 backgroundActive={'green'}
                                 backgroundInactive={'#505050'}
                                 circleActiveColor={'#30a566'}
                                 circleInActiveColor={'gray'}
                             />
                         </View>
+
+                        <TouchableOpacity onPress={() => {
+                            parseInt(Platform.Version, 10) == 11 ?
+                                Linking.openURL('https://itunes.apple.com/us/app/appName/id1331300096?mt=8&action=write-review').catch(err => console.error('An error occurred', err))
+                                :
+                                Linking.openURL('https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8&id1331300096').catch(err => console.error('An error occurred', err));
+                        }
+                        }>
+                            <View style={{
+                                flexDirection: 'row',
+                                backgroundColor: 'white',
+                                justifyContent: 'space-between',
+                                borderBottomColor: '#A9A9A9',
+                                borderBottomWidth: 1,
+                                paddingVertical: 10,
+                                paddingLeft: 5
+                            }}>
+                                <Text style={styles.titleText}> ให้คะแนนเรา </Text>
+                                <Ionicons
+                                    name="ios-arrow-forward"
+                                    size={30}
+                                    color='#696969'
+                                    style={{
+                                        alignSelf: 'center',
+                                        paddingRight: 20
+                                    }}
+                                />
+                            </View>
+                        </TouchableOpacity>
+
                     </View>
-                }
-
-                {Platform.OS == 'ios' ?
-
-                    <TouchableOpacity onPress={() => {
-                    parseInt(Platform.Version, 10) == 11 ?
-                        Linking.openURL('https://itunes.apple.com/us/app/appName/id1331300096?mt=8&action=write-review').catch(err => console.error('An error occurred', err))
-                        :
-                        Linking.openURL('https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8&id1331300096').catch(err => console.error('An error occurred', err));
-                    }
-                    }>
-                        <View style={{
-                            flexDirection: 'row',
-                            backgroundColor: 'white',
-                            justifyContent: 'space-between',
-                            borderBottomColor: '#A9A9A9',
-                            borderBottomWidth: 1
-                        }}>
-                            <View style={{ paddingTop: 10 }}>
-                                <Text style={styles.titleText}> ให้คะแนนเรา </Text>
-                            </View>
-                            <View style={{ paddingTop: Platform.OS == 'ios' ? 7 : 0 }}>
-                                <Text style={styles.more}> > </Text>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
                     :
-                    <TouchableOpacity onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=com.hyfocusapp')}>
+                    <View>
                         <View style={{
                             flexDirection: 'row',
                             backgroundColor: 'white',
                             justifyContent: 'space-between',
                             borderBottomColor: '#A9A9A9',
-                            borderBottomWidth: 1
+                            borderBottomWidth: 1,
+                            paddingTop: 10,
+                            paddingBottom: 5,
+                            paddingLeft: 10
                         }}>
-                            <View style={{ paddingTop: 10 }}>
-                                <Text style={styles.titleText}> ให้คะแนนเรา </Text>
-                            </View>
-                            <View style={{ paddingTop: Platform.OS == 'ios' ? 7 : 0 }}>
-                                <Text style={styles.more}> > </Text>
-                            </View>
+                            <Text style={styles.titleText}>เวอร์ชั่น</Text>
+                            <Text style={styles.version}>{DeviceInfo.getVersion()}</Text>
                         </View>
-                    </TouchableOpacity>
 
+                        <View style={{
+                            flexDirection: 'row',
+                            backgroundColor: 'white',
+                            justifyContent: 'space-between',
+                            borderBottomColor: '#A9A9A9',
+                            borderBottomWidth: 1,
+                            paddingRight: 10,
+                            paddingTop: 10,
+                            paddingBottom: 5,
+                            paddingLeft: 5
+                        }}>
+                            <Text style={styles.titleText}> เปลี่ยนแปลงการแจ้งเตือน </Text>
+                            <Switch
+                                value={this.state.notification}
+                                onValueChange={(val) => this.controlNotification(val)}
+                                disabled={false}
+                                activeText={''}
+                                inActiveText={''}
+                                circleSize={23}
+                                barHeight={23}
+                                circleBorderWidth={1}
+                                backgroundActive={'green'}
+                                backgroundInactive={'#505050'}
+                                circleActiveColor={'#30a566'}
+                                circleInActiveColor={'gray'}
+                            />
+                        </View>
+
+                        <TouchableOpacity onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=com.hyfocusapp')}>
+                            <View style={{
+                                flexDirection: 'row',
+                                backgroundColor: 'white',
+                                justifyContent: 'space-between',
+                                borderBottomColor: '#A9A9A9',
+                                borderBottomWidth: 1,
+                                paddingTop: 10,
+                                paddingBottom: 5,
+                                paddingLeft: 5
+                            }}>
+                                <Text style={styles.titleText}> ให้คะแนนเรา </Text>
+                                <Ionicons
+                                    name="ios-arrow-forward"
+                                    size={30}
+                                    color='#696969'
+                                    style={{
+                                        alignSelf: 'center',
+                                        paddingRight: 20
+                                    }}
+                                />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                 }
 
                 <TouchableOpacity onPress={() => Communications.email(['info@hatyaifocus.com'], null, null, null, null)}>
@@ -202,14 +278,21 @@ export default class Setting extends Component {
                         backgroundColor: 'white',
                         justifyContent: 'space-between',
                         borderBottomColor: '#A9A9A9',
-                        borderBottomWidth: 1
+                        borderBottomWidth: 1,
+                        paddingTop: 10,
+                        paddingBottom: Platform.OS == 'ios' ? 10 : 5,
+                        paddingLeft: 5
                     }}>
-                        <View style={{ paddingTop: 10 }}>
-                            <Text style={styles.titleText}> ติดต่อเรา </Text>
-                        </View>
-                        <View style={{ paddingTop: Platform.OS == 'ios' ? 7 : 0 }}>
-                            <Text style={styles.more}> > </Text>
-                        </View>
+                        <Text style={styles.titleText}> ติดต่อเรา </Text>
+                        <Ionicons
+                            name="ios-arrow-forward"
+                            size={30}
+                            color='#696969'
+                            style={{
+                                alignSelf: 'center',
+                                paddingRight: 20
+                            }}
+                        />
                     </View>
                 </TouchableOpacity>
 
@@ -224,19 +307,16 @@ const styles = StyleSheet.create({
         backgroundColor: Color.BROWN[800],
     },
     titleText: {
-        fontSize: Platform.OS == 'ios' ? 20 : 16,
-        fontWeight: 'normal',
+        fontSize: Platform.OS == 'ios' ? 18 : 16,
         color: 'black',
-        textAlign: 'left',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: Platform.OS == 'ios' ? 10 : 0,
     },
-    more: {
-        fontWeight: 'normal',
-        fontSize: Platform.OS == 'ios' ? 50 : 40,
+    version: {
+        fontSize: Platform.OS == 'ios' ? 18 : 16,
+        color: 'black',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        color: '#696969',
-        marginBottom: Platform.OS == 'ios' ? 0 : -10,
-        marginTop: Platform.OS == 'ios' ? 0 : -10
-    }
+        paddingTop: Platform.OS == 'ios' ? 10 : 0,
+        paddingRight: 10
+    },
 });

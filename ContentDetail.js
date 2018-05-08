@@ -23,6 +23,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import Foundation from 'react-native-vector-icons/dist/Foundation';
 import DeviceInfo from 'react-native-device-info';
+import Lightbox from 'react-native-lightbox';
 
 const { width, height } = Dimensions.get("window");
 let _this = null
@@ -148,18 +149,38 @@ export default class ContentDetail extends Component {
         if (node.name == 'p' && node.children[0].name == 'img') {
             const a = node.children[0].attribs;
             return (
-                <Image
-                    key={index}
-                    style={{
-                        width: width,
-                        height: width * a.height / a.width,
-                        resizeMode: 'contain',
-                        marginVertical: 10
-                    }}
-                    source={{
-                        uri: node.children[0].attribs.src
-                    }}
-                />
+                <Lightbox key={index} underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
+                    {Platform.OS == 'ios' ?
+                        <ScrollView
+                            minimumZoomScale={1}
+                            maximumZoomScale={2}
+                            centerContent={true}
+                        >
+                            <Image
+                                style={{
+                                    width: width,
+                                    height: width * a.height / a.width,
+                                    resizeMode: 'contain',
+                                    marginVertical: 10,
+                                }}
+                                source={{
+                                    uri: node.children[0].attribs.src
+                                }}
+                            />
+                        </ScrollView> :
+                        <Image
+                            style={{
+                                width: width,
+                                height: width * a.height / a.width,
+                                resizeMode: 'contain',
+                                marginVertical: 10,
+                            }}
+                            source={{
+                                uri: node.children[0].attribs.src
+                            }}
+                        />
+                    }
+                </Lightbox>
             )
         }
         else if ((node.name == 'p' || node.name == 'div') && node.children[0] && node.children[0].name == 'iframe') {
@@ -412,110 +433,85 @@ export default class ContentDetail extends Component {
                 );
             }
         }
-        // else if ((node.name == 'p' || node.name == 'div') && node.children[0] && node.children[0].name == 'iframe') {
-        // console.log(node)
-        //     const a = node.children[0].attribs;
-        //     if (a.src.slice(0, 2) == '//') {
-        //         a.src = 'https:' + a.src
-        //     };
-        //     if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
-        //         const iframeHtml =
-        //             `<iframe src="${a.src}" 
-        //                 height= 220, 
-        //                 width= ${width - 10}, 
-        //             >
-        //             </iframe>`;
-        //         return (
-        //             <View key={index}
-        //                 style={{
-        //                     width: width,
-        //                     height: 230,
-        //                     marginLeft: -20,
-        //                     paddingBottom: 10,
-        //                     alignSelf: 'center',
-        //                 }}
-        //             >
-        //                 <WebView
-        //                     bounces={false}
-        //                     scrollEnabled={false}
-        //                     source={{ html: iframeHtml }}
-        //                     style={{
-        //                         backgroundColor: 'transparent',
-        //                     }}
-        //                 />
-        //             </View>
-        //         );
-        //     }
-        //     else if (a.src.slice(12, 15) == 'you') {
-        //         return (
-        //             <WebView
-        //                 key={index}
-        //                 bounces={false}
-        //                 scrollEnabled={false}
-        //                 source={{
-        //                     uri: a.src
-        //                 }}
-        //                 style={{
-        //                     width: width - 10,
-        //                     height: (width - 10) * 0.5625,
-        //                     alignSelf: 'center',
-        //                 }}
-        //             />
-        //         );
-        //     }
-        //     else {
-        //         return (
-        //             <View
-        //                 key={index}
-        //                 style={{
-        //                     width: width - 10,
-        //                     height: (width - 10) * 0.5625,
-        //                     alignSelf: 'center',
-        //                     backgroundColor: 'transparent'
-        //                 }}>
-        //                 <WebView
-        //                     bounces={false}
-        //                     scrollEnabled={false}
-        //                     source={{
-        //                         uri: a.src
-        //                     }}
-        //                     style={{
-        //                         //width: width,
-        //                         height: a.height <= a.width ? (width * a.height / a.width) - 35 : width * a.height / a.width,
-        //                         //resizeMode: 'contain',
-        //                         backgroundColor: 'transparent'
-        //                     }}
-        //                 />
-        //             </View>
-        //         );
-        //     }
-        // }
     }
 
     renderImage(catID) {
         if (catID == 1 || catID == 3 || catID == 4 || catID == 5 || catID == 8) {
-            return <Image source={{ uri: this.props.navigation.state.params.image }}
-                style={{
-                    //width: (width - 10),
-                    height: (width - 10) * 0.75,
-                    resizeMode: 'contain'
-                }}
-            />
+            return (
+                <Lightbox underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
+                    {Platform.OS == 'ios' ?
+                        <ScrollView
+                            minimumZoomScale={1}
+                            maximumZoomScale={2}
+                            centerContent={true}
+                        >
+                            <Image source={{ uri: this.props.navigation.state.params.image }}
+                                style={{
+                                    //width: (width - 10),
+                                    height: (width - 10) * 0.75,
+                                    resizeMode: 'contain'
+                                }}
+                            />
+                        </ScrollView> :
+                        <Image source={{ uri: this.props.navigation.state.params.image }}
+                            style={{
+                                //width: (width - 10),
+                                height: (width - 10) * 0.75,
+                                resizeMode: 'contain'
+                            }}
+                        />}
+                </Lightbox>
+            )
         } else if (catID == 2) {
-            return <Image source={{ uri: this.props.navigation.state.params.image }}
-                style={{
-                    width: (width - 150) * 0.8,
-                    height: (width - 150),
-                    alignSelf: 'center'
-                }}
-            />
+            return (
+                <Lightbox underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
+                    {Platform.OS == 'ios' ?
+                        <ScrollView
+                            minimumZoomScale={1}
+                            maximumZoomScale={2}
+                            centerContent={true}
+                        >
+                            <Image source={{ uri: this.props.navigation.state.params.image }}
+                                style={{
+                                    width: (width - 150) * 0.8,
+                                    height: (width - 150),
+                                    alignSelf: 'center'
+                                }}
+                            />
+                        </ScrollView> :
+                        <Image source={{ uri: this.props.navigation.state.params.image }}
+                            style={{
+                                width: (width - 150) * 0.8,
+                                height: (width - 150),
+                                alignSelf: 'center'
+                            }}
+                        />}
+                </Lightbox>
+            )
         } else if (catID == 7) {
-            return <Image source={{ uri: this.props.navigation.state.params.image }}
-                style={{
-                    width: width - 10,
-                    height: (width - 10) * 0.25
-                }}
-            />
+            return (
+                <Lightbox underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
+                    {Platform.OS == 'ios' ?
+                        <ScrollView
+                            minimumZoomScale={1}
+                            maximumZoomScale={2}
+                            centerContent={true}
+                        >
+                            <Image source={{ uri: this.props.navigation.state.params.image }}
+                                style={{
+                                    width: width - 10,
+                                    height: (width - 10) * 0.25
+                                }}
+                            />
+                        </ScrollView> :
+                        <Image source={{ uri: this.props.navigation.state.params.image }}
+                            style={{
+                                width: width - 10,
+                                height: (width - 10) * 0.25
+                            }}
+                        />}
+                </Lightbox>
+            )
         }
         return null
     }
