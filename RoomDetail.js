@@ -26,6 +26,14 @@ const { width, height } = Dimensions.get("window");
 
 export default class RoomDetail extends Component {
 
+    componentDidMount() {
+        global.ishome = false
+    }
+
+    componentWillUnmount() {
+        global.ishome = true
+    }
+
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>

@@ -518,6 +518,11 @@ export default class ContentDetail extends Component {
 
     componentDidMount() {
         _this = this
+        global.ishome = false
+    }
+
+    componentWillUnmount() {
+        global.ishome = true
     }
 
     render() {

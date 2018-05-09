@@ -87,6 +87,9 @@ export default class JobDetail extends Component {
     }
 
     componentDidMount() {
+
+        global.ishome = false
+
         if (['02', '03', '04', '05', '07'].indexOf(this.props.navigation.state.params.tel.replace(/\D/g, '').slice(0, 2)) >= 0) {
             this.setState({
                 tel: this.props.navigation.state.params.tel.replace(/\D/g, '').slice(0, 9)
@@ -97,6 +100,10 @@ export default class JobDetail extends Component {
                 tel: this.props.navigation.state.params.tel.replace(/\D/g, '').slice(0, 10)
             })
         }
+    }
+
+    componentWillUnmount() {
+        global.ishome = true
     }
 
     render() {

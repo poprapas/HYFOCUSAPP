@@ -17,6 +17,9 @@ import {
     Animated,
     AsyncStorage,
     TouchableWithoutFeedback,
+    BackHandler,
+    Timers,
+    ToastAndroid
 } from 'react-native';
 
 
@@ -150,15 +153,51 @@ export default class Home extends Component {
             size: { width, height },
             isMounted: true,
             update: false,
-            favorite: {}
+            favorite: {},
+            checkback: false
         }
     }
 
     componentWillUnmount() {
         this.state.isMounted = false
+        global.ishome = false
     }
 
     componentDidMount() {
+
+        global.ishome = true
+        let _this = this
+        let timeout
+
+        BackHandler.addEventListener('hardwareBackPress', function () {
+            if (Platform.OS == 'android' && global.ishome) {
+                //console.log(_this.state.checkback)
+                if (_this.state.checkback) {
+                    BackHandler.exitApp()
+                    return true
+                }
+                else {
+                    if (_this.state.isMounted) {
+                        _this.setState({
+                            checkback: true
+                        }, () => {
+                            //console.log(_this.state.checkback, '2')
+                            ToastAndroid.show('กดอีกครั้ง เพื่อออกจากแอป', ToastAndroid.SHORT)
+                            timeout = setTimeout(function () {
+                                //console.log(_this.state.checkback, '3')
+                                if (_this.state.isMounted) {
+                                    _this.setState({
+                                        checkback: false
+                                    })
+                                }
+                            }, 3000)
+                        })
+                    }
+                    return true
+                }
+            }
+            return false
+        })
 
         //AsyncStorage.removeItem('fav')
 
@@ -227,7 +266,7 @@ export default class Home extends Component {
             );
         }
 
-        const { navigate } = this.props.navigation;
+        const { navigate, goBack } = this.props.navigation;
 
         return (
             <View style={styles.container} >
