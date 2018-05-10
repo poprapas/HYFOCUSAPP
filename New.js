@@ -61,9 +61,9 @@ export default class New extends Component {
                 />
             </TouchableOpacity>,
         headerLeft:
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
                 <Ionicons
-                    name="ios-arrow-back"
+                    name="md-menu"
                     size={30}
                     color='white'
                     style={{
@@ -92,10 +92,11 @@ export default class New extends Component {
     }
 
     _fetchData(callback) {
-
+        let cat = this.props.navigation.state.params.cat
+        //alert(this.props.navigation.state.params.cat)
         fetch('https://www.hatyaifocus.com/rest/api.php?action=news&cat=' + this.props.navigation.state.params.cat + '&start=' + this.state.start + '&per_page=10')
             .then(response => response.json())
-            .then(callback)
+            .then(cat == this.props.navigation.state.params.cat ? callback : null)
             .catch(error => {
                 console.error(error);
             });
@@ -114,6 +115,7 @@ export default class New extends Component {
                     })
                 }
                 else {
+                    console.log(responseJson)
                     const data = this.state._data.concat(responseJson);
                     if (this.state.isMounted) {
                         this.setState({
@@ -129,12 +131,34 @@ export default class New extends Component {
         }
     }
 
+    changenew(cat) {
+        //console.log('changenew')
+        this.props.navigation.state.params.cat = cat
+        if (this.state.isMounted) {
+            this.setState({
+                dataSource: null,
+                isLoading: true,
+                isLoadingMore: false,
+                _data: null,
+                _dataAfter: "",
+                start: 0,
+                end: false,
+                refreshing: false,
+                isMounted: true,
+                favorite: {}
+            }, this.componentDidMount)
+        }
+    }
+
     componentDidMount() {
         //Start getting the first batch of data from reddit
+        //console.log('cdm')
+        global.new = this
         this.fetchData(responseJson => {
             let ds = new ListView.DataSource({
                 rowHasChanged: (r1, r2) => r1 !== r2,
             });
+            console.log(responseJson)
             const data = responseJson;
             AsyncStorage.getItem('fav').then((d) => {
                 if (!d) { d = '[]' }

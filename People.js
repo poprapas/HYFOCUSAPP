@@ -57,16 +57,16 @@ export default class People extends Component {
                 />
             </TouchableOpacity>,
         headerLeft:
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
                 <Ionicons
-                    name="ios-arrow-back"
+                    name="md-menu"
                     size={30}
                     color='white'
                     style={{
                         paddingHorizontal: 10
                     }}
                 />
-            </TouchableOpacity>
+            </TouchableOpacity> 
     })
 
     constructor(props) {
@@ -283,6 +283,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: 10,
-        lineHeight: Platform.OS == 'ios' ? 28 :  35
+        lineHeight: Platform.OS == 'ios' ? 28 : 35
     },
 });

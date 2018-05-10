@@ -54,9 +54,9 @@ export default class Setting extends Component {
                 />
             </TouchableOpacity>,
         headerLeft:
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
                 <Ionicons
-                    name="ios-arrow-back"
+                    name="md-menu"
                     size={30}
                     color='white'
                     style={{

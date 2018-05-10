@@ -79,7 +79,7 @@ const Tab = TabNavigator({
         initialRouteName: 'หน้าแรก',
         animationEnabled: true,
         tabBarPosition: 'bottom',
-        swipeEnabled: true,
+        swipeEnabled: false,
         tabBarOptions:
             Platform.OS == 'android' ? {
                 showIcon: true,
@@ -96,7 +96,8 @@ const Tab = TabNavigator({
                     style: { backgroundColor: 'black' },
                     activeTintColor: 'white',
                     inactiveTintColor: '#a0a0a0',
-                }
+                },
+        backBehavior: 'none'
     });
 
 export default Drawer = DrawerNavigator({

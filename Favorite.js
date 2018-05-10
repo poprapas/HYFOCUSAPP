@@ -76,9 +76,9 @@ export default class Favorite extends Component {
                 />
             </TouchableOpacity>,
         headerLeft:
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
                 <Ionicons
-                    name="ios-arrow-back"
+                    name="md-menu"
                     size={30}
                     color='white'
                     style={{
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        lineHeight: Platform.OS == 'ios' ? 28 :  35
+        lineHeight: Platform.OS == 'ios' ? 28 : 35
     },
     moredetail: {
         fontSize: 14,

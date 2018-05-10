@@ -10,7 +10,8 @@ import {
     ListView,
     ActivityIndicator,
     Dimensions,
-    RefreshControl
+    RefreshControl,
+    BackHandler
 } from 'react-native';
 
 import Color from 'react-native-material-color';
@@ -56,9 +57,9 @@ export default class Video extends Component {
                 />
             </TouchableOpacity>,
         headerLeft:
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
                 <Ionicons
-                    name="ios-arrow-back"
+                    name="md-menu"
                     size={30}
                     color='white'
                     style={{
@@ -139,6 +140,14 @@ export default class Video extends Component {
                 });
             }
         });
+
+        BackHandler.addEventListener('hardwareBackPress', function () {
+            if (Platform.OS == 'android') {
+                global.sidemenu.setState({
+                    currentpage: 'หน้าแรก'
+                })
+            }
+        })
     }
 
     componentWillUnmount() {

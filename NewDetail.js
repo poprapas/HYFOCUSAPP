@@ -34,11 +34,11 @@ let ref = null
 
 export default class NewDetail extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         global.ishome = false
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         global.ishome = true
     }
 
@@ -100,39 +100,20 @@ export default class NewDetail extends Component {
         if (node.name == 'p' && node.children[0].name == 'img') {
             const a = node.children[0].attribs;
             return (
-                <Lightbox key={index} underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
-                    {Platform.OS == 'ios' ?
-                        <ScrollView
-                            minimumZoomScale={1}
-                            maximumZoomScale={2}
-                            centerContent={true}
-                        >
-                            <Image
-                                style={{
-                                    width: width,
-                                    height: width * a.height / a.width,
-                                    resizeMode: 'contain',
-                                    marginVertical: 10,
-                                }}
-                                source={{
-                                    uri: a.src
-                                }}
-                            />
-                        </ScrollView> :
-                        <Image
-                            style={{
-                                width: width,
-                                height: width * a.height / a.width,
-                                resizeMode: 'contain',
-                                marginVertical: 10,
-                            }}
-                            source={{
-                                uri: a.src
-                            }}
-                        />
-                    }
+                <Lightbox key={index} underlayColor={'transparent'} swipeToDismiss={false}>
+                    <Image
+                        style={{
+                            width: width,
+                            height: width * a.height / a.width,
+                            resizeMode: 'contain',
+                            marginVertical: 10,
+                        }}
+                        source={{
+                            uri: a.src
+                        }}
+                    />
                 </Lightbox>
-            )
+            ) 
         }
         else if ((node.name == 'p' || node.name == 'div') && node.children[0].name == 'iframe') {
             if (node.children[0].attribs.src.slice(0, 2) == '//') {

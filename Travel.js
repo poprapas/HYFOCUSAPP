@@ -20,52 +20,58 @@ const { width, height } = Dimensions.get("window");
 
 export default class Story extends Component {
 
-    static navigationOptions = ({ navigation }) => ({
-        headerTitle:
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                <Image
-                    source={require('./assets/images/travel-icon.png')}
-                    style={{
-                        width: 25,
-                        height: 25,
-                        top: Platform.OS == 'ios' ? 0 : 3,
-                    }}
-                />
-                <Text style={{
-                    textAlign: 'center',
-                    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-                    fontSize: Platform.OS == 'ios' ? 18 : 15,
-                    color: 'white',
-                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
-                }}> เที่ยวหาดใหญ่
-            </Text>
-            </View>,
-        headerTitleStyle: {
-            alignSelf: 'center',
-        },
-        headerRight:
-            <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
-                <Ionicons
-                    name="logo-facebook"
-                    size={25}
-                    color='white'
-                    style={{
-                        paddingHorizontal: 10
-                    }}
-                />
-            </TouchableOpacity>,
-        headerLeft:
-            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
-                <Ionicons
-                    name="md-menu"
-                    size={30}
-                    color='white'
-                    style={{
-                        paddingHorizontal: 10
-                    }}
-                />
-            </TouchableOpacity>
-    })
+    static navigationOptions = ({ navigation }) => {
+        return {
+            tabBarOnPress: ({ jumpToIndex, scene }) => {
+                // now we have access to Component methods
+                navigation.state.params.onTabFocus();
+                jumpToIndex(scene.index);
+            },
+            headerTitle:
+                <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                    <Image
+                        source={require('./assets/images/travel-icon.png')}
+                        style={{
+                            width: 25,
+                            height: 25,
+                            top: Platform.OS == 'ios' ? 0 : 3,
+                        }}
+                    />
+                    <Text style={{
+                        textAlign: 'center',
+                        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+                        fontSize: Platform.OS == 'ios' ? 18 : 15,
+                        color: 'white',
+                        paddingTop: Platform.OS == 'ios' ? 9 : 5,
+                    }}> เที่ยวหาดใหญ่</Text>
+                </View>,
+            headerTitleStyle: {
+                alignSelf: 'center',
+            },
+            headerRight:
+                <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
+                    <Ionicons
+                        name="logo-facebook"
+                        size={25}
+                        color='white'
+                        style={{
+                            paddingHorizontal: 10
+                        }}
+                    />
+                </TouchableOpacity>,
+            headerLeft:
+                <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+                    <Ionicons
+                        name="md-menu"
+                        size={30}
+                        color='white'
+                        style={{
+                            paddingHorizontal: 10
+                        }}
+                    />
+                </TouchableOpacity>
+        }
+    }
 
     constructor(props) {
         super(props);
@@ -120,7 +126,19 @@ export default class Story extends Component {
         }
     }
 
+    handleTabFocus = () => {
+        // perform your logic here
+        global.sidemenu.setState({
+            currentpage: 'ที่เที่ยว'
+        })
+    }
+
     componentDidMount() {
+
+        this.props.navigation.setParams({
+            onTabFocus: this.handleTabFocus
+        });
+
         //Start getting the first batch of data from reddit
         this.fetchData(responseJson => {
             let ds = new ListView.DataSource({
@@ -308,6 +326,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: 10,
-        lineHeight: Platform.OS == 'ios' ? 28 :  35
+        lineHeight: Platform.OS == 'ios' ? 28 : 35
     },
 });

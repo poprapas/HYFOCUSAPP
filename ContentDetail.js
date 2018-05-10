@@ -150,36 +150,17 @@ export default class ContentDetail extends Component {
             const a = node.children[0].attribs;
             return (
                 <Lightbox key={index} underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
-                    {Platform.OS == 'ios' ?
-                        <ScrollView
-                            minimumZoomScale={1}
-                            maximumZoomScale={2}
-                            centerContent={true}
-                        >
-                            <Image
-                                style={{
-                                    width: width,
-                                    height: width * a.height / a.width,
-                                    resizeMode: 'contain',
-                                    marginVertical: 10,
-                                }}
-                                source={{
-                                    uri: node.children[0].attribs.src
-                                }}
-                            />
-                        </ScrollView> :
-                        <Image
-                            style={{
-                                width: width,
-                                height: width * a.height / a.width,
-                                resizeMode: 'contain',
-                                marginVertical: 10,
-                            }}
-                            source={{
-                                uri: node.children[0].attribs.src
-                            }}
-                        />
-                    }
+                    <Image
+                        style={{
+                            width: width,
+                            height: width * a.height / a.width,
+                            resizeMode: 'contain',
+                            marginVertical: 10,
+                        }}
+                        source={{
+                            uri: node.children[0].attribs.src
+                        }}
+                    />
                 </Lightbox>
             )
         }

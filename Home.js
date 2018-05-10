@@ -40,52 +40,58 @@ const { width, height } = Dimensions.get("window");
 
 export default class Home extends Component {
 
-    static navigationOptions = ({ navigation }) => ({
-        headerTitle:
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                <Image
-                    source={require('./assets/images/home-icon.png')}
-                    style={{
-                        width: 20,
-                        height: 20,
-                        top: Platform.OS == 'ios' ? 2 : 3,
-                    }}
-                />
-                <Text style={{
-                    textAlign: 'center',
-                    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-                    fontSize: Platform.OS == 'ios' ? 18 : 15,
-                    color: 'white',
-                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
-                }}> หน้าแรก
-        </Text>
-            </View>,
-        headerTitleStyle: {
-            alignSelf: 'center',
-        },
-        headerRight:
-            <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
-                <Ionicons
-                    name="logo-facebook"
-                    size={25}
-                    color='white'
-                    style={{
-                        paddingHorizontal: 10
-                    }}
-                />
-            </TouchableOpacity>,
-        headerLeft:
-            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
-                <Ionicons
-                    name="md-menu"
-                    size={30}
-                    color='white'
-                    style={{
-                        paddingHorizontal: 10
-                    }}
-                />
-            </TouchableOpacity>
-    })
+    static navigationOptions = ({ navigation }) => {
+        return {
+            tabBarOnPress: ({ jumpToIndex, scene }) => {
+                // now we have access to Component methods
+                navigation.state.params.onTabFocus();
+                jumpToIndex(scene.index);
+            },
+            headerTitle:
+                <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                    <Image
+                        source={require('./assets/images/home-icon.png')}
+                        style={{
+                            width: 20,
+                            height: 20,
+                            top: Platform.OS == 'ios' ? 2 : 3,
+                        }}
+                    />
+                    <Text style={{
+                        textAlign: 'center',
+                        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+                        fontSize: Platform.OS == 'ios' ? 18 : 15,
+                        color: 'white',
+                        paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                    }}> หน้าแรก</Text>
+                </View>,
+            headerTitleStyle: {
+                alignSelf: 'center',
+            },
+            headerRight:
+                <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
+                    <Ionicons
+                        name="logo-facebook"
+                        size={25}
+                        color='white'
+                        style={{
+                            paddingHorizontal: 10
+                        }}
+                    />
+                </TouchableOpacity>,
+            headerLeft:
+                <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+                    <Ionicons
+                        name="md-menu"
+                        size={30}
+                        color='white'
+                        style={{
+                            paddingHorizontal: 10
+                        }}
+                    />
+                </TouchableOpacity>
+        }
+    }
 
     _notificationAndroid(_this) {
         AsyncStorage.getItem('notification').then((data) => {
@@ -163,15 +169,28 @@ export default class Home extends Component {
         global.ishome = false
     }
 
+    handleTabFocus = () => {
+        // perform your logic here
+        global.sidemenu.setState({
+            currentpage: 'หน้าแรก'
+        })
+    }
+
     componentDidMount() {
+
+        this.props.navigation.setParams({
+            onTabFocus: this.handleTabFocus
+        });
 
         global.ishome = true
         let _this = this
         let timeout
 
         BackHandler.addEventListener('hardwareBackPress', function () {
+            //alert(global.ishome)
             if (Platform.OS == 'android' && global.ishome) {
-                //console.log(_this.state.checkback)
+                console.log(_this.state.checkback)
+                //alert('อะไรก้ได้')
                 if (_this.state.checkback) {
                     BackHandler.exitApp()
                     return true
@@ -196,7 +215,9 @@ export default class Home extends Component {
                     return true
                 }
             }
-            return false
+            else {
+                return false
+            }
         })
 
         //AsyncStorage.removeItem('fav')

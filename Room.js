@@ -21,52 +21,58 @@ const { width, height } = Dimensions.get("window");
 
 export default class Room extends Component {
 
-    static navigationOptions = ({ navigation }) => ({
-        headerTitle:
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                <Image
-                    source={require('./assets/images/hotel-icon.png')}
-                    style={{
-                        width: 25,
-                        height: 25,
-                        top: Platform.OS == 'ios' ? 0 : 3,
-                    }}
-                />
-                <Text style={{
-                    textAlign: 'center',
-                    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-                    fontSize: Platform.OS == 'ios' ? 18 : 15,
-                    color: 'white',
-                    paddingTop: Platform.OS == 'ios' ? 9 : 5,
-                }}> ที่พักหาดใหญ่
-            </Text>
-            </View>,
-        headerTitleStyle: {
-            alignSelf: 'center',
-        },
-        headerRight:
-            <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
-                <Ionicons
-                    name="logo-facebook"
-                    size={25}
-                    color='white'
-                    style={{
-                        paddingHorizontal: 10
-                    }}
-                />
-            </TouchableOpacity>,
-        headerLeft:
-            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
-                <Ionicons
-                    name="md-menu"
-                    size={30}
-                    color='white'
-                    style={{
-                        paddingHorizontal: 10
-                    }}
-                />
-            </TouchableOpacity>
-    })
+    static navigationOptions = ({ navigation }) => {
+        return {
+            tabBarOnPress: ({ jumpToIndex, scene }) => {
+                // now we have access to Component methods
+                navigation.state.params.onTabFocus();
+                jumpToIndex(scene.index);
+            },
+            headerTitle:
+                <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                    <Image
+                        source={require('./assets/images/hotel-icon.png')}
+                        style={{
+                            width: 25,
+                            height: 25,
+                            top: Platform.OS == 'ios' ? 0 : 3,
+                        }}
+                    />
+                    <Text style={{
+                        textAlign: 'center',
+                        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+                        fontSize: Platform.OS == 'ios' ? 18 : 15,
+                        color: 'white',
+                        paddingTop: Platform.OS == 'ios' ? 9 : 5,
+                    }}> ที่พักหาดใหญ่</Text>
+                </View>,
+            headerTitleStyle: {
+                alignSelf: 'center',
+            },
+            headerRight:
+                <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
+                    <Ionicons
+                        name="logo-facebook"
+                        size={25}
+                        color='white'
+                        style={{
+                            paddingHorizontal: 10
+                        }}
+                    />
+                </TouchableOpacity>,
+            headerLeft:
+                <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+                    <Ionicons
+                        name="md-menu"
+                        size={30}
+                        color='white'
+                        style={{
+                            paddingHorizontal: 10
+                        }}
+                    />
+                </TouchableOpacity>
+        }
+    }
 
     constructor(props) {
         super(props);
@@ -89,7 +95,7 @@ export default class Room extends Component {
     componentWillUnmount() {
         this.state.isMounted = false
     }
-    
+
     _fetchData(callback) {
         let url = ''
         if (this.state.page == 'all') {
@@ -144,7 +150,19 @@ export default class Room extends Component {
         }
     }
 
+    handleTabFocus = () => {
+        // perform your logic here
+        global.sidemenu.setState({
+            currentpage: 'ที่พัก'
+        })
+    }
+
     componentDidMount() {
+
+        this.props.navigation.setParams({
+            onTabFocus: this.handleTabFocus
+        });
+
         //Start getting the first batch of data from reddit
         this.fetchData(responseJson => {
             let ds = new ListView.DataSource({
