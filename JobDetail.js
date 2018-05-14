@@ -9,7 +9,8 @@ import {
     ScrollView,
     Dimensions,
     TouchableOpacity,
-    Share
+    Share,
+    StatusBar
 } from 'react-native';
 
 import Color from 'react-native-material-color';
@@ -88,6 +89,12 @@ export default class JobDetail extends Component {
 
     componentDidMount() {
 
+        if (Platform.OS == 'android') {
+            StatusBar.setBackgroundColor('black')
+        }
+        StatusBar.setBarStyle("light-content")
+        StatusBar.setHidden(false)
+
         global.ishome = false
 
         if (['02', '03', '04', '05', '07'].indexOf(this.props.navigation.state.params.tel.replace(/\D/g, '').slice(0, 2)) >= 0) {
@@ -125,16 +132,16 @@ export default class JobDetail extends Component {
                             borderColor: 'black',
                             borderRadius: 2,
                             width: 120,
-                            height: 100,
+                            height: 120,
                             overflow: 'hidden',
                             alignSelf: 'center',
-                            marginTop: 10
+                            marginTop: 10,
                         }}>
                             <Image source={{ uri: this.props.navigation.state.params.image }}
                                 style={{
-                                    width: 120,
                                     height: 100,
                                     resizeMode: 'contain',
+                                    marginVertical: 10
                                 }} />
                         </View>
 
@@ -262,6 +269,7 @@ export default class JobDetail extends Component {
                                 color='black'
                                 style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
                             />
+                            {console.log(this.props.navigation.state.params.date)}
                             <Text style={styles.view}>
                                 {this.props.navigation.state.params.date}
                             </Text>
@@ -296,8 +304,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: 'black',
-        textAlign: 'left',
+        textAlign: 'right',
         width: 110,
+        paddingRight: 10
     },
     topic2: {
         fontSize: 16,
@@ -310,8 +319,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: '#ff0000',
-        textAlign: 'left',
+        textAlign: 'right',
         width: 110,
+        paddingRight: 10
     },
     detail: {
         fontSize: 16,

@@ -257,7 +257,8 @@ export default class Room extends Component {
                                         longitude: rowData.LONGITUDE,
                                         date: rowData.DATE,
                                         gallery: rowData.GALLERY,
-                                        url: rowData.URL
+                                        url: rowData.URL,
+                                        fromhome: true
                                     }
                                 )}
                             >
@@ -272,10 +273,9 @@ export default class Room extends Component {
                                     <View style={{ flex: 5, paddingLeft: 5 }}>
                                         <Image source={{ uri: rowData.GALLERY[0] }}
                                             style={{
-                                                height: 115,
+                                                height: 120,
                                                 resizeMode: 'cover',
-                                                //backgroundColor: '#6a5750',
-                                                borderRadius: 10
+                                                borderRadius: 5
                                             }} />
                                     </View>
 
@@ -293,8 +293,9 @@ export default class Room extends Component {
                                     </View>
 
                                     <View style={{
-                                        paddingTop: Platform.OS == 'ios' ? 45 : 25,
                                         flex: 1,
+                                        alignSelf: 'center',
+                                        paddingRight: 5
                                     }}>
 
                                         <Text style={styles.more}> > </Text>

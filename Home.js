@@ -52,8 +52,8 @@ export default class Home extends Component {
                     <Image
                         source={require('./assets/images/home-icon.png')}
                         style={{
-                            width: 20,
-                            height: 20,
+                            width: 23,
+                            height: 23,
                             top: Platform.OS == 'ios' ? 2 : 3,
                         }}
                     />
@@ -323,7 +323,8 @@ export default class Home extends Component {
                                         view: item.VIEWS,
                                         date: item.DATEIN,
                                         url: item.URL,
-                                        id: item.ID
+                                        id: item.ID,
+                                        fromhome: true
                                     }
                                 )}
                             >

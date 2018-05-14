@@ -36,9 +36,9 @@ export default class Jobs extends Component {
                     <Image
                         source={require('./assets/images/work-icon.png')}
                         style={{
-                            width: 25,
-                            height: 25,
-                            top: Platform.OS == 'ios' ? 0 : 3,
+                            width: 30,
+                            height: 30,
+                            top: 3,
                         }}
                     />
                     <Text style={{
@@ -205,17 +205,11 @@ export default class Jobs extends Component {
                 <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={styles.search}>
-
-                            <View style={{
-                                alignSelf: 'center',
-                                paddingLeft: Platform.OS == 'ios' ? 0 : 5,
-                            }}>
-                                <Icon
-                                    name='search'
-                                    color='black'
-                                    size={20}
-                                />
-                            </View>
+                            <Icon
+                                name='search'
+                                color='black'
+                                size={20}
+                            />
 
                             <View style={{ flexDirection: 'column' }}>
                                 <TextInput
@@ -271,24 +265,12 @@ export default class Jobs extends Component {
 
             <View style={styles.container}>
 
-                {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 3 }}>
-
-          <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-            <Image source={require('./assets/images/banner2.jpg')}
-              style={styles.logo} />
-          </TouchableOpacity>
-
-          <View style={{ flex: 1 }}>
-            <Text style={styles.jobfont}> - หางานหาดใหญ่ - </Text>
-          </View>
-
-        </View> */}
                 <View style={{ flexDirection: 'row' }}>
                     <View style={styles.search}>
 
                         <View style={{
                             alignSelf: 'center',
-                            paddingLeft: Platform.OS == 'ios' ? 0 : 5,
+                            paddingLeft: Platform.OS == 'ios' ? 0 : 10,
                         }}>
                             <Icon
                                 name='search'
@@ -297,10 +279,10 @@ export default class Jobs extends Component {
                             />
                         </View>
 
-                        <View style={{ flexDirection: 'column' }}>
+                        <View style={{ flexDirection: 'column', paddingLeft: 5 }}>
                             <TextInput
                                 style={styles.searchInput}
-                                placeholder=' ค้นหาตำแหน่ง...'
+                                placeholder='ค้นหาตำแหน่ง...'
                                 placeholderTextColor='#686868'
                                 underlineColorAndroid="transparent"
                                 value={this.state.find}
@@ -330,12 +312,10 @@ export default class Jobs extends Component {
                             marginRight: 5,
                             borderRadius: 10,
                             backgroundColor: 'black',
-                            overflow: 'hidden'
+                            overflow: 'hidden',
                         }}
                     >
-                        <Text style={styles.button}>
-                            ค้นหา
-            </Text>
+                        <Text style={styles.button}>ค้นหา</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -384,7 +364,8 @@ export default class Jobs extends Component {
                                             description: rowData.DESCRIPTION,
                                             date: rowData.DATE,
                                             view: rowData.VIEWS,
-                                            url: rowData.URL
+                                            url: rowData.URL,
+                                            fromhome: true
                                         }
                                     )}
                                 >
@@ -408,7 +389,7 @@ export default class Jobs extends Component {
 
                                         <View style={{
                                             flexDirection: 'column',
-                                            paddingTop: Platform.OS == 'ios' ? 12 : 5,
+                                            paddingVertical: 5,
                                             paddingLeft: 5,
                                             flex: 54
                                         }}
@@ -424,9 +405,7 @@ export default class Jobs extends Component {
                                             paddingTop: Platform.OS == 'ios' ? 30 : 15,
                                             flex: 16,
                                         }}>
-
                                             <Text style={styles.more}> > </Text>
-
                                         </View>
                                     </View>
                                 </TouchableOpacity>
@@ -475,14 +454,14 @@ const styles = StyleSheet.create({
     search: {
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        padding: Platform.OS == 'ios' ? 5 : 0,
+        padding: Platform.OS == 'ios' ? 10 : 0,
         margin: 5,
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 20,
         backgroundColor: 'white',
         flex: 5,
-        height: Platform.OS == 'ios' ? 40 : 30,
+        height: Platform.OS == 'ios' ? 35 : 30,
     },
     searchInput: {
         fontSize: 16,
@@ -502,7 +481,7 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'left',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        paddingTop: Platform.OS == 'ios' ? 6 : 2,
+        paddingTop: Platform.OS == 'ios' ? 7 : 2,
     },
     titleText2: {
         fontSize: 15,
@@ -510,7 +489,7 @@ const styles = StyleSheet.create({
         color: '#ff0000',
         textAlign: 'left',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        paddingTop: Platform.OS == 'ios' ? 5 : 2,
+        paddingTop: Platform.OS == 'ios' ? 7 : 2,
     },
     more: {
         fontWeight: 'normal',
@@ -523,8 +502,9 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+        alignItems: 'center',
         padding: 10,
-        paddingVertical: Platform.OS == 'ios' ? 10 : 3,
-        alignItems: 'center'
+        paddingVertical: Platform.OS == 'ios' ? 9 : 3,
+        marginTop: 2
     },
 });

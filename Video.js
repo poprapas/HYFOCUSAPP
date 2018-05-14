@@ -27,7 +27,7 @@ export default class Video extends Component {
             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
                 <Foundation
                     name="play-video"
-                    size={20}
+                    size={21}
                     color='white'
                     style={{
                         top: 5

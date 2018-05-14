@@ -237,23 +237,32 @@ export default class RoomDetail extends Component {
                             </View>
 
                             {this.props.navigation.state.params.latitude ?
+                                <View>
+                                    <TouchableOpacity
+                                        style={{ alignSelf: 'flex-end' }}
+                                        onPress={() => 
+                                            Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + parseFloat(this.props.navigation.state.params.latitude)+ ',' + parseFloat(this.props.navigation.state.params.longitude) : 'https://www.google.com/maps/search/?api=1&query=' + parseFloat(this.props.navigation.state.params.latitude) + ',' + parseFloat(this.props.navigation.state.params.longitude))}
+                                    >
+                                        <Text style={{ color: '#1e90ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
+                                    </TouchableOpacity>
 
-                                <MapView
-                                    provider={PROVIDER_GOOGLE}
-                                    style={styles.map}
-                                    initialRegion={{
-                                        latitude: parseFloat(this.props.navigation.state.params.latitude),
-                                        longitude: parseFloat(this.props.navigation.state.params.longitude),
-                                        latitudeDelta: 0.01,
-                                        longitudeDelta: 0.01,
-                                    }}
-                                >
-                                    <MapView.Marker coordinate={{
-                                        latitude: parseFloat(this.props.navigation.state.params.latitude),
-                                        longitude: parseFloat(this.props.navigation.state.params.longitude),
-                                    }}
-                                    />
-                                </MapView>
+                                    <MapView
+                                        provider={PROVIDER_GOOGLE}
+                                        style={styles.map}
+                                        initialRegion={{
+                                            latitude: parseFloat(this.props.navigation.state.params.latitude),
+                                            longitude: parseFloat(this.props.navigation.state.params.longitude),
+                                            latitudeDelta: 0.01,
+                                            longitudeDelta: 0.01,
+                                        }}
+                                    >
+                                        <MapView.Marker coordinate={{
+                                            latitude: parseFloat(this.props.navigation.state.params.latitude),
+                                            longitude: parseFloat(this.props.navigation.state.params.longitude),
+                                        }}
+                                        />
+                                    </MapView>
+                                </View>
                                 : null
                             }
 

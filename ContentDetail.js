@@ -166,7 +166,10 @@ export default class ContentDetail extends Component {
         }
         else if ((node.name == 'p' || node.name == 'div') && node.children[0] && node.children[0].name == 'iframe') {
             const a = node.children[0].attribs;
-            //console.log(a)
+            let latitude = parseFloat(a.src.slice(a.src.indexOf('!1d') + 3, a.src.indexOf('!2d'))).toFixed(6)
+            let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
+            //console.log(parseFloat(a.src.slice(a.src.indexOf('!1d') + 3, a.src.indexOf('!2d'))).toFixed(6))
+            //console.log(parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6))
             if (a.src.slice(0, 2) == '//') {
                 a.src = 'https:' + a.src
             };
@@ -187,6 +190,13 @@ export default class ContentDetail extends Component {
                             alignSelf: 'center',
                         }}
                     >
+                        <TouchableOpacity
+                            style={{ alignSelf: 'flex-end' }}
+                            onPress={() => Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + latitude + ',' + longitude : 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude)}
+                        >
+                            <Text style={{ color: '#66b3ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
+                        </TouchableOpacity>
+
                         <WebView
                             bounces={false}
                             scrollEnabled={false}
@@ -245,6 +255,10 @@ export default class ContentDetail extends Component {
         else if (node.name == 'p' && node.children[1] && node.children[1].name == 'iframe') {
             //console.log(node.name == 'p' && node.children[1] && node.children[1].name == 'iframe')
             const a = node.children[1].attribs
+            //console.log(a.src)
+            let latitude = parseFloat(a.src.slice(a.src.indexOf('!1d') + 3, a.src.indexOf('!2d'))).toFixed(6)
+            let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
+
             if (a.src.slice(0, 2) == '//') {
                 a.src = 'https:' + a.src
             };
@@ -265,6 +279,14 @@ export default class ContentDetail extends Component {
                             alignSelf: 'center',
                         }}
                     >
+
+                        <TouchableOpacity
+                            style={{ alignSelf: 'flex-end' }}
+                            onPress={() => Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + latitude + ',' + longitude : 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude)}
+                        >
+                            <Text style={{ color: '#66b3ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
+                        </TouchableOpacity>
+
                         <WebView
                             bounces={false}
                             scrollEnabled={false}
@@ -332,6 +354,9 @@ export default class ContentDetail extends Component {
             //console.log((node.name == 'p' || node.name == 'div') && node.children[0] && node.children[0].name == 'iframe')
             const a = node.children[0].attribs;
             //console.log(a)
+            let latitude = parseFloat(a.src.slice(a.src.indexOf('!1d') + 3, a.src.indexOf('!2d'))).toFixed(6)
+            let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
+
             if (a.src.slice(0, 2) == '//') {
                 a.src = 'https:' + a.src
             };
@@ -352,6 +377,14 @@ export default class ContentDetail extends Component {
                             alignSelf: 'center',
                         }}
                     >
+
+                        <TouchableOpacity
+                            style={{ alignSelf: 'flex-end' }}
+                            onPress={() => Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + latitude + ',' + longitude : 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude)}
+                        >
+                            <Text style={{ color: '#66b3ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
+                        </TouchableOpacity>
+
                         <WebView
                             bounces={false}
                             scrollEnabled={false}
@@ -503,7 +536,9 @@ export default class ContentDetail extends Component {
     }
 
     componentWillUnmount() {
-        global.ishome = true
+        if (this.props.navigation.state.params.fromhome) {
+            global.ishome = true
+        }
     }
 
     render() {
@@ -625,8 +660,9 @@ const styless = StyleSheet.create({
     a: {
         fontSize: 18,
         fontWeight: 'normal',
-        color: '#FFFF66',
+        color: '#ffd633',
         textAlign: 'left',
-        fontFamily: 'Times New Roman'
+        fontFamily: 'Times New Roman',
+        textDecorationLine: 'underline'
     },
 });

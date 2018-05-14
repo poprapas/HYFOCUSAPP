@@ -234,7 +234,8 @@ export default class Eat extends Component {
                                     date: rowData.DATEIN,
                                     url: rowData.URL,
                                     topic: 'ของกินหาดใหญ่',
-                                    cat: 3
+                                    cat: 3,
+                                     fromhome: true
                                 }
                             )}
                         >

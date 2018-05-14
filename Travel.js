@@ -236,7 +236,8 @@ export default class Story extends Component {
                                     date: rowData.DATEIN,
                                     url: rowData.URL,
                                     topic: 'เที่ยวหาดใหญ่',
-                                    cat: 8
+                                    cat: 8,
+                                    fromhome: true
                                 }
                             )}
                         >

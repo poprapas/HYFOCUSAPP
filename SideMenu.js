@@ -308,7 +308,7 @@ class SideMenu extends Component {
 
                 <TouchableOpacity onPress={() => { this.props.navigation.navigate('หางาน'), this.setState({ currentpage: 'หางาน', dropdown: false }) }}>
                     <View style={[styles.navSectionStyle, { backgroundColor: this.state.currentpage == 'หางาน' ? Color.BROWN[800] : '#000' }]}>
-                        <Image source={require('./assets/images/work-icon.png')} style={{ height: 28, width: 28 }} />
+                        <Image source={require('./assets/images/work-icon.png')} style={{ height: 29, width: 29 }} />
                         <Text style={styles.navItemStyle}>
                             หางานหาดใหญ่
                         </Text>
