@@ -82,13 +82,14 @@ export default class Room extends Component {
             dataSource: null,
             isLoading: true,
             isLoadingMore: false,
-            _data: null,
+            _data: [],
             _dataAfter: "",
             start: 0,
             end: false,
             refreshing: false,
             page: 'all',
-            isMounted: true
+            isMounted: true,
+            now: 'all'
         }
     }
 
@@ -197,7 +198,7 @@ export default class Room extends Component {
                 dataSource: null,
                 isLoading: true,
                 isLoadingMore: false,
-                _data: null,
+                _data: [],
                 _dataAfter: "",
                 start: 0,
                 end: false,
@@ -331,42 +332,42 @@ export default class Room extends Component {
                     justifyContent: 'space-around'
                 }}>
                     <Button
-                        containerStyle={styles.selectbutton}
+                        containerStyle={[styles.selectbutton, { backgroundColor: this.state.now == 'all' ? '#795548' : '#503830' }]}
                         disabledContainerStyle={{ backgroundColor: 'grey' }}
                         style={styles.button}
-                        onPress={() => this.gotoOtherpage('all')}>
+                        onPress={() => { this.gotoOtherpage('all'), this.setState({ now: 'all' }) }}>
                         All
                     </Button>
 
                     <Button
-                        containerStyle={styles.selectbutton}
+                        containerStyle={[styles.selectbutton, { backgroundColor: this.state.now == 'hotel' ? '#795548' : '#503830' }]}
                         disabledContainerStyle={{ backgroundColor: 'grey' }}
                         style={styles.button}
-                        onPress={() => this.gotoOtherpage('hotel')}>
+                        onPress={() => { this.gotoOtherpage('hotel'), this.setState({ now: 'hotel' }) }}>
                         Hotel
                     </Button>
 
                     <Button
-                        containerStyle={styles.selectbutton}
+                        containerStyle={[styles.selectbutton, { backgroundColor: this.state.now == 'apartment' ? '#795548' : '#503830' }]}
                         disabledContainerStyle={{ backgroundColor: 'grey' }}
                         style={styles.button}
-                        onPress={() => this.gotoOtherpage('apartment')}>
+                        onPress={() => { this.gotoOtherpage('apartment'), this.setState({ now: 'apartment' }) }}>
                         Apartment
                     </Button>
 
                     <Button
-                        containerStyle={styles.selectbutton}
+                        containerStyle={[styles.selectbutton, { backgroundColor: this.state.now == 'resort' ? '#795548' : '#503830' }]}
                         disabledContainerStyle={{ backgroundColor: 'grey' }}
                         style={styles.button}
-                        onPress={() => this.gotoOtherpage('resort')}>
+                        onPress={() => { this.gotoOtherpage('resort'), this.setState({ now: 'resort' }) }}>
                         Resort
                     </Button>
 
                     <Button
-                        containerStyle={styles.selectbutton}
+                        containerStyle={[styles.selectbutton, { backgroundColor: this.state.now == 'guesthouse' ? '#795548' : '#503830' }]}
                         disabledContainerStyle={{ backgroundColor: 'grey' }}
                         style={styles.button}
-                        onPress={() => this.gotoOtherpage('guesthouse')}>
+                        onPress={() => { this.gotoOtherpage('guesthouse'), this.setState({ now: 'guesthouse' }) }}>
                         Guesthouse
                     </Button>
 
@@ -434,7 +435,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#30231d',
-        backgroundColor: '#795548',
         width: Platform.OS == 'ios' ? width / 5.3 : width / 5.5
     },
 });

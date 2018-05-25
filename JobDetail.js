@@ -262,14 +262,14 @@ export default class JobDetail extends Component {
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 20 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: DeviceInfo.getModel() == 'iPhone X' || Platform.OS == 'android' ? 20 : 0 }}>
                             <Icons
                                 name="access-time"
                                 size={15}
                                 color='black'
                                 style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
                             />
-                            {console.log(this.props.navigation.state.params.date)}
+                            {/* {console.log(this.props.navigation.state.params.date)} */}
                             <Text style={styles.view}>
                                 {this.props.navigation.state.params.date}
                             </Text>

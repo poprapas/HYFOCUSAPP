@@ -8,7 +8,8 @@ import {
     Linking,
     TouchableOpacity,
     ScrollView,
-    Dimensions
+    Dimensions,
+    TouchableWithoutFeedback
 } from 'react-native';
 
 import Color from 'react-native-material-color';
@@ -20,50 +21,50 @@ export default class About extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
-          <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-            <Image
-              source={require('./assets/images/about-icon.png')}
-              style={{
-                width: 20,
-                height: 20,
-                top: Platform.OS == 'ios' ? 2 : 3,
-              }}
-            />
-            <Text style={{
-              textAlign: 'center',
-              fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-              fontSize: Platform.OS == 'ios' ? 18 : 15,
-              color: 'white',
-              paddingTop: Platform.OS == 'ios' ? 8 : 5,
-            }}> เกี่ยวกับเรา
+            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                <Image
+                    source={require('./assets/images/about-icon.png')}
+                    style={{
+                        width: 20,
+                        height: 20,
+                        top: Platform.OS == 'ios' ? 2 : 3,
+                    }}
+                />
+                <Text style={{
+                    textAlign: 'center',
+                    fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
+                    fontSize: Platform.OS == 'ios' ? 18 : 15,
+                    color: 'white',
+                    paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                }}> เกี่ยวกับเรา
             </Text>
-          </View>,
+            </View>,
         headerTitleStyle: {
-          alignSelf: 'center',
+            alignSelf: 'center',
         },
         headerRight:
-          <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
-            <Ionicons
-              name="logo-facebook"
-              size={25}
-              color='white'
-              style={{
-                paddingHorizontal: 10
-              }}
-            />
-          </TouchableOpacity>,
+            <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
+                <Ionicons
+                    name="logo-facebook"
+                    size={25}
+                    color='white'
+                    style={{
+                        paddingHorizontal: 10
+                    }}
+                />
+            </TouchableOpacity>,
         headerLeft:
-          <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
-            <Ionicons
-              name="md-menu"
-              size={30}
-              color='white'
-              style={{
-                paddingHorizontal: 10
-              }}
-            />
-          </TouchableOpacity>
-      })
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+                <Ionicons
+                    name="md-menu"
+                    size={30}
+                    color='white'
+                    style={{
+                        paddingHorizontal: 10
+                    }}
+                />
+            </TouchableOpacity>
+    })
 
     render() {
 
@@ -73,9 +74,13 @@ export default class About extends Component {
             <View style={styles.container}>
                 <ScrollView>
                     <View style={styles.about}>
-                        <Text style={styles.main}>
-                            หาดใหญ่โฟกัสดอทคอม (อังกฤษ: HatyaiFocus.com) เป็นเว็บไซต์นำเสนอข้อมูลข่าวสาร เกี่ยวกับเรื่องราวของอำเภอหาดใหญ่และจังหวัดสงขลา และรวมไปถึง Platform เกี่ยวกับการหางานและการซื้อ-ขาย เนื้อหาข่าวสารของหาดใหญ่โฟกัสดอทคอม เน้นไปเรื่องขอการนำเสนอวิถีชีวิตของผู้คน อาชีพ ข่าวสารที่เป็นกระแส ข่าวสารประจำวัน รวมไปถึง Event ต่างๆ โดยอ้างอิงข้อมูลจากเว็บไซต์ต่างๆ ผู้คน และหลักฐานทางเอกสาร โดยจะเป็นการบอกเล่าเรื่องราวในปัจจุบันและอดีตของเมืองหาดใหญ่และจังหวัดสงขลาในด้านต่างๆ ข้อมูลจะมีการอัปเดตอยู่เสมอ นอกจากนั้นหาดใหญ่โฟกัสยังมีเว็บบอร์ดไว้สำหรับชาวหาดใหญ่และผู้คนทั่วไปสามารถเข้ามาตั้งกระทู้สอบถามและแสดงความคิดเห็นซึ่งกันและกัน ทั้งเรื่องราว วิถีชีวิต ข่าวสาร เรื่องทั่วๆไป ทำให้เกิดเรื่องราวที่น่าสนใจมากมายในวงกว้างอยู่เสมอ
-                        </Text>
+                        <TouchableWithoutFeedback onPress={() => Linking.openURL('https://www.hatyaifocus.com/')}>
+                            <View>
+                                <Text style={styles.main}>
+                                    หาดใหญ่โฟกัสดอทคอม (อังกฤษ: <Text style={styles.name}>HatyaiFocus.com</Text>) เป็นเว็บไซต์นำเสนอข้อมูลข่าวสาร เกี่ยวกับเรื่องราวของอำเภอหาดใหญ่และจังหวัดสงขลา และรวมไปถึง Platform เกี่ยวกับการหางานและการซื้อ-ขาย เนื้อหาข่าวสารของหาดใหญ่โฟกัสดอทคอม เน้นไปเรื่องขอการนำเสนอวิถีชีวิตของผู้คน อาชีพ ข่าวสารที่เป็นกระแส ข่าวสารประจำวัน รวมไปถึง Event ต่างๆ โดยอ้างอิงข้อมูลจากเว็บไซต์ต่างๆ ผู้คน และหลักฐานทางเอกสาร โดยจะเป็นการบอกเล่าเรื่องราวในปัจจุบันและอดีตของเมืองหาดใหญ่และจังหวัดสงขลาในด้านต่างๆ ข้อมูลจะมีการอัปเดตอยู่เสมอ นอกจากนั้นหาดใหญ่โฟกัสยังมีเว็บบอร์ดไว้สำหรับชาวหาดใหญ่และผู้คนทั่วไปสามารถเข้ามาตั้งกระทู้สอบถามและแสดงความคิดเห็นซึ่งกันและกัน ทั้งเรื่องราว วิถีชีวิต ข่าวสาร เรื่องทั่วๆไป ทำให้เกิดเรื่องราวที่น่าสนใจมากมายในวงกว้างอยู่เสมอ
+                                </Text>
+                            </View>
+                        </TouchableWithoutFeedback>
 
                         <View style={{ paddingTop: 5 }}>
                             <Text style={styles.topic}>
@@ -89,7 +94,11 @@ export default class About extends Component {
 
                         <View style={{ flexDirection: 'row' }}>
 
-                            <TouchableOpacity onPress={() => navigate('Story')}>
+                            <TouchableOpacity onPress={() => {
+                                navigate('Story'), global.sidemenu.setState({
+                                    currentpage: 'เรื่องราวหาดใหญ่'
+                                })
+                            }}>
                                 <Text style={styles.name}> เรื่องราวหาดใหญ่:</Text>
                             </TouchableOpacity>
 
@@ -102,7 +111,11 @@ export default class About extends Component {
 
                         <View style={{ flexDirection: 'row' }}>
 
-                            <TouchableOpacity onPress={() => navigate('People')}>
+                            <TouchableOpacity onPress={() => {
+                                navigate('People'), global.sidemenu.setState({
+                                    currentpage: 'คนหาดใหญ่'
+                                })
+                            }}>
                                 <Text style={styles.name}> วิถีชีวิต:</Text>
                             </TouchableOpacity>
 
@@ -115,7 +128,11 @@ export default class About extends Component {
 
                         <View style={{ flexDirection: 'row' }}>
 
-                            <TouchableOpacity onPress={() => navigate('Jobs')}>
+                            <TouchableOpacity onPress={() => {
+                                navigate('หางาน'), global.sidemenu.setState({
+                                    currentpage: 'หางาน'
+                                })
+                            }}>
                                 <Text style={styles.name}> หางานหาดใหญ่:</Text>
                             </TouchableOpacity>
 
@@ -128,7 +145,11 @@ export default class About extends Component {
 
                         <View style={{ flexDirection: 'row' }}>
 
-                            <TouchableOpacity onPress={() => navigate('Eat')}>
+                            <TouchableOpacity onPress={() => {
+                                navigate('ของกิน'), global.sidemenu.setState({
+                                    currentpage: 'ของกิน'
+                                })
+                            }}>
                                 <Text style={styles.name}> ของกินหาดใหญ่:</Text>
                             </TouchableOpacity>
 
@@ -141,7 +162,11 @@ export default class About extends Component {
 
                         <View style={{ flexDirection: 'row' }}>
 
-                            <TouchableOpacity onPress={() => navigate('Event')}>
+                            <TouchableOpacity onPress={() => {
+                                navigate('Event'), global.sidemenu.setState({
+                                    currentpage: 'ไปหม้ายโหม๋เรา'
+                                })
+                            }}>
                                 <Text style={styles.name}> ไปหม้ายโหม๋เรา:</Text>
                             </TouchableOpacity>
 
@@ -153,7 +178,11 @@ export default class About extends Component {
                         </View>
 
                         <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity onPress={() => navigate('Video')}>
+                            <TouchableOpacity onPress={() => {
+                                navigate('Video'), global.sidemenu.setState({
+                                    currentpage: 'วิดีโอ'
+                                })
+                            }}>
                                 <Text style={styles.name}> วิดีโอ:</Text>
                             </TouchableOpacity>
 
@@ -179,7 +208,11 @@ export default class About extends Component {
 
                         <View style={{ flexDirection: 'row' }}>
 
-                            <TouchableOpacity onPress={() => navigate('Review')}>
+                            <TouchableOpacity onPress={() => {
+                                navigate('Review'), global.sidemenu.setState({
+                                    currentpage: 'รีวิว'
+                                })
+                            }}>
                                 <Text style={styles.name}> รีวิว:</Text>
                             </TouchableOpacity>
 

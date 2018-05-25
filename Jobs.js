@@ -384,6 +384,7 @@ export default class Jobs extends Component {
                                                     width: 100,
                                                     height: 100,
                                                     resizeMode: 'contain',
+                                                    alignSelf: 'center'
                                                 }} />
                                         </View>
 

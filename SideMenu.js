@@ -13,6 +13,7 @@ import {
     Platform,
     PlatformIOS,
     Dimensions,
+    AsyncStorage
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/dist/Foundation';
@@ -274,7 +275,12 @@ class SideMenu extends Component {
                 }}>
                 </View>
 
-                <TouchableOpacity onPress={() => { this.props.navigation.navigate('Favorite'), this.setState({ currentpage: 'บุ๊คมาร์ค', dropdown: false }) }}>
+                <TouchableOpacity onPress={() => {
+                    AsyncStorage.getItem('fav').then((data) => {
+                        this.props.navigation.navigate('Favorite', {isEmpty: data != '{}'})
+                        this.setState({ currentpage: 'บุ๊คมาร์ค', dropdown: false })
+                    })
+                }}>
                     <View style={[styles.navSectionStyle, { backgroundColor: this.state.currentpage == 'บุ๊คมาร์ค' ? Color.BROWN[800] : '#000' }]}>
                         <Icons name="star" size={25} color='white' style={{ width: 28 }} />
                         <Text style={styles.navItemStyle}>

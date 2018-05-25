@@ -3,6 +3,7 @@ package com.hyfocusapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.airship.customwebview.CustomWebViewPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new CustomWebViewPackage(),
           new ReactNativePushNotificationPackage(),
           new MapsPackage(),
           new VectorIconsPackage(),

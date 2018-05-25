@@ -28,6 +28,7 @@ import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
 import Toast, { DURATION } from 'react-native-easy-toast';
 import DeviceInfo from 'react-native-device-info';
 import Lightbox from 'react-native-lightbox';
+//import WebViews from 'react-native-android-fullscreen-webview-video';
 
 const { width, height } = Dimensions.get("window");
 let ref = null
@@ -123,34 +124,44 @@ export default class NewDetail extends Component {
             };
             if (node.children[0].attribs.src.slice(12, 15) == 'you') {
                 return (
-                    <WebView
+                    <View
                         key={index}
-                        bounces={false}
-                        scrollEnabled={false}
-                        source={{
-                            uri: node.children[0].attribs.src
-                        }}
                         style={{
                             width: width - 10,
                             height: (width - 10) * 0.5625,
                             alignSelf: 'center',
-                        }}
-                    />
+                        }}>
+                        <WebView
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{
+                                uri: node.children[0].attribs.src
+                            }}
+                            style={{
+                                width: width - 10,
+                                height: (width - 10) * 0.5625,
+                                alignSelf: 'center',
+                            }}
+                        />
+                    </View>
                 )
             }
             else {
                 const a = node.children[0].attribs;
-                //console.log(node)
+                //console.log(a)
                 return (
+                    // Platform.OS == 'ios' ?
                     <View
                         key={index}
                         style={{
-                            justifyContent: 'center',
-                            alignItems: 'center',
                             alignSelf: 'center',
                             backgroundColor: 'transparent',
-                            width: width - 10,
-                            height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width
+                            width: a.height <= a.width ? width - 10 : width - 30,
+                            height:
+                                a.height <= a.width ? ((width - 10) * a.height / a.width) :
+                                    //a.width <= '270' && a.height == '476' ? (width - 30) * a.width / a.height :    // bug video facebook
+                                    (width - 30) * a.height / a.width
+
                         }}>
                         <WebView
                             bounces={false}
@@ -159,12 +170,28 @@ export default class NewDetail extends Component {
                                 uri: a.src
                             }}
                             style={{
-                                width: a.height <= a.width ? width - 10 : width - 100,
-                                height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width,
+                                width: a.height <= a.width ? width - 10 : width - 30,
+                                height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 30) * a.height / a.width,
+                                backgroundColor: 'transparent',
                             }}
                         />
                     </View>
-                    //null
+                    // <View
+                    //     key={index}
+                    //     style={{
+                    //         alignSelf: 'center',
+                    //         backgroundColor: 'transparent',
+                    //         width: a.height <= a.width ? width - 10 : width - 30,
+                    //         height:
+                    //             a.width == '264' && a.height == '476' ? (width - 30) * width / height :
+                    //                 a.width == '500' && a.height == '600' ? (width - 30) * height / width :
+                    //                     a.height <= a.width ? ((width - 10) * a.height / a.width) :
+                    //                         (width - 30) * a.height / a.width
+                    //     }}>
+                    //     <WebViews
+                    //         source={{ uri: a.src }}
+                    //     />
+                    // </View>
                 );
             }
         }
@@ -244,7 +271,7 @@ export default class NewDetail extends Component {
                         style={{
                             alignSelf: 'center',
                             backgroundColor: 'transparent',
-                            height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width
+                            height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 30) * a.height / a.width
                         }}>
                         <WebView
                             bounces={false}
@@ -253,8 +280,8 @@ export default class NewDetail extends Component {
                                 uri: a.src
                             }}
                             style={{
-                                width: a.height <= a.width ? width - 10 : width - 100,
-                                height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width,
+                                width: a.height <= a.width ? width - 10 : width - 30,
+                                height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 30) * a.height / a.width,
                             }}
                         />
                     </View>
@@ -335,7 +362,7 @@ export default class NewDetail extends Component {
                         style={{
                             alignSelf: 'center',
                             backgroundColor: 'transparent',
-                            height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width
+                            height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 30) * a.height / a.width
                         }}>
                         <WebView
                             bounces={false}
@@ -344,8 +371,8 @@ export default class NewDetail extends Component {
                                 uri: a.src
                             }}
                             style={{
-                                width: a.height <= a.width ? width - 10 : width - 100,
-                                height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width,
+                                width: a.height <= a.width ? width - 10 : width - 30,
+                                height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 30) * a.height / a.width,
                             }}
                         />
                     </View>
@@ -504,9 +531,8 @@ export default class NewDetail extends Component {
                         <HTMLView
                             value={descript.replace(/\r\n\t/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}
-                            //renderNode={null}
                             stylesheet={styless}
-                            textComponentProps={{ style: { color: '#ffffff' } }}
+                            textComponentProps={{ style: { color: '#fff' } }}
                             style={{ flex: 1 }}
 
                         />

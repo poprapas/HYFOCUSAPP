@@ -114,7 +114,6 @@ export default class Home extends Component {
                 }
             }
         })
-
     }
     _notificationiOS(_this) {
         PushNotification.configure({
@@ -125,9 +124,19 @@ export default class Home extends Component {
             },
             popInitialNotification: true,
             requestPermissions: true,
+            // onNotification(notification) {
+            //     console.log('NOTIFICATION:', notification);
+            //     alert(notification.message)
+            //     //notification.finish(PushNotificationIOS.FetchResult.NoData);
+            // }
         });
         let notificationTime = new Date();
         //AsyncStorage.clear()
+        // PushNotification.localNotificationSchedule({
+        //     date: new Date(Date.now() + 5000),
+        //     message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
+        //     foreground: true,
+        // });
         AsyncStorage.getItem('notificationDate').then((date) => {
             if (date == null || notificationTime.toISOString().slice(0, 10) != date) {
                 notificationTime.setHours(18);
@@ -357,8 +366,8 @@ export default class Home extends Component {
                                         size={25}
                                         color={'#edad35'}
                                         style={{
-                                            width: 25,
-                                            margin: 3
+                                            width: 40,
+                                            margin: 3,
                                         }}
                                     />
                                 </TouchableOpacity>

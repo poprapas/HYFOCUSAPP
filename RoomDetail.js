@@ -9,7 +9,8 @@ import {
     ScrollView,
     Dimensions,
     Share,
-    TouchableOpacity
+    TouchableOpacity,
+    WebView
 } from 'react-native';
 
 import Color from 'react-native-material-color';
@@ -98,6 +99,40 @@ export default class RoomDetail extends Component {
         }
     }
 
+    renderNode(node, index, siblings, parent, defaultRenderer) {
+        if (node.name == 'p' && node.children && node.children["0"] && node.children["0"].children && node.children["0"].children["0"] && node.children["0"].children["0"].name == 'iframe') {
+            console.log(node)
+            let a = node.children["0"].children["0"].attribs
+            if (a.src.slice(0, 2) == '//') {
+                a.src = 'https:' + a.src
+            };
+            if (a.src.slice(12, 15) == 'you') {
+                return (
+                    <View
+                        key={index}
+                        style={{
+                            width: width - 25,
+                            height: (width - 25) * 0.5625,
+                            alignSelf: 'center',
+                        }}>
+                        <WebView
+                            bounces={false}
+                            scrollEnabled={false}
+                            source={{
+                                uri: a.src
+                            }}
+                            style={{
+                                width: width - 25,
+                                height: (width - 25) * 0.5625,
+                                alignSelf: 'center',
+                            }}
+                        />
+                    </View>
+                )
+            }
+        }
+    }
+
     render() {
 
         const { navigate, goBack } = this.props.navigation;
@@ -111,7 +146,7 @@ export default class RoomDetail extends Component {
                         width: "100%",
                     }}>
 
-                        <View style={{ height: height / 4 }}
+                        <View style={{ height: DeviceInfo.getModel() == 'iPhone X' ? height / 4 : height / 3 }}
                             onLayout={this._onLayoutDidChange}
                         >
                             <Carousel
@@ -169,13 +204,18 @@ export default class RoomDetail extends Component {
                             </View>
 
                             <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                                <Text style={styles.topic}>  ลงประกาศ : </Text>
+                                <Text style={styles.for}>{this.props.navigation.state.params.for} </Text>
+                            </View>
+
+                            <View style={{ flexDirection: 'row', marginTop: 5 }}>
                                 <Text style={styles.topic}>  ห้องนอน : </Text>
-                                <Text style={styles.detail}>{this.props.navigation.state.params.bedroom} </Text>
+                                <Text style={styles.detail}>{this.props.navigation.state.params.bedroom} ห้อง</Text>
                             </View>
 
                             <View style={{ flexDirection: 'row', marginTop: 5 }}>
                                 <Text style={styles.topic}>  ห้องน้ำ : </Text>
-                                <Text style={styles.detail}>{this.props.navigation.state.params.bathroom} </Text>
+                                <Text style={styles.detail}>{this.props.navigation.state.params.bathroom} ห้อง</Text>
                             </View>
 
                             <View style={{ flexDirection: 'row', marginTop: 5 }}>
@@ -231,52 +271,53 @@ export default class RoomDetail extends Component {
                                 <View style={{ paddingLeft: 4, marginTop: 10 }}>
                                     <HTMLView
                                         value={this.props.navigation.state.params.descript.replace(/\r\n/g, '').replace(/&nbsp;/g, '')}
+                                        renderNode={this.renderNode}
                                         stylesheet={styless}
                                     />
                                 </View>
                             </View>
+                        </View>
 
-                            {this.props.navigation.state.params.latitude ?
-                                <View>
-                                    <TouchableOpacity
-                                        style={{ alignSelf: 'flex-end' }}
-                                        onPress={() => 
-                                            Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + parseFloat(this.props.navigation.state.params.latitude)+ ',' + parseFloat(this.props.navigation.state.params.longitude) : 'https://www.google.com/maps/search/?api=1&query=' + parseFloat(this.props.navigation.state.params.latitude) + ',' + parseFloat(this.props.navigation.state.params.longitude))}
-                                    >
-                                        <Text style={{ color: '#1e90ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
-                                    </TouchableOpacity>
+                        {this.props.navigation.state.params.latitude ?
+                            <View>
+                                <TouchableOpacity
+                                    style={{ alignSelf: 'flex-end', paddingHorizontal: 10 }}
+                                    onPress={() =>
+                                        Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + parseFloat(this.props.navigation.state.params.latitude) + ',' + parseFloat(this.props.navigation.state.params.longitude) : 'https://www.google.com/maps/search/?api=1&query=' + parseFloat(this.props.navigation.state.params.latitude) + ',' + parseFloat(this.props.navigation.state.params.longitude))}
+                                >
+                                    <Text style={{ color: '#1e90ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
+                                </TouchableOpacity>
 
-                                    <MapView
-                                        provider={PROVIDER_GOOGLE}
-                                        style={styles.map}
-                                        initialRegion={{
-                                            latitude: parseFloat(this.props.navigation.state.params.latitude),
-                                            longitude: parseFloat(this.props.navigation.state.params.longitude),
-                                            latitudeDelta: 0.01,
-                                            longitudeDelta: 0.01,
-                                        }}
-                                    >
-                                        <MapView.Marker coordinate={{
-                                            latitude: parseFloat(this.props.navigation.state.params.latitude),
-                                            longitude: parseFloat(this.props.navigation.state.params.longitude),
-                                        }}
-                                        />
-                                    </MapView>
-                                </View>
-                                : null
-                            }
-
-                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 20, paddingTop: 10 }}>
-                                <Icons
-                                    name="access-time"
-                                    size={15}
-                                    color='black'
-                                    style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
-                                />
-                                <Text style={[styles.view, { paddingBottom: DeviceInfo.getModel() == 'iPhone X' ? 25 : 0 }]}>
-                                    {this.props.navigation.state.params.date}
-                                </Text>
+                                <MapView
+                                    provider={PROVIDER_GOOGLE}
+                                    style={styles.map}
+                                    initialRegion={{
+                                        latitude: parseFloat(this.props.navigation.state.params.latitude),
+                                        longitude: parseFloat(this.props.navigation.state.params.longitude),
+                                        latitudeDelta: 0.01,
+                                        longitudeDelta: 0.01,
+                                    }}
+                                >
+                                    <MapView.Marker coordinate={{
+                                        latitude: parseFloat(this.props.navigation.state.params.latitude),
+                                        longitude: parseFloat(this.props.navigation.state.params.longitude),
+                                    }}
+                                    />
+                                </MapView>
                             </View>
+                            : null
+                        }
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 10, paddingBottom: Platform.OS == 'ios' ? 20 : 40 }}>
+                            <Icons
+                                name="access-time"
+                                size={15}
+                                color='black'
+                                style={{ paddingTop: Platform.OS == 'ios' ? 1 : 3, paddingRight: 2 }}
+                            />
+                            <Text style={[styles.date, { paddingBottom: DeviceInfo.getModel() == 'iPhone X' ? 40 : 0 }]}>
+                                {this.props.navigation.state.params.date}
+                            </Text>
                         </View>
 
                     </ScrollView>
@@ -339,7 +380,6 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
-        width: width - 120,
         paddingLeft: 10,
     },
     price: {
@@ -347,7 +387,6 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         color: '#ff0000',
         textAlign: 'left',
-        width: width - 140,
         paddingLeft: 10,
     },
     date: {
@@ -378,8 +417,16 @@ const styles = StyleSheet.create({
     },
     map: {
         height: 200,
-        width: width,
-    }
+        width: width - 10,
+        alignSelf: 'center'
+    },
+    for: {
+        fontSize: 14,
+        fontWeight: 'normal',
+        color: '#28a428',
+        textAlign: 'left',
+        paddingLeft: 10,
+    },
 });
 
 const styless = StyleSheet.create({

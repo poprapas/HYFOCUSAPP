@@ -49,38 +49,47 @@ export default class Favorite extends Component {
             alignSelf: 'center',
         },
         headerRight:
-            <TouchableOpacity
-                onPress={() =>
-                    Alert.alert(
-                        'บุ๊คมาร์ค',
-                        'ลบข่าวที่บันทึกไว้ทั้งหมด?',
-                        [
-                            {
-                                text: 'ยืนยัน', onPress: () => {
-                                    utils.clearFavorite()
-                                    navigation.goBack()
-                                }
-                            },
-                            { text: 'ยกเลิก', onPress: () => null, style: 'cancel' }
-                        ]
-                    )
-                }
-            >
-                <EvilIcons
-                    name="trash"
-                    size={29}
-                    color='white'
-                    style={{
-                        paddingHorizontal: 10
-                    }}
-                />
-            </TouchableOpacity>,
+            <View>
+                {navigation.state.params.isEmpty ?
+                    <TouchableOpacity
+                        onPress={() =>
+                            Alert.alert(
+                                'บุ๊คมาร์ค',
+                                'ลบข่าวที่บันทึกไว้ทั้งหมด?',
+                                [
+                                    {
+                                        text: 'ยืนยัน', onPress: () => {
+                                            utils.clearFavorite()
+                                            global.sidemenu.setState({
+                                                currentpage: 'หน้าแรก'
+                                            })
+                                            navigation.navigate('หน้าแรก')
+                                        }
+                                    },
+                                    { text: 'ยกเลิก', onPress: () => null, style: 'cancel' }
+                                ]
+                            )
+                        }
+                    >
+                        <EvilIcons
+                            name="trash"
+                            size={30}
+                            color={'white'}
+                            style={{
+                                paddingHorizontal: 10,
+                                alignSelf: 'center',
+                                marginTop: 2,
+                            }}
+                        />
+                    </TouchableOpacity> : null}
+            </View>
+        ,
         headerLeft:
             <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
                 <Ionicons
                     name="md-menu"
                     size={30}
-                    color='white'
+                    color={'#fff'}
                     style={{
                         paddingHorizontal: 10
                     }}
@@ -152,15 +161,23 @@ export default class Favorite extends Component {
             <View style={styles.container}>
 
                 {this.state.d.length == 0 ?
-                    <Text style={{
-                        alignSelf: 'center',
-                        fontSize: 18,
-                        top: 15,
-                        color: 'white'
-                    }}>
-                        --- ไม่มีข่าวที่บันทึกไว้ ---
-                    </Text> :
-
+                    <View>
+                        <Text style={{
+                            alignSelf: 'center',
+                            fontSize: 18,
+                            marginVertical: 15,
+                            color: 'white'
+                        }}>
+                            --- ไม่มีข่าวที่บันทึกไว้ ---
+                    </Text>
+                        <Image source={require('./assets/images/newspaper.png')}
+                            style={{
+                                width: 70,
+                                height: 70,
+                                alignSelf: 'center'
+                            }} />
+                    </View>
+                    :
                     <FlatList
                         data={this.state.d}
                         keyExtractor={(item, index) => index}
@@ -212,9 +229,11 @@ export default class Favorite extends Component {
                                             </View>
                                             <Image source={{ uri: item.FEATURE }}
                                                 style={{
+                                                    height: (width - 10) * 0.525,
+                                                    resizeMode: 'contain',
                                                     width: width - 10,
-                                                    height: (width - 10) * 0.625,
                                                     borderRadius: 10,
+                                                    overflow: 'hidden',
                                                 }}
                                             />
                                             <View style={{ paddingTop: 5 }}>
