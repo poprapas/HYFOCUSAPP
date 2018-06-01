@@ -148,7 +148,7 @@ export default class NewDetail extends Component {
             }
             else {
                 const a = node.children[0].attribs;
-                //console.log(a)
+                console.log(a)
                 return (
                     // Platform.OS == 'ios' ?
                     <View
@@ -159,8 +159,8 @@ export default class NewDetail extends Component {
                             width: a.height <= a.width ? width - 10 : width - 30,
                             height:
                                 a.height <= a.width ? ((width - 10) * a.height / a.width) :
-                                    //a.width <= '270' && a.height == '476' ? (width - 30) * a.width / a.height :    // bug video facebook
-                                    (width - 30) * a.height / a.width
+                                    // a.width <= '270' && a.height == '476' ? (width - 30) * a.width / a.height :    // bug video facebook
+                                        (width - 30) * a.height / a.width
 
                         }}>
                         <WebView
@@ -265,6 +265,7 @@ export default class NewDetail extends Component {
                 );
             }
             else {
+                console.log(a)
                 return (
                     <View
                         key={index}
@@ -356,6 +357,7 @@ export default class NewDetail extends Component {
                 );
             }
             else {
+                console.log(a)
                 return (
                     <View
                         key={index}

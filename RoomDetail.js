@@ -101,7 +101,7 @@ export default class RoomDetail extends Component {
 
     renderNode(node, index, siblings, parent, defaultRenderer) {
         if (node.name == 'p' && node.children && node.children["0"] && node.children["0"].children && node.children["0"].children["0"] && node.children["0"].children["0"].name == 'iframe') {
-            console.log(node)
+            //console.log(node)
             let a = node.children["0"].children["0"].attribs
             if (a.src.slice(0, 2) == '//') {
                 a.src = 'https:' + a.src

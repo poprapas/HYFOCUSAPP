@@ -124,31 +124,31 @@ export default class Home extends Component {
             },
             popInitialNotification: true,
             requestPermissions: true,
-            // onNotification(notification) {
-            //     console.log('NOTIFICATION:', notification);
-            //     alert(notification.message)
-            //     //notification.finish(PushNotificationIOS.FetchResult.NoData);
-            // }
         });
-        let notificationTime = new Date();
-        //AsyncStorage.clear()
-        // PushNotification.localNotificationSchedule({
-        //     date: new Date(Date.now() + 5000),
-        //     message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
-        //     foreground: true,
-        // });
-        AsyncStorage.getItem('notificationDate').then((date) => {
-            if (date == null || notificationTime.toISOString().slice(0, 10) != date) {
-                notificationTime.setHours(18);
-                notificationTime.setMinutes(0);
-                notificationTime.setSeconds(0);
-                notificationTime.setMilliseconds(0);
-                PushNotification.localNotificationSchedule({
-                    date: new Date(notificationTime),
-                    message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
-                    foreground: true,
-                });
-                AsyncStorage.setItem('notificationDate', notificationTime.toISOString().slice(0, 10))
+        // AsyncStorage.clear()
+        AsyncStorage.getItem('notification').then((data) => {
+            if (data == null || data == 'true') {
+                //console.log(data)
+                let notificationTime = new Date();
+                // PushNotification.localNotificationSchedule({
+                //     date: new Date(Date.now() + 5000),
+                //     message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
+                //     foreground: true,
+                // });
+                AsyncStorage.getItem('notificationDate').then((date) => {
+                    if (date == null || notificationTime.toISOString().slice(0, 10) != date) {
+                        notificationTime.setHours(18);
+                        notificationTime.setMinutes(0);
+                        notificationTime.setSeconds(0);
+                        notificationTime.setMilliseconds(0);
+                        PushNotification.localNotificationSchedule({
+                            date: new Date(notificationTime),
+                            message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
+                            foreground: true,
+                        });
+                        AsyncStorage.setItem('notificationDate', notificationTime.toISOString().slice(0, 10))
+                    }
+                })
             }
         })
     }
@@ -198,7 +198,7 @@ export default class Home extends Component {
         BackHandler.addEventListener('hardwareBackPress', function () {
             //alert(global.ishome)
             if (Platform.OS == 'android' && global.ishome) {
-                console.log(_this.state.checkback)
+                //console.log(_this.state.checkback)
                 //alert('อะไรก้ได้')
                 if (_this.state.checkback) {
                     BackHandler.exitApp()

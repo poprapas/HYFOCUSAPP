@@ -82,7 +82,7 @@ export default class New extends Component {
             isLoading: true,
             isLoadingMore: false,
             _data: null,
-            _dataAfter: "",
+            _dataAfter: null,
             start: 0,
             end: false,
             refreshing: false,
@@ -115,7 +115,7 @@ export default class New extends Component {
                     })
                 }
                 else {
-                    console.log(responseJson)
+                    //console.log(responseJson)
                     const data = this.state._data.concat(responseJson);
                     if (this.state.isMounted) {
                         this.setState({
@@ -158,7 +158,7 @@ export default class New extends Component {
             let ds = new ListView.DataSource({
                 rowHasChanged: (r1, r2) => r1 !== r2,
             });
-            console.log(responseJson)
+            //console.log(responseJson)
             const data = responseJson;
             AsyncStorage.getItem('fav').then((d) => {
                 if (!d) { d = '[]' }
