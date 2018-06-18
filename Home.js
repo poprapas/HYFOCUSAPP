@@ -18,21 +18,16 @@ import {
     AsyncStorage,
     TouchableWithoutFeedback,
     BackHandler,
-    Timers,
     ToastAndroid
 } from 'react-native';
 
 
 import Color from 'react-native-material-color';
-import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import DrawerLayout from 'react-native-drawer-layout';
-import Button from 'react-native-button';
-import SideMenu from "./SideMenu";
 import Carousel from 'react-native-looped-carousel';
 import PushNotification from 'react-native-push-notification';
-import Toast, { DURATION } from 'react-native-easy-toast'
+import Toast from 'react-native-easy-toast'
 import * as utils from './Util'
 
 
@@ -283,6 +278,21 @@ export default class Home extends Component {
         }
     }
 
+    gotoURL(key) {
+        if (this.state.slide[key].URL.slice(0, 34) == 'https://www.hatyaifocus.com/บทความ') {
+            Linking.openURL(this.state.slide[key].URL)
+        }
+        if (this.state.slide[key].URL.slice(0, 30) == 'https://www.hatyaifocus.com///') {
+            Linking.openURL('https://' + this.state.slide[key].URL.slice(30))
+        }
+        if (this.state.slide[key].URL.slice(0, 33) == 'https://www.hatyaifocus.com/https') {
+            Linking.openURL('https://' + this.state.slide[key].URL.slice(36))
+        }
+        // else {
+        //     Linking.openURL(this.state.slide[key].URL)
+        // }
+    }
+
     render() {
 
         if (this.state.isLoading || this.state.refreshing) {
@@ -430,7 +440,7 @@ export default class Home extends Component {
                                                 backgroundColor: 'white',
                                                 width: width - 10,
                                             }}>
-                                            <TouchableWithoutFeedback onPress={() => Linking.openURL(this.state.slide[key].URL)} >
+                                            <TouchableWithoutFeedback onPress={() => this.gotoURL(key)} >
                                                 <Image
                                                     source={{ uri: this.state.slide[key].FEATURE }}
                                                     style={styles.advt_1}

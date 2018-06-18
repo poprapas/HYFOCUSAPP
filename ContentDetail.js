@@ -184,7 +184,7 @@ export default class ContentDetail extends Component {
                     <View key={index}
                         style={{
                             width: width,
-                            height: 230,
+                            height: 260,
                             marginLeft: -20,
                             paddingBottom: 10,
                             alignSelf: 'center',
@@ -273,7 +273,7 @@ export default class ContentDetail extends Component {
                     <View key={index}
                         style={{
                             width: width,
-                            height: 230,
+                            height: 260,
                             marginLeft: -20,
                             paddingBottom: 10,
                             alignSelf: 'center',
@@ -371,7 +371,7 @@ export default class ContentDetail extends Component {
                     <View key={index}
                         style={{
                             width: width,
-                            height: 230,
+                            height: 260,
                             marginLeft: -20,
                             paddingBottom: 10,
                             alignSelf: 'center',
