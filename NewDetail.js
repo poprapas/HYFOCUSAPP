@@ -160,7 +160,7 @@ export default class NewDetail extends Component {
                             height:
                                 a.height <= a.width ? ((width - 10) * a.height / a.width) :
                                     // a.width <= '270' && a.height == '476' ? (width - 30) * a.width / a.height :    // bug video facebook
-                                        (width - 30) * a.height / a.width
+                                    (width - 30) * a.height / a.width
 
                         }}>
                         <WebView
@@ -534,9 +534,6 @@ export default class NewDetail extends Component {
                             value={descript.replace(/\r\n\t/g, '').replace(/<p>&nbsp;<\/p>/g, '')}
                             renderNode={this.renderNode}
                             stylesheet={styless}
-                            textComponentProps={{ style: { color: '#fff' } }}
-                            style={{ flex: 1 }}
-
                         />
 
                         <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingTop: 40 }}>
@@ -597,7 +594,6 @@ const styles = StyleSheet.create({
     },
     view: {
         fontSize: 14,
-        fontWeight: 'normal',
         color: 'white',
         textAlign: 'right',
         fontFamily: 'Times New Roman',
@@ -605,7 +601,6 @@ const styles = StyleSheet.create({
     },
     star: {
         fontSize: 16,
-        fontWeight: 'normal',
         color: 'white',
         textAlign: 'right',
         fontFamily: 'Times New Roman',
@@ -616,13 +611,11 @@ const styles = StyleSheet.create({
 const styless = StyleSheet.create({
     p: {
         fontSize: 18,
-        fontWeight: 'normal',
         color: 'white',
-        textAlign: 'left',
         fontFamily: 'Times New Roman',
         paddingHorizontal: 5,
-        lineHeight: 28,
-        marginBottom: Platform.OS == 'ios' ? -35 : -25,
+        // lineHeight: 28,
+        // marginBottom: Platform.OS == 'ios' ? -35 : -25,
     },
     a: {
         fontSize: 18,
@@ -630,7 +623,7 @@ const styless = StyleSheet.create({
         color: '#ffd633',
         textAlign: 'left',
         fontFamily: 'Times New Roman',
-        textDecorationLine: 'underline'
+        textDecorationLine: 'underline',
     },
     br: {
         height: 2

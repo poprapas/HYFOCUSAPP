@@ -221,6 +221,7 @@ export default class ContentDetail extends Component {
                             width: width - 10,
                             height: (width - 10) * 0.5625,
                             alignSelf: 'center',
+                            marginBottom: 10
                         }}
                     />
                 );
@@ -654,8 +655,8 @@ const styless = StyleSheet.create({
         textAlign: 'left',
         fontFamily: 'Times New Roman',
         paddingHorizontal: 5,
-        lineHeight: Platform.OS == 'ios' ? 28 : 35,
-        marginBottom: Platform.OS == 'ios' ? -35 : -25
+        //lineHeight: Platform.OS == 'ios' ? 28 : 35,
+        //marginBottom: Platform.OS == 'ios' ? -35 : -25
     },
     a: {
         fontSize: 18,
