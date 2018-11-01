@@ -27,7 +27,7 @@ export default class Favorite extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+            <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
                 <MaterialIcons
                     name="star"
                     size={20}
@@ -45,9 +45,6 @@ export default class Favorite extends Component {
                 }}> บุ๊คมาร์ค
             </Text>
             </View>,
-        headerTitleStyle: {
-            alignSelf: 'center',
-        },
         headerRight:
             <View>
                 {navigation.state.params.isEmpty ?

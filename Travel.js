@@ -22,13 +22,13 @@ export default class Story extends Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-            tabBarOnPress: ({ jumpToIndex, scene }) => {
-                // now we have access to Component methods
-                navigation.state.params.onTabFocus();
-                jumpToIndex(scene.index);
-            },
+            // tabBarOnPress: ({ jumpToIndex, scene }) => {
+            //     // now we have access to Component methods
+            //     navigation.state.params.onTabFocus();
+            //     jumpToIndex(scene.index);
+            // },
             headerTitle:
-                <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
                     <Image
                         source={require('./assets/images/travel-icon.png')}
                         style={{
@@ -45,9 +45,6 @@ export default class Story extends Component {
                         paddingTop: Platform.OS == 'ios' ? 9 : 5,
                     }}> เที่ยวหาดใหญ่</Text>
                 </View>,
-            headerTitleStyle: {
-                alignSelf: 'center',
-            },
             headerRight:
                 <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
                     <Ionicons
@@ -178,20 +175,6 @@ export default class Story extends Component {
         if (this.state.isLoading || this.state.refreshing) {
             return (
                 <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
-
-                    {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-                        <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-                            <Image source={require('./assets/images/banner2.jpg')}
-                                style={styles.logo} />
-                        </TouchableOpacity>
-
-                        <View style={{ flex: 1 }}>
-                            <Text style={styles.travelfont}> ---- Travel ---- </Text>
-                        </View>
-
-                    </View> */}
-
                     <ActivityIndicator
                         style={{ paddingTop: 20 }}
                         color='#cc9966' />
@@ -201,20 +184,6 @@ export default class Story extends Component {
 
         return (
             <View style={styles.container}>
-
-                {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-                    <TouchableOpacity onPress={() => navigate('หน้าแรก')}>
-                        <Image source={require('./assets/images/banner2.jpg')}
-                            style={styles.logo} />
-                    </TouchableOpacity>
-
-                    <View style={{ flex: 1 }}>
-                        <Text style={styles.travelfont}> ---- Travel ---- </Text>
-                    </View>
-
-                </View> */}
-
                 <ListView
                     refreshControl={
                         <RefreshControl
@@ -290,8 +259,6 @@ export default class Story extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //justifyContent: 'center',
-        //alignItems: 'center',
         backgroundColor: Color.BROWN[800],
     },
     logo: {

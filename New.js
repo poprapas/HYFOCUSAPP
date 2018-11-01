@@ -28,7 +28,7 @@ export default class New extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+            <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
                 <FontAwesome
                     name="newspaper-o"
                     size={18}
@@ -46,9 +46,6 @@ export default class New extends Component {
                 }}> {navigation.state.params.topic}
                 </Text>
             </View>,
-        headerTitleStyle: {
-            alignSelf: 'center',
-        },
         headerRight:
             <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
                 <Ionicons

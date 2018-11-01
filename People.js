@@ -24,7 +24,7 @@ export default class People extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+            <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
                 <Image
                     source={require('./assets/images/people-icon.png')}
                     style={{
@@ -42,9 +42,6 @@ export default class People extends Component {
                 }}> คนหาดใหญ่
             </Text>
             </View>,
-        headerTitleStyle: {
-            alignSelf: 'center',
-        },
         headerRight:
             <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
                 <Ionicons
@@ -66,7 +63,7 @@ export default class People extends Component {
                         paddingHorizontal: 10
                     }}
                 />
-            </TouchableOpacity> 
+            </TouchableOpacity>
     })
 
     constructor(props) {

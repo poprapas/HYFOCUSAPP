@@ -18,7 +18,6 @@ import {
 import Color from 'react-native-material-color';
 import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-//import Button from 'react-native-button';
 
 const { width, height } = Dimensions.get("window");
 
@@ -26,13 +25,13 @@ export default class Jobs extends Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-            tabBarOnPress: ({ jumpToIndex, scene }) => {
-                // now we have access to Component methods
-                navigation.state.params.onTabFocus();
-                jumpToIndex(scene.index);
-            },
+            // tabBarOnPress: ({ jumpToIndex, scene }) => {
+            //     // now we have access to Component methods
+            //     navigation.state.params.onTabFocus();
+            //     jumpToIndex(scene.index);
+            // },
             headerTitle:
-                <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
                     <Image
                         source={require('./assets/images/work-icon.png')}
                         style={{
@@ -49,9 +48,6 @@ export default class Jobs extends Component {
                         paddingTop: Platform.OS == 'ios' ? 9 : 5,
                     }}> หางานหาดใหญ่</Text>
                 </View>,
-            headerTitleStyle: {
-                alignSelf: 'center',
-            },
             headerRight:
                 <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
                     <Ionicons
@@ -205,16 +201,22 @@ export default class Jobs extends Component {
                 <View style={{ flex: 1, backgroundColor: Color.BROWN[800] }}>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={styles.search}>
-                            <Icon
-                                name='search'
-                                color='black'
-                                size={20}
-                            />
 
-                            <View style={{ flexDirection: 'column' }}>
+                            <View style={{
+                                alignSelf: 'center',
+                                paddingLeft: Platform.OS == 'ios' ? 0 : 10,
+                            }}>
+                                <Icon
+                                    name='search'
+                                    color='black'
+                                    size={20}
+                                />
+                            </View>
+
+                            <View style={{ flexDirection: 'column', paddingLeft: 5 }}>
                                 <TextInput
                                     style={styles.searchInput}
-                                    placeholder=' ค้นหาตำแหน่ง...'
+                                    placeholder='ค้นหาตำแหน่ง...'
                                     placeholderTextColor='#686868'
                                     underlineColorAndroid="transparent"
                                     value={this.state.find}
@@ -244,12 +246,10 @@ export default class Jobs extends Component {
                                 marginRight: 5,
                                 borderRadius: 10,
                                 backgroundColor: 'black',
-                                overflow: 'hidden'
+                                overflow: 'hidden',
                             }}
                         >
-                            <Text style={styles.button}>
-                                ค้นหา
-            </Text>
+                            <Text style={styles.button}>ค้นหา</Text>
                         </TouchableOpacity>
 
                     </View>
@@ -455,7 +455,7 @@ const styles = StyleSheet.create({
     search: {
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        padding: Platform.OS == 'ios' ? 10 : 0,
+        paddingHorizontal: Platform.OS == 'ios' ? 10 : 0,
         margin: 5,
         borderWidth: 1,
         borderColor: 'black',
@@ -468,9 +468,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'black',
         padding: 0,
-        width: width - 120,
-        //borderWidth: 1,
-        flex: 1
+        width: width - 140,
+        flex: 1,
     },
     listView: {
         paddingTop: 2,

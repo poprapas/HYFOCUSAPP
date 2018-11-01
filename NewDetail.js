@@ -28,7 +28,6 @@ import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
 import Toast, { DURATION } from 'react-native-easy-toast';
 import DeviceInfo from 'react-native-device-info';
 import Lightbox from 'react-native-lightbox';
-//import WebViews from 'react-native-android-fullscreen-webview-video';
 
 const { width, height } = Dimensions.get("window");
 let ref = null
@@ -37,6 +36,7 @@ export default class NewDetail extends Component {
 
     componentDidMount() {
         global.ishome = false
+        console.log(DeviceInfo.getModel())
     }
 
     componentWillUnmount() {
@@ -47,7 +47,7 @@ export default class NewDetail extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+            <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
                 <FontAwesome
                     name="newspaper-o"
                     size={18}
@@ -65,9 +65,6 @@ export default class NewDetail extends Component {
                 }}> {navigation.state.params.type}
                 </Text>
             </View>,
-        headerTitleStyle: {
-            alignSelf: 'center',
-        },
         headerRight:
             <TouchableOpacity onPress={() =>
                 Platform.OS == 'ios' ?
@@ -150,7 +147,6 @@ export default class NewDetail extends Component {
                 const a = node.children[0].attribs;
                 console.log(a)
                 return (
-                    // Platform.OS == 'ios' ?
                     <View
                         key={index}
                         style={{
@@ -159,7 +155,6 @@ export default class NewDetail extends Component {
                             width: a.height <= a.width ? width - 10 : width - 30,
                             height:
                                 a.height <= a.width ? ((width - 10) * a.height / a.width) :
-                                    // a.width <= '270' && a.height == '476' ? (width - 30) * a.width / a.height :    // bug video facebook
                                     (width - 30) * a.height / a.width
 
                         }}>
@@ -176,22 +171,6 @@ export default class NewDetail extends Component {
                             }}
                         />
                     </View>
-                    // <View
-                    //     key={index}
-                    //     style={{
-                    //         alignSelf: 'center',
-                    //         backgroundColor: 'transparent',
-                    //         width: a.height <= a.width ? width - 10 : width - 30,
-                    //         height:
-                    //             a.width == '264' && a.height == '476' ? (width - 30) * width / height :
-                    //                 a.width == '500' && a.height == '600' ? (width - 30) * height / width :
-                    //                     a.height <= a.width ? ((width - 10) * a.height / a.width) :
-                    //                         (width - 30) * a.height / a.width
-                    //     }}>
-                    //     <WebViews
-                    //         source={{ uri: a.src }}
-                    //     />
-                    // </View>
                 );
             }
         }
@@ -381,33 +360,6 @@ export default class NewDetail extends Component {
                 );
             }
         }
-        // else if (node.name == 'br' && node.children[0] && node.children[0].name == 'iframe' ) {
-        //     const a = node.children[0].attribs
-        //     return (
-        //         <View
-        //             key={index}
-        //             style={{
-        //                 justifyContent: 'center',
-        //                 alignItems: 'center',
-        //                 alignSelf: 'center',
-        //                 backgroundColor: 'transparent',
-        //                 width: width - 10,
-        //                 height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width
-        //             }}>
-        //             <WebView
-        //                 bounces={false}
-        //                 scrollEnabled={false}
-        //                 source={{
-        //                     uri: a.src
-        //                 }}
-        //                 style={{
-        //                     width: a.height <= a.width ? width - 10 : width - 100,
-        //                     height: a.height <= a.width ? ((width - 10) * a.height / a.width) : (width - 100) * a.height / a.width,
-        //                 }}
-        //             />
-        //         </View>
-        //     )
-        // }
         else if (node.name == 'br') {
             return null
         }
@@ -489,12 +441,6 @@ export default class NewDetail extends Component {
                 </Text>
             )
         }
-
-        // else if(node.name == 'strong' && node.parent && node.parent.name == 'p' && node.parent.parent && node.parent.parent.name == 'div'){
-        //     console.log('+++++',node.children)
-        //     return null
-        // }
-
     }
 
     render() {
@@ -536,7 +482,7 @@ export default class NewDetail extends Component {
                             stylesheet={styless}
                         />
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingTop: 40 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingTop: 20, }}>
                             <Icon
                                 name="eye"
                                 size={15}
@@ -548,14 +494,14 @@ export default class NewDetail extends Component {
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: DeviceInfo.getModel() == 'iPhone X' || DeviceInfo.getModel() == 'iPhone XS' || DeviceInfo.getModel() == 'iPhone XS Max' ? 40 : 0 }}>
                             <Icons
                                 name="access-time"
                                 size={15}
                                 color='white'
                                 style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
                             />
-                            <Text style={[styles.view, { paddingBottom: DeviceInfo.getModel() == 'iPhone X' ? 40 : 0 }]}>
+                            <Text style={styles.view}>
                                 {this.props.navigation.state.params.date}
                             </Text>
                         </View>
@@ -571,8 +517,6 @@ export default class NewDetail extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //justifyContent: 'center',
-        //alignItems: 'center',
         backgroundColor: Color.BROWN[500],
     },
     logo: {
@@ -614,8 +558,6 @@ const styless = StyleSheet.create({
         color: 'white',
         fontFamily: 'Times New Roman',
         paddingHorizontal: 5,
-        // lineHeight: 28,
-        // marginBottom: Platform.OS == 'ios' ? -35 : -25,
     },
     a: {
         fontSize: 18,

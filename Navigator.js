@@ -77,12 +77,14 @@ export default AppNavigator = TabNavigator({
                 indicatorStyle: { backgroundColor: '#ffffff' },
                 style: {
                     backgroundColor: 'black'
-                    
+
                 }
             }
                 :
-                {style: { backgroundColor: 'black' },
-                activeTintColor: 'white',
-                inactiveTintColor: '#a0a0a0',}
+                {
+                    style: { backgroundColor: 'black', },
+                    activeTintColor: 'white',
+                    inactiveTintColor: '#a0a0a0',
+                }
     });
 

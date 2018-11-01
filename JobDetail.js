@@ -30,7 +30,7 @@ export default class JobDetail extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+            <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
                 <Image
                     source={require('./assets/images/work-icon.png')}
                     style={{
@@ -48,9 +48,6 @@ export default class JobDetail extends Component {
                 }}> หางานหาดใหญ่
             </Text>
             </View>,
-        headerTitleStyle: {
-            alignSelf: 'center',
-        },
         headerRight:
             <TouchableOpacity onPress={() => Platform.OS == 'ios' ?
                 fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + navigation.state.params.url)
@@ -262,14 +259,13 @@ export default class JobDetail extends Component {
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: DeviceInfo.getModel() == 'iPhone X' || Platform.OS == 'android' ? 20 : 0 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: DeviceInfo.getModel() == 'iPhone X' || DeviceInfo.getModel() == 'iPhone XS' || DeviceInfo.getModel() == 'iPhone XS Max' || Platform.OS == 'android' ? 30 : 0 }}>
                             <Icons
                                 name="access-time"
                                 size={15}
                                 color='black'
                                 style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
                             />
-                            {/* {console.log(this.props.navigation.state.params.date)} */}
                             <Text style={styles.view}>
                                 {this.props.navigation.state.params.date}
                             </Text>

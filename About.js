@@ -21,7 +21,7 @@ export default class About extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+            <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
                 <Image
                     source={require('./assets/images/about-icon.png')}
                     style={{
@@ -39,9 +39,6 @@ export default class About extends Component {
                 }}> เกี่ยวกับเรา
             </Text>
             </View>,
-        headerTitleStyle: {
-            alignSelf: 'center',
-        },
         headerRight:
             <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
                 <Ionicons

@@ -23,7 +23,7 @@ export default class Event extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+            <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
                 <Foundation
                     name="megaphone"
                     size={20}
@@ -41,9 +41,6 @@ export default class Event extends Component {
                 }}> ไปหม้ายโหม๋เรา
             </Text>
             </View>,
-        headerTitleStyle: {
-            alignSelf: 'center',
-        },
         headerRight:
             <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
                 <Ionicons

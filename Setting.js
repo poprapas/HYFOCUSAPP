@@ -21,7 +21,7 @@ export default class Setting extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+            <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
                 <MaterialIcons
                     name="settings"
                     size={20}
@@ -39,9 +39,6 @@ export default class Setting extends Component {
                 }}> ตั้งค่า
             </Text>
             </View>,
-        headerTitleStyle: {
-            alignSelf: 'center',
-        },
         headerRight:
             <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
                 <Ionicons

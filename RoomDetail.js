@@ -37,7 +37,7 @@ export default class RoomDetail extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+            <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
                 <Image
                     source={require('./assets/images/hotel-icon.png')}
                     style={{
@@ -55,9 +55,6 @@ export default class RoomDetail extends Component {
                 }}> ที่พักหาดใหญ่
             </Text>
             </View>,
-        headerTitleStyle: {
-            alignSelf: 'center',
-        },
         headerRight:
             <TouchableOpacity onPress={() => Platform.OS == 'ios' ?
                 fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + navigation.state.params.url)
@@ -114,6 +111,8 @@ export default class RoomDetail extends Component {
                             width: width - 25,
                             height: (width - 25) * 0.5625,
                             alignSelf: 'center',
+                            marginLeft: -5,
+                            backgroundColor: 'transparent'
                         }}>
                         <WebView
                             bounces={false}
@@ -308,14 +307,18 @@ export default class RoomDetail extends Component {
                             : null
                         }
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 10, paddingBottom: Platform.OS == 'ios' ? 20 : 40 }}>
+                        <View style={{
+                            flexDirection: 'row', justifyContent: 'flex-end', padding: 10,
+                            paddingBottom: DeviceInfo.getModel() == 'iPhone X' || DeviceInfo.getModel() == 'iPhone XS' || DeviceInfo.getModel() == 'iPhone XS Max' ? 50 :
+                                Platform.OS == 'android' ? 40 : 20
+                        }}>
                             <Icons
                                 name="access-time"
                                 size={15}
                                 color='black'
                                 style={{ paddingTop: Platform.OS == 'ios' ? 1 : 3, paddingRight: 2 }}
                             />
-                            <Text style={[styles.date, { paddingBottom: DeviceInfo.getModel() == 'iPhone X' ? 40 : 0 }]}>
+                            <Text style={styles.date}>
                                 {this.props.navigation.state.params.date}
                             </Text>
                         </View>
@@ -358,7 +361,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: 'black',
-        textAlign: 'left',
+        textAlign: 'right',
         width: 140,
     },
     topic2: {

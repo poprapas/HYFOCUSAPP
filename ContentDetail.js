@@ -32,7 +32,7 @@ export default class ContentDetail extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+            <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
                 {navigation.state.params.cat == 1 ?
                     <Image
                         source={require('./assets/images/story-icon.png')}
@@ -112,9 +112,6 @@ export default class ContentDetail extends Component {
                 }}> {navigation.state.params.topic}
                 </Text>
             </View>,
-        headerTitleStyle: {
-            alignSelf: 'center',
-        },
         headerRight:
             <TouchableOpacity onPress={() => Platform.OS == 'ios' ?
                 fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + navigation.state.params.url)
@@ -168,8 +165,6 @@ export default class ContentDetail extends Component {
             const a = node.children[0].attribs;
             let latitude = parseFloat(a.src.slice(a.src.indexOf('!1d') + 3, a.src.indexOf('!2d'))).toFixed(6)
             let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
-            //console.log(parseFloat(a.src.slice(a.src.indexOf('!1d') + 3, a.src.indexOf('!2d'))).toFixed(6))
-            //console.log(parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6))
             if (a.src.slice(0, 2) == '//') {
                 a.src = 'https:' + a.src
             };
@@ -184,8 +179,8 @@ export default class ContentDetail extends Component {
                     <View key={index}
                         style={{
                             width: width,
-                            height: 260,
-                            marginLeft: -20,
+                            height: 270,
+                            marginLeft: -10,
                             paddingBottom: 10,
                             alignSelf: 'center',
                         }}
@@ -194,7 +189,7 @@ export default class ContentDetail extends Component {
                             style={{ alignSelf: 'flex-end' }}
                             onPress={() => Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + latitude + ',' + longitude : 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude)}
                         >
-                            <Text style={{ color: '#66b3ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
+                            <Text style={{ color: '#4da6ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
                         </TouchableOpacity>
 
                         <WebView
@@ -583,14 +578,14 @@ export default class ContentDetail extends Component {
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: 20 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingBottom: DeviceInfo.getModel() == 'iPhone X' || DeviceInfo.getModel() == 'iPhone XS' || DeviceInfo.getModel() == 'iPhone XS Max' ? 60 : 20 }}>
                             <Icons
                                 name="access-time"
                                 size={15}
                                 color='white'
                                 style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
                             />
-                            <Text style={[styles.view, { paddingBottom: DeviceInfo.getModel() == 'iPhone X' ? 40 : 0 }]}>
+                            <Text style={styles.view}>
                                 {this.props.navigation.state.params.date}
                             </Text>
                         </View>
@@ -607,8 +602,6 @@ export default class ContentDetail extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //justifyContent: 'center',
-        //alignItems: 'center',
         backgroundColor: Color.BROWN[500],
     },
     logo: {
@@ -655,8 +648,6 @@ const styless = StyleSheet.create({
         textAlign: 'left',
         fontFamily: 'Times New Roman',
         paddingHorizontal: 5,
-        //lineHeight: Platform.OS == 'ios' ? 28 : 35,
-        //marginBottom: Platform.OS == 'ios' ? -35 : -25
     },
     a: {
         fontSize: 18,

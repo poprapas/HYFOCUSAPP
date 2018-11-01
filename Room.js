@@ -23,13 +23,13 @@ export default class Room extends Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-            tabBarOnPress: ({ jumpToIndex, scene }) => {
-                // now we have access to Component methods
-                navigation.state.params.onTabFocus();
-                jumpToIndex(scene.index);
-            },
+            // tabBarOnPress: ({ jumpToIndex, scene }) => {
+            //     // now we have access to Component methods
+            //     navigation.state.params.onTabFocus();
+            //     jumpToIndex(scene.index);
+            // },
             headerTitle:
-                <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
                     <Image
                         source={require('./assets/images/hotel-icon.png')}
                         style={{
@@ -46,9 +46,6 @@ export default class Room extends Component {
                         paddingTop: Platform.OS == 'ios' ? 9 : 5,
                     }}> ที่พักหาดใหญ่</Text>
                 </View>,
-            headerTitleStyle: {
-                alignSelf: 'center',
-            },
             headerRight:
                 <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
                     <Ionicons

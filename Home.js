@@ -43,7 +43,7 @@ export default class Home extends Component {
                 jumpToIndex(scene.index);
             },
             headerTitle:
-                <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
                     <Image
                         source={require('./assets/images/home-icon.png')}
                         style={{
@@ -58,11 +58,9 @@ export default class Home extends Component {
                         fontSize: Platform.OS == 'ios' ? 18 : 15,
                         color: 'white',
                         paddingTop: Platform.OS == 'ios' ? 8 : 5,
+                        alignSelf: 'center',
                     }}> หน้าแรก</Text>
                 </View>,
-            headerTitleStyle: {
-                alignSelf: 'center',
-            },
             headerRight:
                 <TouchableOpacity onPress={() => Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/')}>
                     <Ionicons
@@ -70,7 +68,7 @@ export default class Home extends Component {
                         size={25}
                         color='white'
                         style={{
-                            paddingHorizontal: 10
+                            paddingHorizontal: 10,
                         }}
                     />
                 </TouchableOpacity>,
@@ -81,7 +79,7 @@ export default class Home extends Component {
                         size={30}
                         color='white'
                         style={{
-                            paddingHorizontal: 10
+                            paddingHorizontal: 10,
                         }}
                     />
                 </TouchableOpacity>
