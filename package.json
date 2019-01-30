@@ -8,13 +8,13 @@
         "postinstall": "sed -i '' 's/\\[headers\\[@\"Content-Length\"\\] unsignedIntValue\\]/\\[headers\\[@\"Content-Length\"\\] intValue\\]/' ./node_modules/react-native/React/Base/RCTMultipartStreamReader.m"
     },
     "dependencies": {
+        "@babel/runtime": "^7.1.2",
         "lottie-react-native": "^2.5.9",
         "native-base": "^2.8.1",
         "prop-types": "^15.6.2",
         "react": "16.0.0",
         "react-native": "0.55.4",
         "react-native-action-bar": "^2.0.5",
-        "react-native-android-fullscreen-webview-video": "^1.0.3",
         "react-native-button": "^2.3.0",
         "react-native-communications": "^2.2.1",
         "react-native-device-info": "^0.24.0",
@@ -35,7 +35,7 @@
         "react-native-swipeout": "^2.3.6",
         "react-native-swiper-flatlist": "^1.0.8",
         "react-native-switch": "^1.5.0",
-        "react-native-vector-icons": "^4.6.0",
+        "react-native-vector-icons": "^6.0.1",
         "react-navigation": "^1.6.1",
         "watchman": "^1.0.0"
     },

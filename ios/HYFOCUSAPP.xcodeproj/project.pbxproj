@@ -13,7 +13,6 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* HYFOCUSAPPTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HYFOCUSAPPTests.m */; };
-		04C943846D569EFB0D38D9D8 /* Pods_HYFOCUSAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC59399BA227CCFA4BA3B88 /* Pods_HYFOCUSAPP.framework */; };
 		056B402E4E0F48118BCB5CC4 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1E616F787E944078974119B /* MaterialIcons.ttf */; };
 		071C37FEC34647E4BEB8C8F4 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE557CE106BF485389B31623 /* Zocial.ttf */; };
 		120BBE725E1A45408A5A94DB /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC0A7A5C43EB46EC83EBD318 /* Foundation.ttf */; };
@@ -91,6 +90,7 @@
 		60793AC9FC644A1299E54100 /* bangna-new.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7219C209DA1E4984A9470686 /* bangna-new.ttf */; };
 		613DEFD6B965435484636ABB /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C1D05B714C37BAAC657C /* Foundation.ttf */; };
 		6D445F76B67649AD9B69A73E /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CFB2240136B4119B9FC8F9C /* Octicons.ttf */; };
+		750B45CE601F99C679298967 /* Pods_HYFOCUSAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC8D8299BA8A0DCE758F3832 /* Pods_HYFOCUSAPP.framework */; };
 		7E2E760A7F374A878BF199E0 /* thaisanslite.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 437E0DAB4BAF4527BC58DC3E /* thaisanslite.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8614815311C0483C8C7C5114 /* WDB_Bangna.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 026AFA667521409E9B917E45 /* WDB_Bangna.ttf */; };
@@ -292,6 +292,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 83CBBA2D1A601D0E00E9B192;
 			remoteInfo = React;
+		};
+		39C551CA218C0559006962AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EBF21BDC1FC498900052F4D5;
+			remoteInfo = jsinspector;
+		};
+		39C551CC218C0559006962AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EBF21BFA1FC4989A0052F4D5;
+			remoteInfo = "jsinspector-tvOS";
+		};
+		39C551D2218C0559006962AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8450F93BC2344D39A93607E3 /* RNVectorIcons.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A39873CE1EA65EE60051E01A;
+			remoteInfo = "RNVectorIcons-tvOS";
 		};
 		3DAD3E831DF850E9000B6D8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -556,7 +577,6 @@
 		B71B392310414256AE8F38BA /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		B98D580E2A2E46B0A430C06E /* libSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSplashScreen.a; sourceTree = "<group>"; };
 		BC0A7A5C43EB46EC83EBD318 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
-		BDC59399BA227CCFA4BA3B88 /* Pods_HYFOCUSAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HYFOCUSAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C15D609D66AC41EBAFA753C0 /* libRCTVideo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTVideo.a; sourceTree = "<group>"; };
 		C3103021DFE74E32B9865B5E /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		C35E82FCB449480688741568 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -565,6 +585,7 @@
 		DBB66633556F4E529962A2A3 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		DE557CE106BF485389B31623 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		E90E242073BC43A69F208B67 /* OFL.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = OFL.txt; path = "../node_modules/native-base/Fonts/OFL.txt"; sourceTree = "<group>"; };
+		EC8D8299BA8A0DCE758F3832 /* Pods_HYFOCUSAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HYFOCUSAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A5F73C8E18420CA9E9E5AD /* libRCTYouTube.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTYouTube.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -598,7 +619,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				16EE81B009B64998A700999F /* libSplashScreen.a in Frameworks */,
 				BEB92F015DE44BA4B1B96162 /* libRNVectorIcons.a in Frameworks */,
-				04C943846D569EFB0D38D9D8 /* Pods_HYFOCUSAPP.framework in Frameworks */,
+				750B45CE601F99C679298967 /* Pods_HYFOCUSAPP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,6 +752,8 @@
 				3DAD3EAB1DF850E9000B6D8A /* libcxxreact.a */,
 				3DAD3EAD1DF850E9000B6D8A /* libjschelpers.a */,
 				3DAD3EAF1DF850E9000B6D8A /* libjschelpers.a */,
+				39C551CB218C0559006962AD /* libjsinspector.a */,
+				39C551CD218C0559006962AD /* libjsinspector-tvOS.a */,
 				397696BE1FEA776300322018 /* libthird-party.a */,
 				397696C01FEA776300322018 /* libthird-party.a */,
 				397696C21FEA776300322018 /* libdouble-conversion.a */,
@@ -774,6 +797,7 @@
 			isa = PBXGroup;
 			children = (
 				3976966A1FEA42B500322018 /* libRNVectorIcons.a */,
+				39C551D3218C0559006962AD /* libRNVectorIcons-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -902,7 +926,7 @@
 		6450901295667CB0F79AC780 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BDC59399BA227CCFA4BA3B88 /* Pods_HYFOCUSAPP.framework */,
+				EC8D8299BA8A0DCE758F3832 /* Pods_HYFOCUSAPP.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1061,8 +1085,8 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				96359BBDF806E85A3103827B /* [CP] Embed Pods Frameworks */,
 				145DCE70A0F38B8331422426 /* [CP] Copy Pods Resources */,
+				D53972111EDE94AA2F8D1BFF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1396,6 +1420,27 @@
 			remoteRef = 3984729B20035C58004758A6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		39C551CB218C0559006962AD /* libjsinspector.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjsinspector.a;
+			remoteRef = 39C551CA218C0559006962AD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		39C551CD218C0559006962AD /* libjsinspector-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libjsinspector-tvOS.a";
+			remoteRef = 39C551CC218C0559006962AD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		39C551D3218C0559006962AD /* libRNVectorIcons-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRNVectorIcons-tvOS.a";
+			remoteRef = 39C551D2218C0559006962AD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1606,7 +1651,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-HYFOCUSAPP/Pods-HYFOCUSAPP-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-HYFOCUSAPP/Pods-HYFOCUSAPP-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1615,7 +1660,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HYFOCUSAPP/Pods-HYFOCUSAPP-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HYFOCUSAPP/Pods-HYFOCUSAPP-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
@@ -1631,28 +1676,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		96359BBDF806E85A3103827B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-HYFOCUSAPP/Pods-HYFOCUSAPP-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/React/React.framework",
-				"${BUILT_PRODUCTS_DIR}/react-native-maps/react_native_maps.framework",
-				"${BUILT_PRODUCTS_DIR}/yoga/yoga.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_maps.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HYFOCUSAPP/Pods-HYFOCUSAPP-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		A876932D740B68C3C0AFE573 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1670,6 +1693,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D53972111EDE94AA2F8D1BFF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HYFOCUSAPP/Pods-HYFOCUSAPP-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework",
+				"${BUILT_PRODUCTS_DIR}/Folly/folly.framework",
+				"${BUILT_PRODUCTS_DIR}/RNDeviceInfo/RNDeviceInfo.framework",
+				"${BUILT_PRODUCTS_DIR}/React/React.framework",
+				"${BUILT_PRODUCTS_DIR}/glog/glog.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-maps/react_native_maps.framework",
+				"${BUILT_PRODUCTS_DIR}/yoga/yoga.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoubleConversion.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/folly.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNDeviceInfo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_maps.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HYFOCUSAPP/Pods-HYFOCUSAPP-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1848,13 +1905,14 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
-					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/AirMaps/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/AirMaps/**",
 				);
 				INFOPLIST_FILE = HYFOCUSAPP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lc++",
@@ -1883,13 +1941,14 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
-					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/AirMaps/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/AirMaps/**",
 				);
 				INFOPLIST_FILE = HYFOCUSAPP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lc++",

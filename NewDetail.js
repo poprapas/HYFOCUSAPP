@@ -158,11 +158,15 @@ export default class NewDetail extends Component {
                                     (width - 30) * a.height / a.width
 
                         }}>
+                        {console.log(a.src)}
                         <WebView
                             bounces={false}
+                            useWebKit={true}
                             scrollEnabled={false}
                             source={{
                                 uri: a.src
+                                //uri: 'https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FKongphop.Sontaya%2Fvideos%2F494097110999827%2F&amp;show_text=0&amp;width=560'
+                                //uri: 'https://www.youtube.com/embed/IPV3rQtctkM'
                             }}
                             style={{
                                 width: a.height <= a.width ? width - 10 : width - 30,
