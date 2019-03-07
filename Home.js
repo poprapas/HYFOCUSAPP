@@ -409,48 +409,63 @@ export default class Home extends Component {
                         </View>
                         }
                     />
-                    <View style={{
-                        padding: 5,
-                        backgroundColor: 'white',
-                        marginTop: 20
-                    }}>
-                        <View style={{ height: width * 0.526 }}
-                            onLayout={this._onLayoutDidChange}
-                        >
-                            <Carousel
-                                delay={3000}
-                                style={this.state.size}
-                                autoplay
-                                bullets
-                                arrows
-                                arrowsContainerStyle={{
-                                    marginLeft: 5,
-                                    marginRight: 15,
-                                }}
-                                leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
-                                rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
-                            >
-                                {this.state.slide.map((prop, key) => {
-                                    return (
-                                        <View
-                                            key={key}
-                                            style={{
-                                                backgroundColor: 'white',
-                                                width: width - 10,
-                                            }}>
-                                            <TouchableWithoutFeedback onPress={() => this.gotoURL(key)} >
-                                                <Image
-                                                    source={{ uri: this.state.slide[key].FEATURE }}
-                                                    style={styles.advt_1}
-                                                />
-                                            </TouchableWithoutFeedback>
-                                        </View>
-                                    )
-                                })}
-
-                            </Carousel>
+                    {console.log(this.state.slide)}
+                    {this.state.slide.length == 1 ?
+                        <View style={{
+                            padding: 5,
+                            backgroundColor: 'white',
+                            marginTop: 20,
+                        }}>
+                            <TouchableWithoutFeedback onPress={() => this.gotoURL(0)} >
+                                <Image
+                                    source={{ uri: this.state.slide[0].FEATURE }}
+                                    style={styles.advt_1}
+                                />
+                            </TouchableWithoutFeedback>
                         </View>
-                    </View>
+                        : <View style={{
+                            padding: 5,
+                            backgroundColor: 'white',
+                            marginTop: 20
+                        }}>
+                            <View style={{ height: width * 0.526 }}
+                                onLayout={this._onLayoutDidChange}
+                            >
+                                <Carousel
+                                    delay={3000}
+                                    style={this.state.size}
+                                    autoplay
+                                    bullets
+                                    arrows
+                                    arrowsContainerStyle={{
+                                        marginLeft: 5,
+                                        marginRight: 15,
+                                    }}
+                                    leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
+                                    rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
+                                >
+                                    {this.state.slide.map((prop, key) => {
+                                        return (
+                                            <View
+                                                key={key}
+                                                style={{
+                                                    backgroundColor: 'white',
+                                                    width: width - 10,
+                                                }}>
+                                                {console.log(this.state.slide[key].FEATURE)}
+                                                <TouchableWithoutFeedback onPress={() => this.gotoURL(key)} >
+                                                    <Image
+                                                        source={{ uri: this.state.slide[key].FEATURE }}
+                                                        style={styles.advt_1}
+                                                    />
+                                                </TouchableWithoutFeedback>
+                                            </View>
+                                        )
+                                    })}
+
+                                </Carousel>
+                            </View>
+                        </View>}
 
                     <Image source={require('./assets/images/advt_4.jpg')}
                         style={styles.advt_4} />
@@ -518,7 +533,7 @@ const styles = StyleSheet.create({
     },
     advt_1: {
         height: width * 0.526,
-        width: width,
+        width: width - 10,
     },
     advt_4: {
         height: width * 0.1,
