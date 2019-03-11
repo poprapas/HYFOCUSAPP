@@ -59,6 +59,10 @@
 		<string>thaisanslite.ttf</string>
 		<string>WDB_Bangna.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
