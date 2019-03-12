@@ -9,8 +9,6 @@
     },
     "dependencies": {
         "@babel/runtime": "^7.1.2",
-        "lottie-react-native": "^2.5.9",
-        "native-base": "^2.8.1",
         "prop-types": "^15.6.2",
         "react": "16.0.0",
         "react-native": "0.55.4",
