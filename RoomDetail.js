@@ -18,7 +18,7 @@ import HTMLView from 'react-native-htmlview';
 import Carousel from 'react-native-looped-carousel';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icons from 'react-native-vector-icons/dist/MaterialIcons';
-// import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView from 'react-native-maps';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import DeviceInfo from 'react-native-device-info';
@@ -287,8 +287,8 @@ export default class RoomDetail extends Component {
                                     <Text style={{ color: '#1e90ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
                                 </TouchableOpacity>
 
-                                {/* <MapView
-                                    provider={PROVIDER_GOOGLE}
+                                <MapView
+                                    //provider={PROVIDER_GOOGLE}
                                     style={styles.map}
                                     initialRegion={{
                                         latitude: parseFloat(this.props.navigation.state.params.latitude),
@@ -302,8 +302,7 @@ export default class RoomDetail extends Component {
                                         longitude: parseFloat(this.props.navigation.state.params.longitude),
                                     }}
                                     />
-                                    ///เปลี่ยนไปใช้ webview
-                                </MapView> */}
+                                </MapView>
 
                             </View>
                             : null

@@ -175,7 +175,7 @@ export default class Room extends Component {
                     _dataAfter: responseJson.data,
                     start: 10,
                     refreshing: false,
-                });
+                }, () => console.log(this.state._data));
             }
         });
     }

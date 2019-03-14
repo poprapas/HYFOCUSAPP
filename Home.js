@@ -30,6 +30,8 @@ import PushNotification from 'react-native-push-notification';
 import Toast from 'react-native-easy-toast'
 import * as utils from './Util'
 
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 const { width, height } = Dimensions.get("window");
 
@@ -327,7 +329,7 @@ export default class Home extends Component {
                 >
                     <FlatList
                         data={this.state.dataSource}
-                        keyExtractor={(item, index) => index}
+                        keyExtractor={(item, index) => index.toString()}
                         extraData={this.state.update}
                         renderItem={({ item }) => <View style={styles.flatList}>
                             <TouchableOpacity
