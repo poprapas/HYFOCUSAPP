@@ -1,0 +1,44 @@
+# source 'https://github.com/CocoaPods/Specs.git'
+# install! 'cocoapods', :deterministic_uuids => false
+install! 'cocoapods', :deterministic_uuids => false
+platform :ios, '9.0'
+
+target 'HYFOCUSAPP' do
+    # use_frameworks!
+    pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga/yoga.podspec'
+    pod 'React', path: '../node_modules/react-native', :subspecs => [
+        'Core',
+        'CxxBridge',
+        'DevSupport',
+        'RCTActionSheet',
+        'RCTAnimation',
+        'RCTGeolocation',
+        'RCTImage',
+        'RCTLinkingIOS',
+        'RCTNetwork',
+        'RCTSettings',
+        'RCTText',
+        'RCTVibration',
+        'RCTWebSocket',
+    ]
+
+    pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+    pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+    pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+    pod 'react-native-google-maps', :path => '../node_modules/react-native-maps'
+    pod 'GoogleMaps'
+    pod 'Google-Maps-iOS-Utils'
+  
+    pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      if target.name == 'react-native-google-maps'
+        target.build_configurations.each do |config|
+          config.build_settings['CLANG_ENABLE_MODULES'] = 'No'
+        end
+      end
+    end
+  end

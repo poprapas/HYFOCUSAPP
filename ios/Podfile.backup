@@ -1,0 +1,106 @@
+# source 'https://github.com/CocoaPods/Specs.git'
+# install! 'cocoapods', :deterministic_uuids => false
+
+target 'HYFOCUSAPP' do
+  # use_frameworks!
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga/yoga.podspec'
+  pod 'React', path: '../node_modules/react-native', :subspecs => [
+  'Core',
+  'RCTActionSheet',
+  'RCTAnimation',
+  'RCTGeolocation',
+  'RCTImage',
+  'RCTLinkingIOS',
+  'RCTNetwork',
+  'RCTSettings',
+  'RCTText',
+  'RCTVibration',
+  'RCTWebSocket',
+  'DevSupport',
+  'CxxBridge'
+  ]
+  
+  pod 'GoogleMaps'
+  pod 'react-native-maps', :path => '../node_modules/react-native-maps'
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  # pod 'react-native-google-maps', :path => '../node_modules/react-native-maps'
+  # pod 'lottie-react-native', :path => '../node_modules/lottie-react-native'
+
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
+end
+
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
+use_frameworks!
+
+# post_install do |installer|
+#   installer.pods_project.targets.each do |target|
+#     if target.name == "react-native-google-maps"
+#       target.build_configurations.each do |config|
+#         config.build_settings['CLANG_ENABLE_MODULES'] = 'No'
+#       end
+#     end
+
+#     if target.name == "React"
+#       target.remove_from_project
+#     end
+#   end
+# end
+
+# post_install do |installer|
+#     installer.pods_project.targets.each do |target|
+#       targets_to_ignore = %w(React yoga)
+        
+#       if targets_to_ignore.include? target.name
+#           target.remove_from_project
+#       end
+#       if target.name == "React"
+#         target.remove_from_project
+#       end
+#     end
+#   end
+
+def change_lines_in_file(file_path, &change)
+    print "Fixing #{file_path}...\n"
+  
+    contents = []
+  
+    file = File.open(file_path, 'r')
+    file.each_line do | line |
+      contents << line
+    end
+    file.close
+  
+    File.open(file_path, 'w') do |f|
+      f.puts(change.call(contents))
+    end
+  end
+  
+  post_install do |installer|
+    # https://github.com/facebook/yoga/issues/711#issuecomment-381098373
+    change_lines_in_file('./Pods/Target Support Files/yoga/yoga-umbrella.h') do |lines|
+      lines.reject do | line |
+        [
+          '#import "Utils.h"',
+          '#import "YGLayout.h"',
+          '#import "YGNode.h"',
+          '#import "YGNodePrint.h"',
+          '#import "YGStyle.h"',
+          '#import "Yoga-internal.h"',
+        ].include?(line.strip)
+      end
+    end
+  
+    # # https://github.com/facebook/react-native/issues/13198
+    # change_lines_in_file('./node_modules/react-native/Libraries/NativeAnimation/RCTNativeAnimatedNodesManager.h') do |lines|
+    #   lines.map { |line| line.include?("#import <RCTAnimation/RCTValueAnimatedNode.h>") ? '#import "RCTValueAnimatedNode.h"' : line }
+    # end
+  
+    # # https://github.com/facebook/react-native/issues/16039
+    # change_lines_in_file('./node_modules/react-native/Libraries/WebSocket/RCTReconnectingWebSocket.m') do |lines|
+    #   lines.map { |line| line.include?("#import <fishhook/fishhook.h>") ? '#import "fishhook.h"' : line }
+    # end
+  end

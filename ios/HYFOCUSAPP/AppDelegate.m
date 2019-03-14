@@ -14,15 +14,16 @@
 #import "RNSplashScreen.h"
 #import <React/RCTPushNotificationManager.h>
 
-@import GoogleMaps;
+//#import <GoogleMaps/GoogleMaps.h>
+//@import GoogleMaps;
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+//  [GMSServices provideAPIKey:@"AIzaSyCEHm882zfkeeD2HRhjzAMYjfCh_cfM5fA"];
   NSURL *jsCodeLocation;
-  
-  [GMSServices provideAPIKey:@"AIzaSyCEHm882zfkeeD2HRhjzAMYjfCh_cfM5fA"];
+
   for (NSString* family in [UIFont familyNames])
   {
     NSLog(@"%@", family);
