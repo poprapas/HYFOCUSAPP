@@ -3,6 +3,9 @@ package com.hyfocusapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.webview.RNCWebViewPackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.facebook.react.ReactNativeHost;
@@ -27,6 +30,9 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new RNCWebViewPackage(),
+            new AsyncStoragePackage(),
+            new RNGestureHandlerPackage(),
             new MapsPackage(), new ReactNativePushNotificationPackage(),
              new VectorIconsPackage(), new SplashScreenReactPackage(), new RNDeviceInfo());
         }
