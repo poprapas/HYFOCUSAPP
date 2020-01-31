@@ -296,7 +296,7 @@ export default class New extends Component {
                         borderRadius: 15
                     }}
                     position='bottom'
-                    positionValue={60}
+                    positionValue={Platform.OS == 'ios' ? 90 : 60}
                     fadeInDuration={750}
                     fadeOutDuration={1000}
                     opacity={0.9}

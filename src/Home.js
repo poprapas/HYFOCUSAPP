@@ -437,7 +437,7 @@ export default class Home extends Component {
                         borderRadius: 15
                     }}
                     position='bottom'
-                    positionValue={100}
+                    positionValue={Platform.OS == 'ios' ? 130 : 100}
                     fadeInDuration={750}
                     fadeOutDuration={1000}
                     opacity={0.9}
