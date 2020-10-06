@@ -5,7 +5,7 @@ import Color from 'react-native-material-color';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Carousel from 'react-native-looped-carousel';
-import PushNotification from 'react-native-push-notification';
+// import PushNotification from 'react-native-push-notification';
 import Toast from 'react-native-easy-toast'
 import * as utils from './Util'
 import SplashScreen from 'react-native-splash-screen'
@@ -20,63 +20,63 @@ const { width, height } = Dimensions.get("window");
 export default class Home extends Component {
 
     _notificationAndroid(_this) {
-        AsyncStorage.getItem('notification').then((data) => {
-            console.log(data)
-            if (data == null || data == 'true') {
-                let notificationTime = new Date();
-                if (notificationTime.getHours() < 18) {
-                    notificationTime.setHours(18);
-                    notificationTime.setMinutes(0);
-                    notificationTime.setSeconds(0);
-                    notificationTime.setMilliseconds(0);
-                    PushNotification.localNotificationSchedule({
-                        id: '1',
-                        title: "HatyaiFocus",
-                        date: new Date(notificationTime),
-                        message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
-                        color: '#a6ff00',
-                        repeatType: 'day',
-                    });
-                }
-            }
-        })
+        // AsyncStorage.getItem('notification').then((data) => {
+        //     console.log(data)
+        //     if (data == null || data == 'true') {
+        //         let notificationTime = new Date();
+        //         if (notificationTime.getHours() < 18) {
+        //             notificationTime.setHours(18);
+        //             notificationTime.setMinutes(0);
+        //             notificationTime.setSeconds(0);
+        //             notificationTime.setMilliseconds(0);
+        //             PushNotification.localNotificationSchedule({
+        //                 id: '1',
+        //                 title: "HatyaiFocus",
+        //                 date: new Date(notificationTime),
+        //                 message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
+        //                 color: '#a6ff00',
+        //                 repeatType: 'day',
+        //             });
+        //         }
+        //     }
+        // })
     }
 
     _notificationiOS(_this) {
-        PushNotification.configure({
-            permissions: {
-                alert: true,
-                badge: true,
-                sound: true
-            },
-            popInitialNotification: true,
-            requestPermissions: true,
-        });
-        AsyncStorage.getItem('notification').then((data) => {
-            if (data == null || data == 'true') {
-                //console.log(data)
-                let notificationTime = new Date();
-                // PushNotification.localNotificationSchedule({
-                //     date: new Date(Date.now() + 5000),
-                //     message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
-                //     foreground: true,
-                // });
-                AsyncStorage.getItem('notificationDate').then((date) => {
-                    if (date == null || notificationTime.toISOString().slice(0, 10) != date) {
-                        notificationTime.setHours(18);
-                        notificationTime.setMinutes(0);
-                        notificationTime.setSeconds(0);
-                        notificationTime.setMilliseconds(0);
-                        PushNotification.localNotificationSchedule({
-                            date: new Date(notificationTime),
-                            message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
-                            foreground: true,
-                        });
-                        AsyncStorage.setItem('notificationDate', notificationTime.toISOString().slice(0, 10))
-                    }
-                })
-            }
-        })
+        // PushNotification.configure({
+        //     permissions: {
+        //         alert: true,
+        //         badge: true,
+        //         sound: true
+        //     },
+        //     popInitialNotification: true,
+        //     requestPermissions: true,
+        // });
+        // AsyncStorage.getItem('notification').then((data) => {
+        //     if (data == null || data == 'true') {
+        //         //console.log(data)
+        //         let notificationTime = new Date();
+        //         // PushNotification.localNotificationSchedule({
+        //         //     date: new Date(Date.now() + 5000),
+        //         //     message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
+        //         //     foreground: true,
+        //         // });
+        //         AsyncStorage.getItem('notificationDate').then((date) => {
+        //             if (date == null || notificationTime.toISOString().slice(0, 10) != date) {
+        //                 notificationTime.setHours(18);
+        //                 notificationTime.setMinutes(0);
+        //                 notificationTime.setSeconds(0);
+        //                 notificationTime.setMilliseconds(0);
+        //                 PushNotification.localNotificationSchedule({
+        //                     date: new Date(notificationTime),
+        //                     message: "อัพเดตข่าวใหม่ที่ HatyaiFocus",
+        //                     foreground: true,
+        //                 });
+        //                 AsyncStorage.setItem('notificationDate', notificationTime.toISOString().slice(0, 10))
+        //             }
+        //         })
+        //     }
+        // })
     }
 
     _onLayoutDidChange = (e) => {
@@ -302,6 +302,7 @@ export default class Home extends Component {
                                             fromhome: true
                                         }
                                     )}
+                                    activeOpacity={0.9}
                                 >
                                     <View style={{ paddingBottom: 5 }}>
                                         <Text style={styles.titleText}> {item.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>

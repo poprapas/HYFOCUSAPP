@@ -108,7 +108,7 @@ export default class Favorite extends Component {
                     }}
                     centerIcon4={'star'}
                     text={'บุ๊คมาร์ค'}
-                    rightIcon3={this.props.navigation.state.params.isEmpty ?
+                    rightIcon3={this.props.route.params.isEmpty ?
                         {
                             icon: 'trash',
                             fn: () => {

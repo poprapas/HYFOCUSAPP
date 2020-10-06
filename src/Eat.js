@@ -162,6 +162,7 @@ export default class Eat extends Component {
                     renderItem={({ item, index }) =>
                         <View style={styles.flatlist}>
                             <TouchableOpacity
+                                activeOpacity={0.9}
                                 onPress={() => navigate('ContentDetail',
                                     {
                                         title: item.TOPIC,
@@ -179,7 +180,10 @@ export default class Eat extends Component {
                                 <View style={{ paddingBottom: 5 }}>
                                     <Text style={styles.titleText}> {item.TOPIC.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                                 </View>
-                                <Image source={{ uri: item.FEATURE }}
+                                {console.log('image', item.FEATURE)}
+                                <Image
+                                    onError={({ nativeError: e }) => console.log(e)}
+                                    source={{ uri: item.FEATURE }}
                                     style={{
                                         width: width - 10,
                                         height: (width - 10) * 0.625,

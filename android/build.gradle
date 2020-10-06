@@ -10,8 +10,9 @@ buildscript {
         compileSdkVersion = 28
         targetSdkVersion = 28
         supportLibVersion = "28.0.0"
-        googlePlayServicesVersion = "16.1.0"
-        firebaseVersion = "17.3.4"
+        googlePlayServicesIidVersion = "16.0.1"
+        // googlePlayServicesVersion = "16.1.0"
+        // firebaseVersion = "17.3.4"
     }
     repositories {
         mavenCentral()
@@ -19,7 +20,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.android.tools.build:gradle:3.4.2'
         classpath 'com.google.gms:google-services:4.2.0'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -30,43 +31,48 @@ buildscript {
 allprojects {
     repositories {
         mavenLocal()
-        google()
-        jcenter()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url "$rootDir/../node_modules/react-native/android"
+            url("$rootDir/../node_modules/react-native/android")
         }
         maven {
             url 'https://maven.google.com'
         }
-        configurations.all {
-            resolutionStrategy {
-                // force "com.google.android.gms:play-services-measurement-base:$googlePlayServicesVersion"
-                force "com.android.support:support-v4:${rootProject.ext.supportLibVersion}"
-                force "com.google.android.gms:play-services-basement:16.2.0"
-                force "com.google.android.gms:play-services-tasks:16.0.1"
-            }
+        maven {
+            url("$rootDir/../node_modules/jsc-android/dist")
         }
+
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        // configurations.all {
+        //     resolutionStrategy {
+        //         // force "com.google.android.gms:play-services-measurement-base:$googlePlayServicesVersion"
+        //         force "com.android.support:support-v4:${rootProject.ext.supportLibVersion}"
+        //         force "com.google.android.gms:play-services-basement:16.2.0"
+        //         force "com.google.android.gms:play-services-tasks:16.0.1"
+        //     }
+        // }
     }
 }
 
-subprojects {
-    project.configurations.all {
-        resolutionStrategy.eachDependency { details ->
-            if (details.requested.group == 'com.android.support'
-                    && !details.requested.name.contains('multidex') ) {
-                details.useVersion "27.1.1"
-            }
-        }
-    }
-    afterEvaluate {
-            android {
-            compileSdkVersion 28
-            buildToolsVersion "28.0.3"
+// subprojects {
+//     project.configurations.all {
+//         resolutionStrategy.eachDependency { details ->
+//             if (details.requested.group == 'com.android.support'
+//                     && !details.requested.name.contains('multidex') ) {
+//                 details.useVersion "27.1.1"
+//             }
+//         }
+//     }
+//     afterEvaluate {
+//             android {
+//             compileSdkVersion 28
+//             buildToolsVersion "28.0.3"
 
-            defaultConfig {
-                targetSdkVersion 28
-            }
-        }
-    }
-}
+//             defaultConfig {
+//                 targetSdkVersion 28
+//             }
+//         }
+//     }
+// }

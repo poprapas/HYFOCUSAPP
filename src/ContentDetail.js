@@ -7,6 +7,8 @@ import Icon from 'react-native-vector-icons/dist/Entypo';
 import Icons from 'react-native-vector-icons/dist/MaterialIcons';
 import Lightbox from 'react-native-lightbox';
 import Header from './_Component/header';
+import MapView from 'react-native-maps';
+import LinearGradient from 'react-native-linear-gradient';
 import { WebView } from 'react-native-webview'
 
 const { width, height } = Dimensions.get("window");
@@ -35,7 +37,7 @@ export default class ContentDetail extends Component {
         }
         else if ((node.name == 'p' || node.name == 'div') && node.children[0] && node.children[0].name == 'iframe') {
             const a = node.children[0].attribs;
-            let latitude = parseFloat(a.src.slice(a.src.indexOf('!1d') + 3, a.src.indexOf('!2d'))).toFixed(6)
+            let latitude = parseFloat(a.src.slice(a.src.indexOf('!3d') + 3, a.src.indexOf('!2m'))).toFixed(6)
             let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
             if (a.src.slice(0, 2) == '//') {
                 a.src = 'https:' + a.src
@@ -43,8 +45,8 @@ export default class ContentDetail extends Component {
             if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
                 const iframeHtml =
                     `<iframe src="${a.src}" 
-                        height= 220, 
-                        width= ${width - 10}, 
+                        height="100%", 
+                        width="100%", 
                     >
                     </iframe>`;
                 return (
@@ -63,34 +65,66 @@ export default class ContentDetail extends Component {
                         >
                             <Text style={{ color: '#4da6ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
                         </TouchableOpacity>
-
-                        <WebView
+                        {/* <WebView
                             bounces={false}
                             scrollEnabled={false}
                             source={{ html: iframeHtml }}
                             style={{
-                                backgroundColor: 'transparent',
+                                backgroundColor: 'transparent'
                             }}
-                        />
+                        /> */}
+                        <MapView
+                            //provider={PROVIDER_GOOGLE}
+                            style={{ width, height: width * 9 / 16 }}
+                            initialRegion={{
+                                latitude: Number(latitude),
+                                longitude: Number(longitude),
+                                latitudeDelta: 0.01,
+                                longitudeDelta: 0.01,
+                            }}
+                        >
+                            <MapView.Marker
+                                coordinate={{
+                                    latitude: Number(latitude),
+                                    longitude: Number(longitude),
+                                }}
+                            />
+                        </MapView>
                     </View>
                 );
             }
             else if (a.src.slice(12, 15) == 'you') {
+                let videoId = a.src.slice(a.src.indexOf('/embed/') + 7)
                 return (
-                    <WebView
+                    <TouchableOpacity
                         key={index}
-                        bounces={false}
-                        scrollEnabled={false}
-                        source={{
-                            uri: a.src
-                        }}
+                        onPress={() => Linking.openURL(a.src)}
                         style={{
                             width: width - 10,
                             height: (width - 10) * 0.5625,
                             alignSelf: 'center',
-                            marginBottom: 10,
+                            marginBottom: 10
                         }}
-                    />
+                    >
+                        <Image
+                            source={{ uri: 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg' }}
+                            style={{ width: '100%', height: '100%' }}
+                        />
+                        <LinearGradient
+                            colors={['#fff', 'transparent']}
+                            style={{ width: '100%', height: '100%', position: 'absolute', justifyContent: 'center', alignItems: 'flex-end' }}
+                            start={{ x: 0.6, y: 0.0 }}
+                            end={{ x: 0.1, y: 0.0 }}
+                        >
+                            <View style={{
+                                flexDirection: 'row', alignItems: 'center'
+                            }}>
+                                <Text style={{ fontSize: 15, textShadowColor: 'rgba(0, 0, 0, 0.3)', textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 4 }}>เปิดด้วย Youtube</Text>
+                                <Icon color={'red'} size={40} style={{ marginLeft: 13, width: 43, textShadowColor: 'rgba(0, 0, 0, 0.3)', textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 4 }} name={'youtube'} />
+                                <Icon style={{ textShadowColor: 'rgba(0, 0, 0, 0.3)', textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 4 }} size={40} name={'chevron-right'} />
+                            </View>
+                        </LinearGradient>
+                    </TouchableOpacity>
                 );
             }
             else {
@@ -124,7 +158,7 @@ export default class ContentDetail extends Component {
             //console.log(node.name == 'p' && node.children[1] && node.children[1].name == 'iframe')
             const a = node.children[1].attribs
             //console.log(a.src)
-            let latitude = parseFloat(a.src.slice(a.src.indexOf('!1d') + 3, a.src.indexOf('!2d'))).toFixed(6)
+            let latitude = parseFloat(a.src.slice(a.src.indexOf('!3d') + 3, a.src.indexOf('!2m'))).toFixed(6)
             let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
 
             if (a.src.slice(0, 2) == '//') {
@@ -133,10 +167,10 @@ export default class ContentDetail extends Component {
             if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
                 const iframeHtml =
                     `<iframe src="${a.src}" 
-                            height= 220, 
-                            width= ${width - 10}, 
-                        >
-                        </iframe>`;
+                        height="100%", 
+                        width="100%", 
+                    >
+                    </iframe>`;
                 return (
                     <View key={index}
                         style={{
@@ -155,19 +189,38 @@ export default class ContentDetail extends Component {
                             <Text style={{ color: '#66b3ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
                         </TouchableOpacity>
 
-                        <WebView
+                        {/* <WebView
                             bounces={false}
                             scrollEnabled={false}
                             source={{ html: iframeHtml }}
                             style={{
-                                backgroundColor: 'transparent',
+                                flex: 1,
+                                backgroundColor: 'transparent'
                             }}
-                        />
+                        /> */}
+
+                        <MapView
+                            //provider={PROVIDER_GOOGLE}
+                            style={{ width, height: width * 9 / 16 }}
+                            initialRegion={{
+                                latitude: Number(latitude),
+                                longitude: Number(longitude),
+                                latitudeDelta: 0.01,
+                                longitudeDelta: 0.01,
+                            }}
+                        >
+                            <MapView.Marker
+                                coordinate={{
+                                    latitude: Number(latitude),
+                                    longitude: Number(longitude),
+                                }}
+                            />
+                        </MapView>
                     </View>
                 );
             }
             else if (a.src.slice(12, 15) == 'you') {
-                //console.log(a.src)
+                let videoId = a.src.slice(a.src.indexOf('/embed/') + 7)
                 return (
                     <View
                         style={{
@@ -175,7 +228,7 @@ export default class ContentDetail extends Component {
                             height: (width - 10) * 0.5625,
                             alignSelf: 'center',
                         }}>
-                        <WebView
+                        {/* <WebView
                             key={index}
                             bounces={false}
                             scrollEnabled={false}
@@ -187,7 +240,37 @@ export default class ContentDetail extends Component {
                                 height: (width - 10) * 0.5625,
                                 alignSelf: 'center',
                             }}
-                        />
+                        /> */}
+
+                        <TouchableOpacity
+                            key={index}
+                            onPress={() => Linking.openURL(a.src)}
+                            style={{
+                                width: width - 10,
+                                height: (width - 10) * 0.5625,
+                                alignSelf: 'center',
+                                marginBottom: 10
+                            }}
+                        >
+                            <Image
+                                source={{ uri: 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg' }}
+                                style={{ width: '100%', height: '100%' }}
+                            />
+                            <LinearGradient
+                                colors={['#fff', 'transparent']}
+                                style={{ width: '100%', height: '100%', position: 'absolute', justifyContent: 'center', alignItems: 'flex-end' }}
+                                start={{ x: 0.6, y: 0.0 }}
+                                end={{ x: 0.1, y: 0.0 }}
+                            >
+                                <View style={{
+                                    flexDirection: 'row', alignItems: 'center'
+                                }}>
+                                    <Text style={{ fontSize: 15, textShadowColor: 'rgba(0, 0, 0, 0.3)', textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 4 }}>เปิดด้วย Youtube</Text>
+                                    <Icon color={'red'} size={40} style={{ marginLeft: 13, width: 43, textShadowColor: 'rgba(0, 0, 0, 0.3)', textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 4 }} name={'youtube'} />
+                                    <Icon style={{ textShadowColor: 'rgba(0, 0, 0, 0.3)', textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 4 }} size={40} name={'chevron-right'} />
+                                </View>
+                            </LinearGradient>
+                        </TouchableOpacity>
                     </View>
                 );
             }
@@ -222,7 +305,7 @@ export default class ContentDetail extends Component {
             //console.log((node.name == 'p' || node.name == 'div') && node.children[0] && node.children[0].name == 'iframe')
             const a = node.children[0].attribs;
             //console.log(a)
-            let latitude = parseFloat(a.src.slice(a.src.indexOf('!1d') + 3, a.src.indexOf('!2d'))).toFixed(6)
+            let latitude = parseFloat(a.src.slice(a.src.indexOf('!3d') + 3, a.src.indexOf('!2m'))).toFixed(6)
             let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
 
             if (a.src.slice(0, 2) == '//') {
@@ -231,8 +314,8 @@ export default class ContentDetail extends Component {
             if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
                 const iframeHtml =
                     `<iframe src="${a.src}" 
-                        height= 220, 
-                        width= ${width - 10}, 
+                        height="100%", 
+                        width="100%", 
                     >
                     </iframe>`;
                 return (
@@ -253,18 +336,38 @@ export default class ContentDetail extends Component {
                             <Text style={{ color: '#66b3ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
                         </TouchableOpacity>
 
-                        <WebView
+                        {/* <WebView
                             bounces={false}
                             scrollEnabled={false}
                             source={{ html: iframeHtml }}
                             style={{
-                                backgroundColor: 'transparent',
+                                flex: 1,
+                                backgroundColor: 'transparent'
                             }}
-                        />
+                        /> */}
+
+                        <MapView
+                            //provider={PROVIDER_GOOGLE}
+                            style={{ width, height: width * 9 / 16 }}
+                            initialRegion={{
+                                latitude: Number(latitude),
+                                longitude: Number(longitude),
+                                latitudeDelta: 0.01,
+                                longitudeDelta: 0.01,
+                            }}
+                        >
+                            <MapView.Marker
+                                coordinate={{
+                                    latitude: Number(latitude),
+                                    longitude: Number(longitude),
+                                }}
+                            />
+                        </MapView>
                     </View>
                 );
             }
             else if (a.src.slice(12, 15) == 'you') {
+                let videoId = a.src.slice(a.src.indexOf('/embed/') + 7)
                 return (
                     <View
                         key={index}
@@ -273,7 +376,7 @@ export default class ContentDetail extends Component {
                             height: (width - 10) * 0.5625,
                             alignSelf: 'center',
                         }}>
-                        <WebView
+                        {/* <WebView
                             bounces={false}
                             scrollEnabled={false}
                             source={{
@@ -284,7 +387,36 @@ export default class ContentDetail extends Component {
                                 height: (width - 10) * 0.5625,
                                 alignSelf: 'center',
                             }}
-                        />
+                        /> */}
+                        <TouchableOpacity
+                            key={index}
+                            onPress={() => Linking.openURL(a.src)}
+                            style={{
+                                width: width - 10,
+                                height: (width - 10) * 0.5625,
+                                alignSelf: 'center',
+                                marginBottom: 10
+                            }}
+                        >
+                            <Image
+                                source={{ uri: 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg' }}
+                                style={{ width: '100%', height: '100%' }}
+                            />
+                            <LinearGradient
+                                colors={['#fff', 'transparent']}
+                                style={{ width: '100%', height: '100%', position: 'absolute', justifyContent: 'center', alignItems: 'flex-end' }}
+                                start={{ x: 0.6, y: 0.0 }}
+                                end={{ x: 0.1, y: 0.0 }}
+                            >
+                                <View style={{
+                                    flexDirection: 'row', alignItems: 'center'
+                                }}>
+                                    <Text style={{ fontSize: 15, textShadowColor: 'rgba(0, 0, 0, 0.3)', textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 4 }}>เปิดด้วย Youtube</Text>
+                                    <Icon color={'red'} size={40} style={{ marginLeft: 13, width: 43, textShadowColor: 'rgba(0, 0, 0, 0.3)', textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 4 }} name={'youtube'} />
+                                    <Icon style={{ textShadowColor: 'rgba(0, 0, 0, 0.3)', textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 4 }} size={40} name={'chevron-right'} />
+                                </View>
+                            </LinearGradient>
+                        </TouchableOpacity>
                     </View>
                 );
             }
@@ -327,7 +459,7 @@ export default class ContentDetail extends Component {
                             maximumZoomScale={2}
                             centerContent={true}
                         >
-                            <Image source={{ uri: this.props.navigation.state.params.image }}
+                            <Image source={{ uri: this.props.route.params.image }}
                                 style={{
                                     //width: (width - 10),
                                     height: (width - 10) * 0.75,
@@ -335,7 +467,7 @@ export default class ContentDetail extends Component {
                                 }}
                             />
                         </ScrollView> :
-                        <Image source={{ uri: this.props.navigation.state.params.image }}
+                        <Image source={{ uri: this.props.route.params.image }}
                             style={{
                                 //width: (width - 10),
                                 height: (width - 10) * 0.75,
@@ -353,7 +485,7 @@ export default class ContentDetail extends Component {
                             maximumZoomScale={2}
                             centerContent={true}
                         >
-                            <Image source={{ uri: this.props.navigation.state.params.image }}
+                            <Image source={{ uri: this.props.route.params.image }}
                                 style={{
                                     width: (width - 150) * 0.8,
                                     height: (width - 150),
@@ -361,7 +493,7 @@ export default class ContentDetail extends Component {
                                 }}
                             />
                         </ScrollView> :
-                        <Image source={{ uri: this.props.navigation.state.params.image }}
+                        <Image source={{ uri: this.props.route.params.image }}
                             style={{
                                 width: (width - 150) * 0.8,
                                 height: (width - 150),
@@ -379,7 +511,7 @@ export default class ContentDetail extends Component {
                             maximumZoomScale={2}
                             centerContent={true}
                         >
-                            <Image source={{ uri: this.props.navigation.state.params.image }}
+                            <Image source={{ uri: this.props.route.params.image }}
                                 style={{
                                     width: width - 10,
                                     height: (width - 10) * 0.25,
@@ -387,7 +519,7 @@ export default class ContentDetail extends Component {
                                 }}
                             />
                         </ScrollView> :
-                        <Image source={{ uri: this.props.navigation.state.params.image }}
+                        <Image source={{ uri: this.props.route.params.image }}
                             style={{
                                 width: width - 10,
                                 height: (width - 10) * 0.25,
@@ -407,7 +539,7 @@ export default class ContentDetail extends Component {
     }
 
     componentWillUnmount() {
-        if (this.props.navigation.state.params.fromhome) {
+        if (this.props.route.params.fromhome) {
             global.ishome = true
         }
     }
@@ -415,7 +547,7 @@ export default class ContentDetail extends Component {
     render() {
 
         const { navigate, goBack } = this.props.navigation;
-        let descript = this.props.navigation.state.params.description;
+        let descript = this.props.route.params.description;
 
         return (
 
@@ -426,28 +558,28 @@ export default class ContentDetail extends Component {
                         icon: 'ios-arrow-back',
                         fn: () => { goBack() }
                     }}
-                    centerIcon={this.props.navigation.state.params.cat == 1 ? require('../assets/images/story-icon.png') :
-                        this.props.navigation.state.params.cat == 2 ? require('../assets/images/people-icon.png') :
-                            this.props.navigation.state.params.cat == 3 ? require('../assets/images/eat-icon.png') :
-                                this.props.navigation.state.params.cat == 8 ? require('../assets/images/travel-icon.png') : null}
-                    centerIcon3={this.props.navigation.state.params.cat == 4 ? 'play-video' :
-                        this.props.navigation.state.params.cat == 7 ? 'megaphone' : null}
-                    centerIcon4={this.props.navigation.state.params.cat == 5 ? 'rate-review' : null}
-                    text={this.props.navigation.state.params.topic}
+                    centerIcon={this.props.route.params.cat == 1 ? require('../assets/images/story-icon.png') :
+                        this.props.route.params.cat == 2 ? require('../assets/images/people-icon.png') :
+                            this.props.route.params.cat == 3 ? require('../assets/images/eat-icon.png') :
+                                this.props.route.params.cat == 8 ? require('../assets/images/travel-icon.png') : null}
+                    centerIcon3={this.props.route.params.cat == 4 ? 'play-video' :
+                        this.props.route.params.cat == 7 ? 'megaphone' : null}
+                    centerIcon4={this.props.route.params.cat == 5 ? 'rate-review' : null}
+                    text={this.props.route.params.topic}
                     rightIcon2={{
                         icon: 'share-2',
                         fn: () => Platform.OS == 'ios' ?
-                            fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + this.props.navigation.state.params.url)
+                            fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + this.props.route.params.url)
                                 .then((response) => response.text())
-                                .then((responseJson) => { Share.share({ url: responseJson, message: this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'") }) })
-                            : Share.share({ message: decodeURI(this.props.navigation.state.params.url) })
+                                .then((responseJson) => { Share.share({ url: responseJson, message: this.props.route.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'") }) })
+                            : Share.share({ message: decodeURI(this.props.route.params.url) })
                     }}
                 />
 
                 <ScrollView style={{ flex: 1 }}>
-                    <Text style={styles.title}>{this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
+                    <Text style={styles.title}>{this.props.route.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
 
-                    {this.renderImage.bind(this)(this.props.navigation.state.params.cat)}
+                    {this.renderImage.bind(this)(this.props.route.params.cat)}
 
                     <Text />
 
@@ -460,7 +592,7 @@ export default class ContentDetail extends Component {
                     <View style={{
                         flexDirection: 'row',
                         justifyContent: 'flex-end',
-                        paddingTop: this.props.navigation.state.params.cat == 3 ? 0 : 30,
+                        paddingTop: this.props.route.params.cat == 3 ? 0 : 30,
                         paddingRight: 5
                     }}>
                         <Icon
@@ -470,7 +602,7 @@ export default class ContentDetail extends Component {
                             style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
                         />
                         <Text style={styles.view}>
-                            {this.props.navigation.state.params.view}
+                            {this.props.route.params.view}
                         </Text>
                     </View>
 
@@ -482,7 +614,7 @@ export default class ContentDetail extends Component {
                             style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
                         />
                         <Text style={styles.view}>
-                            {this.props.navigation.state.params.date}
+                            {this.props.route.params.date}
                         </Text>
                     </View>
                     <SafeAreaView style={{ flex: 1, backgroundColor: Color.BROWN[500] }} />

@@ -9,6 +9,7 @@ import MapView from 'react-native-maps';
 import DeviceInfo from 'react-native-device-info';
 import { WebView } from 'react-native-webview';
 import Header from './_Component/header';
+import Swiper from 'react-native-swiper'
 
 const { width, height } = Dimensions.get("window");
 
@@ -87,11 +88,11 @@ export default class RoomDetail extends Component {
                     rightIcon2={{
                         icon: 'share-2',
                         fn: () => Platform.OS == 'ios' ?
-                            fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + this.props.navigation.state.params.url)
+                            fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + this.props.route.params.url)
                                 .then((response) => response.text())
-                                .then((responseJson) => { Share.share({ url: responseJson, message: 'ที่พัก : ' + this.props.navigation.state.params.property }) })
+                                .then((responseJson) => { Share.share({ url: responseJson, message: 'ที่พัก : ' + this.props.route.params.property }) })
                             :
-                            Share.share({ message: decodeURI(this.props.navigation.state.params.url) })
+                            Share.share({ message: decodeURI(this.props.route.params.url) })
                     }}
                 />
 
@@ -100,27 +101,26 @@ export default class RoomDetail extends Component {
                     <View style={{ height: DeviceInfo.getModel() == 'iPhone X' ? height / 4 : height / 3 }}
                         onLayout={this._onLayoutDidChange}
                     >
-                        <Carousel
+                        <Swiper
                             autoplay
-                            delay={5000}
+                            autoplayTimeout={3}
                             style={this.state.size}
-                            bullets
-                            bulletStyle={{
+                            dotStyle={{
                                 margin: 3
                             }}
-                            chosenBulletStyle={{
+                            activeDotStyle={{
                                 margin: 3
                             }}
-                            arrows
-                            arrowsContainerStyle={{
-                                marginLeft: 5,
-                                marginRight: 5,
-                            }}
-                            leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
-                            rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
+                            // arrows
+                            // arrowsContainerStyle={{
+                            //     marginLeft: 5,
+                            //     marginRight: 5,
+                            // }}
+                            // leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
+                            // rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
                         >
 
-                            {this.props.navigation.state.params.gallery.map((prop, key) => {
+                            {this.props.route.params.gallery.map((prop, key) => {
                                 return (
                                     <View
                                         key={key.toString()}
@@ -136,66 +136,66 @@ export default class RoomDetail extends Component {
                                 )
                             })}
 
-                        </Carousel>
+                        </Swiper>
                     </View>
 
                     <View style={{ padding: 10 }}>
-                        <Text style={styles.property}> {this.props.navigation.state.params.property} </Text>
+                        <Text style={styles.property}> {this.props.route.params.property} </Text>
 
                         <Text style={styles.topic1}>  สถานะ  </Text>
 
                         <View style={{ flexDirection: 'row', marginTop: 5 }}>
                             <Text style={styles.topic}>  ความเป็นเจ้าของ : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.owner} </Text>
+                            <Text style={styles.detail}>{this.props.route.params.owner} </Text>
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: 5 }}>
                             <Text style={styles.topic}>  ประเภท : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.type} </Text>
+                            <Text style={styles.detail}>{this.props.route.params.type} </Text>
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: 5 }}>
                             <Text style={styles.topic}>  ลงประกาศ : </Text>
-                            <Text style={styles.for}>{this.props.navigation.state.params.for} </Text>
+                            <Text style={styles.for}>{this.props.route.params.for} </Text>
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: 5 }}>
                             <Text style={styles.topic}>  ห้องนอน : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.bedroom} ห้อง</Text>
+                            <Text style={styles.detail}>{this.props.route.params.bedroom} ห้อง</Text>
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: 5 }}>
                             <Text style={styles.topic}>  ห้องน้ำ : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.bathroom} ห้อง</Text>
+                            <Text style={styles.detail}>{this.props.route.params.bathroom} ห้อง</Text>
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: 5 }}>
                             <Text style={styles.topic}>  เฟอร์นิเจอร์ : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.furni} </Text>
+                            <Text style={styles.detail}>{this.props.route.params.furni} </Text>
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: 5 }}>
                             <Text style={styles.topic}>  สถานะทรัพย์สิน : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.status} </Text>
+                            <Text style={styles.detail}>{this.props.route.params.status} </Text>
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: 5 }}>
                             <Text style={styles.topic}>  ราคา : </Text>
-                            <Text style={styles.price}>{this.props.navigation.state.params.price} </Text>
+                            <Text style={styles.price}>{this.props.route.params.price} </Text>
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: 5 }}>
                             <Text style={styles.topic}>  มัดจำ : </Text>
-                            <Text style={styles.detail}>{this.props.navigation.state.params.deposit == "" ? '-' : this.props.navigation.state.params.deposit} </Text>
+                            <Text style={styles.detail}>{this.props.route.params.deposit == "" ? '-' : this.props.route.params.deposit} </Text>
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: 5 }}>
                             <Text style={styles.topic2}>  สิ่งอำนวยความสะดวก : </Text>
                             <View>
-                                {this.props.navigation.state.params.feature.map((prop, key) => {
+                                {this.props.route.params.feature.map((prop, key) => {
                                     return (
                                         <View key={key}>
-                                            <Text style={styles.feature}>{this.props.navigation.state.params.feature[key]} </Text>
+                                            <Text style={styles.feature}>{this.props.route.params.feature[key]} </Text>
                                         </View>
                                     )
                                 })
@@ -206,10 +206,10 @@ export default class RoomDetail extends Component {
                         <View style={{ flexDirection: 'row', marginTop: 5 }}>
                             <Text style={styles.topic3}>  การบริการ : </Text>
                             <View>
-                                {this.props.navigation.state.params.service.map((prop, key) => {
+                                {this.props.route.params.service.map((prop, key) => {
                                     return (
                                         <View key={key}>
-                                            <Text style={styles.service}>{this.props.navigation.state.params.service[key]} </Text>
+                                            <Text style={styles.service}>{this.props.route.params.service[key]} </Text>
                                         </View>
                                     )
                                 })
@@ -221,7 +221,7 @@ export default class RoomDetail extends Component {
                             <Text style={styles.topic2}>  รายละเอียดเพิ่มเติม : </Text>
                             <View style={{ paddingLeft: 4, marginTop: 10 }}>
                                 <HTMLView
-                                    value={this.props.navigation.state.params.descript.replace(/\r\n/g, '').replace(/&nbsp;/g, '')}
+                                    value={this.props.route.params.descript.replace(/\r\n/g, '').replace(/&nbsp;/g, '')}
                                     renderNode={this.renderNode}
                                     stylesheet={styless}
                                 />
@@ -229,12 +229,12 @@ export default class RoomDetail extends Component {
                         </View>
                     </View>
 
-                    {this.props.navigation.state.params.latitude ?
+                    {this.props.route.params.latitude ?
                         <View style={{ alignSelf: 'center' }}>
                             <TouchableOpacity
                                 style={{ alignSelf: 'flex-end', paddingHorizontal: 10 }}
                                 onPress={() =>
-                                    Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + parseFloat(this.props.navigation.state.params.latitude) + ',' + parseFloat(this.props.navigation.state.params.longitude) : 'https://www.google.com/maps/search/?api=1&query=' + parseFloat(this.props.navigation.state.params.latitude) + ',' + parseFloat(this.props.navigation.state.params.longitude))}
+                                    Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + parseFloat(this.props.route.params.latitude) + ',' + parseFloat(this.props.route.params.longitude) : 'https://www.google.com/maps/search/?api=1&query=' + parseFloat(this.props.route.params.latitude) + ',' + parseFloat(this.props.route.params.longitude))}
                             >
                                 <Text style={{ color: '#1e90ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
                             </TouchableOpacity>
@@ -243,15 +243,15 @@ export default class RoomDetail extends Component {
                                 //provider={PROVIDER_GOOGLE}
                                 style={styles.map}
                                 initialRegion={{
-                                    latitude: parseFloat(this.props.navigation.state.params.latitude),
-                                    longitude: parseFloat(this.props.navigation.state.params.longitude),
+                                    latitude: parseFloat(this.props.route.params.latitude),
+                                    longitude: parseFloat(this.props.route.params.longitude),
                                     latitudeDelta: 0.01,
                                     longitudeDelta: 0.01,
                                 }}
                             >
                                 <MapView.Marker coordinate={{
-                                    latitude: parseFloat(this.props.navigation.state.params.latitude),
-                                    longitude: parseFloat(this.props.navigation.state.params.longitude),
+                                    latitude: parseFloat(this.props.route.params.latitude),
+                                    longitude: parseFloat(this.props.route.params.longitude),
                                 }}
                                 />
                             </MapView>
@@ -271,7 +271,7 @@ export default class RoomDetail extends Component {
                             style={{ paddingTop: Platform.OS == 'ios' ? 1 : 3, paddingRight: 2 }}
                         />
                         <Text style={styles.date}>
-                            {this.props.navigation.state.params.date}
+                            {this.props.route.params.date}
                         </Text>
                     </View>
 

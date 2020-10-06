@@ -302,6 +302,7 @@ export default class Jobs extends Component {
                         <View>{this.state.dataSource.length > 0 ?
                             <View style={styles.flatlist}>
                                 <TouchableOpacity
+                                    activeOpacity={0.9}
                                     onPress={() => navigate('JobDetail',
                                         {
                                             image: item.IMG,
@@ -332,7 +333,7 @@ export default class Jobs extends Component {
                                         paddingBottom: 2,
                                     }}>
 
-                                        <View style={{ flex: 30 }}>
+                                        <View style={{ flex: 30, justifyContent: 'center', alignItems: 'center' }}>
                                             <Image
                                                 source={{ uri: item.IMG }}
                                                 style={{

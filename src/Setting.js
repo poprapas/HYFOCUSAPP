@@ -6,7 +6,7 @@ import {
 import Color from 'react-native-material-color';
 import Communications from 'react-native-communications';
 import { Switch } from 'react-native-switch';
-import PushNotification from 'react-native-push-notification';
+// import PushNotification from 'react-native-push-notification';
 import DeviceInfo from 'react-native-device-info';
 import AsyncStorage from '@react-native-community/async-storage';
 import Header from './_Component/header';
@@ -20,7 +20,7 @@ export default class Setting extends Component {
                 notification: val
             })
         )
-        PushNotification.cancelAllLocalNotifications()
+        // PushNotification.cancelAllLocalNotifications()
     }
 
     componentDidMount() {
@@ -82,7 +82,7 @@ export default class Setting extends Component {
                             <Text style={styles.version}>{DeviceInfo.getVersion()}</Text>
                         </View>
 
-                        <View style={{
+                        {/* <View style={{
                             flexDirection: 'row',
                             backgroundColor: 'white',
                             justifyContent: 'space-between',
@@ -137,7 +137,7 @@ export default class Setting extends Component {
                                     }}
                                 />
                             </View>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
                     </View>
                     :
@@ -156,7 +156,7 @@ export default class Setting extends Component {
                             <Text style={styles.version}>{DeviceInfo.getVersion()}</Text>
                         </View>
 
-                        <View style={{
+                        {/* <View style={{
                             flexDirection: 'row',
                             backgroundColor: 'white',
                             justifyContent: 'space-between',
@@ -184,7 +184,7 @@ export default class Setting extends Component {
                             />
                         </View>
 
-                        <TouchableOpacity onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=com.hyfocusapp')}>
+                        <TouchableOpacity onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=hya.dev.hatyaifocusapp')}>
                             <View style={{
                                 flexDirection: 'row',
                                 backgroundColor: 'white',
@@ -206,7 +206,7 @@ export default class Setting extends Component {
                                     }}
                                 />
                             </View>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 }
 

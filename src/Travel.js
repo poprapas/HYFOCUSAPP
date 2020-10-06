@@ -107,9 +107,7 @@ export default class Story extends Component {
     }
 
     render() {
-
         const { navigate, goBack, toggleDrawer } = this.props.navigation;
-
         if (this.state.isLoading || this.state.refreshing) {
             return (
                 <View style={styles.container} >
@@ -162,6 +160,7 @@ export default class Story extends Component {
                     renderItem={({ item, index }) =>
                         <View style={styles.flatlist}>
                             <TouchableOpacity
+                                activeOpacity={0.9}
                                 onPress={() => navigate('ContentDetail',
                                     {
                                         title: item.TOPIC,

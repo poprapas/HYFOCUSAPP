@@ -18,7 +18,7 @@ export default class NewDetail extends Component {
     }
 
     componentWillUnmount() {
-        if (this.props.navigation.state.params.fromhome) {
+        if (this.props.route.params.fromhome) {
             global.ishome = true
         }
     }
@@ -28,7 +28,7 @@ export default class NewDetail extends Component {
         if (node.name == 'p' && node.children[0].name == 'img') {
             const a = node.children[0].attribs;
             return (
-                <Lightbox key={index} underlayColor={'transparent'} swipeToDismiss={false}>
+                <Lightbox key={index} underlayColor={'transparent'} swipeToDismiss={false}> 
                     <Image
                         style={{
                             width: width,
@@ -116,8 +116,8 @@ export default class NewDetail extends Component {
             if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
                 const iframeHtml =
                     `<iframe src="${a.src}" 
-                        height= 220, 
-                        width= ${width - 10}, 
+                        height="100%", 
+                        width="100%" 
                     >
                     </iframe>`;
                 return (
@@ -208,8 +208,8 @@ export default class NewDetail extends Component {
             if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
                 const iframeHtml =
                     `<iframe src="${a.src}" 
-                        height= 220, 
-                        width= ${width - 10}, 
+                        height="100%", 
+                        width="100%", 
                     >
                     </iframe>`;
                 return (
@@ -375,7 +375,7 @@ export default class NewDetail extends Component {
     render() {
 
         const { navigate, goBack, toggleDrawer } = this.props.navigation;
-        let descript = this.props.navigation.state.params.description;
+        let descript = this.props.route.params.description;
 
         return (
             <View style={styles.container}>
@@ -385,19 +385,19 @@ export default class NewDetail extends Component {
                         fn: () => { goBack() }
                     }}
                     centerIcon2={'newspaper-o'}
-                    text={this.props.navigation.state.params.type}
+                    text={this.props.route.params.type}
                     rightIcon2={{
                         icon: 'share-2',
                         fn: () => Platform.OS == 'ios' ?
-                            fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + this.props.navigation.state.params.url)
+                            fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + this.props.route.params.url)
                                 .then((response) => response.text())
-                                .then((responseJson) => { Share.share({ url: responseJson, message: this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'") }) })
-                            : Share.share({ message: decodeURI(this.props.navigation.state.params.url) })
+                                .then((responseJson) => { Share.share({ url: responseJson, message: this.props.route.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'") }) })
+                            : Share.share({ message: decodeURI(this.props.route.params.url) })
                     }}
                 />
 
                 <ScrollView style={{ flex: 1 }}>
-                    <Text style={styles.title}>{this.props.navigation.state.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
+                    <Text style={styles.title}>{this.props.route.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                     <Lightbox underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
                         {Platform.OS == 'ios' ?
                             <ScrollView
@@ -405,13 +405,13 @@ export default class NewDetail extends Component {
                                 maximumZoomScale={2}
                                 centerContent={true}
                             >
-                                <Image source={{ uri: this.props.navigation.state.params.image }}
+                                <Image source={{ uri: this.props.route.params.image }}
                                     style={{
                                         height: (width - 10) * 0.625,
                                         resizeMode: 'contain',
                                     }} />
                             </ScrollView> :
-                            <Image source={{ uri: this.props.navigation.state.params.image }}
+                            <Image source={{ uri: this.props.route.params.image }}
                                 style={{
                                     height: (width - 10) * 0.625,
                                     resizeMode: 'contain',
@@ -432,7 +432,7 @@ export default class NewDetail extends Component {
                             style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
                         />
                         <Text style={styles.view}>
-                            {this.props.navigation.state.params.view}
+                            {this.props.route.params.view}
                         </Text>
                     </View>
 
@@ -444,7 +444,7 @@ export default class NewDetail extends Component {
                             style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
                         />
                         <Text style={styles.view}>
-                            {this.props.navigation.state.params.date}
+                            {this.props.route.params.date}
                         </Text>
                     </View>
                     <SafeAreaView style={{ flex: 1, backgroundColor: Color.BROWN[500] }} />

@@ -84,14 +84,14 @@ export default class JobDetail extends Component {
 
         global.ishome = false
 
-        if (['02', '03', '04', '05', '07'].indexOf(this.props.navigation.state.params.tel.replace(/\D/g, '').slice(0, 2)) >= 0) {
+        if (['02', '03', '04', '05', '07'].indexOf(this.props.route.params.tel.replace(/\D/g, '').slice(0, 2)) >= 0) {
             this.setState({
-                tel: this.props.navigation.state.params.tel.replace(/\D/g, '').slice(0, 9)
+                tel: this.props.route.params.tel.replace(/\D/g, '').slice(0, 9)
             })
         }
         else {
             this.setState({
-                tel: this.props.navigation.state.params.tel.replace(/\D/g, '').slice(0, 10)
+                tel: this.props.route.params.tel.replace(/\D/g, '').slice(0, 10)
             })
         }
     }
@@ -117,11 +117,11 @@ export default class JobDetail extends Component {
                     rightIcon2={{
                         icon: 'share-2',
                         fn: () => Platform.OS == 'ios' ?
-                            fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + this.props.navigation.state.params.url)
+                            fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + this.props.route.params.url)
                                 .then((response) => response.text())
-                                .then((responseJson) => { Share.share({ url: responseJson, message: 'หางาน : ' + this.props.navigation.state.params.company }) })
+                                .then((responseJson) => { Share.share({ url: responseJson, message: 'หางาน : ' + this.props.route.params.company }) })
                             :
-                            Share.share({ message: decodeURI(this.props.navigation.state.params.url) })
+                            Share.share({ message: decodeURI(this.props.route.params.url) })
                     }}
                 />
 
@@ -137,7 +137,7 @@ export default class JobDetail extends Component {
                         alignSelf: 'center',
                         marginTop: 10,
                     }}>
-                        <Image source={{ uri: this.props.navigation.state.params.image }}
+                        <Image source={{ uri: this.props.route.params.image }}
                             style={{
                                 height: 100,
                                 resizeMode: 'contain',
@@ -145,21 +145,21 @@ export default class JobDetail extends Component {
                             }} />
                     </View>
 
-                    <Text style={styles.company}> {this.props.navigation.state.params.company} </Text>
+                    <Text style={styles.company}> {this.props.route.params.company} </Text>
 
                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
                         <Text style={styles.topic}> ตำแหน่ง : </Text>
-                        <Text style={styles.detail}>{this.props.navigation.state.params.position} </Text>
+                        <Text style={styles.detail}>{this.props.route.params.position} </Text>
                     </View>
 
                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
                         <Text style={styles.topic}> ที่อยู่ : </Text>
-                        <Text style={styles.detail}>{this.props.navigation.state.params.address} </Text>
+                        <Text style={styles.detail}>{this.props.route.params.address} </Text>
                     </View>
 
                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
                         <Text style={styles.topic}> จังหวัด : </Text>
-                        <Text style={styles.detail}>{this.props.navigation.state.params.province} </Text>
+                        <Text style={styles.detail}>{this.props.route.params.province} </Text>
                     </View>
 
                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
@@ -183,15 +183,15 @@ export default class JobDetail extends Component {
                                     color='white'
                                 />
                             </TouchableOpacity>
-                            <Text style={styles.detail3}>{this.props.navigation.state.params.tel} </Text>
+                            <Text style={styles.detail3}>{this.props.route.params.tel} </Text>
                         </View>
                     </View>
 
                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
                         <Text style={styles.topic}> อีเมลล์ : </Text>
                         <View style={{ width: width - 180, flexDirection: 'row' }}>
-                            {this.props.navigation.state.params.email == "" ? null :
-                                <TouchableOpacity onPress={() => Communications.email([this.props.navigation.state.params.email], null, null, null, null)}
+                            {this.props.route.params.email == "" ? null :
+                                <TouchableOpacity onPress={() => Communications.email([this.props.route.params.email], null, null, null, null)}
                                     style={{
                                         width: 30,
                                         height: 20,
@@ -210,41 +210,41 @@ export default class JobDetail extends Component {
                                     />
                                 </TouchableOpacity>
                             }
-                            <Text style={styles.detail3}>{this.props.navigation.state.params.email == "" ? '-' : this.props.navigation.state.params.email} </Text>
+                            <Text style={styles.detail3}>{this.props.route.params.email == "" ? '-' : this.props.route.params.email} </Text>
                         </View>
 
                     </View>
 
                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
                         <Text style={styles.topic3}> จำนวน : </Text>
-                        <Text style={styles.detail2}>{this.props.navigation.state.params.rate} ตำแหน่ง </Text>
+                        <Text style={styles.detail2}>{this.props.route.params.rate} ตำแหน่ง </Text>
                     </View>
 
                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
                         <Text style={styles.topic3}> เงินเดือน : </Text>
-                        <Text style={styles.detail2}>{this.props.navigation.state.params.salary == "" ? '-' : this.props.navigation.state.params.salary} </Text>
+                        <Text style={styles.detail2}>{this.props.route.params.salary == "" ? '-' : this.props.route.params.salary} </Text>
                     </View>
 
                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
                         <Text style={styles.topic}> ลักษณะงาน : </Text>
-                        <Text style={styles.detail}>{this.props.navigation.state.params.style} </Text>
+                        <Text style={styles.detail}>{this.props.route.params.style} </Text>
                     </View>
 
                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
                         <Text style={styles.topic}> วุฒิการศึกษา : </Text>
-                        <Text style={styles.detail}>{this.props.navigation.state.params.certi == "" ? '-' : this.props.navigation.state.params.certi} </Text>
+                        <Text style={styles.detail}>{this.props.route.params.certi == "" ? '-' : this.props.route.params.certi} </Text>
                     </View>
 
                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
                         <Text style={styles.topic}> เพศ : </Text>
-                        <Text style={styles.detail}>{this.props.navigation.state.params.sex} </Text>
+                        <Text style={styles.detail}>{this.props.route.params.sex} </Text>
                     </View>
 
                     <View style={{ marginTop: 10, marginBottom: 40 }}>
                         <Text style={styles.topic2}> รายละเอียดเพิ่มเติม : </Text>
                         <View style={{ paddingLeft: 4, marginTop: 10 }}>
                             <HTMLView
-                                value={this.props.navigation.state.params.description.replace(/\r\n/g, '').replace(/&nbsp;/g, '').replace(/<br \/>/g, '')}
+                                value={this.props.route.params.description.replace(/\r\n/g, '').replace(/&nbsp;/g, '').replace(/<br \/>/g, '')}
                                 stylesheet={styless}
                             />
                         </View>
@@ -258,7 +258,7 @@ export default class JobDetail extends Component {
                             style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
                         />
                         <Text style={styles.view}>
-                            {this.props.navigation.state.params.view}
+                            {this.props.route.params.view}
                         </Text>
                     </View>
 
@@ -270,7 +270,7 @@ export default class JobDetail extends Component {
                             style={{ paddingTop: Platform.OS == 'ios' ? 0 : 3 }}
                         />
                         <Text style={styles.view}>
-                            {this.props.navigation.state.params.date}
+                            {this.props.route.params.date}
                         </Text>
                     </View>
 

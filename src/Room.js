@@ -198,6 +198,7 @@ export default class Room extends Component {
                     renderItem={({ item, index }) =>
                         <View style={styles.flatlist}>
                             <TouchableOpacity
+                                activeOpacity={0.9}
                                 onPress={() => navigate('RoomDetail',
                                     {
                                         for: item.FOR,

@@ -31,11 +31,11 @@ export default class New extends Component {
     }
 
     _fetchData(callback) {
-        let cat = this.props.navigation.state.params.cat
-        //alert(this.props.navigation.state.params.cat)
-        fetch('https://www.hatyaifocus.com/rest/api.php?action=news&cat=' + this.props.navigation.state.params.cat + '&start=' + this.state.start + '&per_page=10')
+        let cat = this.props.route.params.cat
+        //alert(this.props.route.params.cat)
+        fetch('https://www.hatyaifocus.com/rest/api.php?action=news&cat=' + this.props.route.params.cat + '&start=' + this.state.start + '&per_page=10')
             .then(response => response.json())
-            .then(cat == this.props.navigation.state.params.cat ? callback : null)
+            .then(cat == this.props.route.params.cat ? callback : null)
             .catch(error => {
                 console.error(error);
             });
@@ -72,7 +72,7 @@ export default class New extends Component {
 
     changenew(cat) {
         //console.log('changenew')
-        this.props.navigation.state.params.cat = cat
+        this.props.route.params.cat = cat
         if (this.state.isMounted) {
             this.setState({
                 dataSource: null,
@@ -150,7 +150,7 @@ export default class New extends Component {
                             fn: () => { toggleDrawer() }
                         }}
                         centerIcon2={'newspaper-o'}
-                        text={this.props.navigation.state.params.type}
+                        text={this.props.route.params.type}
                         rightIcon={{
                             icon: 'logo-facebook',
                             fn: () => { Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/') }
@@ -173,7 +173,7 @@ export default class New extends Component {
                         fn: () => { toggleDrawer() }
                     }}
                     centerIcon2={'newspaper-o'}
-                    text={this.props.navigation.state.params.topic}
+                    text={this.props.route.params.topic}
                     rightIcon={{
                         icon: 'logo-facebook',
                         fn: () => { Linking.openURL('https://th-th.facebook.com/Hatyaifocus99/') }

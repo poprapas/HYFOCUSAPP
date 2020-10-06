@@ -1,4 +1,4 @@
-package com.hyfocusapp;
+package hya.dev.hatyaifocusapp;
 
 import android.os.Bundle;
 import android.content.Intent;
@@ -22,7 +22,7 @@ public class MainActivity extends ReactActivity {
     }
     @Override
     protected String getMainComponentName() {
-        return "HYFOCUSAPP";
+        return "HATYAIFOCUS";
     }
 
     @Override
