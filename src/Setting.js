@@ -82,63 +82,6 @@ export default class Setting extends Component {
                             <Text style={styles.version}>{DeviceInfo.getVersion()}</Text>
                         </View>
 
-                        {/* <View style={{
-                            flexDirection: 'row',
-                            backgroundColor: 'white',
-                            justifyContent: 'space-between',
-                            borderBottomColor: '#A9A9A9',
-                            borderBottomWidth: 1,
-                            paddingRight: 10,
-                            paddingTop: 10,
-                            paddingBottom: 5,
-                            paddingLeft: 5
-                        }}>
-                            <Text style={styles.titleText}> เปลี่ยนแปลงการแจ้งเตือน </Text>
-                            <Switch
-                                value={this.state.notification}
-                                onValueChange={(val) => this.controlNotification(val)}
-                                disabled={false}
-                                activeText={''}
-                                inActiveText={''}
-                                circleSize={23}
-                                barHeight={23}
-                                circleBorderWidth={1}
-                                backgroundActive={'green'}
-                                backgroundInactive={'#505050'}
-                                circleActiveColor={'#30a566'}
-                                circleInActiveColor={'gray'}
-                            />
-                        </View>
-
-                        <TouchableOpacity onPress={() => {
-                            parseInt(Platform.Version, 10) == 11 ?
-                                Linking.openURL('https://itunes.apple.com/us/app/appName/id1331300096?mt=8&action=write-review').catch(err => console.error('An error occurred', err))
-                                :
-                                Linking.openURL('https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8&id1331300096').catch(err => console.error('An error occurred', err));
-                        }
-                        }>
-                            <View style={{
-                                flexDirection: 'row',
-                                backgroundColor: 'white',
-                                justifyContent: 'space-between',
-                                borderBottomColor: '#A9A9A9',
-                                borderBottomWidth: 1,
-                                paddingVertical: 10,
-                                paddingLeft: 5
-                            }}>
-                                <Text style={styles.titleText}> ให้คะแนนเรา </Text>
-                                <Ionicons
-                                    name="ios-arrow-forward"
-                                    size={30}
-                                    color='#696969'
-                                    style={{
-                                        alignSelf: 'center',
-                                        paddingRight: 20
-                                    }}
-                                />
-                            </View>
-                        </TouchableOpacity> */}
-
                     </View>
                     :
                     <View>
@@ -155,58 +98,6 @@ export default class Setting extends Component {
                             <Text style={styles.titleText}>เวอร์ชั่น</Text>
                             <Text style={styles.version}>{DeviceInfo.getVersion()}</Text>
                         </View>
-
-                        {/* <View style={{
-                            flexDirection: 'row',
-                            backgroundColor: 'white',
-                            justifyContent: 'space-between',
-                            borderBottomColor: '#A9A9A9',
-                            borderBottomWidth: 1,
-                            paddingRight: 10,
-                            paddingTop: 10,
-                            paddingBottom: 5,
-                            paddingLeft: 5
-                        }}>
-                            <Text style={styles.titleText}> เปลี่ยนแปลงการแจ้งเตือน </Text>
-                            <Switch
-                                value={this.state.notification}
-                                onValueChange={(val) => this.controlNotification(val)}
-                                disabled={false}
-                                activeText={''}
-                                inActiveText={''}
-                                circleSize={23}
-                                barHeight={23}
-                                circleBorderWidth={1}
-                                backgroundActive={'green'}
-                                backgroundInactive={'#505050'}
-                                circleActiveColor={'#30a566'}
-                                circleInActiveColor={'gray'}
-                            />
-                        </View>
-
-                        <TouchableOpacity onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=hya.dev.hatyaifocusapp')}>
-                            <View style={{
-                                flexDirection: 'row',
-                                backgroundColor: 'white',
-                                justifyContent: 'space-between',
-                                borderBottomColor: '#A9A9A9',
-                                borderBottomWidth: 1,
-                                paddingTop: 10,
-                                paddingBottom: 5,
-                                paddingLeft: 5
-                            }}>
-                                <Text style={styles.titleText}> ให้คะแนนเรา </Text>
-                                <Ionicons
-                                    name="ios-arrow-forward"
-                                    size={30}
-                                    color='#696969'
-                                    style={{
-                                        alignSelf: 'center',
-                                        paddingRight: 20
-                                    }}
-                                />
-                            </View>
-                        </TouchableOpacity> */}
                     </View>
                 }
 

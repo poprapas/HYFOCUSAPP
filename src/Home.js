@@ -5,7 +5,7 @@ import Color from 'react-native-material-color';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Carousel from 'react-native-looped-carousel';
-// import PushNotification from 'react-native-push-notification';
+//import PushNotification from 'react-native-push-notification';
 import Toast from 'react-native-easy-toast'
 import * as utils from './Util'
 import SplashScreen from 'react-native-splash-screen'
@@ -24,9 +24,9 @@ export default class Home extends Component {
         //     console.log(data)
         //     if (data == null || data == 'true') {
         //         let notificationTime = new Date();
-        //         if (notificationTime.getHours() < 18) {
-        //             notificationTime.setHours(18);
-        //             notificationTime.setMinutes(0);
+        //         if (notificationTime.getHours() < 12) {
+        //             notificationTime.setHours(11);
+        //             notificationTime.setMinutes(32);
         //             notificationTime.setSeconds(0);
         //             notificationTime.setMilliseconds(0);
         //             PushNotification.localNotificationSchedule({
@@ -411,7 +411,7 @@ export default class Home extends Component {
                                                     backgroundColor: 'white',
                                                     width: width - 10,
                                                 }}>
-                                                {console.log(this.state.slide[key].FEATURE)}
+                                                {/* {console.log(this.state.slide[key].FEATURE)} */}
                                                 <TouchableWithoutFeedback onPress={() => this.gotoURL(key)} >
                                                     <Image
                                                         source={{ uri: this.state.slide[key].FEATURE }}

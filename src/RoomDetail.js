@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, Linking, ScrollView, Dimensions, Share, TouchableOpacity, } from 'react-native';
 
 import HTMLView from 'react-native-htmlview';
-import Carousel from 'react-native-looped-carousel';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icons from 'react-native-vector-icons/dist/MaterialIcons';
 import MapView from 'react-native-maps';
 import DeviceInfo from 'react-native-device-info';
@@ -98,7 +96,7 @@ export default class RoomDetail extends Component {
 
                 <ScrollView style={{ flex: 1 }}>
 
-                    <View style={{ height: DeviceInfo.getModel() == 'iPhone X' ? height / 4 : height / 3 }}
+                    <View style={{ height: DeviceInfo.hasNotch() ? height / 4 : height / 3, }}
                         onLayout={this._onLayoutDidChange}
                     >
                         <Swiper
@@ -111,13 +109,6 @@ export default class RoomDetail extends Component {
                             activeDotStyle={{
                                 margin: 3
                             }}
-                            // arrows
-                            // arrowsContainerStyle={{
-                            //     marginLeft: 5,
-                            //     marginRight: 5,
-                            // }}
-                            // leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
-                            // rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
                         >
 
                             {this.props.route.params.gallery.map((prop, key) => {
@@ -229,7 +220,7 @@ export default class RoomDetail extends Component {
                         </View>
                     </View>
 
-                    {this.props.route.params.latitude ?
+                    {this.props.route.params.latitude && this.props.route.params.longitude ?
                         <View style={{ alignSelf: 'center' }}>
                             <TouchableOpacity
                                 style={{ alignSelf: 'flex-end', paddingHorizontal: 10 }}

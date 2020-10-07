@@ -35,65 +35,15 @@ export default class ContentDetail extends Component {
                 </Lightbox>
             )
         }
-        else if ((node.name == 'p' || node.name == 'div') && node.children[0] && node.children[0].name == 'iframe') {
+        else if ((node.name == 'p' || node.name == 'div') && node.children[0] && (node.children[0].name == 'iframe')) {
             const a = node.children[0].attribs;
-            let latitude = parseFloat(a.src.slice(a.src.indexOf('!3d') + 3, a.src.indexOf('!2m'))).toFixed(6)
-            let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
+
+            console.log(a.src, a.src.slice(6, 13))
+
             if (a.src.slice(0, 2) == '//') {
                 a.src = 'https:' + a.src
             };
-            if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
-                const iframeHtml =
-                    `<iframe src="${a.src}" 
-                        height="100%", 
-                        width="100%", 
-                    >
-                    </iframe>`;
-                return (
-                    <View key={index}
-                        style={{
-                            width: width,
-                            height: 270,
-                            marginLeft: -10,
-                            paddingBottom: 10,
-                            alignSelf: 'center',
-                        }}
-                    >
-                        <TouchableOpacity
-                            style={{ alignSelf: 'flex-end' }}
-                            onPress={() => Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + latitude + ',' + longitude : 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude)}
-                        >
-                            <Text style={{ color: '#4da6ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
-                        </TouchableOpacity>
-                        {/* <WebView
-                            bounces={false}
-                            scrollEnabled={false}
-                            source={{ html: iframeHtml }}
-                            style={{
-                                backgroundColor: 'transparent'
-                            }}
-                        /> */}
-                        <MapView
-                            //provider={PROVIDER_GOOGLE}
-                            style={{ width, height: width * 9 / 16 }}
-                            initialRegion={{
-                                latitude: Number(latitude),
-                                longitude: Number(longitude),
-                                latitudeDelta: 0.01,
-                                longitudeDelta: 0.01,
-                            }}
-                        >
-                            <MapView.Marker
-                                coordinate={{
-                                    latitude: Number(latitude),
-                                    longitude: Number(longitude),
-                                }}
-                            />
-                        </MapView>
-                    </View>
-                );
-            }
-            else if (a.src.slice(12, 15) == 'you') {
+            if ((a.src.slice(6, 13) == 'youtube') || (a.src.slice(12, 15) == 'you')) {
                 let videoId = a.src.slice(a.src.indexOf('/embed/') + 7)
                 return (
                     <TouchableOpacity
@@ -127,6 +77,56 @@ export default class ContentDetail extends Component {
                     </TouchableOpacity>
                 );
             }
+            else if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
+                const iframeHtml =
+                    `<iframe src="${a.src}" 
+                        height="100%", 
+                        width="100%", 
+                    >
+                    </iframe>`;
+
+                let latitude = parseFloat(a.src.slice(a.src.indexOf('!3d') + 3, a.src.indexOf('!2m'))).toFixed(6)
+                let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
+                console.log(a.src, latitude, longitude, 1)
+
+                if (latitude != 'NaN' && longitude != 'NaN') {
+                    return (
+                        <View key={index}
+                            style={{
+                                width: width,
+                                height: 270,
+                                marginLeft: -10,
+                                paddingBottom: 10,
+                                alignSelf: 'center',
+                            }}
+                        >
+                            <TouchableOpacity
+                                style={{ alignSelf: 'flex-end' }}
+                                onPress={() => Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + latitude + ',' + longitude : 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude)}
+                            >
+                                <Text style={{ color: '#4da6ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
+                            </TouchableOpacity>
+                            <MapView
+                                //provider={PROVIDER_GOOGLE}
+                                style={{ width, height: width * 9 / 16 }}
+                                initialRegion={{
+                                    latitude: Number(latitude),
+                                    longitude: Number(longitude),
+                                    latitudeDelta: 0.01,
+                                    longitudeDelta: 0.01,
+                                }}
+                            >
+                                <MapView.Marker
+                                    coordinate={{
+                                        latitude: Number(latitude),
+                                        longitude: Number(longitude),
+                                    }}
+                                />
+                            </MapView>
+                        </View>
+                    );
+                }
+            }
             else {
                 return (
                     <View
@@ -155,71 +155,12 @@ export default class ContentDetail extends Component {
             }
         }
         else if (node.name == 'p' && node.children[1] && node.children[1].name == 'iframe') {
-            //console.log(node.name == 'p' && node.children[1] && node.children[1].name == 'iframe')
             const a = node.children[1].attribs
-            //console.log(a.src)
-            let latitude = parseFloat(a.src.slice(a.src.indexOf('!3d') + 3, a.src.indexOf('!2m'))).toFixed(6)
-            let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
 
             if (a.src.slice(0, 2) == '//') {
                 a.src = 'https:' + a.src
             };
-            if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
-                const iframeHtml =
-                    `<iframe src="${a.src}" 
-                        height="100%", 
-                        width="100%", 
-                    >
-                    </iframe>`;
-                return (
-                    <View key={index}
-                        style={{
-                            width: width,
-                            height: 260,
-                            marginLeft: -20,
-                            paddingBottom: 10,
-                            alignSelf: 'center',
-                        }}
-                    >
-
-                        <TouchableOpacity
-                            style={{ alignSelf: 'flex-end' }}
-                            onPress={() => Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + latitude + ',' + longitude : 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude)}
-                        >
-                            <Text style={{ color: '#66b3ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
-                        </TouchableOpacity>
-
-                        {/* <WebView
-                            bounces={false}
-                            scrollEnabled={false}
-                            source={{ html: iframeHtml }}
-                            style={{
-                                flex: 1,
-                                backgroundColor: 'transparent'
-                            }}
-                        /> */}
-
-                        <MapView
-                            //provider={PROVIDER_GOOGLE}
-                            style={{ width, height: width * 9 / 16 }}
-                            initialRegion={{
-                                latitude: Number(latitude),
-                                longitude: Number(longitude),
-                                latitudeDelta: 0.01,
-                                longitudeDelta: 0.01,
-                            }}
-                        >
-                            <MapView.Marker
-                                coordinate={{
-                                    latitude: Number(latitude),
-                                    longitude: Number(longitude),
-                                }}
-                            />
-                        </MapView>
-                    </View>
-                );
-            }
-            else if (a.src.slice(12, 15) == 'you') {
+            if ((a.src.slice(6, 13) == 'youtube') || (a.src.slice(12, 15) == 'you')) {
                 let videoId = a.src.slice(a.src.indexOf('/embed/') + 7)
                 return (
                     <View
@@ -228,19 +169,6 @@ export default class ContentDetail extends Component {
                             height: (width - 10) * 0.5625,
                             alignSelf: 'center',
                         }}>
-                        {/* <WebView
-                            key={index}
-                            bounces={false}
-                            scrollEnabled={false}
-                            source={{
-                                uri: a.src
-                            }}
-                            style={{
-                                width: width - 10,
-                                height: (width - 10) * 0.5625,
-                                alignSelf: 'center',
-                            }}
-                        /> */}
 
                         <TouchableOpacity
                             key={index}
@@ -273,6 +201,58 @@ export default class ContentDetail extends Component {
                         </TouchableOpacity>
                     </View>
                 );
+            }
+            else if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
+                const iframeHtml =
+                    `<iframe src="${a.src}" 
+                        height="100%", 
+                        width="100%", 
+                    >
+                    </iframe>`;
+
+                let latitude = parseFloat(a.src.slice(a.src.indexOf('!3d') + 3, a.src.indexOf('!2m'))).toFixed(6)
+                let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
+                console.log(latitude, 2)
+
+                if (latitude != 'NaN' && longitude != 'NaN') {
+                    return (
+                        <View key={index}
+                            style={{
+                                width: width,
+                                height: 260,
+                                marginLeft: -20,
+                                paddingBottom: 10,
+                                alignSelf: 'center',
+                            }}
+                        >
+
+                            <TouchableOpacity
+                                style={{ alignSelf: 'flex-end' }}
+                                onPress={() => Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + latitude + ',' + longitude : 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude)}
+                            >
+                                <Text style={{ color: '#66b3ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
+                            </TouchableOpacity>
+
+                            <MapView
+                                //provider={PROVIDER_GOOGLE}
+                                style={{ width, height: width * 9 / 16 }}
+                                initialRegion={{
+                                    latitude: Number(latitude),
+                                    longitude: Number(longitude),
+                                    latitudeDelta: 0.01,
+                                    longitudeDelta: 0.01,
+                                }}
+                            >
+                                <MapView.Marker
+                                    coordinate={{
+                                        latitude: Number(latitude),
+                                        longitude: Number(longitude),
+                                    }}
+                                />
+                            </MapView>
+                        </View>
+                    );
+                }
             }
             else {
                 return (
@@ -302,71 +282,12 @@ export default class ContentDetail extends Component {
             }
         }
         else if ((node.name == 'p' || node.name == 'div') && node.children[0] && node.children[0].name == 'iframe') {
-            //console.log((node.name == 'p' || node.name == 'div') && node.children[0] && node.children[0].name == 'iframe')
             const a = node.children[0].attribs;
-            //console.log(a)
-            let latitude = parseFloat(a.src.slice(a.src.indexOf('!3d') + 3, a.src.indexOf('!2m'))).toFixed(6)
-            let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
 
             if (a.src.slice(0, 2) == '//') {
                 a.src = 'https:' + a.src
             };
-            if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
-                const iframeHtml =
-                    `<iframe src="${a.src}" 
-                        height="100%", 
-                        width="100%", 
-                    >
-                    </iframe>`;
-                return (
-                    <View key={index}
-                        style={{
-                            width: width,
-                            height: 260,
-                            marginLeft: -20,
-                            paddingBottom: 10,
-                            alignSelf: 'center',
-                        }}
-                    >
-
-                        <TouchableOpacity
-                            style={{ alignSelf: 'flex-end' }}
-                            onPress={() => Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + latitude + ',' + longitude : 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude)}
-                        >
-                            <Text style={{ color: '#66b3ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
-                        </TouchableOpacity>
-
-                        {/* <WebView
-                            bounces={false}
-                            scrollEnabled={false}
-                            source={{ html: iframeHtml }}
-                            style={{
-                                flex: 1,
-                                backgroundColor: 'transparent'
-                            }}
-                        /> */}
-
-                        <MapView
-                            //provider={PROVIDER_GOOGLE}
-                            style={{ width, height: width * 9 / 16 }}
-                            initialRegion={{
-                                latitude: Number(latitude),
-                                longitude: Number(longitude),
-                                latitudeDelta: 0.01,
-                                longitudeDelta: 0.01,
-                            }}
-                        >
-                            <MapView.Marker
-                                coordinate={{
-                                    latitude: Number(latitude),
-                                    longitude: Number(longitude),
-                                }}
-                            />
-                        </MapView>
-                    </View>
-                );
-            }
-            else if (a.src.slice(12, 15) == 'you') {
+            if ((a.src.slice(6, 13) == 'youtube') || (a.src.slice(12, 15) == 'you')) {
                 let videoId = a.src.slice(a.src.indexOf('/embed/') + 7)
                 return (
                     <View
@@ -376,18 +297,6 @@ export default class ContentDetail extends Component {
                             height: (width - 10) * 0.5625,
                             alignSelf: 'center',
                         }}>
-                        {/* <WebView
-                            bounces={false}
-                            scrollEnabled={false}
-                            source={{
-                                uri: a.src
-                            }}
-                            style={{
-                                width: width - 10,
-                                height: (width - 10) * 0.5625,
-                                alignSelf: 'center',
-                            }}
-                        /> */}
                         <TouchableOpacity
                             key={index}
                             onPress={() => Linking.openURL(a.src)}
@@ -419,6 +328,58 @@ export default class ContentDetail extends Component {
                         </TouchableOpacity>
                     </View>
                 );
+            }
+            else if (a.src.slice(0, 27) == 'https://www.google.com/maps') {
+                const iframeHtml =
+                    `<iframe src="${a.src}" 
+                        height="100%", 
+                        width="100%", 
+                    >
+                    </iframe>`;
+
+                let latitude = parseFloat(a.src.slice(a.src.indexOf('!3d') + 3, a.src.indexOf('!2m'))).toFixed(6)
+                let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
+                console.log(latitude, 3)
+
+                if (latitude != 'NaN' && longitude != 'NaN') {
+                    return (
+                        <View key={index}
+                            style={{
+                                width: width,
+                                height: 260,
+                                marginLeft: -20,
+                                paddingBottom: 10,
+                                alignSelf: 'center',
+                            }}
+                        >
+
+                            <TouchableOpacity
+                                style={{ alignSelf: 'flex-end' }}
+                                onPress={() => Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + latitude + ',' + longitude : 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude)}
+                            >
+                                <Text style={{ color: '#66b3ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
+                            </TouchableOpacity>
+
+                            <MapView
+                                //provider={PROVIDER_GOOGLE}
+                                style={{ width, height: width * 9 / 16 }}
+                                initialRegion={{
+                                    latitude: Number(latitude),
+                                    longitude: Number(longitude),
+                                    latitudeDelta: 0.01,
+                                    longitudeDelta: 0.01,
+                                }}
+                            >
+                                <MapView.Marker
+                                    coordinate={{
+                                        latitude: Number(latitude),
+                                        longitude: Number(longitude),
+                                    }}
+                                />
+                            </MapView>
+                        </View>
+                    );
+                }
             }
             else {
                 return (

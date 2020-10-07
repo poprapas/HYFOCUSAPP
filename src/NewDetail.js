@@ -28,7 +28,7 @@ export default class NewDetail extends Component {
         if (node.name == 'p' && node.children[0].name == 'img') {
             const a = node.children[0].attribs;
             return (
-                <Lightbox key={index} underlayColor={'transparent'} swipeToDismiss={false}> 
+                <Lightbox key={index} underlayColor={'transparent'} swipeToDismiss={false}>
                     <Image
                         style={{
                             width: width,
@@ -120,34 +120,36 @@ export default class NewDetail extends Component {
                         width="100%" 
                     >
                     </iframe>`;
-                return (
-                    <View key={index}
-                        style={{
-                            width: width,
-                            height: 260,
-                            marginLeft: -20,
-                            paddingBottom: 10,
-                            alignSelf: 'center',
-                        }}
-                    >
-
-                        <TouchableOpacity
-                            style={{ alignSelf: 'flex-end' }}
-                            onPress={() => Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + latitude + ',' + longitude : 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude)}
-                        >
-                            <Text style={{ color: '#66b3ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
-                        </TouchableOpacity>
-
-                        <WebView
-                            bounces={false}
-                            scrollEnabled={false}
-                            source={{ html: iframeHtml }}
+                if (latitude != 'NaN' && longitude != 'NaN') {
+                    return (
+                        <View key={index}
                             style={{
-                                backgroundColor: 'transparent',
+                                width: width,
+                                height: 260,
+                                marginLeft: -20,
+                                paddingBottom: 10,
+                                alignSelf: 'center',
                             }}
-                        />
-                    </View>
-                );
+                        >
+
+                            <TouchableOpacity
+                                style={{ alignSelf: 'flex-end' }}
+                                onPress={() => Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + latitude + ',' + longitude : 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude)}
+                            >
+                                <Text style={{ color: '#66b3ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
+                            </TouchableOpacity>
+
+                            <WebView
+                                bounces={false}
+                                scrollEnabled={false}
+                                source={{ html: iframeHtml }}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                }}
+                            />
+                        </View>
+                    );
+                }
             }
             else if (a.src.slice(12, 15) == 'you') {
                 return (
@@ -212,33 +214,35 @@ export default class NewDetail extends Component {
                         width="100%", 
                     >
                     </iframe>`;
-                return (
-                    <View key={index}
-                        style={{
-                            width: width,
-                            height: 260,
-                            marginLeft: -20,
-                            paddingBottom: 10,
-                            alignSelf: 'center',
-                        }}
-                    >
-                        <TouchableOpacity
-                            style={{ alignSelf: 'flex-end' }}
-                            onPress={() => Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + latitude + ',' + longitude : 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude)}
-                        >
-                            <Text style={{ color: '#66b3ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
-                        </TouchableOpacity>
-
-                        <WebView
-                            bounces={false}
-                            scrollEnabled={false}
-                            source={{ html: iframeHtml }}
+                if (latitude != 'NaN' && longitude != 'NaN') {
+                    return (
+                        <View key={index}
                             style={{
-                                backgroundColor: 'transparent',
+                                width: width,
+                                height: 260,
+                                marginLeft: -20,
+                                paddingBottom: 10,
+                                alignSelf: 'center',
                             }}
-                        />
-                    </View>
-                );
+                        >
+                            <TouchableOpacity
+                                style={{ alignSelf: 'flex-end' }}
+                                onPress={() => Linking.openURL(Platform.OS == 'ios' ? 'http://maps.apple.com/?q=' + latitude + ',' + longitude : 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude)}
+                            >
+                                <Text style={{ color: '#66b3ff', fontSize: 15, textDecorationLine: 'underline', paddingBottom: 10 }}>{Platform.OS == 'ios' ? 'ดูด้วย Maps' : 'ดูด้วย Google Maps'}</Text>
+                            </TouchableOpacity>
+
+                            <WebView
+                                bounces={false}
+                                scrollEnabled={false}
+                                source={{ html: iframeHtml }}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                }}
+                            />
+                        </View>
+                    );
+                }
             }
             else if (a.src.slice(12, 15) == 'you') {
                 return (

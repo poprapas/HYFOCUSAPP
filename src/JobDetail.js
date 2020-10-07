@@ -9,63 +9,11 @@ import Icons from 'react-native-vector-icons/dist/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
 import Foundation from 'react-native-vector-icons/dist/Foundation';
 import Communications from 'react-native-communications';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Feather from 'react-native-vector-icons/Feather';
-import DeviceInfo from 'react-native-device-info';
 import Header from './_Component/header';
 
 const { width, height } = Dimensions.get("window");
 
 export default class JobDetail extends Component {
-
-    // static navigationOptions = ({ navigation }) => ({
-    //     headerTitle:
-    //         <View style={{ flexDirection: 'row', alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
-    //             <Image
-    //                 source={require('../assets/images/work-icon.png')}
-    //                 style={{
-    //                     width: 25,
-    //                     height: 25,
-    //                     top: Platform.OS == 'ios' ? 0 : 3,
-    //                 }}
-    //             />
-    //             <Text style={{
-    //                 textAlign: 'center',
-    //                 fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    //                 fontSize: Platform.OS == 'ios' ? 18 : 15,
-    //                 color: 'white',
-    //                 paddingTop: Platform.OS == 'ios' ? 8 : 5,
-    //             }}> หางานหาดใหญ่
-    //         </Text>
-    //         </View>,
-    //     headerRight:
-    //         <TouchableOpacity onPress={() => Platform.OS == 'ios' ?
-    //             fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + navigation.state.params.url)
-    //                 .then((response) => response.text())
-    //                 .then((responseJson) => { Share.share({ url: responseJson, message: 'หางาน : ' + navigation.state.params.company }) })
-    //             :
-    //             Share.share({ message: decodeURI(navigation.state.params.url) })}>
-    //             <Feather
-    //                 name="share-2"
-    //                 size={20}
-    //                 color='white'
-    //                 style={{
-    //                     paddingHorizontal: 10
-    //                 }}
-    //             />
-    //         </TouchableOpacity>,
-    //     headerLeft:
-    //         <TouchableOpacity onPress={() => navigation.goBack()}>
-    //             <Ionicons
-    //                 name="ios-arrow-back"
-    //                 size={30}
-    //                 color='white'
-    //                 style={{
-    //                     paddingHorizontal: 10
-    //                 }}
-    //             />
-    //         </TouchableOpacity>
-    // })
 
     constructor(props) {
         super(props);
