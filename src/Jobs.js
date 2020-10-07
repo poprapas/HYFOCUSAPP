@@ -423,7 +423,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         backgroundColor: 'white',
         flex: 5,
-        height: Platform.OS == 'ios' ? 35 : 30,
+        height: 40,
     },
     searchInput: {
         fontSize: 16,
@@ -438,7 +438,6 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: 15,
-        fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
@@ -446,21 +445,18 @@ const styles = StyleSheet.create({
     },
     titleText2: {
         fontSize: 15,
-        fontWeight: 'normal',
         color: '#ff0000',
         textAlign: 'left',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: Platform.OS == 'ios' ? 7 : 2,
     },
     more: {
-        fontWeight: 'normal',
         fontSize: 50,
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         color: '#696969'
     },
     button: {
-        fontSize: Platform.OS == 'ios' ? 16 : 15,
-        fontWeight: 'normal',
+        fontSize: 18,
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         alignItems: 'center',

@@ -7,7 +7,8 @@ import MapView from 'react-native-maps';
 import DeviceInfo from 'react-native-device-info';
 import { WebView } from 'react-native-webview';
 import Header from './_Component/header';
-import Swiper from 'react-native-swiper'
+import Carousel from 'react-native-looped-carousel';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const { width, height } = Dimensions.get("window");
 
@@ -99,25 +100,23 @@ export default class RoomDetail extends Component {
                     <View style={{ height: DeviceInfo.hasNotch() ? height / 4 : height / 3, }}
                         onLayout={this._onLayoutDidChange}
                     >
-                        <Swiper
-                            autoplay
-                            autoplayTimeout={3}
+                        <Carousel
+                            delay={3000}
                             style={this.state.size}
-                            dotStyle={{
-                                margin: 3
-                            }}
-                            activeDotStyle={{
-                                margin: 3
-                            }}
+                            autoplay
+                            bullets
+                            arrows
+                            arrowsContainerStyle={{ marginHorizontal: 5 }}
+                            leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
+                            rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
                         >
-
                             {this.props.route.params.gallery.map((prop, key) => {
                                 return (
                                     <View
                                         key={key.toString()}
                                         style={{
                                             backgroundColor: 'white',
-                                            width: width
+                                            width: width,
                                         }}>
                                         <Image
                                             source={{ uri: prop }}
@@ -126,8 +125,8 @@ export default class RoomDetail extends Component {
                                     </View>
                                 )
                             })}
+                        </Carousel>
 
-                        </Swiper>
                     </View>
 
                     <View style={{ padding: 10 }}>

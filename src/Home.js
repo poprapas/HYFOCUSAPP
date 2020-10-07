@@ -396,10 +396,7 @@ export default class Home extends Component {
                                     autoplay
                                     bullets
                                     arrows
-                                    arrowsContainerStyle={{
-                                        marginLeft: 5,
-                                        marginRight: 15,
-                                    }}
+                                    arrowsContainerStyle={{ marginHorizontal: 5 }}
                                     leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
                                     rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
                                 >
