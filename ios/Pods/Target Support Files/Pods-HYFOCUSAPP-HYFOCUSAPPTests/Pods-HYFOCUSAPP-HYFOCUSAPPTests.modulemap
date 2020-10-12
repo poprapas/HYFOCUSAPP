@@ -1,0 +1,6 @@
+module Pods_HYFOCUSAPP_HYFOCUSAPPTests {
+  umbrella header "Pods-HYFOCUSAPP-HYFOCUSAPPTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

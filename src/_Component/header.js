@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         backgroundColor: '#000',
-        paddingVertical: 5
+        paddingVertical: 10
     },
     welcome: {
         color: '#fff',

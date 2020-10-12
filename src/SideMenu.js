@@ -29,7 +29,6 @@ export default class SideMenu extends Component {
             <View style={{ flex: 1, backgroundColor: '#000', }}>
                 <View style={{ height: 60, }} />
                 <ScrollView bounces={false} style={{ flex: 1, backgroundColor: '#000', }}>
-
                     <TouchableOpacity onPress={() => { this.props.navigation.navigate('หน้าแรก'), this.setState({ currentpage: 'หน้าแรก', dropdown: false }) }}>
                         <View style={[styles.navSectionStyle, { backgroundColor: this.state.currentpage == 'หน้าแรก' ? Color.BROWN[800] : '#000' }]}>
                             <Image source={require('../assets/images/home-icon.png')} style={{ height: 23, width: 28 }} />
@@ -39,11 +38,7 @@ export default class SideMenu extends Component {
                         </View>
                     </TouchableOpacity>
 
-                    <View style={{
-                        height: 1,
-                        backgroundColor: 'rgba(240,240,240,0.2)',
-                        width
-                    }} />
+                    <View style={{ height: 1, backgroundColor: 'rgba(240,240,240,0.2)', width }} />
 
                     <TouchableOpacity onPress={() => this.setState({ dropdown: !this.state.dropdown })}>
                         <View style={styles.navSectionStyle}>
@@ -442,22 +437,6 @@ export default class SideMenu extends Component {
                     }}>
                     </View>
 
-                    {/* <TouchableOpacity onPress={() => Linking.openURL('https://www.hatyaifocus.com/board/forum.php')}>
-                    <View style={styles.navSectionStyle}>
-                        <Iconss name="tags" size={20} color='white' style={{ width: 28 }} />
-                        <Text style={styles.navItemStyle}>
-                            เว็บบอร์ด
-                            </Text>
-                    </View>
-                </TouchableOpacity>
-
-                <View style={{
-                    height: 1,
-                    backgroundColor: 'rgba(240,240,240,0.2)',
-                    width
-                }}>
-                </View> */}
-
                     <View>
                         <TouchableOpacity onPress={() => { this.props.navigation.navigate('Setting'), this.setState({ currentpage: 'ตั้งค่า', dropdown: false }) }}>
                             <View style={[styles.navSectionStyle, { backgroundColor: this.state.currentpage == 'ตั้งค่า' ? Color.BROWN[800] : '#000' }]}>
@@ -475,6 +454,7 @@ export default class SideMenu extends Component {
                         }}>
                         </View>
                     </View>
+                    <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }} />
                 </ScrollView >
             </View>
         );

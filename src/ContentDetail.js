@@ -38,7 +38,7 @@ export default class ContentDetail extends Component {
         else if ((node.name == 'p' || node.name == 'div') && node.children[0] && (node.children[0].name == 'iframe')) {
             const a = node.children[0].attribs;
 
-            console.log(a.src, a.src.slice(6, 13))
+            // console.log(a.src, a.src.slice(6, 13))
 
             if (a.src.slice(0, 2) == '//') {
                 a.src = 'https:' + a.src
@@ -87,7 +87,7 @@ export default class ContentDetail extends Component {
 
                 let latitude = parseFloat(a.src.slice(a.src.indexOf('!3d') + 3, a.src.indexOf('!2m'))).toFixed(6)
                 let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
-                console.log(a.src, latitude, longitude, 1)
+                // console.log(a.src, latitude, longitude, 1)
 
                 if (latitude != 'NaN' && longitude != 'NaN') {
                     return (
@@ -212,7 +212,7 @@ export default class ContentDetail extends Component {
 
                 let latitude = parseFloat(a.src.slice(a.src.indexOf('!3d') + 3, a.src.indexOf('!2m'))).toFixed(6)
                 let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
-                console.log(latitude, 2)
+                // console.log(latitude, 2)
 
                 if (latitude != 'NaN' && longitude != 'NaN') {
                     return (
@@ -339,7 +339,7 @@ export default class ContentDetail extends Component {
 
                 let latitude = parseFloat(a.src.slice(a.src.indexOf('!3d') + 3, a.src.indexOf('!2m'))).toFixed(6)
                 let longitude = parseFloat(a.src.slice(a.src.indexOf('!2d') + 3, a.src.indexOf('!3d'))).toFixed(6)
-                console.log(latitude, 3)
+                // console.log(latitude, 3)
 
                 if (latitude != 'NaN' && longitude != 'NaN') {
                     return (
@@ -529,11 +529,7 @@ export default class ContentDetail extends Component {
                     text={this.props.route.params.topic}
                     rightIcon2={{
                         icon: 'share-2',
-                        fn: () => Platform.OS == 'ios' ?
-                            fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + this.props.route.params.url)
-                                .then((response) => response.text())
-                                .then((responseJson) => { Share.share({ url: responseJson, message: this.props.route.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'") }) })
-                            : Share.share({ message: decodeURI(this.props.route.params.url) })
+                        fn: () => Share.share({ message: decodeURI(this.props.route.params.url) })
                     }}
                 />
 
@@ -601,23 +597,16 @@ const styles = StyleSheet.create({
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
     },
-    flatlist: {
-        paddingLeft: 5,
-        paddingRight: 5,
-        paddingTop: 2,
-    },
     title: {
         fontSize: 20,
         color: 'white',
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        paddingTop: 20,
+        paddingTop: 10,
         lineHeight: 32,
-
     },
     view: {
         fontSize: 14,
-        fontWeight: 'normal',
         color: 'white',
         textAlign: 'right',
         fontFamily: 'Times New Roman',
@@ -628,7 +617,6 @@ const styles = StyleSheet.create({
 const styless = StyleSheet.create({
     p: {
         fontSize: 18,
-        fontWeight: 'normal',
         color: 'white',
         textAlign: 'left',
         fontFamily: 'Times New Roman',
@@ -636,7 +624,6 @@ const styless = StyleSheet.create({
     },
     a: {
         fontSize: 18,
-        fontWeight: 'normal',
         color: '#ffd633',
         textAlign: 'left',
         fontFamily: 'Times New Roman',

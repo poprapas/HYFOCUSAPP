@@ -145,19 +145,6 @@ export default class About extends Component {
                         </View>
                     </View>
 
-                    {/* <View style={{ flexDirection: 'row' }}>
-
-                            <TouchableOpacity onPress={() => Linking.openURL('https://www.hatyaifocus.com/board/forum.php')}>
-                                <Text style={styles.name}> เว็บบอร์ด:</Text>
-                            </TouchableOpacity>
-
-                            <View style={{ paddingTop: 5 }}>
-                                <Text style={styles.detail}>
-                                    บอร์ดกระดานข้อความพูดคุย ข่าวคราวเรื่องราว การซื้อขาย
-                                </Text>
-                            </View>
-                        </View> */}
-
                     <View style={{ flexDirection: 'row' }}>
 
                         <TouchableOpacity onPress={() => {
@@ -189,13 +176,11 @@ const styles = StyleSheet.create({
     },
     main: {
         fontSize: 16,
-        fontWeight: 'normal',
         color: 'black',
         fontFamily: 'Times New Roman',
     },
     detail: {
         fontSize: 16,
-        fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
         fontFamily: 'Times New Roman',
@@ -212,7 +197,6 @@ const styles = StyleSheet.create({
     name: {
         fontSize: 16,
         paddingTop: 5,
-        fontWeight: 'normal',
         color: '#0066ff',
         textAlign: 'left',
         fontFamily: 'Times New Roman',

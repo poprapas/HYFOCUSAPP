@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Image, Linking, ScrollView, Dimensions, Share, TouchableOpacity, } from 'react-native';
+import { Platform, StyleSheet, Text, View, Image, Linking, ScrollView, Dimensions, Share, TouchableOpacity, SafeAreaView } from 'react-native';
 
 import HTMLView from 'react-native-htmlview';
 import Icons from 'react-native-vector-icons/dist/MaterialIcons';
@@ -86,12 +86,7 @@ export default class RoomDetail extends Component {
                     text={'ที่พักหาดใหญ่'}
                     rightIcon2={{
                         icon: 'share-2',
-                        fn: () => Platform.OS == 'ios' ?
-                            fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + this.props.route.params.url)
-                                .then((response) => response.text())
-                                .then((responseJson) => { Share.share({ url: responseJson, message: 'ที่พัก : ' + this.props.route.params.property }) })
-                            :
-                            Share.share({ message: decodeURI(this.props.route.params.url) })
+                        fn: () => Share.share({ message: decodeURI(this.props.route.params.url) })
                     }}
                 />
 
@@ -265,6 +260,8 @@ export default class RoomDetail extends Component {
                         </Text>
                     </View>
 
+                    <SafeAreaView style={{ flex: 1, backgroundColor: 'white', }} />
+
                 </ScrollView>
 
             </View >
@@ -277,10 +274,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         ...StyleSheet.absoluteFillObject,
-    },
-    logo: {
-        height: 100,
-        width: 150,
     },
     property: {
         fontSize: 22,
@@ -318,21 +311,18 @@ const styles = StyleSheet.create({
     },
     detail: {
         fontSize: 16,
-        fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
         paddingLeft: 10,
     },
     price: {
         fontSize: 14,
-        fontWeight: 'normal',
         color: '#ff0000',
         textAlign: 'left',
         paddingLeft: 10,
     },
     date: {
         fontSize: 14,
-        fontWeight: 'normal',
         color: 'black',
         textAlign: 'right',
         paddingLeft: 3,
@@ -344,14 +334,12 @@ const styles = StyleSheet.create({
     },
     feature: {
         fontSize: 16,
-        fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
         paddingLeft: 5,
     },
     service: {
         fontSize: 16,
-        fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
         paddingLeft: 5,
@@ -363,7 +351,6 @@ const styles = StyleSheet.create({
     },
     for: {
         fontSize: 14,
-        fontWeight: 'normal',
         color: '#28a428',
         textAlign: 'left',
         paddingLeft: 10,
@@ -373,10 +360,8 @@ const styles = StyleSheet.create({
 const styless = StyleSheet.create({
     p: {
         fontSize: 16,
-        fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
         paddingLeft: 5,
-        marginBottom: Platform.OS === 'ios' ? -20 : -10,
     }
 });

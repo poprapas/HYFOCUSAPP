@@ -265,6 +265,7 @@ export default class Jobs extends Component {
                         onPress={() => this.search()}
                         style={{
                             alignSelf: 'center',
+                            alignItems: 'center',
                             marginRight: 5,
                             borderRadius: 10,
                             backgroundColor: 'black',
@@ -283,9 +284,7 @@ export default class Jobs extends Component {
                             color: 'white',
                             alignSelf: 'center',
                             paddingTop: 10,
-                        }}>
-                            - ไม่พบข้อมูลที่ค้นหา -
-          </Text> : null}
+                        }}>- ไม่พบข้อมูลที่ค้นหา -</Text> : null}
                 </View>
 
                 <FlatList
@@ -300,7 +299,7 @@ export default class Jobs extends Component {
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) =>
                         <View>{this.state.dataSource.length > 0 ?
-                            <View style={styles.flatlist}>
+                            <View style={{ paddingVertical: 2 }}>
                                 <TouchableOpacity
                                     activeOpacity={0.9}
                                     onPress={() => navigate('JobDetail',
@@ -362,7 +361,7 @@ export default class Jobs extends Component {
                                             paddingTop: Platform.OS == 'ios' ? 30 : 15,
                                             flex: 16,
                                         }}>
-                                            <Text style={styles.more}> > </Text>
+                                            <Text style={styles.more}>{' > '}</Text>
                                         </View>
                                     </View>
                                 </TouchableOpacity>
@@ -432,10 +431,6 @@ const styles = StyleSheet.create({
         width: width - 140,
         flex: 1,
     },
-    flatlist: {
-        paddingTop: 2,
-        paddingBottom: 2,
-    },
     titleText: {
         fontSize: 15,
         color: 'black',
@@ -456,12 +451,9 @@ const styles = StyleSheet.create({
         color: '#696969'
     },
     button: {
-        fontSize: 18,
+        fontSize: 16,
         color: 'white',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        alignItems: 'center',
         padding: 10,
-        paddingVertical: Platform.OS == 'ios' ? 9 : 3,
-        marginTop: 2
     },
 });

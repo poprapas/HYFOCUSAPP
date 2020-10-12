@@ -196,7 +196,7 @@ export default class Room extends Component {
                     data={this.state.dataSource}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) =>
-                        <View style={styles.flatlist}>
+                        <View style={{ paddingBottom: 5 }}>
                             <TouchableOpacity
                                 activeOpacity={0.9}
                                 onPress={() => navigate('RoomDetail',
@@ -259,7 +259,7 @@ export default class Room extends Component {
                                         paddingRight: 5
                                     }}>
 
-                                        <Text style={styles.more}> > </Text>
+                                        <Text style={styles.more}>{' > '}</Text>
                                     </View>
 
                                 </View>
@@ -349,23 +349,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Color.BROWN[800],
     },
-    logo: {
-        height: 110,
-        width: 150,
-    },
-    roomfont: {
-        fontSize: width * 0.065,
-        paddingTop: Platform.OS === 'ios' ? 48 : 40,
-        alignSelf: 'center',
-        color: 'white',
-        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    },
-    flatlist: {
-        paddingBottom: 5
-    },
     titleText: {
         fontSize: 16,
-        fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
@@ -373,33 +358,30 @@ const styles = StyleSheet.create({
     },
     titleText2: {
         fontSize: 15,
-        fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: Platform.OS == 'ios' ? 8 : 0,
     },
     more: {
-        fontWeight: 'normal',
         fontSize: 40,
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         color: '#696969'
     },
     button: {
-        fontSize: Platform.OS == 'ios' ? width / 35 : width / 41,
-        fontWeight: 'normal',
+        fontSize: 11,
         color: 'white',
         textAlign: 'center',
         padding: 5,
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        marginTop: Platform.OS == 'ios' ? 5 : 2,
     },
     selectbutton: {
-        height: 30,
         overflow: 'hidden',
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#30231d',
-        width: Platform.OS == 'ios' ? width / 5.3 : width / 5.5
+        width: width / 5.2,
+        justifyContent: 'center',
+        paddingVertical: 5
     },
 });

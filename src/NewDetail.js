@@ -305,7 +305,6 @@ export default class NewDetail extends Component {
                     <Text
                         style={{
                             fontSize: 18,
-                            fontWeight: 'normal',
                             color: 'white',
                             textAlign: 'left',
                             fontFamily: 'Times New Roman',
@@ -335,7 +334,6 @@ export default class NewDetail extends Component {
                     key={index}
                     style={{
                         fontSize: 18,
-                        fontWeight: 'normal',
                         color: 'white',
                         textAlign: 'left',
                         fontFamily: 'Times New Roman',
@@ -366,7 +364,6 @@ export default class NewDetail extends Component {
                     key={index}
                     style={{
                         fontSize: 18,
-                        fontWeight: 'normal',
                         color: 'white',
                     }}
                 >
@@ -392,11 +389,7 @@ export default class NewDetail extends Component {
                     text={this.props.route.params.type}
                     rightIcon2={{
                         icon: 'share-2',
-                        fn: () => Platform.OS == 'ios' ?
-                            fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + this.props.route.params.url)
-                                .then((response) => response.text())
-                                .then((responseJson) => { Share.share({ url: responseJson, message: this.props.route.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'") }) })
-                            : Share.share({ message: decodeURI(this.props.route.params.url) })
+                        fn: () => Share.share({ message: decodeURI(this.props.route.params.url) })
                     }}
                 />
 
@@ -472,7 +465,7 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        paddingTop: 20,
+        paddingTop: 10,
         lineHeight: 32
     },
     view: {
@@ -500,7 +493,6 @@ const styless = StyleSheet.create({
     },
     a: {
         fontSize: 18,
-        fontWeight: 'normal',
         color: '#ffd633',
         textAlign: 'left',
         fontFamily: 'Times New Roman',

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-    Platform, StyleSheet, Text, View, Image, Linking, ScrollView, Dimensions, TouchableOpacity, Share, StatusBar
-} from 'react-native';
+import { Platform, StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableOpacity, Share, StatusBar, SafeAreaView } from 'react-native';
 
 import HTMLView from 'react-native-htmlview';
 import Icon from 'react-native-vector-icons/dist/Entypo';
@@ -64,12 +62,7 @@ export default class JobDetail extends Component {
                     text={'หางานหาดใหญ่'}
                     rightIcon2={{
                         icon: 'share-2',
-                        fn: () => Platform.OS == 'ios' ?
-                            fetch('http://api.bit.ly/v3/shorten?format=txt&login=hatyaiapp&apiKey=R_c8544f5f3e8241f39f1dbe59bee0027a&longUrl=' + this.props.route.params.url)
-                                .then((response) => response.text())
-                                .then((responseJson) => { Share.share({ url: responseJson, message: 'หางาน : ' + this.props.route.params.company }) })
-                            :
-                            Share.share({ message: decodeURI(this.props.route.params.url) })
+                        fn: () => Share.share({ message: decodeURI(this.props.route.params.url) })
                     }}
                 />
 
@@ -222,6 +215,8 @@ export default class JobDetail extends Component {
                         </Text>
                     </View>
 
+                    <SafeAreaView style={{ flex: 1, backgroundColor: 'white', }} />
+
                 </ScrollView>
 
             </View>
@@ -265,27 +260,23 @@ const styles = StyleSheet.create({
     },
     detail: {
         fontSize: 16,
-        fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
         width: width - 130
     },
     detail2: {
         fontSize: 16,
-        fontWeight: 'normal',
         color: '#ff0000',
         textAlign: 'left',
         width: width - 120
     },
     detail3: {
         fontSize: 16,
-        fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
     },
     view: {
         fontSize: 14,
-        fontWeight: 'normal',
         color: 'black',
         textAlign: 'right',
         paddingLeft: 3,
@@ -295,10 +286,9 @@ const styles = StyleSheet.create({
 const styless = StyleSheet.create({
     p: {
         fontSize: 16,
-        fontWeight: 'normal',
         color: 'black',
         textAlign: 'left',
-        marginBottom: Platform.OS == 'ios' ? -30 : -20,
+        marginBottom: -25,
         lineHeight: 22,
     },
     strong: {
@@ -306,7 +296,7 @@ const styless = StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'left',
-        marginBottom: -20,
+        marginBottom: -25,
         lineHeight: 22,
     }
 });

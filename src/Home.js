@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Platform, StyleSheet, Text, View, ScrollView, Image, ActivityIndicator, Linking, FlatList, Dimensions, StatusBar, RefreshControl, Animated, TouchableWithoutFeedback, BackHandler, ToastAndroid, Button } from 'react-native';
+import { TouchableOpacity, Platform, StyleSheet, Text, View, ScrollView, Image, ActivityIndicator, Linking, FlatList, Dimensions, StatusBar, RefreshControl, Animated, TouchableWithoutFeedback, BackHandler, ToastAndroid, } from 'react-native';
 
 import Color from 'react-native-material-color';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -159,14 +159,11 @@ export default class Home extends Component {
         if (Platform.OS == 'android') {
             StatusBar.setBackgroundColor('black')
         }
-        StatusBar.setBarStyle("light-content")
-        StatusBar.setHidden(false)
 
-        // do stuff while splash screen is shown
-        // After having done stuff (such as async tasks) hide the splash screen
         SplashScreen.hide();
 
-
+        StatusBar.setBarStyle("light-content")
+        StatusBar.setHidden(false)
 
         if (Platform.OS == 'ios') {
             this._notificationiOS(this);
@@ -287,7 +284,7 @@ export default class Home extends Component {
                         keyExtractor={(item, index) => index.toString()}
                         extraData={this.state.update}
                         renderItem={({ item }) =>
-                            <View style={styles.flatList}>
+                            <View style={{ padding: 5 }}>
                                 <TouchableOpacity
                                     onPress={() => navigate('NewDetail',
                                         {
@@ -318,7 +315,7 @@ export default class Home extends Component {
                                     />
                                 </TouchableOpacity>
 
-                                <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 5 }}>
 
                                     <TouchableOpacity onPress={() => {
                                         item.favorite = !item.favorite
@@ -330,12 +327,9 @@ export default class Home extends Component {
                                     }}>
                                         <Ionicons
                                             name={item.favorite || this.state.favorite['news_' + item.ID] ? "md-star" : "md-star-outline"}
-                                            size={25}
+                                            size={20}
                                             color={'#edad35'}
-                                            style={{
-                                                width: 40,
-                                                margin: 3,
-                                            }}
+                                            style={{ width: 40, }}
                                         />
                                     </TouchableOpacity>
 
@@ -353,7 +347,7 @@ export default class Home extends Component {
                                             }
                                         )}
                                     >
-                                        <Text style={styles.moredetail}>>>> อ่านต่อ >>></Text>
+                                        <Text style={styles.moredetail}>{'>>> อ่านต่อ >>>'}</Text>
                                     </TouchableOpacity>
 
                                 </View>
@@ -452,36 +446,17 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Color.BROWN[800],
     },
-    logo: {
-        height: 110,
-        width: 150,
-    },
-    newfont: {
-        fontSize: width * 0.07,
-        paddingTop: Platform.OS === 'ios' ? 45 : 40,
-        alignSelf: 'center',
-        color: 'white',
-        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    },
-    flatList: {
-        paddingLeft: 5,
-        paddingRight: 5,
-        paddingTop: 5,
-        paddingBottom: 20,
-    },
     titleText: {
         fontSize: 18,
         paddingTop: 10,
-        fontWeight: 'normal',
         color: 'white',
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        lineHeight: Platform.OS == 'ios' ? 28 : 35,
+        lineHeight: 35,
     },
     moredetail: {
         fontSize: 14,
         paddingTop: 5,
-        fontWeight: 'normal',
         color: 'white',
         textAlign: 'right',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
@@ -495,29 +470,7 @@ const styles = StyleSheet.create({
         height: width * 0.1,
         width: width,
         marginVertical: 20
-    },
-    button: {
-        fontSize: 15,
-        fontWeight: 'normal',
-        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        color: 'white',
-        textAlign: 'left',
-        paddingLeft: 5,
-        paddingRight: 5,
-        paddingTop: Platform.OS == 'ios' ? 7.5 : 5,
-        marginTop: Platform.OS == 'ios' ? 5 : 0,
-    },
-    selectbutton: {
-        height: 30,
-        overflow: 'hidden',
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#30231d',
-        backgroundColor: '#795548',
-        marginTop: 5,
-        marginLeft: 15,
-        alignSelf: 'flex-start'
-    },
+    }
 });
 
 

@@ -169,12 +169,11 @@ export default class People extends Component {
                                         height: (width - 150),
                                         alignSelf: 'center',
                                         borderRadius: 10,
-
                                     }}
                                 />
 
                                 <View style={{ paddingTop: 5 }}>
-                                    <Text style={styles.moredetail}> >>> อ่านต่อ >>> </Text>
+                                    <Text style={styles.moredetail}>{'>>> อ่านต่อ >>>'}</Text>
                                 </View>
                                 <View style={{
                                     height: 1,
@@ -219,27 +218,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Color.BROWN[800],
     },
-    logo: {
-        height: 110,
-        width: 150,
-    },
-    peoplefont: {
-        fontSize: width * 0.07,
-        paddingTop: Platform.OS === 'ios' ? 45 : 40,
-        alignSelf: 'center',
-        color: 'white',
-        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    },
     flatlist: {
-        paddingLeft: 5,
-        paddingRight: 5,
-        paddingTop: 5,
-        paddingBottom: 20,
+        padding: 5,
         alignItems: 'center',
     },
     moredetail: {
         fontSize: 14,
-        fontWeight: 'normal',
         color: 'white',
         textAlign: 'right',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
@@ -248,11 +232,10 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: 18,
-        fontWeight: 'normal',
         color: 'white',
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: 10,
-        lineHeight: Platform.OS == 'ios' ? 28 : 35
+        lineHeight: 35
     },
 });

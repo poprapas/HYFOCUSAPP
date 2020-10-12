@@ -167,7 +167,7 @@ export default class Favorite extends Component {
                             keyExtractor={(item, index) => index.toString()}
                             renderItem={({ item, index }) =>
 
-                                <View style={styles.flatlist}>
+                                <View style={{ padding: 5 }}>
                                     <Swipeout
                                         autoClose={true}
                                         onOpen={() => this.setState({
@@ -224,7 +224,7 @@ export default class Favorite extends Component {
                                                     }}
                                                 />
                                                 <View style={{ paddingTop: 5 }}>
-                                                    <Text style={styles.moredetail}> >>> อ่านต่อ >>> </Text>
+                                                    <Text style={styles.moredetail}>{'>>> อ่านต่อ >>>'}</Text>
                                                 </View>
                                                 <View style={{
                                                     height: 1,
@@ -249,25 +249,17 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Color.BROWN[800],
     },
-    flatlist: {
-        paddingLeft: 5,
-        paddingRight: 5,
-        paddingTop: 5,
-        paddingBottom: 20,
-    },
     titleText: {
         fontSize: 18,
         paddingTop: 10,
-        fontWeight: 'normal',
         color: 'white',
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        lineHeight: Platform.OS == 'ios' ? 28 : 35
+        lineHeight: 35
     },
     moredetail: {
         fontSize: 14,
         paddingTop: 5,
-        fontWeight: 'normal',
         color: 'white',
         textAlign: 'right',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',

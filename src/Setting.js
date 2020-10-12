@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-    Platform, StyleSheet, Text, View, Linking, TouchableOpacity,
-} from 'react-native';
+import { Platform, StyleSheet, Text, View, Linking, TouchableOpacity, } from 'react-native';
 
 import Color from 'react-native-material-color';
 import Communications from 'react-native-communications';
@@ -66,61 +64,21 @@ export default class Setting extends Component {
                     }}
                 />
 
-                {Platform.OS == 'ios' ?
-                    <View>
-
-                        <View style={{
-                            flexDirection: 'row',
-                            backgroundColor: 'white',
-                            justifyContent: 'space-between',
-                            borderBottomColor: '#A9A9A9',
-                            borderBottomWidth: 1,
-                            paddingVertical: 10,
-                            paddingLeft: 10,
-                        }}>
-                            <Text style={styles.titleText}>เวอร์ชั่น</Text>
-                            <Text style={styles.version}>{DeviceInfo.getVersion()}</Text>
-                        </View>
-
+                <View>
+                    <View style={styles.box}>
+                        <Text style={styles.titleText}>เวอร์ชั่น</Text>
+                        <Text style={styles.titleText}>{DeviceInfo.getVersion()}</Text>
                     </View>
-                    :
-                    <View>
-                        <View style={{
-                            flexDirection: 'row',
-                            backgroundColor: 'white',
-                            justifyContent: 'space-between',
-                            borderBottomColor: '#A9A9A9',
-                            borderBottomWidth: 1,
-                            paddingTop: 10,
-                            paddingBottom: 5,
-                            paddingLeft: 10
-                        }}>
-                            <Text style={styles.titleText}>เวอร์ชั่น</Text>
-                            <Text style={styles.version}>{DeviceInfo.getVersion()}</Text>
-                        </View>
-                    </View>
-                }
+                </View>
 
                 <TouchableOpacity onPress={() => Communications.email(['info@hatyaifocus.com'], null, null, null, null)}>
-                    <View style={{
-                        flexDirection: 'row',
-                        backgroundColor: 'white',
-                        justifyContent: 'space-between',
-                        borderBottomColor: '#A9A9A9',
-                        borderBottomWidth: 1,
-                        paddingTop: 10,
-                        paddingBottom: Platform.OS == 'ios' ? 10 : 5,
-                        paddingLeft: 5
-                    }}>
-                        <Text style={styles.titleText}> ติดต่อเรา </Text>
+                    <View style={styles.box}>
+                        <Text style={styles.titleText}>ติดต่อเรา</Text>
                         <Ionicons
                             name="ios-arrow-forward"
                             size={30}
                             color='#696969'
-                            style={{
-                                alignSelf: 'center',
-                                paddingRight: 20
-                            }}
+                            style={{ alignSelf: 'center', }}
                         />
                     </View>
                 </TouchableOpacity>
@@ -136,16 +94,18 @@ const styles = StyleSheet.create({
         backgroundColor: Color.BROWN[800],
     },
     titleText: {
-        fontSize: Platform.OS == 'ios' ? 18 : 16,
+        fontSize: 18,
         color: 'black',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: Platform.OS == 'ios' ? 10 : 0,
     },
-    version: {
-        fontSize: Platform.OS == 'ios' ? 18 : 16,
-        color: 'black',
-        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-        paddingTop: Platform.OS == 'ios' ? 10 : 0,
-        paddingRight: 10
-    },
+    box: {
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        justifyContent: 'space-between',
+        borderBottomColor: '#A9A9A9',
+        borderBottomWidth: 1,
+        padding: 10,
+        alignItems: 'center'
+    }
 });

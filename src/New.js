@@ -191,7 +191,7 @@ export default class New extends Component {
                     data={this.state.dataSource}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) =>
-                        <View style={styles.flatlist}>
+                        <View style={{ padding: 5 }}>
                             <TouchableOpacity
                                 onPress={() => navigate('NewDetail',
                                     {
@@ -219,7 +219,7 @@ export default class New extends Component {
                                 />
                             </TouchableOpacity>
 
-                            <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 5 }}>
 
                                 <TouchableOpacity onPress={() => {
                                     item.favorite = !item.favorite
@@ -228,12 +228,9 @@ export default class New extends Component {
                                 }}>
                                     <Ionicons
                                         name={item.favorite || this.state.favorite['news_' + item.ID] ? "md-star" : "md-star-outline"}
-                                        size={25}
+                                        size={20}
                                         color={'#edad35'}
-                                        style={{
-                                            width: 25,
-                                            margin: 3
-                                        }}
+                                        style={{ width: 40, }}
                                     />
                                 </TouchableOpacity>
 
@@ -251,8 +248,7 @@ export default class New extends Component {
                                         }
                                     )}
                                 >
-
-                                    <Text style={styles.moredetail}> >>> อ่านต่อ >>> </Text>
+                                    <Text style={styles.moredetail}>{'>>> อ่านต่อ >>>'}</Text>
                                 </TouchableOpacity>
 
                             </View>
@@ -313,26 +309,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Color.BROWN[600],
     },
-    logo: {
-        height: 110,
-        width: 150,
-    },
-    bannerfont: {
-        fontSize: Platform.OS === 'ios' ? width * 0.07 : width * 0.065,
-        paddingTop: Platform.OS === 'ios' ? 45 : 40,
-        alignSelf: 'center',
-        color: 'white',
-        fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
-    },
-    flatlist: {
-        paddingLeft: 5,
-        paddingRight: 5,
-        paddingTop: 5,
-        paddingBottom: 20
-    },
     moredetail: {
         fontSize: 14,
-        fontWeight: 'normal',
         color: 'white',
         textAlign: 'right',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
@@ -341,11 +319,10 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: 18,
-        fontWeight: 'normal',
         color: 'white',
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: 10,
-        lineHeight: Platform.OS == 'ios' ? 28 : 35
+        lineHeight: 35
     },
 });
