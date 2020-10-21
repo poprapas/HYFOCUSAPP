@@ -6,9 +6,9 @@ import RoomDetail from "./RoomDetail"
 import NewDetail from "./NewDetail"
 import Tab from './Tab'
 import ContentDetail from "./ContentDetail"
-import { YellowBox } from 'react-native';
+import { LogBox } from 'react-native';
 
-YellowBox.ignoreWarnings([
+LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
 ]);
 

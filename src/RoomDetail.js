@@ -7,7 +7,7 @@ import MapView from 'react-native-maps';
 import DeviceInfo from 'react-native-device-info';
 import { WebView } from 'react-native-webview';
 import Header from './_Component/header';
-import Carousel from 'react-native-looped-carousel';
+import Carousel from '../custom_modules/react-native-looped-carousel';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const { width, height } = Dimensions.get("window");
