@@ -533,7 +533,7 @@ export default class ContentDetail extends Component {
                     }}
                 />
 
-                <ScrollView style={{ flex: 1 }}>
+                <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
                     <Text style={styles.title}>{this.props.route.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
 
                     {this.renderImage.bind(this)(this.props.route.params.cat)}

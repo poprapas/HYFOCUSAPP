@@ -90,7 +90,7 @@ export default class RoomDetail extends Component {
                     }}
                 />
 
-                <ScrollView style={{ flex: 1 }}>
+                <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
 
                     <View style={{ height: DeviceInfo.hasNotch() ? height / 4 : height / 3, }}
                         onLayout={this._onLayoutDidChange}
@@ -102,8 +102,8 @@ export default class RoomDetail extends Component {
                             bullets
                             arrows
                             arrowsContainerStyle={{ marginHorizontal: 5 }}
-                            leftArrowText={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
-                            rightArrowText={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
+                            leftArrow={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
+                            rightArrow={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
                         >
                             {this.props.route.params.gallery.map((prop, key) => {
                                 return (

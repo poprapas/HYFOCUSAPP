@@ -66,7 +66,7 @@ export default class JobDetail extends Component {
                     }}
                 />
 
-                <ScrollView style={{ flex: 1, paddingHorizontal: 5 }}>
+                <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, paddingHorizontal: 5 }}>
                     <View style={{
                         marginBottom: 10,
                         borderWidth: 1,

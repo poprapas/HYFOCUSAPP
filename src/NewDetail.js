@@ -393,7 +393,7 @@ export default class NewDetail extends Component {
                     }}
                 />
 
-                <ScrollView style={{ flex: 1 }}>
+                <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }} >
                     <Text style={styles.title}>{this.props.route.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
                     <Lightbox underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
                         {Platform.OS == 'ios' ?
