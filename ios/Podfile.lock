@@ -321,7 +321,7 @@ PODS:
     - React-Core
   - RNCMaskedView (0.1.10):
     - React
-  - RNDeviceInfo (6.2.0):
+  - RNDeviceInfo (7.0.2):
     - React-Core
   - RNFastImage (8.3.2):
     - React
@@ -554,7 +554,7 @@ SPEC CHECKSUMS:
   ReactCommon: 4167844018c9ed375cc01a843e9ee564399e53c3
   RNCAsyncStorage: cb9a623793918c6699586281f0b51cbc38f046f9
   RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
-  RNDeviceInfo: 980848feea8d74412b16f2e3e8758c8294d63ca2
+  RNDeviceInfo: a37a15a98822c31c3982cb28eba6d336ba4d0968
   RNFastImage: e19ba191922e7dab9d932a4d59d62d76660aa222
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   RNReanimated: dd8c286ab5dd4ba36d3a7fef8bff7e08711b5476

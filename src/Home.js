@@ -391,8 +391,8 @@ export default class Home extends Component {
                                             bullets
                                             arrows
                                             arrowsContainerStyle={{ marginHorizontal: 5 }}
-                                            leftArrow={<FontAwesome name='chevron-circle-left' size={40} color='white' />}
-                                            rightArrow={<FontAwesome name='chevron-circle-right' size={40} color='white' />}
+                                            leftArrow={<FontAwesome name='chevron-circle-left' size={35} color='white' />}
+                                            rightArrow={<FontAwesome name='chevron-circle-right' size={35} color='white' />}
                                         >
                                             {this.state.slide.map((prop, key) => {
                                                 return (

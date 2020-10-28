@@ -27,7 +27,7 @@ export default class SideMenu extends Component {
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: '#000', }}>
-                <View style={{ height: 60, }} />
+                <View style={{ height: 70, }} />
                 <ScrollView bounces={false} style={{ flex: 1, backgroundColor: '#000', }}>
                     <TouchableOpacity onPress={() => { this.props.navigation.navigate('หน้าแรก'), this.setState({ currentpage: 'หน้าแรก', dropdown: false }) }}>
                         <View style={[styles.navSectionStyle, { backgroundColor: this.state.currentpage == 'หน้าแรก' ? Color.BROWN[800] : '#000' }]}>
