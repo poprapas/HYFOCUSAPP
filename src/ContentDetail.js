@@ -10,6 +10,7 @@ import Header from './_Component/header';
 import MapView from 'react-native-maps';
 import LinearGradient from 'react-native-linear-gradient';
 import { WebView } from 'react-native-webview'
+import DeviceInfo from 'react-native-device-info';
 
 const { width, height } = Dimensions.get("window");
 
@@ -20,7 +21,13 @@ export default class ContentDetail extends Component {
         if (node.name == 'p' && node.children[0].name == 'img') {
             const a = node.children[0].attribs;
             return (
-                <Lightbox key={index} underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
+                <Lightbox key={index} underlayColor={Color.BROWN[500]} swipeToDismiss={false}
+                    renderHeader={(close) =>
+                        <TouchableOpacity
+                            onPress={close}
+                            style={{ width: 40, height: 40, marginTop: DeviceInfo.hasNotch() ? 40 : 0, alignItems: 'center', justifyContent: 'center' }}>
+                            <Icons name={'close'} color={'#fff'} size={25} />
+                        </TouchableOpacity>}>
                     <Image
                         style={{
                             width: width,
@@ -411,87 +418,38 @@ export default class ContentDetail extends Component {
     }
 
     renderImage(catID) {
-        if (catID == 1 || catID == 3 || catID == 4 || catID == 5 || catID == 8) {
-            return (
-                <Lightbox underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
-                    {Platform.OS == 'ios' ?
-                        <ScrollView
-                            minimumZoomScale={1}
-                            maximumZoomScale={2}
-                            centerContent={true}
-                        >
-                            <Image source={{ uri: this.props.route.params.image }}
-                                style={{
-                                    //width: (width - 10),
-                                    height: (width - 10) * 0.75,
-                                    resizeMode: 'contain'
-                                }}
-                            />
-                        </ScrollView> :
+        return (
+            <Lightbox underlayColor={Color.BROWN[500]} swipeToDismiss={false}
+                renderHeader={(close) =>
+                    <TouchableOpacity
+                        onPress={close}
+                        style={{ width: 40, height: 40, marginTop: DeviceInfo.hasNotch() ? 40 : 0, alignItems: 'center', justifyContent: 'center' }}>
+                        <Icons name={'close'} color={'#fff'} size={25} />
+                    </TouchableOpacity>}>
+                {Platform.OS == 'ios' ?
+                    <ScrollView
+                        minimumZoomScale={1}
+                        maximumZoomScale={2}
+                        centerContent={true}
+                    >
                         <Image source={{ uri: this.props.route.params.image }}
                             style={{
-                                //width: (width - 10),
-                                height: (width - 10) * 0.75,
-                                resizeMode: 'contain'
-                            }}
-                        />}
-                </Lightbox>
-            )
-        } else if (catID == 2) {
-            return (
-                <Lightbox underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
-                    {Platform.OS == 'ios' ?
-                        <ScrollView
-                            minimumZoomScale={1}
-                            maximumZoomScale={2}
-                            centerContent={true}
-                        >
-                            <Image source={{ uri: this.props.route.params.image }}
-                                style={{
-                                    width: (width - 150) * 0.8,
-                                    height: (width - 150),
-                                    alignSelf: 'center'
-                                }}
-                            />
-                        </ScrollView> :
-                        <Image source={{ uri: this.props.route.params.image }}
-                            style={{
-                                width: (width - 150) * 0.8,
-                                height: (width - 150),
+                                width: (catID == 2) ? (width - 150) * 0.8 : (catID == 7) ? width - 10 : width,
+                                height: (catID == 1 || catID == 3 || catID == 4 || catID == 5 || catID == 8) ? (width - 10) * 0.75 :
+                                    (catID == 2) ? (width - 150) : (catID == 7) ? (width - 10) * 0.25 : height,
+                                resizeMode: 'contain',
                                 alignSelf: 'center',
                             }}
-                        />}
-                </Lightbox>
-            )
-        } else if (catID == 7) {
-            return (
-                <Lightbox underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
-                    {Platform.OS == 'ios' ?
-                        <ScrollView
-                            minimumZoomScale={1}
-                            maximumZoomScale={2}
-                            centerContent={true}
-                        >
-                            <Image source={{ uri: this.props.route.params.image }}
-                                style={{
-                                    width: width - 10,
-                                    height: (width - 10) * 0.25,
-                                    alignSelf: 'center'
-                                }}
-                            />
-                        </ScrollView> :
-                        <Image source={{ uri: this.props.route.params.image }}
-                            style={{
-                                width: width - 10,
-                                height: (width - 10) * 0.25,
-                                alignSelf: 'center'
-
-                            }}
-                        />}
-                </Lightbox>
-            )
-        }
-        return null
+                        />
+                    </ScrollView> :
+                    <Image source={{ uri: this.props.route.params.image }}
+                        style={{
+                            height: (width - 10) * 0.75,
+                            resizeMode: 'contain'
+                        }}
+                    />}
+            </Lightbox>
+        )
     }
 
     componentDidMount() {
@@ -604,6 +562,7 @@ const styles = StyleSheet.create({
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: 10,
         lineHeight: 32,
+        paddingHorizontal: 5
     },
     view: {
         fontSize: 14,

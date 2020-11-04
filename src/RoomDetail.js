@@ -4,7 +4,6 @@ import { Platform, StyleSheet, Text, View, Image, Linking, ScrollView, Dimension
 import HTMLView from 'react-native-htmlview';
 import Icons from 'react-native-vector-icons/dist/MaterialIcons';
 import MapView from 'react-native-maps';
-import DeviceInfo from 'react-native-device-info';
 import { WebView } from 'react-native-webview';
 import Header from './_Component/header';
 import Carousel from '../custom_modules/react-native-looped-carousel';

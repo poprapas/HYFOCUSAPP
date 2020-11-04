@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Linking, ActivityIndicator, Dimensions, RefreshControl, FlatList } from 'react-native';
+import { Platform, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Linking, ActivityIndicator, Dimensions, RefreshControl, FlatList, Keyboard } from 'react-native';
 
 import Color from 'react-native-material-color';
 import Icon from 'react-native-vector-icons/dist/MaterialIcons';
@@ -197,6 +197,62 @@ export default class Jobs extends Component {
                         }}
                     />
 
+                    <View style={{ flexDirection: 'row' }}>
+                        <View style={styles.search}>
+
+                            <View style={{
+                                alignSelf: 'center',
+                                paddingLeft: Platform.OS == 'ios' ? 0 : 10,
+                            }}>
+                                <Icon
+                                    name='search'
+                                    color='black'
+                                    size={20}
+                                />
+                            </View>
+
+                            <View style={{ flexDirection: 'column', paddingLeft: 5 }}>
+                                <TextInput
+                                    style={styles.searchInput}
+                                    placeholder='ค้นหาตำแหน่ง...'
+                                    placeholderTextColor='#686868'
+                                    underlineColorAndroid="transparent"
+                                    value={this.state.find}
+                                    onChangeText={(find) => this.setState({ find: find })}
+                                />
+                            </View>
+
+                            {this.state.find == '' ? null :
+                                <TouchableOpacity
+                                    onPress={() => this.setState({ find: '' })}
+                                    style={{ alignSelf: 'center' }}>
+                                    <Ionicons
+                                        name='md-close-circle'
+                                        color='black'
+                                        size={20}
+                                    />
+                                </TouchableOpacity>
+                            }
+
+                        </View>
+
+
+                        <TouchableOpacity
+                            onPress={() => { Keyboard.dismiss(), this.search() }}
+                            style={{
+                                alignSelf: 'center',
+                                alignItems: 'center',
+                                marginRight: 5,
+                                borderRadius: 10,
+                                backgroundColor: 'black',
+                                overflow: 'hidden',
+                            }}
+                        >
+                            <Text style={styles.button}>ค้นหา</Text>
+                        </TouchableOpacity>
+
+                    </View>
+
                     <ActivityIndicator
                         style={{ paddingTop: height / 3 }}
                         size={'large'}
@@ -262,7 +318,7 @@ export default class Jobs extends Component {
 
 
                     <TouchableOpacity
-                        onPress={() => this.search()}
+                        onPress={() => { Keyboard.dismiss(), this.search() }}
                         style={{
                             alignSelf: 'center',
                             alignItems: 'center',
@@ -437,6 +493,7 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: Platform.OS == 'ios' ? 7 : 2,
+        height: 24
     },
     titleText2: {
         fontSize: 15,

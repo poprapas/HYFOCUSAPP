@@ -8,6 +8,7 @@ import Icons from 'react-native-vector-icons/dist/MaterialIcons';
 import Lightbox from 'react-native-lightbox';
 import Header from './_Component/header';
 import { WebView } from 'react-native-webview';
+import DeviceInfo from 'react-native-device-info';
 
 const { width, height } = Dimensions.get("window");
 
@@ -28,7 +29,13 @@ export default class NewDetail extends Component {
         if (node.name == 'p' && node.children[0].name == 'img') {
             const a = node.children[0].attribs;
             return (
-                <Lightbox key={index} underlayColor={'transparent'} swipeToDismiss={false}>
+                <Lightbox key={index} underlayColor={'transparent'} swipeToDismiss={false}
+                    renderHeader={(close) =>
+                        <TouchableOpacity
+                            onPress={close}
+                            style={{ width: 40, height: 40, marginTop: DeviceInfo.hasNotch() ? 40 : 0, alignItems: 'center', justifyContent: 'center' }}>
+                            <Icons name={'close'} color={'#fff'} size={25} />
+                        </TouchableOpacity>}>
                     <Image
                         style={{
                             width: width,
@@ -395,7 +402,13 @@ export default class NewDetail extends Component {
 
                 <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }} >
                     <Text style={styles.title}>{this.props.route.params.title.replace(/&#34;/g, '"').replace(/&#39;/g, "'")} </Text>
-                    <Lightbox underlayColor={Color.BROWN[500]} swipeToDismiss={false}>
+                    <Lightbox underlayColor={Color.BROWN[500]} swipeToDismiss={false}
+                        renderHeader={(close) =>
+                            <TouchableOpacity
+                                onPress={close}
+                                style={{ width: 40, height: 40, marginTop: DeviceInfo.hasNotch() ? 40 : 0, alignItems: 'center', justifyContent: 'center' }}>
+                                <Icons name={'close'} color={'#fff'} size={25} />
+                            </TouchableOpacity>}>
                         {Platform.OS == 'ios' ?
                             <ScrollView
                                 minimumZoomScale={1}
@@ -466,7 +479,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: Platform.OS == 'ios' ? 'WDBBangna' : 'bangna-new',
         paddingTop: 10,
-        lineHeight: 32
+        lineHeight: 32,
+        paddingHorizontal: 5
     },
     view: {
         fontSize: 14,
